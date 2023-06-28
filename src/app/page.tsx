@@ -1,5 +1,4 @@
-import Login from "../components/login/Login";
-
+import LoginButton from "../components/login/LoginButton";
 const STYLE_DESCRIPTION = 'mt-5 ml-16 text-3xl font-semibold';
 
 export default function Main() {
@@ -11,7 +10,7 @@ export default function Main() {
       <h3 className={STYLE_DESCRIPTION}>나만을 위한 유튜브 강의</h3>
       <h3 className={STYLE_DESCRIPTION}>
         관리 플랫폼 스룸
-        <Login/>
+        <LoginButton/>
       </h3>
     </>
   );

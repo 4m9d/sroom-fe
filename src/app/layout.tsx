@@ -1,3 +1,4 @@
+import QueryProvider from '../api/QueryProvider';
 import NavBar from '../components/nav/NavBar';
 import './globals.css';
 import { Inter } from 'next/font/google';
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang='en'>
       <body className={inter.className}>
+        <QueryProvider>
           <NavBar
             logo='스룸'
             profileDropdown={[
@@ -25,6 +27,7 @@ export default function RootLayout({ children }: Props) {
             ]}
           />
           {children}
+        </QueryProvider>
       </body>
     </html>
   );
