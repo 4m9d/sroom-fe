@@ -1,21 +1,16 @@
+'use client';
 import Link from 'next/link';
 import SearchInput from './SearchInput';
+import useFetchProfile from '@/src/hook/useFetchProfile';
 
 type Props = {
   logo: string;
-  searchBarVisible: boolean;
-  profileVisible: boolean;
-  profile: Profile;
   profileDropdown?: ProfileDropdown[];
 };
 
-export default function NavBar({
-  logo,
-  searchBarVisible = true,
-  profileVisible = true,
-  profile,
-  profileDropdown
-}: Props) {
+export default function NavBar({ logo, profileDropdown }: Props) {
+  const { name, bio } = useFetchProfile();
+
   return (
     <nav className='flex justify-between px-10 navbar'>
       <h1 className=''>
@@ -23,20 +18,20 @@ export default function NavBar({
           {logo}
         </Link>
       </h1>
-      <div className={`${searchBarVisible ? '' : 'hidden'}`}>
+      <div className={`${name ? '' : 'hidden'}`}>
         <SearchInput />
       </div>
       <div
         className={`${
-          profileVisible ? '' : 'hidden'
+          name ? '' : 'hidden'
         } dropdown dropdown-hover pr-10`}
       >
         <div tabIndex={0} className='flex flex-col btn btn-ghost rounded-btn'>
           <div>
-            <p>{profile.name}</p>
+            <p>{name}</p>
           </div>
           <div>
-            <p>{profile.bio}</p>
+            <p>{bio}</p>
           </div>
         </div>
         <ul

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Login from "../components/login/Login";
 
 const STYLE_DESCRIPTION = 'mt-5 ml-16 text-3xl font-semibold';
 
@@ -11,9 +11,7 @@ export default function Main() {
       <h3 className={STYLE_DESCRIPTION}>나만을 위한 유튜브 강의</h3>
       <h3 className={STYLE_DESCRIPTION}>
         관리 플랫폼 스룸
-        <Link href={'/'} className='inline-block px-2 py-1 ml-6 text-lg text-white align-middle bg-black rounded-xl'>
-          구글 로그인
-        </Link>
+        <Login/>
       </h3>
     </>
   );
