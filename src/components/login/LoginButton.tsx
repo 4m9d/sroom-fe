@@ -1,24 +1,16 @@
 'use client';
 import { useRef } from 'react';
 import useScript from '@/src/hook/useScript';
+import useAuth from '@/src/hook/useAuth';
 
-declare global {
-  interface Window {
-    google: any;
-  }
-}
-
-export default function Login() {
+export default function LoginButton() {
   const loginButton = useRef<HTMLDivElement>(null);
+  const { login } = useAuth();
 
-  const onGoogleLogin = async (res) => {
-    //TODO: fetch authorization code
-    console.log(res)
-  };
   const onload = () => {
     window.google.accounts.id.initialize({
       client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-      callback: onGoogleLogin,
+      callback: login
     });
 
     window.google.accounts.id.renderButton(loginButton.current, {
