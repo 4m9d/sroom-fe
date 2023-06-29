@@ -1,18 +1,15 @@
-import { useQueryClient, useQuery } from '@tanstack/react-query';
-import { QueryKeys } from '../api/queryKeys';
-import fetchUserAuth from '../api/auth/login';
-
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 export default function useAuth() {
-  const QueryClient = useQueryClient();
+  const router = useRouter();
 
   const login = async (credential: GoogleLoginResponse) => {
-    console.log('일단 호출은 됨');
-    await fetchUserAuth(credential).then((res) => {
-      if (res) {
-        QueryClient.setQueryData(QueryKeys.AuthQueryKey, res);
-        QueryClient.invalidateQueries(QueryKeys.AuthQueryKey);
-        console.log('로그인 성공');
-      }
+    signIn('credentials', {
+      credential: credential,
+      redirect: false
+    }).then(() => {
+      router.replace('/dashboards');
+      //TODO: 로그인한 유저 -> 메인으로 못 가게 막기
     });
   };
   return { login };
