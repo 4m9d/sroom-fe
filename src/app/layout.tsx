@@ -1,5 +1,6 @@
-import QueryProvider from '../api/QueryProvider';
+import QueryProvider from '../lib/QueryProvider';
 import NavBar from '../components/nav/NavBar';
+import AuthSessionProvider from '../lib/AuthSessionProvider';
 import './globals.css';
 import { Inter } from 'next/font/google';
 
@@ -18,16 +19,18 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <QueryProvider>
-          <NavBar
-            logo='스룸'
-            profileDropdown={[
-              { id: 1, menuTitle: '내 강의실', menuRoute: '/' },
-              { id: 2, menuTitle: '강의 자료', menuRoute: '/' }
-            ]}
-          />
-          {children}
-        </QueryProvider>
+        <AuthSessionProvider>
+          <QueryProvider>
+            <NavBar
+              logo='스룸'
+              profileDropdown={[
+                { id: 1, menuTitle: '내 강의실', menuRoute: '/' },
+                { id: 2, menuTitle: '강의 자료', menuRoute: '/lecture-note' }
+              ]}
+            />
+            {children}
+          </QueryProvider>
+        </AuthSessionProvider>
       </body>
     </html>
   );
