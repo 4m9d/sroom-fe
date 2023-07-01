@@ -21,11 +21,11 @@ interface GoogleLoginResponse {
   select_by: string;
 }
 
-interface LoginRequest {
-  credential: string;
+interface RefreshToken {
+  refreshToken: string;
 }
 
-interface LoginResponse {
+interface LoginResponse extends Response {
   accessToken: string;
   refreshToken: string;
   expiresIn: number;

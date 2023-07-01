@@ -1,3 +1,3 @@
 export const QueryKeys = {
-  AuthQueryKey: ['auth']
+  REFRESH: 'refresh'
 };

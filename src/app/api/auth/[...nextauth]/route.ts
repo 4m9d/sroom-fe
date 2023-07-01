@@ -1,4 +1,4 @@
-import fetchUserAuth from '@/src/api/auth/login';
+import { fetchUserAuthWithCredential } from '@/src/api/auth/login';
 import NextAuth from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
 /* // for next-auth
@@ -31,7 +31,13 @@ declare module 'next-auth' {
   }
 } */
 
+const HALF_YEAR = (180 - 10) * 24 * 60 * 60;
+
 const handler = NextAuth({
+  session: {
+    strategy: 'jwt',
+    maxAge: HALF_YEAR
+  },
   providers: [
     CredentialProvider({
       name: 'Credentials',
@@ -39,7 +45,7 @@ const handler = NextAuth({
         credential: { type: 'text' }
       },
       async authorize(credentials) {
-        const res = await fetchUserAuth(credentials);
+        const res = await fetchUserAuthWithCredential(credentials);
         if (res) {
           return res;
         }
@@ -48,14 +54,11 @@ const handler = NextAuth({
     })
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.accessToken = user.accessToken;
-        token.refreshToken = user.refreshToken;
-        token.expiresIn = user.expiresIn;
-        token.tokenType = user.tokenType;
-        token.name = user.name;
-        token.bio = user.bio;
+    async jwt({ token, user, trigger, session }) {
+      if (trigger === 'update' && session) {
+        token = session;
+      } else if (user) {
+        token = user;
       }
       return token;
     },
