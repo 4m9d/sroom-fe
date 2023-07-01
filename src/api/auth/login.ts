@@ -1,14 +1,23 @@
-import { Endpoint } from '../Endpoint';
+import { Endpoints } from '../Endpoints';
 
-export default async function fetchUserAuth(res: GoogleLoginResponse) {
-  const requestBody: LoginRequest = { credential: res.credential };
-  const response = await fetch(Endpoint.LOGIN, {
+export async function fetchUserAuthWithCredential(res: GoogleLoginResponse) {
+  const requestBody = { credential: res.credential };
+  const response = await fetch(Endpoints.LOGIN, {
     method: 'POST',
     body: JSON.stringify(requestBody)
-  })
-    .then((res) => res.json())
-    .then((res) => res as LoginResponse)
-    .catch((err) => console.error(err));
+  }).then((res) => res.json() as Promise<LoginResponse>);
+
+  return response;
+}
+
+export async function fetchUserAuthWithRefreshToken(
+  refreshToken: RefreshToken
+) {
+  const requestBody = refreshToken;
+  const response = await fetch(Endpoints.REFRESH, {
+    method: 'POST',
+    body: JSON.stringify(requestBody)
+  }).then((res) => res.json() as Promise<LoginResponse>);
 
   return response;
 }

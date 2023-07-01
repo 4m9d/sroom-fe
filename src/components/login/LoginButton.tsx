@@ -15,12 +15,12 @@ export default function LoginButton() {
 
     window.google.accounts.id.renderButton(loginButton.current, {
       theme: 'outline',
-      width: 250
+      width: 100
     });
     window.google.accounts.id.prompt();
   };
 
   useScript('https://accounts.google.com/gsi/client', onload);
 
-  return <div id='google-login-button' ref={loginButton} />;
+  return <div className='inline-block mt-5 align-middle sm:ml-5 sm:mt-0' id='google-login-button' ref={loginButton} />;
 }
