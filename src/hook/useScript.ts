@@ -14,10 +14,6 @@ export default function useScript(
     script.async = async;
     script.onload = onload;
 
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
+    document.head.appendChild(script);
   }, [id, url, async, onload]);
 }
