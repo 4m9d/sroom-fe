@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
 import SearchInput from './SearchInput';
 import useAuth from '@/src/hook/useAuth';
 
@@ -12,8 +11,8 @@ type Props = {
 export default function NavBar({ logo, profileDropdown }: Props) {
   const { session } = useAuth();
 
-  const name = session?.user?.name;
-  const bio = session?.user?.bio;
+  const name = session?.name;
+  const bio = session?.bio;
 
   return (
     <nav className='flex justify-between px-10 navbar'>

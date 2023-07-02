@@ -6,18 +6,15 @@ import { QueryKeys } from '../lib/queryKeys';
 
 export default function useAuth() {
   const router = useRouter();
-  const { data: session, update } = useSession();
+  const { data: session, status, update } = useSession();
   const NOW = Math.floor(Date.now() / 1000);
   //서버에서 설정한 만료 시간보다 1분 짧게 변경
-  const REFRESH_PERIOD = session?.user?.expiresAt - NOW - 60 * 1000;
+  const REFRESH_PERIOD = session!.expiresAt - NOW - 60 * 1000;
 
   const silentRefresh = async (refreshToken: RefreshToken, update: any) => {
-    console.log('안녕');
-
     const response = await fetchUserAuthWithRefreshToken(refreshToken);
     if (response.ok) {
       await update(response);
-      console.log('silent refresh', session);
     } else {
     }
     return response;
@@ -25,7 +22,7 @@ export default function useAuth() {
 
   useQuery(
     [QueryKeys.REFRESH],
-    () => silentRefresh(session?.user?.refreshToken, update),
+    () => silentRefresh({ refreshToken: session!.refreshToken }, update),
     {
       enabled: !!session,
       refetchOnWindowFocus: false,
@@ -38,7 +35,7 @@ export default function useAuth() {
   );
 
   const login = async (credential: GoogleLoginResponse) => {
-    signIn('credentials', {
+    await signIn('credentials', {
       credential: credential,
       redirect: false
     }).then((res) => {
@@ -51,5 +48,5 @@ export default function useAuth() {
     });
   };
 
-  return { session, login, silentRefresh };
+  return { session, status, login, silentRefresh };
 }
