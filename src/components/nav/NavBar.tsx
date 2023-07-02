@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import SearchInput from './SearchInput';
 import useAuth from '@/src/hook/useAuth';
+import Button from '../ui/Button';
+import { signOut } from 'next-auth/react';
 
 type Props = {
   logo: string;
@@ -24,27 +26,34 @@ export default function NavBar({ logo, profileDropdown }: Props) {
       <div className={`${name ? '' : 'hidden'}`}>
         <SearchInput />
       </div>
-      <div className={`${name ? '' : 'hidden'} dropdown dropdown-hover pr-10`}>
-        <div tabIndex={0} className='flex flex-col btn btn-ghost rounded-btn'>
-          <div>
+      <div className='flex gap-4'>
+        <Button
+          onClick={() => signOut()}
+          className={`${name ? '' : 'hidden'} g_id_signout`}
+        >
+          <p>로그아웃</p>
+        </Button>
+        <button className={`${name ? '' : 'hidden'} dropdown dropdown-hover`}>
+          <div
+            tabIndex={0}
+            className='flex flex-col items-start w-44 btn btn-ghost rounded-btn'
+          >
             <p>{name}</p>
-          </div>
-          <div>
             <p>{bio}</p>
           </div>
-        </div>
-        <ul
-          tabIndex={0}
-          className='menu dropdown-content z-[1] p-2 shadow rounded-box w-52'
-        >
-          {profileDropdown?.map((menu) => {
-            return (
-              <li key={menu.id}>
-                <Link href={menu.menuRoute}>{menu.menuTitle}</Link>
-              </li>
-            );
-          })}
-        </ul>
+          <ul
+            tabIndex={0}
+            className='menu dropdown-content z-[1] p-2 shadow rounded-box w-44'
+          >
+            {profileDropdown?.map((menu) => {
+              return (
+                <li key={menu.id}>
+                  <Link href={menu.menuRoute}>{menu.menuTitle}</Link>
+                </li>
+              );
+            })}
+          </ul>
+        </button>
       </div>
     </nav>
   );
