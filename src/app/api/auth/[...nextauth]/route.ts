@@ -1,35 +1,6 @@
 import { fetchUserAuthWithCredential } from '@/src/api/auth/login';
 import NextAuth from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
-/* // for next-auth
-declare module 'next-auth' {
-  interface User {
-    name: string;
-    bio: string;
-    accessToken: string;
-    refreshToken: string;
-    expiresIn: number;
-    tokenType: string;
-  }
-  interface JWT {
-    name: string;
-    bio: string;
-    accessToken: string;
-    refreshToken: string;
-    expiresIn: number;
-    tokenType: string;
-  }
-  interface Session extends DefaultSession {
-    user: {
-      name: string;
-      bio: string;
-    };
-    accessToken: string;
-    refreshToken: string;
-    expiresIn: number;
-    tokenType: string;
-  }
-} */
 
 const HALF_YEAR = (180 - 10) * 24 * 60 * 60;
 
@@ -42,12 +13,17 @@ const handler = NextAuth({
     CredentialProvider({
       name: 'Credentials',
       credentials: {
-        credential: { type: 'text' }
+        clientId: { type: 'text' },
+        client_id: { type: 'text' },
+        credential: { type: 'text' },
+        select_by: { type: 'text' }
       },
       async authorize(credentials) {
-        const res = await fetchUserAuthWithCredential(credentials);
+        const credential = credentials as GoogleLoginResponse;
+
+        const res = await fetchUserAuthWithCredential(credential);
         if (res) {
-          return res;
+          return res as any;
         }
         return null;
       }
@@ -58,17 +34,13 @@ const handler = NextAuth({
       if (trigger === 'update' && session) {
         token = session;
       } else if (user) {
-        token = user;
+        token.session = user;
       }
       return token;
     },
     async session({ session, token }) {
-      session.accessToken = token.accessToken;
-      session.refreshToken = token.refreshToken;
-      session.expiresIn = token.expiresIn;
-      session.tokenType = token.tokenType;
-      session.user.name = token.name;
-      session.user.bio = token.bio;
+      session = token.session;
+
       return session;
     }
   }
