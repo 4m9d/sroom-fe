@@ -9,7 +9,8 @@ export default function useAuth() {
   const { data: session, status, update } = useSession();
   const NOW = Math.floor(Date.now() / 1000);
   //서버에서 설정한 만료 시간보다 1분 짧게 변경
-  const REFRESH_PERIOD = session!.expiresAt - NOW - 60 * 1000;
+  const REFRESH_PERIOD = session ? session?.expiresAt - NOW - 60 * 1000 : 0;
+  const refreshToken = { refreshToken: session?.refreshToken ?? '' };
 
   const silentRefresh = async (refreshToken: RefreshToken, update: any) => {
     const response = await fetchUserAuthWithRefreshToken(refreshToken);
@@ -20,19 +21,15 @@ export default function useAuth() {
     return response;
   };
 
-  useQuery(
-    [QueryKeys.REFRESH],
-    () => silentRefresh({ refreshToken: session!.refreshToken }, update),
-    {
-      enabled: !!session,
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      retry: 2,
-      refetchInterval: REFRESH_PERIOD,
-      refetchIntervalInBackground: true
-    }
-  );
+  useQuery([QueryKeys.REFRESH], () => silentRefresh(refreshToken, update), {
+    enabled: !!session,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    retry: 2,
+    refetchInterval: REFRESH_PERIOD,
+    refetchIntervalInBackground: true
+  });
 
   const login = async (credential: GoogleLoginResponse) => {
     await signIn('credentials', {
