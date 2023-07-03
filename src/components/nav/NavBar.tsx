@@ -4,6 +4,7 @@ import SearchInput from './SearchInput';
 import useAuth from '@/src/hook/useAuth';
 import Button from '../ui/Button';
 import { signOut } from 'next-auth/react';
+import Alert from '../ui/Alert';
 
 type Props = {
   logo: string;
@@ -28,7 +29,15 @@ export default function NavBar({ logo, profileDropdown }: Props) {
       </div>
       <div className='flex gap-4'>
         <Button
-          onClick={() => signOut()}
+          onClick={() =>
+            signOut().catch(() => (
+              <Alert
+                alert='error'
+                title='에러 발생!'
+                description='로그아웃에 실패했어요'
+              />
+            ))
+          }
           className={`${name ? '' : 'hidden'} g_id_signout`}
         >
           <p>로그아웃</p>
