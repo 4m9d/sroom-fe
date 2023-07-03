@@ -15,6 +15,8 @@ export default function useAuth() {
   const silentRefresh = async (refreshToken: RefreshToken, update: any) => {
     const response = await fetchUserAuthWithRefreshToken(refreshToken);
     if (response.ok) {
+      //TODO: 로그 추후 삭제
+      console.log('silent refresh!');
       await update(response);
     } else {
     }
@@ -32,6 +34,8 @@ export default function useAuth() {
   });
 
   const login = async (credential: GoogleLoginResponse) => {
+    //TODO: 로그 추후 삭제
+    console.log('구글 토큰', credential);
     await signIn('credentials', {
       credential: credential,
       redirect: false
@@ -41,7 +45,6 @@ export default function useAuth() {
       } else {
         console.log('로그인 실패');
       }
-      //TODO: 로그인한 유저 -> 메인으로 못 가게 막기
     });
   };
 

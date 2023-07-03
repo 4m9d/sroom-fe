@@ -28,8 +28,7 @@ interface RefreshToken {
 interface LoginResponse extends Response {
   accessToken: string;
   refreshToken: string;
-  expiresIn: number;
-  tokenType: string;
+  expiresAt: number;
   name: string;
   bio: string;
 }
