@@ -3,6 +3,14 @@ interface Window {
   google: any;
 }
 
+interface Alert {
+  type: 'success' | 'error';
+  title: string;
+  description: string;
+  buttonLabel?: string;
+  buttonOnClick?: () => void;
+}
+
 interface Profile {
   name: string;
   bio: string;
@@ -14,7 +22,7 @@ interface ProfileDropdown {
   menuRoute: string;
 }
 
-interface GoogleLoginResponse {
+interface GoogleLoginResponse extends Response {
   clientId: string;
   client_id: string;
   credential: string;

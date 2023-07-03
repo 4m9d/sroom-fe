@@ -3,6 +3,7 @@ import NavBar from '../components/nav/NavBar';
 import AuthSessionProvider from '../lib/AuthSessionProvider';
 import './globals.css';
 import { Inter } from 'next/font/google';
+import Alert from '../components/ui/Alert';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: Props) {
             />
             {children}
           </QueryProvider>
+          <Alert />
         </AuthSessionProvider>
       </body>
     </html>

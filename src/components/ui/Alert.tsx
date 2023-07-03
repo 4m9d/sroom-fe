@@ -1,9 +1,5 @@
-type Props = {
-  alert: 'success' | 'error';
-  children?: React.ReactNode;
-  title?: string;
-  description?: string;
-};
+'use client';
+import useAlert from '@/src/hook/useAlert';
 
 const SVG = {
   success: (
@@ -38,17 +34,31 @@ const SVG = {
   )
 };
 
-export default function Alert({ alert, children, title, description }: Props) {
-  const TYPE = 'alert-' + alert;
+export default function Alert() {
+  const { alert, show } = useAlert();
 
-  return (
-    <div className={`alert ${TYPE}`}>
-      <span className='inline-block mr-2 align-middle'>{SVG[alert]}</span>
-      <div>
-        <h3 className='font-bold'>{title}</h3>
-        <p className='text-xs'>{description}</p>
+  if (!alert) return <></>;
+
+  const { type, title, description, buttonLabel, buttonOnClick } = alert;
+
+  if (show) {
+    return (
+      <div
+        className={`alert ${
+          type === 'error' ? 'alert-error' : 'alert-success'
+        } absolute z-10 bottom-16 w-1/2 left-1/4`}
+      >
+        <span className='inline-block mr-2 align-middle'>{SVG[type]}</span>
+        <div>
+          <h3 className='font-bold'>{title}</h3>
+          <p className='text-xs'>{description}</p>
+        </div>
+        {buttonLabel && buttonOnClick && (
+          <button onClick={buttonOnClick} className='btn btn-sm btn-ghost'>
+            {buttonLabel}
+          </button>
+        )}
       </div>
-      {children}
-    </div>
-  );
+    );
+  } else return <></>;
 }
