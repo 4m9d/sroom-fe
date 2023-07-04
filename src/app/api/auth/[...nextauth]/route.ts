@@ -2,12 +2,14 @@ import { fetchUserAuthWithCredential } from '@/src/api/auth/login';
 import NextAuth from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
 
-const HALF_YEAR = (180 - 10) * 24 * 60 * 60;
+const ONE_HOUR = 60 * 60;
+const ONE_WEEK = 7 * 24 * ONE_HOUR;
+const SESSION_AGE = ONE_WEEK - ONE_HOUR;
 
 const handler = NextAuth({
   session: {
     strategy: 'jwt',
-    maxAge: HALF_YEAR
+    maxAge: SESSION_AGE
   },
   providers: [
     CredentialProvider({
