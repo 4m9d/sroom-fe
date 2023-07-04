@@ -1,5 +1,5 @@
 'use client';
-import useAlert from '@/src/hook/useAlert';
+import useAlert from '@/src/hooks/useAlert';
 
 const SVG = {
   success: (
