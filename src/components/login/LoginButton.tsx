@@ -1,7 +1,7 @@
 'use client';
 import { useRef } from 'react';
-import useScript from '@/src/hook/useScript';
-import useAuth from '@/src/hook/useAuth';
+import useScript from '@/src/hooks/useScript';
+import useAuth from '@/src/hooks/useAuth';
 
 export default function LoginButton() {
   const loginButton = useRef<HTMLDivElement>(null);

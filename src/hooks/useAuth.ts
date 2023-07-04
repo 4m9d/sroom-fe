@@ -1,4 +1,4 @@
-import { signIn, useSession } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { fetchUserAuthWithRefreshToken } from '../api/auth/login';
 import { useQuery } from '@tanstack/react-query';
@@ -14,13 +14,14 @@ export default function useAuth() {
   const REFRESH_PERIOD = session ? session?.expiresAt - NOW - 60 * 1000 : 0;
   const refreshToken = { refreshToken: session?.refreshToken ?? '' };
 
-  const loginErrorHandler = (e: Error) => {
+  const authErrorHandler = (e: Error) => {
     setAlert({
       type: 'error',
       title: '에러 발생',
       description: e.message
     });
   };
+
   const silentRefresh = async (refreshToken: RefreshToken, update: any) => {
     const response = await fetchUserAuthWithRefreshToken(refreshToken);
     if (response.ok) {
@@ -58,9 +59,21 @@ export default function useAuth() {
         router.replace('/dashboards');
       })
       .catch((err) => {
-        loginErrorHandler(err);
+        authErrorHandler(err);
       });
   };
 
-  return { session, status, login, silentRefresh };
+  const logout = async () => {
+    await signOut()
+      .then((res) => {
+        if (!res) {
+          throw new Error('로그아웃에 실패했어요');
+        }
+      })
+      .catch((err) => {
+        authErrorHandler(err);
+      });
+  };
+
+  return { session, status, login, logout, silentRefresh };
 }
