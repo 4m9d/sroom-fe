@@ -52,10 +52,10 @@ export default function useAuth() {
       redirect: false
     })
       .then((res) => {
-        if (!res?.ok) {
+        if (res?.error) {
           throw new Error('로그인에 실패했어요');
         }
-        router.replace('/dashboards');
+        router.replace('/dashboard');
       })
       .catch((err) => {
         authErrorHandler(err);
