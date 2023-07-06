@@ -8,12 +8,12 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   if (pathname === '/' && session) {
-    return NextResponse.redirect(new URL('/dashboards', req.url));
+    return NextResponse.redirect(new URL('/dashboard', req.url));
   } else if (pathname.length > 1 && !session) {
     return NextResponse.redirect(new URL('/', req.url));
   }
 }
 
 export const config = {
-  matcher: ['/', '/dashboards']
+  matcher: ['/', '/dashboard']
 };
