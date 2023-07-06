@@ -24,11 +24,10 @@ export default function useAuth() {
 
   const silentRefresh = async (refreshToken: RefreshToken, update: any) => {
     const response = await fetchUserAuthWithRefreshToken(refreshToken);
-    if (response.ok) {
+    if (response) {
       //TODO: 로그 추후 삭제
-      console.log('silent refresh!');
+      console.log('silent refresh! response: ', response);
       await update(response);
-    } else {
     }
     return response;
   };
@@ -64,15 +63,7 @@ export default function useAuth() {
   };
 
   const logout = async () => {
-    await signOut()
-      .then((res) => {
-        if (!res) {
-          throw new Error('로그아웃에 실패했어요');
-        }
-      })
-      .catch((err) => {
-        authErrorHandler(err);
-      });
+    await signOut();
   };
 
   return { session, status, login, logout, silentRefresh };

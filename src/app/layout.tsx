@@ -26,7 +26,7 @@ export default function RootLayout({ children }: Props) {
               logo='스룸'
               profileDropdown={[
                 { id: 1, menuTitle: '내 강의실', menuRoute: '/' },
-                { id: 2, menuTitle: '강의 자료', menuRoute: '/lecture-note' }
+                { id: 2, menuTitle: '강의 자료', menuRoute: '/' }
               ]}
             />
             {children}
