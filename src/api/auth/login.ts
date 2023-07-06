@@ -1,7 +1,7 @@
 import { Endpoints } from '../Endpoints';
 
-export async function fetchUserAuthWithCredential(res: GoogleLoginResponse) {
-  const requestBody = { credential: res.credential };
+export async function fetchUserAuthWithCredential(credential: GoogleLoginCredential) {
+  const requestBody = credential
   const response = await fetch(Endpoints.LOGIN, {
     method: 'POST',
     body: JSON.stringify(requestBody)

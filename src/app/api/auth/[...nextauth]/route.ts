@@ -15,13 +15,10 @@ const handler = NextAuth({
     CredentialProvider({
       name: 'Credentials',
       credentials: {
-        clientId: { type: 'text' },
-        client_id: { type: 'text' },
-        credential: { type: 'text' },
-        select_by: { type: 'text' }
+        credential: { type: 'text' }
       },
       async authorize(credentials) {
-        const credential = credentials as GoogleLoginResponse;
+        const credential = credentials as GoogleLoginCredential;
 
         const res = await fetchUserAuthWithCredential(credential);
         if (res) {

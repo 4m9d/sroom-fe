@@ -42,13 +42,13 @@ export default function useAuth() {
     refetchIntervalInBackground: true
   });
 
-  const login = async (credential: GoogleLoginResponse) => {
+  const login = async (googleResponse: GoogleLoginCredential) => {
     //TODO: 로그 추후 삭제
-    console.log('구글 토큰', credential);
-    if (!credential) return;
+    console.log('구글 토큰', googleResponse);
+    if (!googleResponse) return;
 
     await signIn('credentials', {
-      credential: credential,
+      credential: googleResponse.credential,
       redirect: false
     })
       .then((res) => {
