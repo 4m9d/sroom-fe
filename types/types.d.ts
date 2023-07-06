@@ -22,11 +22,14 @@ interface ProfileDropdown {
   menuRoute: string;
 }
 
-interface GoogleLoginResponse extends Response {
+interface GoogleLoginResponse extends Response, GoogleLoginCredential {
   clientId: string;
   client_id: string;
-  credential: string;
   select_by: string;
+}
+
+interface GoogleLoginCredential {
+  credential: string;
 }
 
 interface RefreshToken {

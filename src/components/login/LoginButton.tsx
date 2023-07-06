@@ -10,7 +10,7 @@ export default function LoginButton() {
   const onload = async () => {
     window.google.accounts.id.initialize({
       client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-      callback: async (response: GoogleLoginResponse) => await login(response)
+      callback: async (response: GoogleLoginResponse) => await login({credential: response.credential})
     });
 
     if (status !== 'authenticated') {
