@@ -3,7 +3,8 @@ interface Window {
   google: any;
 }
 
-interface Alert {
+interface Toast {
+  id?: string;
   type: 'success' | 'error';
   title: string;
   description: string;
