@@ -21,10 +21,7 @@ const handler = NextAuth({
         const credential = credentials as GoogleLoginCredential;
 
         const res = await fetchUserAuthWithCredential(credential);
-        if (res) {
-          return res as any;
-        }
-        return null;
+        return res as any;
       }
     })
   ],
