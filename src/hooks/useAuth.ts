@@ -3,19 +3,19 @@ import { useRouter } from 'next/navigation';
 import { fetchUserAuthWithRefreshToken } from '../api/auth/login';
 import { useQuery } from '@tanstack/react-query';
 import { QueryKeys } from '../lib/queryKeys';
-import useAlert from './useAlert';
+import useToast from './useToast';
 
 export default function useAuth() {
   const router = useRouter();
   const { data: session, status, update } = useSession();
-  const { setAlert } = useAlert();
+  const { setToast } = useToast();
   const NOW = Math.floor(Date.now() / 1000);
   //서버에서 설정한 만료 시간보다 1분 짧게 변경
   const REFRESH_PERIOD = session ? session?.expiresAt - NOW - 60 * 1000 : 0;
   const refreshToken = { refreshToken: session?.refreshToken ?? '' };
 
   const authErrorHandler = (e: Error) => {
-    setAlert({
+    setToast({
       type: 'error',
       title: '에러 발생',
       description: e.message

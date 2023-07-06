@@ -3,7 +3,8 @@ import NavBar from '../components/nav/NavBar';
 import AuthSessionProvider from '../lib/AuthSessionProvider';
 import './globals.css';
 import { Inter } from 'next/font/google';
-import Alert from '../components/ui/Alert';
+import ToastProvider from '../lib/ToastProvider';
+import Toast from '../components/ui/Toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,19 +21,21 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <AuthSessionProvider>
-          <QueryProvider>
-            <NavBar
-              logo='스룸'
-              profileDropdown={[
-                { id: 1, menuTitle: '내 강의실', menuRoute: '/' },
-                { id: 2, menuTitle: '강의 자료', menuRoute: '/' }
-              ]}
-            />
-            {children}
-          </QueryProvider>
-          <Alert />
-        </AuthSessionProvider>
+        <ToastProvider>
+          <AuthSessionProvider>
+            <QueryProvider>
+              <NavBar
+                logo='스룸'
+                profileDropdown={[
+                  { id: 1, menuTitle: '내 강의실', menuRoute: '/' },
+                  { id: 2, menuTitle: '강의 자료', menuRoute: '/' }
+                ]}
+              />
+              {children}
+            </QueryProvider>
+          </AuthSessionProvider>
+          <Toast />
+        </ToastProvider>
       </body>
     </html>
   );
