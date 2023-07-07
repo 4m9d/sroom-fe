@@ -1,4 +1,4 @@
-import { fetchUserAuthWithCredential } from '@/src/api/auth/login';
+import { fetchUserAuthWithCredential } from '@/src/api/members/login';
 import NextAuth from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
 
