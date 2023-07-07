@@ -1,3 +1,4 @@
 export const QueryKeys = {
-  REFRESH: 'refresh'
+  REFRESH: 'refresh',
+  SEARCH: 'search',
 };

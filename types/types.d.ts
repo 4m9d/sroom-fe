@@ -44,3 +44,14 @@ interface LoginResponse extends Response {
   name: string;
   bio: string;
 }
+
+interface SearchLectureParams extends Record<string, string | number> {
+  keyword: string;
+  limit: number;
+}
+
+interface LectureDeatilParams extends Record<string, string | number> {
+  is_playlist: boolean;
+  review_only?: boolean;
+  index_only?: boolean;
+}
