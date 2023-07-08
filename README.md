@@ -10,7 +10,8 @@
 
 2. **vs code 설치하기**
   [Download Visual Studio Code](https://code.visualstudio.com/)
-끝
+
+3. **끝😎**
 
 <br>
 
@@ -26,15 +27,31 @@ npm install
 
 <br>
 
-**개발 서버**를 열기 위해서는 아래 코드를 실행해주세요 :)
+**개발 서버**를 열기 위해서는 아래 코드를 실행해주세요 😊
+*(개발 서버에서는 Mock API만 사용)*
 
 ```bash
 npm run dev
-# 또는
-yarn dev
 ```
 
-이후, 브라우저에서 [http://localhost:3000](http://localhost:3000)를 열어 실행하면 됩니다!
+<br>
+
+**프로덕션 서버**를 열기 위해서는 아래 스크립트를 실행해주세요 😊
+*(프로덕션 서버에서는 실제 백엔드 API만 사용)*
+
+최초, 혹은 pull 받았을 때는 먼저 빌드를 해야합니다! 아래 스크립트를 먼저 실행해주세요
+
+```bash
+npm run build
+```
+
+이후에는 다음과 같이 실행해주시면 됩니다!
+
+```bash
+npm run start
+```
+
+스크립트 실행 이후, 브라우저에서 [http://localhost:3000](http://localhost:3000)를 실행하면 됩니다!
 
 ## 참고 자료
 

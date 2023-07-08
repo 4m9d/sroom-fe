@@ -55,3 +55,27 @@ interface LectureDeatilParams extends Record<string, string | number> {
   review_only?: boolean;
   index_only?: boolean;
 }
+
+interface Lecture {
+  lectureTitle: string;
+  description: string;
+  channel: string;
+  lectureCode: string;
+  rating: number;
+  reviewCount: number;
+  thumbnail: string;
+  isPlaylist: boolean;
+}
+
+interface SearchResultsList {
+  resultPerPage: number;
+  nextPageToken: string;
+  prevPageToken: string;
+  lectures: Lecture[];
+}
+
+interface ErrorToast extends Error {
+  title: string;
+  description: string;
+  type: 'error';
+}
