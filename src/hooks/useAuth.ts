@@ -4,35 +4,35 @@ import { fetchUserAuthWithRefreshToken } from '../api/members/login';
 import { useQuery } from '@tanstack/react-query';
 import { QueryKeys } from '../lib/queryKeys';
 import useToast from './useToast';
+import getErrorObject from '../util/getErrorObject';
 
 export default function useAuth() {
   const router = useRouter();
   const { data: session, status, update } = useSession();
   const { setToast } = useToast();
   const NOW = Math.floor(Date.now() / 1000);
-  //서버에서 설정한 만료 시간보다 1분 짧게 변경
+  //NOTE: 서버에서 설정한 만료 시간보다 1분 짧게 변경
   const REFRESH_PERIOD = session ? session?.expiresAt - NOW - 60 * 1000 : 0;
   const refreshToken = { refreshToken: session?.refreshToken ?? '' };
 
-  const authErrorHandler = (e: Error) => {
-    setToast({
-      type: 'error',
-      title: '에러 발생',
-      description: e.message
-    });
+  const authErrorHandler = (error: Error) => {
+    setToast(getErrorObject(error.message));
   };
 
-  const silentRefresh = async (refreshToken: RefreshToken, update: any) => {
-    const response = await fetchUserAuthWithRefreshToken(refreshToken);
-    if (response) {
-      //TODO: 로그 추후 삭제
-      console.log('silent refresh! response: ', response);
-      await update(response);
-    }
-    return response;
+  const silentRefresh = async (refreshToken: RefreshToken) => {
+    return await fetchUserAuthWithRefreshToken(refreshToken)
+      .then(async (res) => {
+        //TODO: 로그 추후 삭제
+        console.log('silent refresh! response: ', res);
+        await update(res);
+      })
+      .catch(async (err: Error) => {
+        authErrorHandler(err);
+        await logout();
+      });
   };
 
-  useQuery([QueryKeys.REFRESH], () => silentRefresh(refreshToken, update), {
+  useQuery([QueryKeys.REFRESH], () => silentRefresh(refreshToken), {
     enabled: !!session,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

@@ -1,7 +1,8 @@
-const MOCK_API = process.env.NEXT_PUBLIC_MOCK_API;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const Endpoints = {
-  LOGIN: `${MOCK_API}/members/login`,
-  REFRESH: `${MOCK_API}/members/refresh`,
-  LECTURES: `${MOCK_API}/lectures`,
-}
+  MEMBERS: `${API_URL}/members`,
+  LECTURES: `${API_URL}/lectures`
+} as const;
+
+type Endpoints = (typeof Endpoints)[keyof typeof Endpoints];

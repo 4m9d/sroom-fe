@@ -6,7 +6,7 @@ const ONE_HOUR = 60 * 60;
 const ONE_WEEK = 7 * 24 * ONE_HOUR;
 const SESSION_AGE = ONE_WEEK - ONE_HOUR;
 
-const handler = NextAuth({
+export const handler = NextAuth({
   session: {
     strategy: 'jwt',
     maxAge: SESSION_AGE
@@ -20,8 +20,9 @@ const handler = NextAuth({
       async authorize(credentials) {
         const credential = credentials as GoogleLoginCredential;
 
-        const res = await fetchUserAuthWithCredential(credential);
-        return res as any;
+        return (await fetchUserAuthWithCredential(credential)
+          .then((res) => res)
+          .catch(() => null)) as any;
       }
     })
   ],

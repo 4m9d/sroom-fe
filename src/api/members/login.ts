@@ -4,29 +4,23 @@ export async function fetchUserAuthWithCredential(
   credential: GoogleLoginCredential
 ) {
   const requestBody = credential;
-  const response = await fetch(Endpoints.LOGIN, {
+  return await fetch(Endpoints.MEMBERS, {
     method: 'POST',
     body: JSON.stringify(requestBody)
-  })
-    .then((res) => {
-      if (res.ok) {
-        return res.json() as Promise<LoginResponse>;
-      } else {
-        throw new Error('로그인에 실패했어요');
-      }
-    })
-    .catch((err) => {
-      return null;
-    });
-
-  return response;
+  }).then((res) => {
+    if (res.ok) {
+      return res.json() as Promise<LoginResponse>;
+    } else {
+      throw new Error('로그인에 실패했어요');
+    }
+  });
 }
 
 export async function fetchUserAuthWithRefreshToken(
   refreshToken: RefreshToken
 ) {
   const requestBody = refreshToken;
-  const response = await fetch(Endpoints.REFRESH, {
+  return await fetch(`${Endpoints.MEMBERS}/refresh`, {
     method: 'POST',
     body: JSON.stringify(requestBody)
   }).then((res) => {
@@ -36,6 +30,4 @@ export async function fetchUserAuthWithRefreshToken(
       throw new Error('세션 업데이트에 실패했어요');
     }
   });
-
-  return response;
 }
