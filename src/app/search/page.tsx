@@ -7,10 +7,9 @@ type Props = {
 const LIMIT_PER_FETCH = 10;
 
 export default async function SearchResults({ params, searchParams }: Props) {
-
   const requestParam: SearchLectureParams = {
     keyword: searchParams.keyword,
-    limit: searchParams.limit ?? LIMIT_PER_FETCH
+    limit: searchParams.limit ? Number(searchParams.limit) : LIMIT_PER_FETCH
   };
 
   return (
