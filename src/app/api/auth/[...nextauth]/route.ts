@@ -40,6 +40,13 @@ export const handler = NextAuth({
 
       return session;
     }
+  },
+  pages: {
+    signIn: '/auth/signin',
+    signOut: '/auth/signout',
+    error: '/',
+    verifyRequest: '/',
+    newUser: '/'
   }
 });
 
