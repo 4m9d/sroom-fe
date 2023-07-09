@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { ToastContext } from '../lib/ToastProvider';
+import getErrorObject from '../util/getErrorObject';
 
 export default function useToast() {
   const { toasts, setToasts } = useContext(ToastContext);
@@ -15,5 +16,9 @@ export default function useToast() {
     setTimeout(() => removeToast(), TOAST_TIMEOUT);
   };
 
-  return { toasts, setToast };
+  const errorHandler = (error: Error) => {
+    setToast(getErrorObject(error.message));
+  }
+
+  return { toasts, setToast, errorHandler };
 }
