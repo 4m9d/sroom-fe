@@ -3,12 +3,12 @@ import { fetchLecturesByKeyword } from '@/src/api/lectures/search';
 import { QueryKeys } from '@/src/api/queryKeys';
 import useToast from '@/src/hooks/useToast';
 import { useQuery } from '@tanstack/react-query';
-import { useCallback } from 'react';
 
 export default async function SearchResultsList(
   requestParam: SearchLectureParams
 ) {
   const fetchSearchResults = async () => {
+    console.log('hihi')
     return await fetchLecturesByKeyword(requestParam)
       .then((res) => {
         return res as SearchResultsList;
