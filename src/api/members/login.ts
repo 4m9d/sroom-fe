@@ -1,16 +1,20 @@
+import getHeaders from '@/src/util/getHeaders';
 import { Endpoints } from '../Endpoints';
 import { ErrorMessage } from '../ErrorMessage';
+import { getAuthorizedHeaders } from '@/src/util/getAuthorizedHeaders';
 
 export async function fetchUserAuthWithCredential(
   credential: GoogleLoginCredential
 ) {
-  const requestBody = credential;
-  return await fetch(Endpoints.MEMBERS, {
+  const headers = getHeaders();
+  const body = JSON.stringify(credential);
+  return await fetch(`${Endpoints.MEMBERS}/login`, {
     method: 'POST',
-    body: JSON.stringify(requestBody)
-  }).then((res) => {
+    headers,
+    body
+  }).then(async (res) => {
     if (res.ok) {
-      return res.json() as Promise<LoginResponse>;
+      return (await res.json()) as Promise<LoginResponse>;
     } else {
       throw new Error(ErrorMessage.login);
     }
@@ -20,13 +24,15 @@ export async function fetchUserAuthWithCredential(
 export async function fetchUserAuthWithRefreshToken(
   refreshToken: RefreshToken
 ) {
-  const requestBody = refreshToken;
+  const headers = await getAuthorizedHeaders();
+  const body = JSON.stringify(refreshToken);
   return await fetch(`${Endpoints.MEMBERS}/refresh`, {
     method: 'POST',
-    body: JSON.stringify(requestBody)
-  }).then((res) => {
+    headers,
+    body
+  }).then(async (res) => {
     if (res.ok) {
-      return res.json() as Promise<LoginResponse>;
+      return (await res.json()) as Promise<LoginResponse>;
     } else {
       throw new Error(ErrorMessage.refresh);
     }

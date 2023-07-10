@@ -1,7 +1,7 @@
 'use client';
 import { fetchLecturesByKeyword } from '@/src/api/lectures/search';
 import useToast from '@/src/hooks/useToast';
-import { getAuthorizationHeaderFromClient } from '@/src/util/getAuthorizationHeader';
+import { getAuthorizedHeadersFromClient } from '@/src/util/getAuthorizedHeaders';
 import { useCallback, useEffect, useState } from 'react';
 
 export default async function SearchResultsList(
@@ -22,7 +22,7 @@ export default async function SearchResultsList(
     [requestParam, errorHandler]
   );
 
-  const header = await getAuthorizationHeaderFromClient();
+  const header = await getAuthorizedHeadersFromClient();
 
   /*  useEffect(() => {
     fetchSearchResults().then((res) => {
