@@ -16,10 +16,11 @@ export const handler = NextAuth({
       },
       async authorize(credentials) {
         const credential = credentials as GoogleLoginCredential;
-
-        return (await fetchUserAuthWithCredential(credential)
+        const response = (await fetchUserAuthWithCredential(credential)
           .then((res) => res)
           .catch(() => null)) as any;
+
+        return response;
       }
     })
   ],

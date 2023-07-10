@@ -1,5 +1,5 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+const API_URL = "http://localhost:8080";
 export const Endpoints = {
   MEMBERS: `${API_URL}/members`,
   LECTURES: `${API_URL}/lectures`

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import SearchInput from './SearchInput';
 import useAuth from '@/src/hooks/useAuth';
 import Button from '../ui/Button';
+import { useSession } from 'next-auth/react';
 
 type Props = {
   logo: string;
@@ -14,7 +15,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
 
   const name = session?.name;
   const bio = session?.bio;
-
+  
   return (
     <nav className='flex justify-between px-10 navbar'>
       <h1 className=''>

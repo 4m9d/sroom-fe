@@ -18,23 +18,26 @@ export default function useAuth() {
     : 0;
   const refreshToken = { refreshToken: session?.refreshToken ?? '' };
 
-  const silentRefresh = async (refreshToken: RefreshToken) => {
-    return await fetchUserAuthWithRefreshToken(refreshToken)
+  const silentRefresh = async () => {
+    const response = await fetchUserAuthWithRefreshToken(refreshToken)
       .then(async (res) => {
         //TODO: 로그 추후 삭제
         console.log('silent refresh! response: ', res);
         await update(res);
+        return res;
       })
       .catch(async (err: Error) => {
         errorHandler(err);
         await logout();
       });
+
+    return response;
   };
 
-  useQuery([QueryKeys.REFRESH], () => silentRefresh(refreshToken), {
+  useQuery([QueryKeys.REFRESH], silentRefresh, {
     enabled: !!session,
     refetchOnWindowFocus: false,
-    refetchOnMount: false,
+    refetchOnMount: true,
     refetchOnReconnect: false,
     retry: 2,
     refetchInterval: REFRESH_PERIOD,
@@ -62,7 +65,9 @@ export default function useAuth() {
   };
 
   const logout = async () => {
-    await signOut();
+    await signOut().then(() => {
+      router.replace('/');
+    });
   };
 
   return { session, status, login, logout, silentRefresh };
