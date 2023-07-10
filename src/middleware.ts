@@ -24,11 +24,6 @@ export async function middleware(req: NextRequest) {
     return redirectToMain();
   }
 
-  //NOTE: 검색 페이지에서 검색어가 없으면 메인 페이지로 리다이렉트
-  if (pathname === '/search' && noSearchKeyword()) {
-    return redirectToMain();
-  }
-
   //functions
   function redirectToMain() {
     return NextResponse.redirect(new URL('/', req.url));
@@ -36,17 +31,11 @@ export async function middleware(req: NextRequest) {
   function redirectToDashboard() {
     return NextResponse.redirect(new URL('/dashboard', req.url));
   }
-  function noSearchKeyword() {
-    return (
-      searchParams.has('keyword') === false ||
-      searchParams.get('keyword')?.length === 0
-    );
-  }
   function tryToAccessProtectedRoute() {
     return pathname.startsWith('/') && pathname.length > 1;
   }
 }
 
 export const config = {
-  matcher: ['/', '/dashboard', '/auth/signin', '/auth/signout', '/search']
+  matcher: ['/', '/dashboard', '/auth/signin', '/auth/signout']
 };

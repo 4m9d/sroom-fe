@@ -1,10 +1,7 @@
 import { fetchUserAuthWithCredential } from '@/src/api/members/login';
+import { SESSION_AGE } from '@/src/constants/auth/auth';
 import NextAuth from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
-
-const ONE_HOUR = 60 * 60;
-const ONE_WEEK = 7 * 24 * ONE_HOUR;
-const SESSION_AGE = ONE_WEEK - ONE_HOUR;
 
 export const handler = NextAuth({
   session: {

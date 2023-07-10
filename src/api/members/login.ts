@@ -1,4 +1,5 @@
 import { Endpoints } from '../Endpoints';
+import { ErrorMessage } from '../ErrorMessage';
 
 export async function fetchUserAuthWithCredential(
   credential: GoogleLoginCredential
@@ -11,7 +12,7 @@ export async function fetchUserAuthWithCredential(
     if (res.ok) {
       return res.json() as Promise<LoginResponse>;
     } else {
-      throw new Error('로그인에 실패했어요');
+      throw new Error(ErrorMessage.login);
     }
   });
 }
@@ -27,7 +28,7 @@ export async function fetchUserAuthWithRefreshToken(
     if (res.ok) {
       return res.json() as Promise<LoginResponse>;
     } else {
-      throw new Error('세션 업데이트에 실패했어요');
+      throw new Error(ErrorMessage.refresh);
     }
   });
 }

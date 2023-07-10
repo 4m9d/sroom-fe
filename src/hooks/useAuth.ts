@@ -4,6 +4,8 @@ import { fetchUserAuthWithRefreshToken } from '../api/members/login';
 import { useQuery } from '@tanstack/react-query';
 import { QueryKeys } from '../lib/queryKeys';
 import useToast from './useToast';
+import { ErrorMessage } from '../api/ErrorMessage';
+import { ONE_MINUTE_IN_MS } from '../constants/auth/auth';
 
 export default function useAuth() {
   const router = useRouter();
@@ -11,7 +13,9 @@ export default function useAuth() {
   const { errorHandler } = useToast();
   const NOW = Math.floor(Date.now() / 1000);
   //NOTE: 서버에서 설정한 만료 시간보다 1분 짧게 변경
-  const REFRESH_PERIOD = session ? session?.expiresAt - NOW - 60 * 1000 : 0;
+  const REFRESH_PERIOD = session
+    ? session?.expiresAt - NOW - ONE_MINUTE_IN_MS
+    : 0;
   const refreshToken = { refreshToken: session?.refreshToken ?? '' };
 
   const silentRefresh = async (refreshToken: RefreshToken) => {
@@ -48,7 +52,7 @@ export default function useAuth() {
     })
       .then((res) => {
         if (res?.error) {
-          throw new Error('로그인에 실패했어요');
+          throw new Error(ErrorMessage.login);
         }
         router.replace('/dashboard');
       })
