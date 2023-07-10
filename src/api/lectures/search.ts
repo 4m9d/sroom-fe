@@ -1,11 +1,10 @@
 import getQueryURL from '@/src/util/getQueryURL';
 import { Endpoints } from '../Endpoints';
 import { ErrorMessage } from '../ErrorMessage';
+import { getAuthorizedHeaders } from '@/src/util/getAuthorizedHeaders';
 
-export async function fetchLecturesByKeyword(
-  params: SearchLectureParams,
-  headers: Headers
-) {
+export async function fetchLecturesByKeyword(params: SearchLectureParams) {
+  const headers = await getAuthorizedHeaders();
   return await fetch(getQueryURL(Endpoints.LECTURES, params), {
     method: 'GET',
     headers
@@ -20,9 +19,9 @@ export async function fetchLecturesByKeyword(
 
 export async function fetchLectureDetail(
   lectureCode: string,
-  params: LectureDeatilParams,
-  headers: Headers
+  params: LectureDeatilParams
 ) {
+  const headers = await getAuthorizedHeaders();
   return await fetch(
     getQueryURL(`${Endpoints.LECTURES}/${lectureCode}`, params),
     {
