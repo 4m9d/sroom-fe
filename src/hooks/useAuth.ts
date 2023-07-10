@@ -2,7 +2,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { fetchUserAuthWithRefreshToken } from '../api/members/login';
 import { useQuery } from '@tanstack/react-query';
-import { QueryKeys } from '../lib/queryKeys';
+import { QueryKeys } from '../api/queryKeys';
 import useToast from './useToast';
 import { ErrorMessage } from '../api/ErrorMessage';
 import { ONE_MINUTE_IN_MS } from '../constants/auth/auth';

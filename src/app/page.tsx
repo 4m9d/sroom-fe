@@ -1,16 +1,24 @@
-import LoginButton from "../components/login/LoginButton";
+import { getServerSession } from 'next-auth';
+import LoginButton from '../components/login/LoginButton';
 const STYLE_DESCRIPTION = 'mt-5 ml-16 text-3xl font-semibold';
 
-export default function Main() {
+export default async function Main() {
+  const session = await getServerSession();
   return (
     <>
+      {session === null ? (
+        <div
+          id='google-one-tap'
+          className='absolute top-0 right-0 mt-5 mr-5'
+        />
+      ) : null}
       <h2 className='mt-24 ml-16 text-5xl font-bold mb-14'>
         유튜브 강의를 쉽고 편하게.
       </h2>
       <h3 className={STYLE_DESCRIPTION}>나만을 위한 유튜브 강의</h3>
       <h3 className={STYLE_DESCRIPTION}>
         관리 플랫폼 스룸
-        <LoginButton/>
+        <LoginButton />
       </h3>
     </>
   );
