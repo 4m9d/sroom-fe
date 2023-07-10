@@ -1,5 +1,6 @@
 import getQueryURL from '@/src/util/getQueryURL';
 import { Endpoints } from '../Endpoints';
+import { ErrorMessage } from '../ErrorMessage';
 
 export async function fetchLecturesByKeyword(
   params: SearchLectureParams,
@@ -12,7 +13,7 @@ export async function fetchLecturesByKeyword(
     if (res.ok) {
       return res.json() as Promise<SearchResultsList>;
     } else {
-      throw new Error('검색 결과를 불러오지 못했어요');
+      throw new Error(ErrorMessage.search);
     }
   });
 }
@@ -32,7 +33,7 @@ export async function fetchLectureDetail(
     if (res.ok) {
       return res.json();
     } else {
-      throw new Error('강의 상세 정보를 불러오지 못했어요');
+      throw new Error(ErrorMessage.detail);
     }
   });
 }
