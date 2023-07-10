@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ToastContext } from '../lib/ToastProvider';
+import { ToastContext } from '../providers/ToastProvider';
 import getErrorObject from '../util/getErrorObject';
 import { TOAST_TIMEOUT } from '../constants/toast/toast';
 

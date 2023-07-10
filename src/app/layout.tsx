@@ -1,9 +1,9 @@
-import QueryProvider from '../lib/QueryProvider';
+import QueryProvider from '../providers/QueryProvider';
 import NavBar from '../components/nav/NavBar';
-import AuthSessionProvider from '../lib/AuthSessionProvider';
+import AuthSessionProvider from '../providers/AuthSessionProvider';
 import './globals.css';
 import { Inter } from 'next/font/google';
-import ToastProvider from '../lib/ToastProvider';
+import ToastProvider from '../providers/ToastProvider';
 import Toast from '../components/ui/Toast';
 
 const inter = Inter({ subsets: ['latin'] });

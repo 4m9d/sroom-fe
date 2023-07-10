@@ -1,5 +1,5 @@
 'use client';
-import { ToastContext } from '@/src/lib/ToastProvider';
+import { ToastContext } from '@/src/providers/ToastProvider';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useContext } from 'react';
 
