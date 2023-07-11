@@ -1,10 +1,11 @@
+import GoogleOneTapPortal from '../components/login/GoogleOneTapPortal';
 import LoginButton from '../components/login/LoginButton';
 const STYLE_DESCRIPTION = 'mt-5 ml-16 text-3xl font-semibold';
 
 export default async function Main() {
   return (
     <>
-      <div id='google-one-tap' className='absolute top-3 right-3' />
+      <GoogleOneTapPortal />
       <h2 className='mt-24 ml-16 text-5xl font-bold mb-14'>
         유튜브 강의를 쉽고 편하게.
       </h2>

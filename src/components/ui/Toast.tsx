@@ -1,20 +1,12 @@
 'use client';
-import { ToastContext } from '@/src/providers/ToastProvider';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useContext } from 'react';
 
 const Emoji = {
   success: '✅',
   error: '🚫'
 } as const;
 
-export default function Toast() {
-  const { toasts } = useContext(ToastContext);
-
-  const toast = toasts[0];
-
-  if (!toast) return null;
-
+export default function Toast({ toast }: { toast: Toast }) {
   const { type, title, description, buttonLabel, buttonOnClick } = toast;
 
   return (
@@ -22,7 +14,7 @@ export default function Toast() {
       <motion.div
         initial={{ y: 200 }}
         animate={{ y: 0 }}
-        transition={{ repeat: 1, repeatType: 'reverse', repeatDelay: 3 }}
+        transition={{ repeat: 1, repeatType: 'reverse', repeatDelay: 3.5}}
         className={`alert h-14 flex items-center ${
           type === 'error' ? 'alert-error' : 'alert-success'
         } absolute z-10 bottom-16 w-1/2 left-1/4`}

@@ -1,0 +1,1 @@
+export const LIMIT_PER_FETCH = 20;
