@@ -1,9 +1,9 @@
 'use client';
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 import useScript from '@/src/hooks/useScript';
 import useAuth from '@/src/hooks/useAuth';
 
-export default function LoginButton() {
+function LoginButton() {
   const loginButton = useRef<HTMLDivElement>(null);
   const { login, status } = useAuth();
 
@@ -39,3 +39,5 @@ export default function LoginButton() {
     />
   );
 }
+
+export default memo(LoginButton);

@@ -2,23 +2,25 @@ import { useContext } from 'react';
 import { ToastContext } from '../providers/ToastProvider';
 import getErrorObject from '../util/getErrorObject';
 import { TOAST_TIMEOUT } from '../constants/toast/toast';
+import getRandomID from '../util/getRandomID';
 
 export default function useToast() {
   const { toasts, setToasts } = useContext(ToastContext);
 
-  const removeToast = () => {
-    const poppedToasts = toasts.slice(1);
-    setToasts(poppedToasts);
+  const removeToast = (id: number) => {
+    setToasts((prev: Toast[]) => prev.filter((toast) => toast.id !== id));
   };
 
   const setToast = (toast: Toast) => {
-    setToasts((prev) => [...prev, toast]);
-    setTimeout(() => removeToast(), TOAST_TIMEOUT);
+    const id = getRandomID();
+
+    setToasts((prev: Toast[]) => [...prev, { ...toast, id }]);
+    setTimeout(() => removeToast(toast.id), TOAST_TIMEOUT);
   };
 
-  const errorHandler = (error: Error) => {
+  const setErrorToast = (error: Error) => {
     setToast(getErrorObject(error.message));
-  }
+  };
 
-  return { toasts, setToast, errorHandler };
+  return { toasts, setToast, setErrorToast };
 }

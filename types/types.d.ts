@@ -4,12 +4,24 @@ interface Window {
 }
 
 interface Toast {
-  id?: string;
+  id: number;
   type: 'success' | 'error';
   title: string;
   description: string;
   buttonLabel?: string;
   buttonOnClick?: () => void;
+}
+
+interface ErrorToast extends Error {
+  id: number;
+  title: string;
+  description: string;
+  type: 'error';
+}
+
+interface ToastContextType {
+  toasts: Toast[];
+  setToasts: Dispatch<SetStateAction<Toast[]>>;
 }
 
 interface Profile {
@@ -71,11 +83,6 @@ interface SearchResultsList {
   resultPerPage: number;
   nextPageToken: string;
   prevPageToken: string;
+  isEnrolled: boolean;
   lectures: Lecture[];
-}
-
-interface ErrorToast extends Error {
-  title: string;
-  description: string;
-  type: 'error';
 }

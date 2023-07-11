@@ -21,6 +21,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang='en'>
       <body className={inter.className}>
+        <div id='toast'></div>
         <ToastProvider>
           <AuthSessionProvider>
             <QueryProvider>
@@ -34,7 +35,6 @@ export default function RootLayout({ children }: Props) {
               {children}
             </QueryProvider>
           </AuthSessionProvider>
-          <Toast />
         </ToastProvider>
       </body>
     </html>

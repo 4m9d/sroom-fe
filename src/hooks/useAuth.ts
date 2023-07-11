@@ -10,7 +10,7 @@ import { ONE_MINUTE_IN_MS } from '../constants/auth/auth';
 export default function useAuth() {
   const router = useRouter();
   const { data: session, status, update } = useSession();
-  const { errorHandler } = useToast();
+  const { setErrorToast } = useToast();
   const NOW = Math.floor(Date.now() / 1000);
   //NOTE: 서버에서 설정한 만료 시간보다 1분 짧게 변경
   const REFRESH_PERIOD = session
@@ -26,8 +26,8 @@ export default function useAuth() {
         await update(res);
         return res;
       })
-      .catch(async (err: Error) => {
-        errorHandler(err);
+      .catch(async () => {
+        setErrorToast(new Error(ErrorMessage.refresh));
         await logout();
       });
 
@@ -37,8 +37,8 @@ export default function useAuth() {
   useQuery([QueryKeys.REFRESH], silentRefresh, {
     enabled: !!session,
     refetchOnWindowFocus: false,
-    refetchOnMount: true,
-    refetchOnReconnect: false,
+    refetchOnMount: false,
+    refetchOnReconnect: true,
     retry: 2,
     refetchInterval: REFRESH_PERIOD,
     refetchIntervalInBackground: true
@@ -60,13 +60,13 @@ export default function useAuth() {
         router.replace('/dashboard');
       })
       .catch((err) => {
-        errorHandler(err);
+        setErrorToast(err);
       });
   };
 
   const logout = async () => {
     await signOut().then(() => {
-      router.replace('/');
+      router.push('/');
     });
   };
 
