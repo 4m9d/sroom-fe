@@ -3,7 +3,6 @@ import Link from 'next/link';
 import SearchInput from './SearchInput';
 import useAuth from '@/src/hooks/useAuth';
 import Button from '../ui/Button';
-import { useSession } from 'next-auth/react';
 
 type Props = {
   logo: string;
@@ -15,6 +14,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
 
   const name = session?.name;
   const bio = session?.bio;
+  const hidden = name ? '' : 'hidden';
   
   return (
     <nav className='flex justify-between px-10 navbar'>
@@ -23,17 +23,17 @@ export default function NavBar({ logo, profileDropdown }: Props) {
           {logo}
         </Link>
       </h1>
-      <div className={`${name ? '' : 'hidden'}`}>
+      <div className={`${hidden}`}>
         <SearchInput />
       </div>
       <div className='flex gap-4'>
         <Button
           onClick={logout}
-          className={`${name ? '' : 'hidden'} g_id_signout`}
+          className={`${hidden} g_id_signout`}
         >
           <p>로그아웃</p>
         </Button>
-        <button className={`${name ? '' : 'hidden'} dropdown dropdown-hover`}>
+        <button className={`${hidden} dropdown dropdown-hover`}>
           <div
             tabIndex={0}
             className='flex flex-col items-start w-44 btn btn-ghost rounded-btn'

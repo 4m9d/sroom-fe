@@ -14,10 +14,10 @@ export default function Toast({ toast }: { toast: Toast }) {
       <motion.div
         initial={{ y: 200 }}
         animate={{ y: 0 }}
-        transition={{ repeat: 1, repeatType: 'reverse', repeatDelay: 3.5}}
-        className={`alert h-14 flex items-center ${
+        transition={{ repeat: 1, repeatType: 'reverse', repeatDelay: 3.4 }}
+        className={`fixed alert h-14 flex items-center ${
           type === 'error' ? 'alert-error' : 'alert-success'
-        } absolute z-10 bottom-16 w-1/2 left-1/4`}
+        } z-10 bottom-16 w-1/2 left-1/4`}
       >
         <span className='inline-block mr-2 align-middle'>{Emoji[type]}</span>
         <div>

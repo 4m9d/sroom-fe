@@ -77,12 +77,12 @@ interface Lecture {
   reviewCount: number;
   thumbnail: string;
   isPlaylist: boolean;
+  isEnrolled: boolean;
 }
 
 interface SearchResultsList {
   resultPerPage: number;
   nextPageToken: string;
   prevPageToken: string;
-  isEnrolled: boolean;
   lectures: Lecture[];
 }

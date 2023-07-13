@@ -4,7 +4,6 @@ import AuthSessionProvider from '../providers/AuthSessionProvider';
 import './globals.css';
 import { Inter } from 'next/font/google';
 import ToastProvider from '../providers/ToastProvider';
-import Toast from '../components/ui/Toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
