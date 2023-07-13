@@ -13,10 +13,12 @@ export default function SearchInput() {
   const submitHandler = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (keyword.trim() === '') {
+    const encodedQuery = encodeURIComponent(keyword);
+
+    if (encodedQuery.trim() === '') {
       return;
     } else {
-      const url = getQueryURL('/search', { keyword });
+      const url = getQueryURL('/search', { keyword: encodedQuery });
       router.push(url);
       setKeyword('');
     }
