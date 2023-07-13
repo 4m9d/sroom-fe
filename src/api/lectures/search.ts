@@ -7,12 +7,13 @@ export async function fetchLecturesByKeyword(params: SearchLectureParams) {
   const headers = await getAuthorizedHeaders();
   return await fetch(getQueryURL(Endpoints.LECTURES, params), {
     method: 'GET',
-    headers
-  }).then((res) => {
+    headers,
+    cache : 'no-store'
+  }).then(async(res) => {
     if (res.ok) {
-      return res.json() as Promise<SearchResultsList>;
+      return await res.json() as Promise<SearchResultsList>;
     } else {
-      throw new Error(ErrorMessage.search);
+      return Promise.reject(new Error(ErrorMessage.search));
     }
   });
 }
@@ -28,11 +29,11 @@ export async function fetchLectureDetail(
       method: 'GET',
       headers
     }
-  ).then((res) => {
+  ).then(async(res) => {
     if (res.ok) {
-      return res.json();
+      return await res.json();
     } else {
-      throw new Error(ErrorMessage.detail);
+      return Promise.reject(new Error(ErrorMessage.detail));
     }
   });
 }
