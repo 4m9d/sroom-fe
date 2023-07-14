@@ -60,6 +60,7 @@ interface LoginResponse extends Response {
 interface SearchLectureParams extends Record<string, string | number> {
   keyword: string;
   limit: number;
+  nextPageToken: string;
 }
 
 interface LectureDeatilParams extends Record<string, string | number> {
@@ -82,7 +83,7 @@ interface Lecture {
 
 interface SearchResultsList {
   resultPerPage: number;
-  nextPageToken: string;
-  prevPageToken: string;
+  nextPageToken: string | null;
+  prevPageToken: string | null;
   lectures: Lecture[];
 }

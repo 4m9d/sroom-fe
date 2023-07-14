@@ -6,7 +6,7 @@ type Props = {
 
 export default function Button({ className, children, onClick }: Props) {
   return (
-    <button onClick={onClick} className={`${className} btn btn-ghost`}>
+    <button onClick={onClick} className={`${className} btn`}>
       {children}
     </button>
   );
