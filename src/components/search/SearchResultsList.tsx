@@ -14,7 +14,7 @@ import Select from '../ui/Select';
 export default async function SearchResultsList(
   requestParam: SearchLectureParams
 ) {
-  const [filter, setFilter] = useState<SearchResultsFilter>('all');
+  const [filter, setFilter] = useState<SearchResultsFilter>(requestParam.filter);
   const { setErrorToast } = useToast();
 
   const fetchSearchResults = async ({ pageParam: next_page_token = '' }) => {

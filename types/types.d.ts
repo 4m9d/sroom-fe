@@ -62,7 +62,7 @@ type SearchResultsFilter = 'all' | 'playlist' | 'video';
 interface SearchLectureParams extends Record<string, string | number> {
   keyword: string;
   limit: number;
-  next_page_token: string;
+  next_page_token?: string;
   filter: SearchResultsFilter
 }
 
