@@ -57,10 +57,13 @@ interface LoginResponse extends Response {
   bio: string;
 }
 
+type SearchResultsFilter = 'all' | 'playlist' | 'video';
+
 interface SearchLectureParams extends Record<string, string | number> {
   keyword: string;
   limit: number;
-  nextPageToken: string;
+  next_page_token: string;
+  filter: SearchResultsFilter
 }
 
 interface LectureDeatilParams extends Record<string, string | number> {
