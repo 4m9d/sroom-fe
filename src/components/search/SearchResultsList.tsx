@@ -5,7 +5,7 @@ import { fetchLecturesByKeyword } from '@/src/api/lectures/search';
 import { QueryKeys } from '@/src/api/queryKeys';
 import useToast from '@/src/hooks/useToast';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import SearchLectureCard from '../ui/SearchLectureCard';
+import SearchLectureCard from './SearchLectureCard';
 import { GRID_COLS_2 } from '@/src/constants/ui/searchLectureCard';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/search/search';
 import Button from '../ui/Button';

@@ -7,7 +7,7 @@ import {
   useState
 } from 'react';
 import { createPortal } from 'react-dom';
-import Toast from '../components/ui/Toast';
+import Toast from '../components/toast/Toast';
 
 export const ToastContext = createContext<ToastContextType>({
   toasts: [],
