@@ -32,8 +32,9 @@ export async function fetchLectureDetail(
     }
   ).then(async (res) => {
     if (res.ok) {
-      return await res.json();
+      return (await res.json()) as Promise<LectureDetail>;
     } else {
+      console.dir(res);
       return Promise.reject(new Error(ErrorMessage.detail));
     }
   });

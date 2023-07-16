@@ -12,7 +12,7 @@ import useToast from '@/src/hooks/useToast';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 
 type Props = {
-  lectureDetail: LectureDetail;
+  lectureDetail: LectureDetail | null;
   navigationType: 'soft' | 'hard';
 };
 
@@ -21,6 +21,13 @@ export default function LectureDetailModal({
   navigationType
 }: Props) {
   const router = useRouter();
+  const { setErrorToast } = useToast();
+
+  if (lectureDetail === null) {
+    setErrorToast(new Error(ErrorMessage.detail));
+    return null;
+  }
+  
   const onCloseHandler =
     navigationType === 'soft' ? router.back : () => router.replace('/');
 
@@ -32,12 +39,6 @@ export default function LectureDetailModal({
     review_count,
     description
   } = lectureDetail;
-  const { setErrorToast } = useToast();
-
-  if (lectureDetail === null) {
-    setErrorToast(new Error(ErrorMessage.detail));
-    return null;
-  }
 
   return (
     <Modal className='rounded-none' onClose={onCloseHandler}>
@@ -47,12 +48,7 @@ export default function LectureDetailModal({
         <div
           className={`relative object-cover ${THUMBNAIL_PREVIEW_MIN_WIDTH.MEDIUM} ${THUMBNAIL_PREVIEW_MIN_WIDTH.LARGE} ${THUMBNAIL_PREVIEW_MIN_WIDTH.XLARGE}`}
         >
-          <Image
-            fill={true}
-            sizes='100%'
-            src={thumbnail}
-            alt={lecture_title}
-          />
+          <Image fill={true} sizes='100%' src={thumbnail} alt={lecture_title} />
         </div>
         <div className='flex flex-col w-1/2 px-4'>
           <p className='font-semibold h-1/5 sm:text-sm lg:text-base sm:line-clamp-1 lg:line-clamp-2'>

@@ -109,12 +109,13 @@ interface LectureReview {
 
 interface LectureDetail extends Lecture {
   published_at: string | null;
-  lecture_count: number;
-  index_info: {
+  view_count: number;
+  duration: string;
+  lecture_count?: number;
+  index_info?: {
     index_list: LectureIndex[];
     next_page_token: string | null;
     total_duration: stirng;
   };
   reviews: [];
-  is_enrolled: boolean;
 }
