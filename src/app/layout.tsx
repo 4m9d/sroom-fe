@@ -14,9 +14,10 @@ export const metadata = {
 
 type Props = {
   children: React.ReactNode;
+  modal: React.ReactNode;
 };
 
-export default function RootLayout({ children }: Props) {
+export default function RootLayout({ children, modal }: Props) {
   return (
     <html lang='en'>
       <body className={inter.className}>
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: Props) {
                 ]}
               />
               {children}
+              {modal}
             </QueryProvider>
           </AuthSessionProvider>
         </ToastProvider>
