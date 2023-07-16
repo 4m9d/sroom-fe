@@ -10,6 +10,6 @@ export default async function LectureDetailModalIntercepter({
 
   const lectureDetail = await lectureDetailData;
 
-  return <LectureDetailModal lectureDetail={lectureDetail} />;
+  return <LectureDetailModal lectureDetail={lectureDetail} navigationType='soft'/>;
 }
 //NOTE: 수정하면, search/[lectureCode]/page 에서도 수정해야함

@@ -14,10 +14,16 @@ import { ErrorMessage } from '@/src/api/ErrorMessage';
 
 type Props = {
   lectureDetail: LectureDetail;
+  navigationType: 'soft' | 'hard';
 };
 
-export default function LectureDetailModal({ lectureDetail }: Props) {
+export default function LectureDetailModal({
+  lectureDetail,
+  navigationType
+}: Props) {
   const router = useRouter();
+  const onCloseHandler =
+    navigationType === 'soft' ? router.back : () => router.replace('/');
 
   const { thumbnail, lectureTitle, rating, channel, reviewCount, description } =
     lectureDetail;
@@ -32,7 +38,7 @@ export default function LectureDetailModal({ lectureDetail }: Props) {
   }
 
   return (
-    <Modal className='rounded-none' onClose={router.back}>
+    <Modal className='rounded-none' onClose={onCloseHandler}>
       <div
         className={`flex w-full cursor-pointer ${THUMBNAIL_PREVIEW_HEIGHT.MEDIUM} ${THUMBNAIL_PREVIEW_HEIGHT.LARGE} ${THUMBNAIL_PREVIEW_HEIGHT.XLARGE}`}
       >
