@@ -1,9 +1,9 @@
 import { fetchUserAuthWithCredential } from '@/src/api/members/login';
 import { SESSION_AGE } from '@/src/constants/auth/auth';
-import NextAuth from 'next-auth';
+import NextAuth, { AuthOptions } from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
 
-export const handler = NextAuth({
+export const authOptions: AuthOptions = {
   session: {
     strategy: 'jwt',
     maxAge: SESSION_AGE
@@ -46,6 +46,8 @@ export const handler = NextAuth({
     verifyRequest: '/',
     newUser: '/'
   }
-});
+}
+
+export const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST };

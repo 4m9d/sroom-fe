@@ -8,10 +8,10 @@ export async function fetchLecturesByKeyword(params: SearchLectureParams) {
   return await fetch(getQueryURL(Endpoints.LECTURES, params), {
     method: 'GET',
     headers,
-    cache : 'no-store'
-  }).then(async(res) => {
+    cache: 'no-store'
+  }).then(async (res) => {
     if (res.ok) {
-      return await res.json() as Promise<SearchResultsList>;
+      return (await res.json()) as Promise<SearchResultsList>;
     } else {
       return Promise.reject(new Error(ErrorMessage.search));
     }
@@ -20,16 +20,17 @@ export async function fetchLecturesByKeyword(params: SearchLectureParams) {
 
 export async function fetchLectureDetail(
   lectureCode: string,
-  params: LectureDeatilParams
+  params?: LectureDeatilParams
 ) {
   const headers = await getAuthorizedHeaders();
   return await fetch(
     getQueryURL(`${Endpoints.LECTURES}/${lectureCode}`, params),
     {
       method: 'GET',
-      headers
+      headers,
+      cache: 'no-store'
     }
-  ).then(async(res) => {
+  ).then(async (res) => {
     if (res.ok) {
       return await res.json();
     } else {

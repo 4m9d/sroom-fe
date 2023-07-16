@@ -1,4 +1,4 @@
-import { SEARCH_LECTURE_CARD } from '@/src/constants/ui/searchLectureCard';
+import { THUMBNAIL_PREVIEW_HEIGHT, THUMBNAIL_PREVIEW_MIN_WIDTH } from '@/src/constants/ui/thumbnail';
 import { decode } from 'html-entities';
 import Image from 'next/image';
 
@@ -21,9 +21,11 @@ export default function SearchLectureCard({ lecture }: { lecture: Lecture }) {
   const decodedDescription = decode(description);
 
   return (
-    <li className={SEARCH_LECTURE_CARD.CARD}>
-      <div className={SEARCH_LECTURE_CARD.THUMBNAIL}>
-        <Image fill={true} sizes='100%' src={thumbnail} alt={lectureTitle} />
+    <li
+      className={`flex w-full cursor-pointer ${THUMBNAIL_PREVIEW_HEIGHT.MEDIUM} ${THUMBNAIL_PREVIEW_HEIGHT.LARGE}`}
+    >
+      <div className={`relative object-cover ${THUMBNAIL_PREVIEW_MIN_WIDTH.MEDIUM} ${THUMBNAIL_PREVIEW_MIN_WIDTH.LARGE}`}>
+        <Image fill={true} sizes='100%' src={thumbnail} alt={decodedLectureTitle} />
       </div>
       <div className='flex flex-col w-1/2 px-4'>
         <p className='font-semibold h-1/5 sm:text-sm lg:text-base sm:line-clamp-1 lg:line-clamp-2'>
