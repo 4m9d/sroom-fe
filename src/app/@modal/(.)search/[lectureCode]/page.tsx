@@ -2,9 +2,9 @@ import { fetchLectureDetail } from '@/src/api/lectures/search';
 import LectureDetailModal from '@/src/components/lectureDetail/LectureDetailModal';
 
 export default async function LectureDetailModalIntercepter({
-  params: { lectureCode }
+  params: { lecture_code }
 }: LectureDetailModalParams) {
-  const lectureDetailData = fetchLectureDetail(lectureCode)
+  const lectureDetailData = fetchLectureDetail(lecture_code)
     .then((res) => res)
     .catch(() => null);
 

@@ -11,7 +11,7 @@ export async function getAuthorizedHeaders() {
   }
   
   const header = getHeaders();
-  header.set('Authorization', session?.accessToken ?? '');
+  header.set('Authorization', session?.access_token ?? '');
 
   return header;
 }

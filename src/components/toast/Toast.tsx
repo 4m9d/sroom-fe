@@ -14,7 +14,7 @@ export default function Toast({ toast }: { toast: Toast }) {
       <motion.div
         initial={{ y: 200 }}
         animate={{ y: 0 }}
-        transition={{ repeat: 1, repeatType: 'reverse', repeatDelay: 3.4 }}
+        transition={{ repeat: 1, repeatType: 'reverse', repeatDelay: 3 }}
         className={`fixed alert h-14 flex items-center ${
           type === 'error' ? 'alert-error' : 'alert-success'
         } z-10 bottom-16 w-1/2 left-1/4`}

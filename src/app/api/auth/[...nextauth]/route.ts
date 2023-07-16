@@ -15,7 +15,9 @@ export const authOptions: AuthOptions = {
         credential: { type: 'text' }
       },
       async authorize(credentials) {
-        const credential = credentials as GoogleLoginCredential;
+        const credential = {
+          credential: credentials?.credential
+        } as GoogleLoginCredential;
         const response = await fetchUserAuthWithCredential(credential).then(
           (res) => res
         );
@@ -46,8 +48,8 @@ export const authOptions: AuthOptions = {
     verifyRequest: '/',
     newUser: '/'
   }
-}
+};
 
-export const handler = NextAuth(authOptions)
+export const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

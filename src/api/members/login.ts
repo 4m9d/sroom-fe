@@ -18,7 +18,7 @@ export async function fetchUserAuthWithCredential(
     } else {
       return Promise.reject(new Error(ErrorMessage.login));
     }
-  });
+  })
 }
 
 export async function fetchUserAuthWithRefreshToken(

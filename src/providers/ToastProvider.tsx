@@ -17,7 +17,7 @@ export const ToastContext = createContext<ToastContextType>({
 const ToastProvider = ({ children }: PropsWithChildren) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [portal, setportal] = useState<Element | null>(null);
-  const value = useMemo(() => ({ toasts, setToasts }), [toasts, setToasts]);
+  const value = { toasts, setToasts };
 
   useEffect(() => {
     setportal(document.getElementById('toast'));
