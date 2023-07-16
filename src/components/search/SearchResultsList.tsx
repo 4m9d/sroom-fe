@@ -42,13 +42,12 @@ export default async function SearchResultsList(
       suspense: true,
       staleTime: STALE_TIME,
       cacheTime: CACHE_TIME,
-      getNextPageParam: (lastPage) => lastPage?.nextPageToken
+      getNextPageParam: (lastPage) => lastPage?.next_page_token
     }
   );
 
   const FilterSelect = () => {
     const onSelectHanlder = (e: ChangeEvent<HTMLSelectElement>) => {
-      console.log(e.target.value);
       setFilter(e.target.value as SearchResultsFilter);
     };
 
@@ -82,9 +81,9 @@ export default async function SearchResultsList(
         {data?.pages.map((page) =>
           page?.lectures.map((lecture: Lecture) => (
             <Link
-              key={lecture.lectureCode}
+              key={lecture.lecture_code}
               href={{
-                pathname: `/search/${lecture.lectureCode}`
+                pathname: `/search/${lecture.lecture_code}`
               }}
               scroll={false}
             >

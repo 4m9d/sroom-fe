@@ -19,12 +19,12 @@ export async function fetchLecturesByKeyword(params: SearchLectureParams) {
 }
 
 export async function fetchLectureDetail(
-  lectureCode: string,
+  lecture_code: string,
   params?: LectureDeatilParams
 ) {
   const headers = await getAuthorizedHeaders();
   return await fetch(
-    getQueryURL(`${Endpoints.LECTURES}/${lectureCode}`, params),
+    getQueryURL(`${Endpoints.LECTURES}/${lecture_code}`, params),
     {
       method: 'GET',
       headers,

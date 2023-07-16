@@ -14,9 +14,9 @@ export default function useAuth() {
   const NOW = Math.floor(Date.now() / 1000);
   //NOTE: 서버에서 설정한 만료 시간보다 1분 짧게 변경
   const REFRESH_PERIOD = session
-    ? session?.expiresAt - NOW - ONE_MINUTE_IN_MS
+    ? session?.expires_at - NOW - ONE_MINUTE_IN_MS
     : 0;
-  const refreshToken = { refreshToken: session?.refreshToken ?? '' };
+  const refreshToken = { refresh_token: session?.refresh_token ?? '' };
 
   const silentRefresh = async () => {
     const response = await fetchUserAuthWithRefreshToken(refreshToken)

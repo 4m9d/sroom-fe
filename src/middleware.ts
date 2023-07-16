@@ -24,7 +24,7 @@ export async function middleware(req: NextRequest) {
     return redirectToMain();
   }
 
-  //functions
+  ////////////////////////////////functions////////////////////////////////
   function redirectToMain() {
     return NextResponse.redirect(new URL('/', req.url));
   }
@@ -34,8 +34,9 @@ export async function middleware(req: NextRequest) {
   function tryToAccessProtectedRoute() {
     return pathname.startsWith('/') && pathname.length > 1;
   }
+  /////////////////////////////////////////////////////////////////////////
 }
 
 export const config = {
-  matcher: ['/', '/dashboard', '/auth/signin', '/auth/signout', '/search']
+  matcher: ['/', '/dashboard', '/auth/signin', '/auth/signout', '/search:path*']
 };
