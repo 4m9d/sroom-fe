@@ -10,6 +10,8 @@ export default async function LectureDetail({
 
   const lectureDetail = await lectureDetailData;
 
-  return <LectureDetailModal lectureDetail={lectureDetail} />;
+  return (
+    <LectureDetailModal lectureDetail={lectureDetail} navigationType='hard' />
+  );
 }
 //NOTE: 수정하면, @modal/(.)search/[lectureCode]/page 에서도 수정해야함
