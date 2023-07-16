@@ -49,12 +49,10 @@ interface RefreshToken {
   refreshToken: string;
 }
 
-interface LoginResponse extends Response {
+interface LoginResponse extends Response, Profile {
   accessToken: string;
   refreshToken: string;
   expiresAt: number;
-  name: string;
-  bio: string;
 }
 
 type SearchResultsFilter = 'all' | 'playlist' | 'video';
@@ -63,13 +61,18 @@ interface SearchLectureParams extends Record<string, string | number> {
   keyword: string;
   limit: number;
   next_page_token?: string;
-  filter: SearchResultsFilter
+  filter: SearchResultsFilter;
+}
+
+interface LectureDetailModalParams {
+  params: { lectureCode: string };
+  searchParams: { isPlaylist: string };
 }
 
 interface LectureDeatilParams extends Record<string, string | number> {
-  is_playlist: boolean;
   review_only?: boolean;
   index_only?: boolean;
+  next_page_token?: string;
 }
 
 interface Lecture {
@@ -89,4 +92,29 @@ interface SearchResultsList {
   nextPageToken: string | null;
   prevPageToken: string | null;
   lectures: Lecture[];
+}
+
+interface LectureIndex {
+  index: number;
+  thumbnail: string;
+  lectureTitle: string;
+  duration: string;
+}
+
+interface LectureReview {
+  index: number;
+  reviewContent: string;
+  submittedRating: number;
+}
+
+interface LectureDetail extends Lecture {
+  publishedAt: string | null;
+  lectureCount: number;
+  indexInfo: {
+    indexList: LectureIndex[];
+    nextPageToken: string | null;
+    totalDuration: stirng;
+  };
+  reviews: [];
+  isEnrolled: boolean;
 }

@@ -1,9 +1,15 @@
-import { Session } from 'next-auth';
+import { Session, getServerSession } from 'next-auth';
 import { getSession } from 'next-auth/react';
 import getHeaders from './getHeaders';
+import { authOptions } from '../app/api/auth/[...nextauth]/route';
 
 export async function getAuthorizedHeaders() {
-  const session: Session | null = await getSession();
+  let session: Session | null = await getSession();
+
+  if (session === null) {
+    session = await getServerSession(authOptions);
+  }
+  
   const header = getHeaders();
   header.set('Authorization', session?.accessToken ?? '');
 

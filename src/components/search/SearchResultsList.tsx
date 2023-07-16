@@ -6,21 +6,22 @@ import { QueryKeys } from '@/src/api/queryKeys';
 import useToast from '@/src/hooks/useToast';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import SearchLectureCard from './SearchLectureCard';
-import { GRID_COLS_2 } from '@/src/constants/ui/searchLectureCard';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/search/search';
 import Button from '../ui/Button';
 import Select from '../ui/Select';
+import Link from 'next/link';
 
 export default async function SearchResultsList(
   requestParam: SearchLectureParams
 ) {
-  const [filter, setFilter] = useState<SearchResultsFilter>(requestParam.filter);
+  const [filter, setFilter] = useState<SearchResultsFilter>(
+    requestParam.filter
+  );
   const { setErrorToast } = useToast();
 
   const fetchSearchResults = async ({ pageParam: next_page_token = '' }) => {
     return await fetchLecturesByKeyword({
       ...requestParam,
-      //TODO: next_page_token으로 수정
       next_page_token,
       filter
     })
@@ -77,10 +78,18 @@ export default async function SearchResultsList(
       <div className='flex justify-end mb-5'>
         <FilterSelect />
       </div>
-      <ul className={GRID_COLS_2}>
+      <ul className='grid grid-cols-2 gap-8 px-5 gap-y-4'>
         {data?.pages.map((page) =>
           page?.lectures.map((lecture: Lecture) => (
-            <SearchLectureCard key={lecture.lectureCode} lecture={lecture} />
+            <Link
+              key={lecture.lectureCode}
+              href={{
+                pathname: `/search/${lecture.lectureCode}`
+              }}
+              scroll={false}
+            >
+              <SearchLectureCard lecture={lecture} />
+            </Link>
           ))
         )}
       </ul>
