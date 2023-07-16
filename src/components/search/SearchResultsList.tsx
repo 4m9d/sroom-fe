@@ -82,9 +82,7 @@ export default async function SearchResultsList(
           page?.lectures.map((lecture: Lecture) => (
             <Link
               key={lecture.lecture_code}
-              href={{
-                pathname: `/search/${lecture.lecture_code}`
-              }}
+              href={`/search/${lecture.lecture_code}`}
               scroll={false}
             >
               <SearchLectureCard lecture={lecture} />
