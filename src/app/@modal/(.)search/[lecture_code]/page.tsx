@@ -1,4 +1,3 @@
-import { ErrorMessage } from '@/src/api/ErrorMessage';
 import { fetchLectureDetail } from '@/src/api/lectures/search';
 import LectureDetailModal from '@/src/components/lectureDetail/LectureDetailModal';
 
