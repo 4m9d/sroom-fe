@@ -105,6 +105,8 @@ interface LectureReview {
   index: number;
   review_content: string;
   submitted_rating: number;
+  review_writer: string;
+  published_at: string;
 }
 
 interface LectureDetail extends Lecture {
@@ -112,10 +114,10 @@ interface LectureDetail extends Lecture {
   view_count: number;
   duration: string;
   lecture_count?: number;
-  index_info?: {
+  indexes?: {
     index_list: LectureIndex[];
     next_page_token: string | null;
     total_duration: stirng;
   };
-  reviews: [];
+  reviews: LectureReview[];
 }
