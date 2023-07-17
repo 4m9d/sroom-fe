@@ -8,11 +8,9 @@ import {
   THUMBNAIL_PREVIEW_HEIGHT,
   THUMBNAIL_PREVIEW_MIN_WIDTH
 } from '@/src/constants/ui/thumbnail';
-import useToast from '@/src/hooks/useToast';
-import { ErrorMessage } from '@/src/api/ErrorMessage';
 
 type Props = {
-  lectureDetail: LectureDetail | null;
+  lectureDetail: LectureDetail;
   navigationType: 'soft' | 'hard';
 };
 
@@ -21,12 +19,6 @@ export default function LectureDetailModal({
   navigationType
 }: Props) {
   const router = useRouter();
-  const { setErrorToast } = useToast();
-
-  if (lectureDetail === null) {
-    setErrorToast(new Error(ErrorMessage.detail));
-    return null;
-  }
   
   const onCloseHandler =
     navigationType === 'soft' ? router.back : () => router.replace('/');

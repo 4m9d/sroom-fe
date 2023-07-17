@@ -1,14 +1,12 @@
+import { ErrorMessage } from '@/src/api/ErrorMessage';
 import { fetchLectureDetail } from '@/src/api/lectures/search';
 import LectureDetailModal from '@/src/components/lectureDetail/LectureDetailModal';
 
 export default async function LectureDetail({
   params: { lecture_code }
 }: LectureDetailModalParams) {
-  const lectureDetailData = fetchLectureDetail(lecture_code)
+  const lectureDetail = await fetchLectureDetail(lecture_code)
     .then((res) => res)
-    .catch(() => null);
-
-  const lectureDetail = await lectureDetailData;
 
   return (
     <LectureDetailModal lectureDetail={lectureDetail} navigationType='hard' />
