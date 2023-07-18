@@ -10,6 +10,7 @@ import { CACHE_TIME, STALE_TIME } from '@/src/constants/search/search';
 import Button from '../ui/Button';
 import Select from '../ui/Select';
 import Link from 'next/link';
+import LoadMoreButton from '../ui/LoadMoreButton';
 
 export default async function SearchResultsList(
   requestParam: SearchLectureParams
@@ -20,16 +21,18 @@ export default async function SearchResultsList(
   const { setErrorToast } = useToast();
 
   const fetchSearchResults = async ({ pageParam: next_page_token = '' }) => {
-    return await fetchLecturesByKeyword({
+    const params: SearchLectureParams = {
       ...requestParam,
       next_page_token,
       filter
-    })
+    };
+    
+    return await fetchLecturesByKeyword(params)
       .then((res) => {
         return res;
       })
       .catch(() => {
-        setErrorToast(new Error(ErrorMessage.search));
+        setErrorToast(new Error(ErrorMessage.SEARCH));
         return null;
       });
   };
@@ -64,14 +67,6 @@ export default async function SearchResultsList(
     );
   };
 
-  const LoadMoreButton = () => {
-    return (
-      <Button onClick={fetchNextPage} className='mx-auto btn-md btn-wide'>
-        {'더보기'}
-      </Button>
-    );
-  };
-
   return (
     <>
       <div className='flex justify-end mb-5'>
@@ -91,7 +86,7 @@ export default async function SearchResultsList(
         )}
       </ul>
       <div className='flex justify-center my-10'>
-        {hasNextPage ? <LoadMoreButton /> : null}
+        {hasNextPage ? <LoadMoreButton onClick={fetchNextPage} /> : null}
       </div>
     </>
   );
