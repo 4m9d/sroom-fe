@@ -69,12 +69,6 @@ interface LectureDetailModalParams {
   searchParams: { is_playlist: string };
 }
 
-interface LectureDeatilParams extends Record<string, string | number> {
-  review_only?: boolean;
-  index_only?: boolean;
-  next_page_token?: string;
-}
-
 interface Lecture {
   lecture_title: string;
   description: string;
@@ -101,23 +95,42 @@ interface LectureIndex {
   duration: string;
 }
 
+interface LectureIndexList {
+  index_list: LectureIndex[];
+  next_page_token: string | null;
+  total_duration: string;
+}
+
 interface LectureReview {
   index: number;
+  review_title: string;
   review_content: string;
   submitted_rating: number;
-  review_writer: string;
+  reviewer_name: string;
   published_at: string;
 }
+
+type LectureReviewList = LectureReview[];
 
 interface LectureDetail extends Lecture {
   published_at: string | null;
   view_count: number;
   duration: string;
   lecture_count?: number;
-  indexes?: {
-    index_list: LectureIndex[];
-    next_page_token: string | null;
-    total_duration: stirng;
-  };
+  indexes?: LectureIndexList;
   reviews: LectureReview[];
 }
+
+interface LectureIndexParams extends Record<string, string | number | boolean> {
+  index_only?: boolean;
+  index_next_token?: string;
+  index_limit?: number;
+}
+
+interface LectureReviewParams extends Record<string, number | boolean> {
+  review_only?: boolean;
+  review_offset?: number;
+  review_limit?: number;
+}
+
+interface LectureDeatilParams extends LectureIndexParams, LectureReviewParams {}
