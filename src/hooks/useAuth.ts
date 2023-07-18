@@ -27,7 +27,7 @@ export default function useAuth() {
         return res;
       })
       .catch(async () => {
-        setErrorToast(new Error(ErrorMessage.refresh));
+        setErrorToast(new Error(ErrorMessage.REFRESH));
         await logout();
       });
 
@@ -55,7 +55,7 @@ export default function useAuth() {
     })
       .then((res) => {
         if (res?.error) {
-          throw new Error(ErrorMessage.login);
+          throw new Error(ErrorMessage.LOGIN);
         }
         router.replace('/dashboard');
       })

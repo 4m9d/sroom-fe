@@ -16,7 +16,7 @@ export async function fetchUserAuthWithCredential(
     if (res.ok) {
       return (await res.json()) as Promise<LoginResponse>;
     } else {
-      return Promise.reject(new Error(ErrorMessage.login));
+      return Promise.reject(new Error(ErrorMessage.LOGIN));
     }
   })
 }
@@ -34,7 +34,7 @@ export async function fetchUserAuthWithRefreshToken(
     if (res.ok) {
       return (await res.json()) as Promise<LoginResponse>;
     } else {
-      return Promise.reject(new Error(ErrorMessage.refresh));
+      return Promise.reject(new Error(ErrorMessage.REFRESH));
     }
   });
 }
