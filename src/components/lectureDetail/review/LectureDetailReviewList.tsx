@@ -38,7 +38,7 @@ export default async function LectureDetailReviewList({ lectureCode }: Props) {
       });
   };
 
-  const { data, fetchNextPage } = useInfiniteQuery(
+  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
     [QueryKeys.LECTURE_REVIEW, lectureCode],
     fetchLectureReviewList,
     {
@@ -46,7 +46,7 @@ export default async function LectureDetailReviewList({ lectureCode }: Props) {
       suspense: true,
       staleTime: STALE_TIME,
       cacheTime: CACHE_TIME,
-      getNextPageParam: (lastPage) => true
+      getNextPageParam: (lastPage) => (lastPage ? true : false)
     }
   );
 
@@ -63,7 +63,7 @@ export default async function LectureDetailReviewList({ lectureCode }: Props) {
         )}
       </ul>
       <div className='flex justify-center my-10 mb-20'>
-        <LoadMoreButton onClick={fetchNextPage} />
+        {hasNextPage ? <LoadMoreButton onClick={fetchNextPage} /> : null}
       </div>
     </>
   );
