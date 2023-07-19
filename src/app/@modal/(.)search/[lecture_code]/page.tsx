@@ -4,8 +4,9 @@ import LectureDetailModal from '@/src/components/lectureDetail/LectureDetailModa
 export default async function LectureDetailModalIntercepter({
   params: { lecture_code }
 }: LectureDetailModalParams) {
-  const lectureDetail = await fetchLectureDetail(lecture_code)
-    .then((res) => res)
+  const lectureDetail = await fetchLectureDetail(lecture_code).then(
+    (res) => res
+  );
 
   return (
     <LectureDetailModal lectureDetail={lectureDetail} navigationType='soft' />
