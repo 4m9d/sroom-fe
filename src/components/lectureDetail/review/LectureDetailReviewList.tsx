@@ -2,7 +2,6 @@
 import { fetchLectureDetailReview } from '@/src/api/lectures/search';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 import LoadMoreButton from '../../ui/LoadMoreButton';
-import { useState } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
 import {
@@ -17,8 +16,9 @@ type Props = {
   lectureCode: string;
 };
 
+let offset = 0;
+
 export default async function LectureDetailReviewList({ lectureCode }: Props) {
-  const [offset, setOffset] = useState(0);
 
   const fetchLectureReviewList = async () => {
     const params: LectureDeatilParams = {
@@ -26,9 +26,10 @@ export default async function LectureDetailReviewList({ lectureCode }: Props) {
       review_offset: offset,
       review_limit: REVIEW_LIMIT
     };
+    console.log(offset);
     return await fetchLectureDetailReview(lectureCode, params)
       .then((res) => {
-        setOffset((prev) => prev + (res.length ? res.length : 0));
+        offset += (res.length ? res.length : 0);
         return res;
       })
       .catch(() => {

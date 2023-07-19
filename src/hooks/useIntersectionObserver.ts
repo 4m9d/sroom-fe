@@ -13,7 +13,7 @@ export default function useIntersectionObserver(
   const QUARTER = 0.25;
 
   const entryIsDominant = (entry: IntersectionObserverEntry) => {
-    return entry.isIntersecting && (entry.intersectionRect.height / entry.rootBounds!.height) >= QUARTER;
+    return entry.isIntersecting && entry.intersectionRatio >= QUARTER;
   };
 
   const checkIntersect = useCallback(
