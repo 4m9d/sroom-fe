@@ -7,7 +7,10 @@ import LectureDetailIndexList from './index/LectureDetailIndexList';
 import LectureDetailReviewList from './review/LectureDetailReviewList';
 import LectureDetailCard from './LectureDetailCard';
 import LectureDetailIndexSkeleton from './index/LectureDetailIndexSkeleton';
-import { INDEX_SKELETON_LIMIT, REVIEW_LIMIT } from '@/src/constants/detail/detail';
+import {
+  INDEX_SKELETON_LIMIT,
+  REVIEW_LIMIT
+} from '@/src/constants/detail/detail';
 import LectureDetailHeading from './LectureDetailHeading';
 import LectureDetailReviewSkeleton from './review/LectureDetailReviewSkeleton';
 
@@ -28,26 +31,30 @@ export default function LectureDetailModal({
   return (
     <Modal
       id='modal'
-      className='relative h-full rounded-none'
+      className='relative h-full rounded-none scroll-smooth'
       onClose={onCloseHandler}
     >
       <LectureDetailCard lectureDetail={lectureDetail} />
       <LectureDetailTabNav is_playlist={is_playlist} />
       <section id='indexes'>
-        <LectureDetailHeading title={'목차'} />
         {is_playlist && (
-          <Suspense
-            fallback={
-              <LectureDetailIndexSkeleton limit={INDEX_SKELETON_LIMIT} />
-            }
-          >
-            <LectureDetailIndexList lectureCode={lecture_code} />
-          </Suspense>
+          <>
+            <LectureDetailHeading title={'목차'} />
+            <Suspense
+              fallback={
+                <LectureDetailIndexSkeleton limit={INDEX_SKELETON_LIMIT} />
+              }
+            >
+              <LectureDetailIndexList lectureCode={lecture_code} />
+            </Suspense>
+          </>
         )}
       </section>
       <section id='reviews'>
         <LectureDetailHeading title={'후기'} />
-        <Suspense fallback={<LectureDetailReviewSkeleton limit={REVIEW_LIMIT}/>}>
+        <Suspense
+          fallback={<LectureDetailReviewSkeleton limit={REVIEW_LIMIT} />}
+        >
           <LectureDetailReviewList lectureCode={lecture_code} />
         </Suspense>
       </section>

@@ -1,16 +1,15 @@
 'use client';
 import { ChangeEvent, useState } from 'react';
-import { ErrorMessage } from '@/src/api/ErrorMessage';
 import { fetchLecturesByKeyword } from '@/src/api/lectures/search';
 import { QueryKeys } from '@/src/api/queryKeys';
-import useToast from '@/src/hooks/useToast';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import SearchLectureCard from './SearchLectureCard';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/search/search';
-import Button from '../ui/Button';
 import Select from '../ui/Select';
 import Link from 'next/link';
 import LoadMoreButton from '../ui/LoadMoreButton';
+import setErrorToast from '@/src/util/setErrorToast';
+import { ErrorMessage } from '@/src/api/ErrorMessage';
 
 export default async function SearchResultsList(
   requestParam: SearchLectureParams
@@ -18,7 +17,6 @@ export default async function SearchResultsList(
   const [filter, setFilter] = useState<SearchResultsFilter>(
     requestParam.filter
   );
-  const { setErrorToast } = useToast();
 
   const fetchSearchResults = async ({ pageParam: next_page_token = '' }) => {
     const params: SearchLectureParams = {

@@ -10,7 +10,7 @@ type Props = {
 
 export default async function SearchResults({ searchParams }: Props) {
   const requestParam: SearchLectureParams = {
-    keyword: decodeURIComponent(searchParams.keyword),
+    keyword: searchParams.keyword === undefined ? '' : decodeURIComponent(searchParams.keyword),
     limit: searchParams.limit ? Number(searchParams.limit) : LIMIT_PER_FETCH,
     next_page_token: '',
     filter: searchParams.filter ? searchParams.filter : 'all'

@@ -1,4 +1,3 @@
-'use client';
 import { fetchLectureDetail } from '@/src/api/lectures/search';
 import dynamic from 'next/dynamic';
 
