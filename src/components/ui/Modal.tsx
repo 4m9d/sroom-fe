@@ -8,6 +8,7 @@ type Props = {
 export default function Modal({ id, className, children, onClose }: Props) {
   return (
     <div className={'modal modal-open'}>
+      <div onClick={onClose} className="modal-backdrop"/>
       <div id={id} className={`px-12 py-7 modal-box min-w-[70vw] ${className}`}>
         <button
           onClick={onClose}
@@ -16,7 +17,7 @@ export default function Modal({ id, className, children, onClose }: Props) {
           ✕
         </button>
         {children}
-      </div>
+      d</div>
     </div>
   );
 }
