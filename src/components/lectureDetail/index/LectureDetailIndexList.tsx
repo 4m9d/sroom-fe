@@ -3,7 +3,6 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import LectureDetailIndexCard from './LectureDetailIndexCard';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { fetchLectureDetailIndex } from '@/src/api/lectures/search';
-import useToast from '@/src/hooks/useToast';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 import {
   CACHE_TIME,
@@ -11,14 +10,13 @@ import {
   STALE_TIME
 } from '@/src/constants/detail/detail';
 import LoadMoreButton from '../../ui/LoadMoreButton';
+import setErrorToast from '@/src/util/setErrorToast';
 
 type Props = {
   lectureCode: string;
 };
 
 export default async function LectureDetailIndexList({ lectureCode }: Props) {
-  const { setErrorToast } = useToast();
-
   const fetchLectureIndexList = async ({
     pageParam: index_next_token = ''
   }) => {

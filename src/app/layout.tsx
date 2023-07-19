@@ -3,7 +3,7 @@ import NavBar from '../components/nav/NavBar';
 import AuthSessionProvider from '../providers/AuthSessionProvider';
 import './globals.css';
 import { Inter } from 'next/font/google';
-import ToastProvider from '../providers/ToastProvider';
+import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,7 +22,6 @@ export default function RootLayout({ children, modal }: Props) {
     <html lang='en'>
       <body className={inter.className}>
         <div id='toast'></div>
-        <ToastProvider>
           <AuthSessionProvider>
             <QueryProvider>
               <NavBar
@@ -34,9 +33,9 @@ export default function RootLayout({ children, modal }: Props) {
               />
               {children}
               {modal}
+              <Toaster/>
             </QueryProvider>
           </AuthSessionProvider>
-        </ToastProvider>
       </body>
     </html>
   );

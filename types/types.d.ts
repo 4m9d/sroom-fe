@@ -3,8 +3,7 @@ interface Window {
   google: any;
 }
 
-interface Toast {
-  id: number;
+interface CustomToast {
   type: 'success' | 'error';
   title: string;
   description: string;

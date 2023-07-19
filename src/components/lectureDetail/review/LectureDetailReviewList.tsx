@@ -1,5 +1,4 @@
 'use client';
-import useToast from '@/src/hooks/useToast';
 import { fetchLectureDetailReview } from '@/src/api/lectures/search';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 import LoadMoreButton from '../../ui/LoadMoreButton';
@@ -12,13 +11,13 @@ import {
   REVIEW_LIMIT
 } from '@/src/constants/detail/detail';
 import LectureDetailReviewCard from './LectureDetailReviewCard';
+import setErrorToast from '@/src/util/setErrorToast';
 
 type Props = {
   lectureCode: string;
 };
 
 export default async function LectureDetailReviewList({ lectureCode }: Props) {
-  const { setErrorToast } = useToast();
   const [offset, setOffset] = useState(0);
 
   const fetchLectureReviewList = async () => {
