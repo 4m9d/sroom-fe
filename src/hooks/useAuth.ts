@@ -3,14 +3,13 @@ import { useRouter } from 'next/navigation';
 import { fetchUserAuthWithRefreshToken } from '../api/members/login';
 import { useQuery } from '@tanstack/react-query';
 import { QueryKeys } from '../api/queryKeys';
-import useToast from './useToast';
 import { ErrorMessage } from '../api/ErrorMessage';
 import { ONE_MINUTE_IN_MS } from '../constants/auth/auth';
+import setErrorToast from '../util/setErrorToast';
 
 export default function useAuth() {
   const router = useRouter();
   const { data: session, status, update } = useSession();
-  const { setErrorToast } = useToast();
   const NOW = Math.floor(Date.now() / 1000);
   //NOTE: 서버에서 설정한 만료 시간보다 1분 짧게 변경
   const REFRESH_PERIOD = session
