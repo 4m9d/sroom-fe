@@ -19,7 +19,6 @@ type Props = {
 let offset = 0;
 
 export default async function LectureDetailReviewList({ lectureCode }: Props) {
-
   const fetchLectureReviewList = async () => {
     const params: LectureDeatilParams = {
       review_only: true,
@@ -29,7 +28,7 @@ export default async function LectureDetailReviewList({ lectureCode }: Props) {
     console.log(offset);
     return await fetchLectureDetailReview(lectureCode, params)
       .then((res) => {
-        offset += (res.length ? res.length : 0);
+        offset += res.length ? res.length : 0;
         return res;
       })
       .catch(() => {
@@ -46,7 +45,8 @@ export default async function LectureDetailReviewList({ lectureCode }: Props) {
       suspense: true,
       staleTime: STALE_TIME,
       cacheTime: CACHE_TIME,
-      getNextPageParam: (lastPage) => (lastPage ? true : false)
+      getNextPageParam: (lastPage) =>
+        lastPage && lastPage.length > 0 ? true : false
     }
   );
 

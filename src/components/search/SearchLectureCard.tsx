@@ -1,7 +1,15 @@
-import { THUMBNAIL_PREVIEW_HEIGHT, THUMBNAIL_PREVIEW_MIN_WIDTH } from '@/src/constants/ui/thumbnail';
+'use client';
+import {
+  THUMBNAIL_PREVIEW_HEIGHT,
+  THUMBNAIL_PREVIEW_MIN_WIDTH
+} from '@/src/constants/ui/thumbnail';
 import Image from 'next/image';
 
-export default function SearchLectureCard({ lecture }: { lecture: Lecture }) {
+export default async function SearchLectureCard({
+  lecture
+}: {
+  lecture: Lecture;
+}) {
   const {
     lecture_title,
     description,
@@ -13,14 +21,15 @@ export default function SearchLectureCard({ lecture }: { lecture: Lecture }) {
     is_playlist,
     is_enrolled
   } = lecture;
-
   // TODO: 플레이리스트 여부, 등록 여부에 따른 UI 구현
 
   return (
     <li
       className={`flex w-full cursor-pointer ${THUMBNAIL_PREVIEW_HEIGHT.MEDIUM} ${THUMBNAIL_PREVIEW_HEIGHT.LARGE}`}
     >
-      <div className={`relative object-cover ${THUMBNAIL_PREVIEW_MIN_WIDTH.MEDIUM} ${THUMBNAIL_PREVIEW_MIN_WIDTH.LARGE}`}>
+      <div
+        className={`relative object-cover ${THUMBNAIL_PREVIEW_MIN_WIDTH.MEDIUM} ${THUMBNAIL_PREVIEW_MIN_WIDTH.LARGE}`}
+      >
         <Image fill={true} sizes='100%' src={thumbnail} alt={lecture_title} />
       </div>
       <div className='flex flex-col w-1/2 px-4'>
