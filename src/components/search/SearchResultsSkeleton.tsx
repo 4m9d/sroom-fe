@@ -1,4 +1,5 @@
 import { THUMBNAIL_PREVIEW_HEIGHT, THUMBNAIL_PREVIEW_MIN_WIDTH } from '@/src/constants/ui/thumbnail';
+import { memo } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
@@ -6,7 +7,7 @@ type Props = {
   limit: number;
 };
 
-export default function SearchResultsSkeleton({ limit }: Props) {
+const SearchResultsSkeleton = ({ limit }: Props)=> {
   const skeletonArray = [...new Array(limit)].map((_, i) => i + 1);
 
   const StyledSkeleton = () => {
@@ -35,3 +36,4 @@ export default function SearchResultsSkeleton({ limit }: Props) {
     </ul>
   );
 }
+export default memo(SearchResultsSkeleton);

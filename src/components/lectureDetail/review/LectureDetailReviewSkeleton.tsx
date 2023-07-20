@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
@@ -5,7 +6,7 @@ type Props = {
   limit: number;
 };
 
-export default function LectureDetailReviewSkeleton({ limit }: Props) {
+const LectureDetailReviewSkeleton = ({ limit }: Props) => {
   const skeletonArray = [...new Array(limit)].map((_, i) => i + 1);
 
   const StyledSkeleton = () => {
@@ -24,4 +25,6 @@ export default function LectureDetailReviewSkeleton({ limit }: Props) {
       ))}
     </ul>
   );
-}
+};
+
+export default memo(LectureDetailReviewSkeleton);

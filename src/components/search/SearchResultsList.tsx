@@ -35,7 +35,7 @@ export default async function SearchResultsList(
       });
   };
 
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
+  const { data, fetchNextPage, hasNextPage, status } = useInfiniteQuery(
     [QueryKeys.SEARCH, requestParam.keyword, filter],
     fetchSearchResults,
     {
@@ -84,7 +84,7 @@ export default async function SearchResultsList(
         )}
       </ul>
       <div className='flex justify-center my-10'>
-        {hasNextPage ? <LoadMoreButton onClick={fetchNextPage} /> : null}
+        {hasNextPage && status !== 'loading' ? <LoadMoreButton onClick={fetchNextPage} /> : null}
       </div>
     </>
   );
