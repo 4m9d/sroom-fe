@@ -1,4 +1,5 @@
 'use client';
+import { TOAST_DELAY } from '@/src/constants/toast/toast';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const Emoji = {
@@ -14,7 +15,8 @@ export default function Toast({ toast }: { toast: CustomToast }) {
       <motion.div
         initial={{ y: 200 }}
         animate={{ y: 0 }}
-        transition={{ repeat: 1, repeatType: 'reverse', repeatDelay: 3.5 }}
+        exit={{ y: 200 }}
+        transition={{ repeat: 1, repeatType: 'reverse', repeatDelay: TOAST_DELAY }}
         className={`fixed alert h-14 flex items-center ${
           type === 'error' ? 'alert-error' : 'alert-success'
         } z-10 bottom-16 w-1/2 left-1/4`}
