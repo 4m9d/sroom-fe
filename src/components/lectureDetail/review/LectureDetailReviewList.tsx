@@ -11,7 +11,6 @@ import {
 } from '@/src/constants/detail/detail';
 import LectureDetailReviewCard from './LectureDetailReviewCard';
 import setErrorToast from '@/src/util/setErrorToast';
-import { useRef } from 'react';
 
 export default async function LectureDetailReviewList({
   lectureCode,
