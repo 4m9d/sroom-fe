@@ -4,16 +4,19 @@ import { fetchLecturesByKeyword } from '@/src/api/lectures/search';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import SearchLectureCard from './SearchLectureCard';
-import { CACHE_TIME, STALE_TIME } from '@/src/constants/search/search';
 import Select from '../ui/Select';
 import Link from 'next/link';
 import LoadMoreButton from '../ui/LoadMoreButton';
 import setErrorToast from '@/src/util/setErrorToast';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 
-export default async function SearchResultsList(
-  requestParam: SearchLectureParams
-) {
+export default async function SearchResultsList({
+  requestParam,
+  searchResultPageRef
+}: {
+  requestParam: SearchLectureParams;
+  searchResultPageRef: React.MutableRefObject<number>;
+}) {
   const [filter, setFilter] = useState<SearchResultsFilter>(
     requestParam.filter
   );
@@ -24,7 +27,9 @@ export default async function SearchResultsList(
       next_page_token,
       filter
     };
-    
+
+    searchResultPageRef.current += 1;
+
     return await fetchLecturesByKeyword(params)
       .then((res) => {
         return res;
@@ -35,14 +40,14 @@ export default async function SearchResultsList(
       });
   };
 
-  const { data, fetchNextPage, hasNextPage, status } = useInfiniteQuery(
+  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
     [QueryKeys.SEARCH, requestParam.keyword, filter],
     fetchSearchResults,
     {
       refetchOnWindowFocus: false,
       suspense: true,
-      staleTime: STALE_TIME,
-      cacheTime: CACHE_TIME,
+      staleTime: Infinity,
+      cacheTime: Infinity,
       getNextPageParam: (lastPage) => lastPage?.next_page_token
     }
   );
@@ -83,9 +88,11 @@ export default async function SearchResultsList(
           ))
         )}
       </ul>
-      <div className='flex justify-center my-10'>
-        {hasNextPage && status !== 'loading' ? <LoadMoreButton onClick={fetchNextPage} /> : null}
-      </div>
+      {hasNextPage ? (
+        <div className='flex justify-center my-10'>
+          <LoadMoreButton onClick={fetchNextPage} />
+        </div>
+      ) : null}
     </>
   );
 }

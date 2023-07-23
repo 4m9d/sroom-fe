@@ -1,14 +1,19 @@
-import { THUMBNAIL_PREVIEW_HEIGHT, THUMBNAIL_PREVIEW_MIN_WIDTH } from '@/src/constants/ui/thumbnail';
-import { memo } from 'react';
+import {
+  THUMBNAIL_PREVIEW_HEIGHT,
+  THUMBNAIL_PREVIEW_MIN_WIDTH
+} from '@/src/constants/ui/thumbnail';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 type Props = {
   limit: number;
+  searchResultPageRef: React.MutableRefObject<number>;
 };
 
-const SearchResultsSkeleton = ({ limit }: Props)=> {
-  const skeletonArray = [...new Array(limit)].map((_, i) => i + 1);
+const SearchResultsSkeleton = ({ limit, searchResultPageRef }: Props) => {
+  const skeletonArray = [...new Array(limit * searchResultPageRef.current)].map(
+    (_, i) => i + 1
+  );
 
   const StyledSkeleton = () => {
     return (
@@ -35,5 +40,5 @@ const SearchResultsSkeleton = ({ limit }: Props)=> {
       ))}
     </ul>
   );
-}
-export default memo(SearchResultsSkeleton);
+};
+export default SearchResultsSkeleton;
