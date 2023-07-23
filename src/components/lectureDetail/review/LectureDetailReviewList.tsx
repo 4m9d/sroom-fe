@@ -12,23 +12,37 @@ import {
 import LectureDetailReviewCard from './LectureDetailReviewCard';
 import setErrorToast from '@/src/util/setErrorToast';
 
-type Props = {
+export default async function LectureDetailReviewList({
+  lectureCode,
+  reviewPageRef
+}: {
   lectureCode: string;
-};
+  reviewPageRef: React.MutableRefObject<number>;
+}) {
+  const updateReviewPageRef = (offset: number) => {
+    if (offset === 0) {
+      reviewPageRef.current = 0;
+    }
+    reviewPageRef.current += 1;
+  };
 
-let offset = 0;
+  const checkNextPage = (
+    lastPage: LectureReviewList | null,
+    allPages: (LectureReviewList | null)[]
+  ) =>
+    lastPage && lastPage.length > 0 ? allPages.length * lastPage.length : 0;
 
-export default async function LectureDetailReviewList({ lectureCode }: Props) {
-  const fetchLectureReviewList = async () => {
-    const params: LectureDeatilParams = {
+  const fetchLectureReviewList = async ({ pageParam: offset = 0 }) => {
+    const params: LectureReviewParams = {
       review_only: true,
       review_offset: offset,
       review_limit: REVIEW_LIMIT
     };
-    console.log(offset);
+
+    updateReviewPageRef(offset);
+
     return await fetchLectureDetailReview(lectureCode, params)
       .then((res) => {
-        offset += res.length ? res.length : 0;
         return res;
       })
       .catch(() => {
@@ -45,8 +59,7 @@ export default async function LectureDetailReviewList({ lectureCode }: Props) {
       suspense: true,
       staleTime: STALE_TIME,
       cacheTime: CACHE_TIME,
-      getNextPageParam: (lastPage) =>
-        lastPage && lastPage.length > 0 ? true : false
+      getNextPageParam: checkNextPage
     }
   );
 

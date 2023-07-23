@@ -12,11 +12,20 @@ import {
 import LoadMoreButton from '../../ui/LoadMoreButton';
 import setErrorToast from '@/src/util/setErrorToast';
 
-type Props = {
+export default async function LectureDetailIndexList({
+  lectureCode,
+  indexPageRef
+}: {
   lectureCode: string;
-};
+  indexPageRef: React.MutableRefObject<number>;
+}) {
+  const updateIndexPageRef = (next_page_token: string) => {
+    if (next_page_token === '') {
+      indexPageRef.current = 0;
+    }
+    indexPageRef.current += 1;
+  };
 
-export default async function LectureDetailIndexList({ lectureCode }: Props) {
   const fetchLectureIndexList = async ({
     pageParam: index_next_token = ''
   }) => {
@@ -25,6 +34,9 @@ export default async function LectureDetailIndexList({ lectureCode }: Props) {
       index_limit: INDEX_LIMIT,
       index_next_token
     };
+
+    updateIndexPageRef(index_next_token);
+
     return await fetchLectureDetailIndex(lectureCode, params)
       .then((res) => {
         return res;

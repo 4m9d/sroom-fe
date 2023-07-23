@@ -1,14 +1,20 @@
-import { THUMBNAIL_PREVIEW_HEIGHT, THUMBNAIL_PREVIEW_MIN_WIDTH } from '@/src/constants/ui/thumbnail';
-import { memo } from 'react';
+'use client';
+import {
+  THUMBNAIL_PREVIEW_HEIGHT,
+  THUMBNAIL_PREVIEW_MIN_WIDTH
+} from '@/src/constants/ui/thumbnail';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 type Props = {
   limit: number;
+  searchResultPageRef: React.MutableRefObject<number>;
 };
 
-const SearchResultsSkeleton = ({ limit }: Props)=> {
-  const skeletonArray = [...new Array(limit)].map((_, i) => i + 1);
+const SearchResultsSkeleton = ({ limit, searchResultPageRef }: Props) => {
+  const skeletonArray = [...new Array(limit * searchResultPageRef.current)].map(
+    (_, i) => i + 1
+  );
 
   const StyledSkeleton = () => {
     return (
@@ -29,11 +35,11 @@ const SearchResultsSkeleton = ({ limit }: Props)=> {
     );
   };
   return (
-    <ul className='grid grid-cols-2 gap-8 px-5 gap-y-4'>
+    <ul className='grid grid-cols-2 gap-8 px-5 mt-[5.25rem] gap-y-4'>
       {skeletonArray.map((idx) => (
         <StyledSkeleton key={'skeleton' + idx} />
       ))}
     </ul>
   );
-}
-export default memo(SearchResultsSkeleton);
+};
+export default SearchResultsSkeleton;
