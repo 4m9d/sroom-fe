@@ -35,7 +35,7 @@ const SearchResultsSkeleton = ({ limit, searchResultPageRef }: Props) => {
     );
   };
   return (
-    <ul className='grid grid-cols-2 gap-8 px-5 gap-y-4'>
+    <ul className='grid grid-cols-2 gap-8 px-5 mt-[5.25rem] gap-y-4'>
       {skeletonArray.map((idx) => (
         <StyledSkeleton key={'skeleton' + idx} />
       ))}
