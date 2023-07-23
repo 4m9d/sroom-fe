@@ -1,13 +1,15 @@
-import { memo } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 type Props = {
   limit: number;
+  indexPageRef: React.MutableRefObject<number>;
 };
 
-const LectureDetailIndexSkeleton = ({ limit }: Props) => {
-  const skeletonArray = [...new Array(limit)].map((_, i) => i + 1);
+const LectureDetailIndexSkeleton = ({ limit, indexPageRef }: Props) => {
+  const skeletonArray = [...new Array(limit * indexPageRef.current)].map(
+    (_, i) => i + 1
+  );
 
   const StyledSkeleton = () => {
     return (
@@ -27,4 +29,4 @@ const LectureDetailIndexSkeleton = ({ limit }: Props) => {
   );
 };
 
-export default memo(LectureDetailIndexSkeleton);
+export default LectureDetailIndexSkeleton;

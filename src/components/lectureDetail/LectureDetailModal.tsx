@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import Modal from '../ui/Modal';
 import LectureDetailTabNav from './LectureDetailTabNav';
-import { Suspense } from 'react';
+import { Suspense, useRef } from 'react';
 import LectureDetailIndexList from './index/LectureDetailIndexList';
 import LectureDetailReviewList from './review/LectureDetailReviewList';
 import LectureDetailCard from './LectureDetailCard';
@@ -27,6 +27,8 @@ export default function LectureDetailModal({
   const router = useRouter();
   const onCloseHandler =
     navigationType === 'soft' ? router.back : () => router.replace('/');
+  const indexPageRef = useRef<number>(0);
+  const reviewPageRef = useRef<number>(0);
 
   return (
     <Modal
@@ -42,10 +44,16 @@ export default function LectureDetailModal({
             <LectureDetailHeading title={'목차'} />
             <Suspense
               fallback={
-                <LectureDetailIndexSkeleton limit={INDEX_SKELETON_LIMIT} />
+                <LectureDetailIndexSkeleton
+                  indexPageRef={indexPageRef}
+                  limit={INDEX_SKELETON_LIMIT}
+                />
               }
             >
-              <LectureDetailIndexList lectureCode={lecture_code} />
+              <LectureDetailIndexList
+                indexPageRef={indexPageRef}
+                lectureCode={lecture_code}
+              />
             </Suspense>
           </>
         )}
@@ -53,9 +61,17 @@ export default function LectureDetailModal({
       <section id='reviews'>
         <LectureDetailHeading title={'후기'} />
         <Suspense
-          fallback={<LectureDetailReviewSkeleton limit={REVIEW_LIMIT} />}
+          fallback={
+            <LectureDetailReviewSkeleton
+              reviewPageRef={reviewPageRef}
+              limit={REVIEW_LIMIT}
+            />
+          }
         >
-          <LectureDetailReviewList lectureCode={lecture_code} />
+          <LectureDetailReviewList
+            reviewPageRef={reviewPageRef}
+            lectureCode={lecture_code}
+          />
         </Suspense>
       </section>
     </Modal>

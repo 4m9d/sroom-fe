@@ -12,20 +12,24 @@ import {
 import LectureDetailReviewCard from './LectureDetailReviewCard';
 import setErrorToast from '@/src/util/setErrorToast';
 
-type Props = {
-  lectureCode: string;
-};
-
 let offset = 0;
 
-export default async function LectureDetailReviewList({ lectureCode }: Props) {
+export default async function LectureDetailReviewList({
+  lectureCode,
+  reviewPageRef
+}: {
+  lectureCode: string;
+  reviewPageRef: React.MutableRefObject<number>;
+}) {
   const fetchLectureReviewList = async () => {
     const params: LectureDeatilParams = {
       review_only: true,
       review_offset: offset,
       review_limit: REVIEW_LIMIT
     };
-    console.log(offset);
+    
+    reviewPageRef.current += 1;
+
     return await fetchLectureDetailReview(lectureCode, params)
       .then((res) => {
         offset += res.length ? res.length : 0;

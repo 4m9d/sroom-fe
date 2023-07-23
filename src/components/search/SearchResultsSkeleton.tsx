@@ -1,3 +1,4 @@
+'use client';
 import {
   THUMBNAIL_PREVIEW_HEIGHT,
   THUMBNAIL_PREVIEW_MIN_WIDTH
