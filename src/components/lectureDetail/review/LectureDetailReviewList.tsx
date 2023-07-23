@@ -11,8 +11,7 @@ import {
 } from '@/src/constants/detail/detail';
 import LectureDetailReviewCard from './LectureDetailReviewCard';
 import setErrorToast from '@/src/util/setErrorToast';
-
-let offset = 0;
+import { useRef } from 'react';
 
 export default async function LectureDetailReviewList({
   lectureCode,
@@ -21,18 +20,30 @@ export default async function LectureDetailReviewList({
   lectureCode: string;
   reviewPageRef: React.MutableRefObject<number>;
 }) {
-  const fetchLectureReviewList = async () => {
-    const params: LectureDeatilParams = {
+  const updateReviewPageRef = (offset: number) => {
+    if (offset === 0) {
+      reviewPageRef.current = 0;
+    }
+    reviewPageRef.current += 1;
+  };
+
+  const checkNextPage = (
+    lastPage: LectureReviewList | null,
+    allPages: (LectureReviewList | null)[]
+  ) =>
+    lastPage && lastPage.length > 0 ? allPages.length * lastPage.length : 0;
+
+  const fetchLectureReviewList = async ({ pageParam: offset = 0 }) => {
+    const params: LectureReviewParams = {
       review_only: true,
       review_offset: offset,
       review_limit: REVIEW_LIMIT
     };
-    
-    reviewPageRef.current += 1;
+
+    updateReviewPageRef(offset);
 
     return await fetchLectureDetailReview(lectureCode, params)
       .then((res) => {
-        offset += res.length ? res.length : 0;
         return res;
       })
       .catch(() => {
@@ -49,8 +60,7 @@ export default async function LectureDetailReviewList({
       suspense: true,
       staleTime: STALE_TIME,
       cacheTime: CACHE_TIME,
-      getNextPageParam: (lastPage) =>
-        lastPage && lastPage.length > 0 ? true : false
+      getNextPageParam: checkNextPage
     }
   );
 

@@ -19,6 +19,13 @@ export default async function LectureDetailIndexList({
   lectureCode: string;
   indexPageRef: React.MutableRefObject<number>;
 }) {
+  const updateIndexPageRef = (next_page_token: string) => {
+    if (next_page_token === '') {
+      indexPageRef.current = 0;
+    }
+    indexPageRef.current += 1;
+  };
+
   const fetchLectureIndexList = async ({
     pageParam: index_next_token = ''
   }) => {
@@ -28,8 +35,8 @@ export default async function LectureDetailIndexList({
       index_next_token
     };
 
-    indexPageRef.current += 1;
-    
+    updateIndexPageRef(index_next_token);
+
     return await fetchLectureDetailIndex(lectureCode, params)
       .then((res) => {
         return res;

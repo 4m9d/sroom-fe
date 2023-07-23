@@ -21,14 +21,21 @@ export default async function SearchResultsList({
     requestParam.filter
   );
 
+  const updateSearchResultPageRef = (next_page_token: string) => {
+    if (next_page_token === '') {
+      searchResultPageRef.current = 0;
+    }
+    searchResultPageRef.current += 1;
+  };
+
   const fetchSearchResults = async ({ pageParam: next_page_token = '' }) => {
     const params: SearchLectureParams = {
       ...requestParam,
       next_page_token,
       filter
     };
-
-    searchResultPageRef.current += 1;
+    
+    updateSearchResultPageRef(next_page_token);
 
     return await fetchLecturesByKeyword(params)
       .then((res) => {

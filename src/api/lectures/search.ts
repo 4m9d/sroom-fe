@@ -59,7 +59,7 @@ export async function fetchLectureDetailIndex(
 
 export async function fetchLectureDetailReview(
   lecture_code: string,
-  params?: LectureIndexParams
+  params?: LectureReviewParams
 ) {
   const headers = await getAuthorizedHeaders();
   return await fetch(
