@@ -6,20 +6,15 @@ export default function useIntersectionObserver(
   root: HTMLElement | null
 ) {
   const option = {
-    threshold: [0, 0.25, 0.75, 1],
+    threshold: 0,
     rootMargin,
     root
-  };
-  const QUARTER = 0.25;
-
-  const entryIsDominant = (entry: IntersectionObserverEntry) => {
-    return entry.isIntersecting && entry.intersectionRatio >= QUARTER;
   };
 
   const checkIntersect = useCallback(
     async (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
-        if (entryIsDominant(entry)) {
+        if (entry.isIntersecting) {
           setId(entry.target.id);
         }
       });
