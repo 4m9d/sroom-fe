@@ -1,5 +1,9 @@
+import DashboardHeader from '@/src/components/dashboard/header/DashboardHeader';
+
 export default function Dashboard() {
   return (
-    <div>대시보드</div>
-  )
+    <div>
+      <DashboardHeader isEnrolled={false} />
+    </div>
+  );
 }
