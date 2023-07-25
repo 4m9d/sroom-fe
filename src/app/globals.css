@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.radial-progress.radial-square::before {
+  background: conic-gradient(currentColor calc(var(--value) * 1%), #ffffff4f 0);
+}
+
+.radial-progress.radial-square::after {
+  inset: unset;
+}
