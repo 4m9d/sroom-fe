@@ -8,7 +8,7 @@ import {
   CACHE_TIME,
   INDEX_LIMIT,
   STALE_TIME
-} from '@/src/constants/detail/detail';
+} from '@/src/constants/lectureDetail/lectureDetail';
 import LoadMoreButton from '../../ui/LoadMoreButton';
 import setErrorToast from '@/src/util/setErrorToast';
 
