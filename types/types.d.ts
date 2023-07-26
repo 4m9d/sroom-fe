@@ -2,6 +2,13 @@
 interface Window {
   google: any;
 }
+// for dayjs
+interface WeekRange {
+  startOfWeek: string;
+  endOfWeek: string;
+}
+
+//////////////////////////////////toast//////////////////////////////////
 
 interface CustomToast {
   type: 'success' | 'error';
@@ -22,6 +29,10 @@ interface ToastContextType {
   toasts: Toast[];
   setToasts: Dispatch<SetStateAction<Toast[]>>;
 }
+/////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////members/////////////////////////////////
 
 interface Profile {
   name: string;
@@ -53,6 +64,46 @@ interface LoginResponse extends Response, Profile {
   refresh_token: string;
   expires_at: number;
 }
+
+/////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////dashboards///////////////////////////////
+
+interface LatestLearningLecture {
+  course_id: string;
+  channel: string;
+  thumbnail: string;
+  course_title: string;
+  course_duration: number;
+  last_view_time: string;
+  progress: number;
+}
+
+interface LearningHistory {
+  date: string;
+  learning_time: number;
+  quizzes: number;
+  lectures: number;
+}
+
+interface DashboardInfo {
+  correctness_rate: number;
+  completion_rate: number;
+  total_learning_time: number;
+  motivation: string;
+  latest: LatestLearningLecture[];
+  learning_history: LearningHistory[];
+}
+
+interface WeekInfo {
+  fullDate: string;
+  date: string;
+  learningHistory?: LearningHistory | undefined;
+}
+
+/////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////search/////////////////////////////////
 
 type SearchResultsFilter = 'all' | 'playlist' | 'video';
 
@@ -133,3 +184,5 @@ interface LectureReviewParams extends Record<string, number | boolean> {
 }
 
 interface LectureDeatilParams extends LectureIndexParams, LectureReviewParams {}
+
+/////////////////////////////////////////////////////////////////////////
