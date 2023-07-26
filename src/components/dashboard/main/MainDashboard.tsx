@@ -1,4 +1,3 @@
-import { fetchDashboardInfo } from '@/src/api/dashboards/dashboards';
 import SectionHeading from '../../ui/SectionHeading';
 import CompletionRate from './CompletionRate';
 import CorrectnessRate from './CorrectnessRate';
@@ -6,14 +5,14 @@ import Motivation from './Motivation';
 import TotalLearningTime from './TotalLearningTime';
 import WeeklyCalendar from './WeeklyCalendar';
 
-type Props = {};
+type Props = {
+  dashboardInfo: DashboardInfo;
+};
 
-export default async function MainDashboard({}: Props) {
-  const dashboardInfo = await fetchDashboardInfo().then((res) => res);
+export default async function MainDashboard({dashboardInfo}: Props) {
   const {
     completion_rate,
     correctness_rate,
-    latest,
     motivation,
     total_learning_time,
     learning_history
