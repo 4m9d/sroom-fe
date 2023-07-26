@@ -1,6 +1,6 @@
 'use client';
 import { useEffect } from 'react';
-import setErrorToast from '../util/setErrorToast';
+import setErrorToast from '../util/error/setErrorToast';
 
 export default function GlobalError({
   error,

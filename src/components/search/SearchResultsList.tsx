@@ -7,7 +7,7 @@ import SearchLectureCard from './SearchLectureCard';
 import Select from '../ui/Select';
 import Link from 'next/link';
 import LoadMoreButton from '../ui/LoadMoreButton';
-import setErrorToast from '@/src/util/setErrorToast';
+import setErrorToast from '@/src/util/error/setErrorToast';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 
 export default async function SearchResultsList({

@@ -1,7 +1,7 @@
-import getHeaders from '@/src/util/getHeaders';
+import getHeaders from '@/src/util/http/getHeaders';
 import { Endpoints } from '../Endpoints';
 import { ErrorMessage } from '../ErrorMessage';
-import { getAuthorizedHeaders } from '@/src/util/getAuthorizedHeaders';
+import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
 
 export async function fetchUserAuthWithCredential(
   credential: GoogleLoginCredential

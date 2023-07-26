@@ -1,5 +1,5 @@
 'use client';
-import setErrorToast from '@/src/util/setErrorToast';
+import setErrorToast from '@/src/util/error/setErrorToast';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
