@@ -8,7 +8,7 @@ import {
   STALE_TIME,
   CACHE_TIME,
   REVIEW_LIMIT
-} from '@/src/constants/detail/detail';
+} from '@/src/constants/lectureDetail/lectureDetail';
 import LectureDetailReviewCard from './LectureDetailReviewCard';
 import setErrorToast from '@/src/util/setErrorToast';
 
