@@ -31,7 +31,6 @@ export default function WeeklyCalendar({ learning_history }: Props) {
   const [selectedDay, setSelectedDay] = useState<weekdayKey>(7);
 
   const findLearningHistory = useCallback((startOfWeek: string) => {
-    console.log('함수 실행!', startOfWeek);
     const weekInfo = getFullWeekDate(startOfWeek);
 
     const mappedWeekInfo: WeekInfo[] = weekInfo.map((day) => {
