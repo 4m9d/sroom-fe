@@ -23,7 +23,7 @@ export default function LatestLearningLectureCard({lecture}: Props) {
             {lecture.channel}
           </p>
         </div>
-        <div className='flex justify-between h-12 gap-5 mb-1'>
+        <div className='flex justify-between h-10 gap-5 mb-1'>
           <div className='flex flex-col justify-between flex-1 py-1'>
             <p className='text-xs text-zinc-500'>
               총 강의 시간 : {lecture.course_duration}분 |{' '}
@@ -34,7 +34,7 @@ export default function LatestLearningLectureCard({lecture}: Props) {
               value={lecture.progress}
             />
           </div>
-          <Button className='flex justify-between w-32 text-zinc-200 bg-zinc-800'>
+          <Button className='flex justify-between w-32 text-sm text-zinc-200 bg-zinc-800'>
             <p>바로 학습</p>
             <p> 〉 </p>
           </Button>
