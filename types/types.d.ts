@@ -74,8 +74,10 @@ interface LatestLearningLecture {
   channel: string;
   thumbnail: string;
   course_title: string;
-  course_duration: number;
+  duration: number;
   last_view_time: string;
+  total_video_count: number;
+  completed_video_count: number;
   progress: number;
 }
 
