@@ -9,9 +9,7 @@ const DynamicLectureDetailModal = dynamic(
 export default async function LectureDetail({
   params: { lecture_code }
 }: LectureDetailModalParams) {
-  const lectureDetail = await fetchLectureDetail(lecture_code).then(
-    (res) => res
-  );
+  const lectureDetail = await fetchLectureDetail(lecture_code);
 
   return (
     <DynamicLectureDetailModal
