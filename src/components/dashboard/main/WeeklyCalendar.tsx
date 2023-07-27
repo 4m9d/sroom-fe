@@ -5,7 +5,7 @@ import {
   getPreviousWeekRange,
   getFullWeekDate
 } from '@/src/util/day/getWeekRange';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 type Props = {
   learning_history: LearningHistory[];
@@ -30,7 +30,8 @@ export default function WeeklyCalendar({ learning_history }: Props) {
   );
   const [selectedDay, setSelectedDay] = useState<weekdayKey>(7);
 
-  const findLearningHistory = (startOfWeek: string) => {
+  const findLearningHistory = useCallback((startOfWeek: string) => {
+    console.log('함수 실행!', startOfWeek);
     const weekInfo = getFullWeekDate(startOfWeek);
 
     const mappedWeekInfo: WeekInfo[] = weekInfo.map((day) => {
@@ -41,29 +42,29 @@ export default function WeeklyCalendar({ learning_history }: Props) {
       return { ...day, learningHistory } as WeekInfo;
     });
     return mappedWeekInfo;
-  };
+  }, []);
 
-  const dayCardClickHandler = (weekday: weekdayKey) => {
+  const dayCardClickHandler = useCallback((weekday: weekdayKey) => {
     setSelectedDay(weekday);
-  };
+  }, []);
 
-  const previousWeekClickHandler = () => {
+  const previousWeekClickHandler = useCallback(() => {
     const startOfWeek = selectedWeek[0].fullDate;
     const endOfWeek = selectedWeek[6].fullDate;
 
     const previousWeek = getPreviousWeekRange({ startOfWeek, endOfWeek });
     setSelectedWeek(findLearningHistory(previousWeek.startOfWeek));
     setSelectedDay(7);
-  };
+  }, []);
 
-  const nextWeekClickHandler = () => {
+  const nextWeekClickHandler = useCallback(() => {
     const startOfWeek = selectedWeek[0].fullDate;
     const endOfWeek = selectedWeek[6].fullDate;
 
     const nextWeek = getNextWeekRange({ startOfWeek, endOfWeek });
     setSelectedWeek(findLearningHistory(nextWeek.startOfWeek));
     setSelectedDay(7);
-  };
+  }, []);
 
   useEffect(() => {
     const { startOfWeek, endOfWeek } = getCurrentWeekRange();
