@@ -54,7 +54,7 @@ export default function WeeklyCalendar({ learning_history }: Props) {
     const previousWeek = getPreviousWeekRange({ startOfWeek, endOfWeek });
     setSelectedWeek(findLearningHistory(previousWeek.startOfWeek));
     setSelectedDay(7);
-  }, []);
+  }, [selectedWeek]);
 
   const nextWeekClickHandler = useCallback(() => {
     const startOfWeek = selectedWeek[0].fullDate;
@@ -63,7 +63,7 @@ export default function WeeklyCalendar({ learning_history }: Props) {
     const nextWeek = getNextWeekRange({ startOfWeek, endOfWeek });
     setSelectedWeek(findLearningHistory(nextWeek.startOfWeek));
     setSelectedDay(7);
-  }, []);
+  }, [selectedWeek]);
 
   useEffect(() => {
     const { startOfWeek, endOfWeek } = getCurrentWeekRange();
