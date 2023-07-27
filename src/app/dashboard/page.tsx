@@ -12,7 +12,7 @@ export default async function Dashboard() {
     <div>
       <DashboardHeader isEnrolled={isEnrolled} />
       <MainDashboard dashboardInfo={dashboardInfo} />
-      <LatestLearningLectures latestLearningLectures={latestLearningLectures}/>
+      {isEnrolled && <LatestLearningLectures latestLearningLectures={latestLearningLectures}/>}
     </div>
   );
 }
