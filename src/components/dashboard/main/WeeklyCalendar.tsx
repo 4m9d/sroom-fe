@@ -5,7 +5,7 @@ import {
   getPreviousWeekRange,
   getFullWeekDate
 } from '@/src/util/day/getWeekRange';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 type Props = {
   learning_history: LearningHistory[];
@@ -29,14 +29,20 @@ export default function WeeklyCalendar({ learning_history }: Props) {
     getFullWeekDate()
   );
   const [selectedDay, setSelectedDay] = useState<weekdayKey>(7);
+  const dayIdx = useRef(0);
 
   const findLearningHistory = useCallback((startOfWeek: string) => {
     const weekInfo = getFullWeekDate(startOfWeek);
+    const startIdx = dayIdx.current;
+    const slicedLearningHistory = learning_history.slice(startIdx);
 
     const mappedWeekInfo: WeekInfo[] = weekInfo.map((day) => {
-      const learningHistory = learning_history.find(
-        (history) => history.date === day.fullDate
-      );
+      const learningHistory = slicedLearningHistory.find((history, index) => {
+        if (history.date === day.fullDate) {
+          dayIdx.current = startIdx + index;
+          return true;
+        }
+      });
 
       return { ...day, learningHistory } as WeekInfo;
     });
