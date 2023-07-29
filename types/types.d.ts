@@ -31,7 +31,6 @@ interface ToastContextType {
 }
 /////////////////////////////////////////////////////////////////////////
 
-
 /////////////////////////////////members/////////////////////////////////
 
 interface Profile {
@@ -121,7 +120,7 @@ interface LectureDetailModalParams {
   searchParams: { is_playlist: string };
 }
 
-interface Lecture {
+interface PersonalizedLecture {
   lecture_title: string;
   description: string;
   channel: string;
@@ -130,6 +129,9 @@ interface Lecture {
   review_count: number;
   thumbnail: string;
   is_playlist: boolean;
+}
+
+interface Lecture extends PersonalizedLecture {
   is_enrolled: boolean;
 }
 
