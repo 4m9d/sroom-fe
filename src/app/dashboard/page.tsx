@@ -1,6 +1,6 @@
 import { fetchDashboardInfo } from '@/src/api/dashboards/dashboards';
 import DashboardHeader from '@/src/components/dashboard/header/DashboardHeader';
-import LatestLearningLectures from '@/src/components/dashboard/latestLearning/LatestLearningLectures';
+import LatestLearningLecturesList from '@/src/components/dashboard/latestLearning/LatestLearningLecturesList';
 import MainDashboard from '@/src/components/dashboard/main/MainDashboard';
 
 export default async function Dashboard() {
@@ -12,7 +12,7 @@ export default async function Dashboard() {
     <div>
       <DashboardHeader isEnrolled={isEnrolled} />
       <MainDashboard dashboardInfo={dashboardInfo} />
-      {isEnrolled && <LatestLearningLectures latestLearningLectures={latestLearningLectures}/>}
+      {isEnrolled && <LatestLearningLecturesList latestLearningLectures={latestLearningLectures}/>}
     </div>
   );
 }
