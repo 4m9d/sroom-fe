@@ -5,7 +5,7 @@ type Props = {
   latestLearningLectures: LatestLearningLecture[];
 };
 
-export default function LatestLearningLectures({
+export default function LatestLearningLecturesList({
   latestLearningLectures
 }: Props) {
   return (
