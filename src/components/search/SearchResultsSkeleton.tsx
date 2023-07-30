@@ -18,24 +18,17 @@ const SearchResultsSkeleton = ({ limit, searchResultPageRef }: Props) => {
 
   const StyledSkeleton = () => {
     return (
-      <li
-        className={`flex w-full ${THUMBNAIL_PREVIEW_HEIGHT.MEDIUM} ${THUMBNAIL_PREVIEW_HEIGHT.LARGE}`}
-      >
-        <div
-          className={`relative object-cover ${THUMBNAIL_PREVIEW_MIN_WIDTH.MEDIUM} ${THUMBNAIL_PREVIEW_MIN_WIDTH.LARGE}`}
-        >
-          <Skeleton height='100%' />
+      <div className='w-[42rem] h-[11rem] bg-white drop-shadow-md flex p-3 items-center gap-4'>
+        <div className='h-full relative object-cover md:min-w-[calc(9rem*1.78)]'>
+          <Skeleton height='100%' width='100%' />
         </div>
-        <div className='w-1/2 h-full pl-3 mt-1'>
-          <Skeleton height='15%' />
-          <Skeleton height='15%' />
-          <Skeleton height='15%' />
+        <div className='w-full h-full'>
         </div>
-      </li>
+      </div>
     );
   };
   return (
-    <ul className='grid grid-cols-2 gap-8 px-5 mt-[5.25rem] gap-y-4'>
+    <ul className='flex flex-wrap gap-8 shrink-0 mt-[5.25rem]'>
       {skeletonArray.map((idx) => (
         <StyledSkeleton key={'skeleton' + idx} />
       ))}

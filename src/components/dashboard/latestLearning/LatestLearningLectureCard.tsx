@@ -25,8 +25,8 @@ export default function LatestLearningLectureCard({ lecture }: Props) {
         <div className='flex justify-between h-10 gap-5 mb-1'>
           <div className='flex flex-col justify-between flex-1 gap-1 py-1'>
             <p className='text-xs text-zinc-500'>
-              총 강의 시간 : {lecture.duration}분 | 수강한 영상 :{' '}
-              {lecture.completed_video_count}개 / {lecture.total_video_count}개
+              총 강의 시간 : {lecture.duration.toLocaleString()}분 | 수강한 영상 :{' '}
+              {lecture.completed_video_count.toLocaleString()}개 / {lecture.total_video_count.toLocaleString()}개
             </p>
             <div className='flex items-center'>
               <ProgressBar
