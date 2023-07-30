@@ -1,6 +1,6 @@
 export default function getQueryURL(
   endpoint: string,
-  params: Record<string, string | number | boolean> | undefined
+  params?: Record<string, string | number | boolean> | undefined
 ) {
   if (params === undefined) return endpoint;
 

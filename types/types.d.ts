@@ -106,7 +106,7 @@ interface WeekInfo {
 
 //////////////////////////////////search/////////////////////////////////
 
-type SearchResultsFilter = 'all' | 'playlist' | 'video';
+type SearchResultsFilter = 'all' | 'playlist';
 
 interface SearchLectureParams extends Record<string, string | number> {
   keyword: string;
