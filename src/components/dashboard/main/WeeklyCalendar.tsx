@@ -22,7 +22,7 @@ const weekdayList = {
   7: 'NONE'
 } as const;
 
-type weekdayKey = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+type weekdayKey = keyof typeof weekdayList;
 
 export default function WeeklyCalendar({ learning_history }: Props) {
   const [selectedWeek, setSelectedWeek] = useState<WeekInfo[]>(
@@ -43,8 +43,9 @@ export default function WeeklyCalendar({ learning_history }: Props) {
           return true;
         }
       });
+      const result: WeekInfo = { ...day, learningHistory };
 
-      return { ...day, learningHistory } as WeekInfo;
+      return result;
     });
     return mappedWeekInfo;
   }, []);
@@ -119,7 +120,7 @@ export default function WeeklyCalendar({ learning_history }: Props) {
         {selectedWeek?.map((day, index) => {
           return (
             <DayCard
-              key={day.fullDate}
+              key={day.fullDate + index}
               weekday={index as weekdayKey}
               date={day.date}
               hasValue={day.learningHistory !== undefined}
