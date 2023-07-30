@@ -76,7 +76,7 @@ export default async function LectureDetailReviewList({
         )}
       </ul>
       <div className='flex justify-center my-10 mb-20'>
-        {hasNextPage ? <LoadMoreButton onClick={fetchNextPage} /> : null}
+        {hasNextPage ? <LoadMoreButton title='후기 더보기' onClick={fetchNextPage} /> : null}
       </div>
     </>
   );
