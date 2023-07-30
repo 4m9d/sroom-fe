@@ -70,7 +70,7 @@ interface LoginResponse extends Response, Profile {
 
 interface LatestLearningLecture {
   course_id: string;
-  channel: string;
+  channels: string;
   thumbnail: string;
   course_title: string;
   duration: number;
@@ -83,8 +83,8 @@ interface LatestLearningLecture {
 interface LearningHistory {
   date: string;
   learning_time: number;
-  quizzes: number;
-  lectures: number;
+  quiz_count: number;
+  lecture_count: number;
 }
 
 interface DashboardInfo {
@@ -92,8 +92,8 @@ interface DashboardInfo {
   completion_rate: number;
   total_learning_time: number;
   motivation: string;
-  latest: LatestLearningLecture[];
-  learning_history: LearningHistory[];
+  latest_lectures: LatestLearningLecture[];
+  learning_histories: LearningHistory[];
 }
 
 interface WeekInfo {
@@ -188,5 +188,9 @@ interface LectureReviewParams extends Record<string, number | boolean> {
 }
 
 interface LectureDeatilParams extends LectureIndexParams, LectureReviewParams {}
+
+interface LectureRecommendations {
+  recommendations: PersonalizedLecture[];
+}
 
 /////////////////////////////////////////////////////////////////////////
