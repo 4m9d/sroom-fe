@@ -1,7 +1,6 @@
 import React from 'react';
 import ProgressBar from '../../ui/ProgressBar';
 import HorizontalSmallLectureCard from '../../ui/lectureCard/HorizontalSmallLectureCard';
-import getRelativeTime from '@/src/util/day/getRelativeTime';
 import Button from '../../ui/Button';
 
 type Props = {
@@ -16,11 +15,11 @@ export default function LatestLearningLectureCard({ lecture }: Props) {
     >
       <div className='flex flex-col justify-between h-full'>
         <div className='mt-2'>
-          <p className='text-lg font-bold line-clamp-2'>
+          <p className='text-lg font-bold whitespace-normal line-clamp-2'>
             {lecture.course_title}
           </p>
-          <p className='text-sm font-semibold text-zinc-500 line-clamp-1'>
-            {lecture.channel}
+          <p className='text-sm font-semibold whitespace-normal text-zinc-500 line-clamp-1'>
+            {lecture.channels}
           </p>
         </div>
         <div className='flex justify-between h-10 gap-5 mb-1'>

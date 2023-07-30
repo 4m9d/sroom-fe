@@ -175,11 +175,11 @@ export default function WeeklyCalendar({ learning_history }: Props) {
               />
               <LearningHistoryItem
                 title={'푼 퀴즈'}
-                value={`${selectedWeek[selectedDay].learningHistory?.quizzes}문제`}
+                value={`${selectedWeek[selectedDay].learningHistory?.quiz_count}문제`}
               />
               <LearningHistoryItem
                 title={'수강한 강의'}
-                value={`${selectedWeek[selectedDay].learningHistory?.lectures}개`}
+                value={`${selectedWeek[selectedDay].learningHistory?.lecture_count}개`}
               />
             </>
           )}
