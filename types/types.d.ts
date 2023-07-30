@@ -135,11 +135,17 @@ interface Lecture extends PersonalizedLecture {
   is_enrolled: boolean;
 }
 
+interface SearchResultsLecture extends Lecture {
+  published_at: string;
+  view_count: number | null;
+  lecture_count: number | null;
+}
+
 interface SearchResultsList {
   result_per_page: number;
   next_page_token: string | null;
   prev_page_token: string | null;
-  lectures: Lecture[];
+  lectures: SearchResultsLecture[];
 }
 
 interface LectureIndex {
