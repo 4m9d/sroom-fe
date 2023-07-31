@@ -182,7 +182,7 @@ interface LectureReview {
 type LectureReviewList = LectureReview[];
 
 interface LectureDetail extends Lecture {
-  published_at: string | null;
+  published_at: string;
   view_count: number;
   duration: string;
   lecture_count?: number;
