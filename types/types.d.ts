@@ -120,7 +120,7 @@ interface LectureDetailModalParams {
   searchParams: { is_playlist: string };
 }
 
-interface PersonalizedLecture {
+interface Lecture {
   lecture_title: string;
   description: string;
   channel: string;
@@ -129,11 +129,20 @@ interface PersonalizedLecture {
   review_count: number;
   thumbnail: string;
   is_playlist: boolean;
-}
-
-interface Lecture extends PersonalizedLecture {
   is_enrolled: boolean;
 }
+
+type PersonalizedLecture = {
+  [key in
+    | 'lecture_title'
+    | 'description'
+    | 'channel'
+    | 'lecture_code'
+    | 'rating'
+    | 'review_count'
+    | 'thumbnail'
+    | 'is_playlist']: Lecture[key];
+};
 
 interface SearchResultsLecture extends Lecture {
   published_at: string;
