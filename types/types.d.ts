@@ -68,7 +68,7 @@ interface LoginResponse extends Response, Profile {
 
 ////////////////////////////////dashboards///////////////////////////////
 
-interface LatestLearningLecture {
+interface Course {
   course_id: string;
   channels: string;
   thumbnail: string;
@@ -92,7 +92,7 @@ interface DashboardInfo {
   completion_rate: number;
   total_learning_time: number;
   motivation: string;
-  latest_lectures: LatestLearningLecture[];
+  latest_lectures: Course[];
   learning_histories: LearningHistory[];
 }
 
