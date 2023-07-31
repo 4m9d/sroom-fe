@@ -137,8 +137,8 @@ interface Lecture extends PersonalizedLecture {
 
 interface SearchResultsLecture extends Lecture {
   published_at: string;
-  view_count: number | null;
-  lecture_count: number | null;
+  view_count: number;
+  lecture_count: number;
 }
 
 interface SearchResultsList {
