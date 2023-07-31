@@ -5,11 +5,11 @@ import { QueryKeys } from '@/src/api/queryKeys';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import SearchLectureCard from './SearchLectureCard';
 import Link from 'next/link';
-import LoadMoreButton from '../ui/LoadMoreButton';
+import LoadMoreButton from '../ui/button/LoadMoreButton';
 import setErrorToast from '@/src/util/error/setErrorToast';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/search/search';
-import Button from '../ui/Button';
+import Button from '../ui/button/Button';
 
 export default async function SearchResultsList({
   requestParam,

@@ -9,7 +9,7 @@ import {
   INDEX_LIMIT,
   STALE_TIME
 } from '@/src/constants/lectureDetail/lectureDetail';
-import LoadMoreButton from '../../ui/LoadMoreButton';
+import LoadMoreButton from '../../ui/button/LoadMoreButton';
 import setErrorToast from '@/src/util/error/setErrorToast';
 
 export default async function LectureDetailIndexList({

@@ -1,7 +1,7 @@
 import React from 'react';
 import ProgressBar from '../../ui/ProgressBar';
 import HorizontalSmallLectureCard from '../../ui/lectureCard/HorizontalSmallLectureCard';
-import Button from '../../ui/Button';
+import Button from '../../ui/button/Button';
 
 type Props = {
   lecture: LatestLearningLecture;

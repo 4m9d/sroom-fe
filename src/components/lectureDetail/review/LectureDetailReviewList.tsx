@@ -1,7 +1,7 @@
 'use client';
 import { fetchLectureDetailReview } from '@/src/api/lectures/search';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
-import LoadMoreButton from '../../ui/LoadMoreButton';
+import LoadMoreButton from '../../ui/button/LoadMoreButton';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
 import {
