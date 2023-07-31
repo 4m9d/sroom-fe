@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import SearchInput from './SearchInput';
 import useAuth from '@/src/hooks/useAuth';
-import Button from '../ui/Button';
+import Button from '../ui/button/Button';
 
 type Props = {
   logo: string;

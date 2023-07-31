@@ -1,21 +1,95 @@
+'use client';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Mousewheel } from 'swiper/modules';
+import SwiperCore from 'swiper';
+import 'swiper/css';
+import 'swiper/css/mousewheel';
 import SectionHeading from '../ui/SectionHeading';
 import LectureRecommendationsCard from './LectureRecommendationsCard';
+import useWindowSize from '@/src/hooks/useWindowSize';
+import SwiperNavigationButton from '../ui/button/SwiperNavigationButton';
+import { useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type Props = {
   recommendations: PersonalizedLecture[];
 };
 
 export default function LectureRecommendationsList({ recommendations }: Props) {
+  const windowSize = useWindowSize();
+  const prevRef = useRef<HTMLButtonElement>(null);
+  const nextRef = useRef<HTMLButtonElement>(null);
+  const [swiper, setSwiper] = useState<SwiperCore>();
+  const [isFirstSlide, setIsFirstSlide] = useState<boolean>(true);
+  const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
+
   return (
-    <section className='relative px-20 py-20 mx-auto my-20 max-w-screen-2xl'>
+    <section className='px-20 py-20 mx-auto my-20 max-w-screen-2xl'>
       <SectionHeading title='이런 강의는 어때요?' />
-      <ul className='flex gap-8 overflow-x-scroll overflow-y-hidden overscroll-x-contain scrollbar-hide'>
-        {recommendations.map((lecture) => (
-          <li key={lecture.lecture_code}>
-            <LectureRecommendationsCard lecture={lecture} />
-          </li>
-        ))}
-      </ul>
+      <div className='relative'>
+        <Swiper
+          className='!py-2'
+          modules={[Mousewheel]}
+          slidesPerView={
+            windowSize.width < 1000 ? 1 : windowSize.width < 1400 ? 2 : 3
+          }
+          navigation={{
+            prevEl: prevRef.current,
+            nextEl: nextRef.current
+          }}
+          mousewheel={{
+            sensitivity: 1,
+            thresholdTime: 100,
+            thresholdDelta: 15
+          }}
+          onBeforeInit={(swiper) => {
+            setSwiper(swiper);
+          }}
+          onSlideChange={(swiper) => {
+            swiper.isEnd ? setIsLastSlide(true) : setIsLastSlide(false);
+            swiper.isBeginning ? setIsFirstSlide(true) : setIsFirstSlide(false);
+          }}
+        >
+          {recommendations.map((lecture) => (
+            <SwiperSlide
+              className='!flex justify-center'
+              key={lecture.lecture_code}
+            >
+              <LectureRecommendationsCard lecture={lecture} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        {!isFirstSlide && (
+          <AnimatePresence>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className='absolute z-10 top-1/3 -left-16'
+            >
+              <SwiperNavigationButton
+                onClick={() => swiper?.slidePrev()}
+                navigation='prev'
+              />
+            </motion.div>
+          </AnimatePresence>
+        )}
+        {!isLastSlide && (
+          <AnimatePresence>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className='absolute z-10 top-1/3 -right-16'
+            >
+              <SwiperNavigationButton
+                onClick={() => swiper?.slideNext()}
+                navigation='next'
+              />
+            </motion.div>
+          </AnimatePresence>
+        )}
+      </div>
     </section>
   );
 }
