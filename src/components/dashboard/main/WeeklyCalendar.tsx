@@ -8,7 +8,7 @@ import {
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 type Props = {
-  learning_history: LearningHistory[];
+  learning_histories: LearningHistory[];
 };
 
 const weekdayList = {
@@ -24,22 +24,18 @@ const weekdayList = {
 
 type weekdayKey = keyof typeof weekdayList;
 
-export default function WeeklyCalendar({ learning_history }: Props) {
+export default function WeeklyCalendar({ learning_histories }: Props) {
   const [selectedWeek, setSelectedWeek] = useState<WeekInfo[]>(
     getFullWeekDate()
   );
   const [selectedDay, setSelectedDay] = useState<weekdayKey>(7);
-  const dayIdx = useRef(0);
 
   const findLearningHistory = useCallback((startOfWeek: string) => {
     const weekInfo = getFullWeekDate(startOfWeek);
-    const startIdx = dayIdx.current;
-    const slicedLearningHistory = learning_history.slice(startIdx);
 
     const mappedWeekInfo: WeekInfo[] = weekInfo.map((day) => {
-      const learningHistory = slicedLearningHistory.find((history, index) => {
+      const learningHistory = learning_histories.find((history) => {
         if (history.date === day.fullDate) {
-          dayIdx.current = startIdx + index;
           return true;
         }
       });
