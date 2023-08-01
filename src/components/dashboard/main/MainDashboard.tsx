@@ -26,7 +26,7 @@ export default async function MainDashboard({dashboardInfo}: Props) {
         <TotalLearningTime time={total_learning_time} />
         <CorrectnessRate value={correctness_rate} />
         <CompletionRate value={completion_rate} />
-        <WeeklyCalendar learning_history={learning_histories} />
+        <WeeklyCalendar learning_histories={learning_histories} />
       </div>
     </section>
   );
