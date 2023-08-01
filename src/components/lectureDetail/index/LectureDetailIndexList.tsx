@@ -8,9 +8,9 @@ import {
   CACHE_TIME,
   INDEX_LIMIT,
   STALE_TIME
-} from '@/src/constants/detail/detail';
-import LoadMoreButton from '../../ui/LoadMoreButton';
-import setErrorToast from '@/src/util/setErrorToast';
+} from '@/src/constants/lectureDetail/lectureDetail';
+import LoadMoreButton from '../../ui/button/LoadMoreButton';
+import setErrorToast from '@/src/util/error/setErrorToast';
 
 export default async function LectureDetailIndexList({
   lectureCode,
@@ -70,7 +70,7 @@ export default async function LectureDetailIndexList({
         )}
       </ul>
       <div className='flex justify-center my-10'>
-        {hasNextPage ? <LoadMoreButton onClick={fetchNextPage} /> : null}
+        {hasNextPage ? <LoadMoreButton title='목차 더보기' onClick={fetchNextPage} /> : null}
       </div>
     </>
   );

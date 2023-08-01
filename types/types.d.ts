@@ -2,6 +2,13 @@
 interface Window {
   google: any;
 }
+// for dayjs
+interface WeekRange {
+  startOfWeek: string;
+  endOfWeek: string;
+}
+
+//////////////////////////////////toast//////////////////////////////////
 
 interface CustomToast {
   type: 'success' | 'error';
@@ -22,6 +29,9 @@ interface ToastContextType {
   toasts: Toast[];
   setToasts: Dispatch<SetStateAction<Toast[]>>;
 }
+/////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////members/////////////////////////////////
 
 interface Profile {
   name: string;
@@ -54,7 +64,49 @@ interface LoginResponse extends Response, Profile {
   expires_at: number;
 }
 
-type SearchResultsFilter = 'all' | 'playlist' | 'video';
+/////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////dashboards///////////////////////////////
+
+interface Course {
+  course_id: string;
+  channels: string;
+  thumbnail: string;
+  course_title: string;
+  duration: number;
+  last_view_time: string;
+  total_video_count: number;
+  completed_video_count: number;
+  progress: number;
+}
+
+interface LearningHistory {
+  date: string;
+  learning_time: number;
+  quiz_count: number;
+  lecture_count: number;
+}
+
+interface DashboardInfo {
+  correctness_rate: number;
+  completion_rate: number;
+  total_learning_time: number;
+  motivation: string;
+  latest_lectures: Course[];
+  learning_histories: LearningHistory[];
+}
+
+interface WeekInfo {
+  fullDate: string;
+  date: string;
+  learningHistory?: LearningHistory | undefined;
+}
+
+/////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////search/////////////////////////////////
+
+type SearchResultsFilter = 'all' | 'playlist';
 
 interface SearchLectureParams extends Record<string, string | number> {
   keyword: string;
@@ -80,11 +132,29 @@ interface Lecture {
   is_enrolled: boolean;
 }
 
+type PersonalizedLecture = {
+  [key in
+    | 'lecture_title'
+    | 'description'
+    | 'channel'
+    | 'lecture_code'
+    | 'rating'
+    | 'review_count'
+    | 'thumbnail'
+    | 'is_playlist']: Lecture[key];
+};
+
+interface SearchResultsLecture extends Lecture {
+  published_at: string;
+  view_count: number;
+  lecture_count: number;
+}
+
 interface SearchResultsList {
   result_per_page: number;
   next_page_token: string | null;
   prev_page_token: string | null;
-  lectures: Lecture[];
+  lectures: SearchResultsLecture[];
 }
 
 interface LectureIndex {
@@ -112,7 +182,7 @@ interface LectureReview {
 type LectureReviewList = LectureReview[];
 
 interface LectureDetail extends Lecture {
-  published_at: string | null;
+  published_at: string;
   view_count: number;
   duration: string;
   lecture_count?: number;
@@ -133,3 +203,9 @@ interface LectureReviewParams extends Record<string, number | boolean> {
 }
 
 interface LectureDeatilParams extends LectureIndexParams, LectureReviewParams {}
+
+interface LectureRecommendations {
+  recommendations: PersonalizedLecture[];
+}
+
+/////////////////////////////////////////////////////////////////////////

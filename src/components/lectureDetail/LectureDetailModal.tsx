@@ -10,7 +10,7 @@ import LectureDetailIndexSkeleton from './index/LectureDetailIndexSkeleton';
 import {
   INDEX_SKELETON_LIMIT,
   REVIEW_LIMIT
-} from '@/src/constants/detail/detail';
+} from '@/src/constants/lectureDetail/lectureDetail';
 import LectureDetailHeading from './LectureDetailHeading';
 import LectureDetailReviewSkeleton from './review/LectureDetailReviewSkeleton';
 

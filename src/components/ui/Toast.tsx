@@ -1,5 +1,5 @@
 'use client';
-import { TOAST_DELAY } from '@/src/constants/toast/toast';
+import { TOAST_DELAY } from '@/src/constants/ui/toast';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const Emoji = {

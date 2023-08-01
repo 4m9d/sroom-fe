@@ -1,16 +1,16 @@
 'use client';
 import { fetchLectureDetailReview } from '@/src/api/lectures/search';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
-import LoadMoreButton from '../../ui/LoadMoreButton';
+import LoadMoreButton from '../../ui/button/LoadMoreButton';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
 import {
   STALE_TIME,
   CACHE_TIME,
   REVIEW_LIMIT
-} from '@/src/constants/detail/detail';
+} from '@/src/constants/lectureDetail/lectureDetail';
 import LectureDetailReviewCard from './LectureDetailReviewCard';
-import setErrorToast from '@/src/util/setErrorToast';
+import setErrorToast from '@/src/util/error/setErrorToast';
 
 export default async function LectureDetailReviewList({
   lectureCode,
@@ -76,7 +76,7 @@ export default async function LectureDetailReviewList({
         )}
       </ul>
       <div className='flex justify-center my-10 mb-20'>
-        {hasNextPage ? <LoadMoreButton onClick={fetchNextPage} /> : null}
+        {hasNextPage ? <LoadMoreButton title='후기 더보기' onClick={fetchNextPage} /> : null}
       </div>
     </>
   );

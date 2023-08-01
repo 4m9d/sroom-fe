@@ -1,7 +1,7 @@
-import getQueryURL from '@/src/util/getQueryURL';
+import getQueryURL from '@/src/util/http/getQueryURL';
 import { Endpoints } from '../Endpoints';
 import { ErrorMessage } from '../ErrorMessage';
-import { getAuthorizedHeaders } from '@/src/util/getAuthorizedHeaders';
+import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
 
 export async function fetchLecturesByKeyword(params: SearchLectureParams) {
   const headers = await getAuthorizedHeaders();
@@ -76,3 +76,22 @@ export async function fetchLectureDetailReview(
     }
   });
 }
+
+export async function fetchLectureRecommendations(
+) {
+  const headers = await getAuthorizedHeaders();
+  return await fetch(
+    getQueryURL(`${Endpoints.LECTURES}/recommendations`),
+    {
+      method: 'GET',
+      headers
+    }
+  ).then(async (res) => {
+    if (res.ok) {
+      return (await res.json()) as Promise<LectureRecommendations>;
+    } else {
+      return Promise.reject(new Error(ErrorMessage.RECOMMENDATIONS));
+    }
+  });
+}
+

@@ -1,5 +1,5 @@
 'use client';
-import getQueryURL from '@/src/util/getQueryURL';
+import getQueryURL from '@/src/util/http/getQueryURL';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 

@@ -4,12 +4,12 @@ module.exports = {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/constants/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/constants/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {
     extend: {}
   },
-  plugins: [require('daisyui')],
+  plugins: [require('daisyui'), require('tailwind-scrollbar-hide')],
   daisyui: {
     themes: ['light'],
     darkTheme: 'dark', // default: 'dark'
@@ -18,6 +18,6 @@ module.exports = {
     utils: true, // default: true
     rtl: false, // default: false
     prefix: '', // default: ''
-    logs: false // default: 
+    logs: false // default:
   }
 };
