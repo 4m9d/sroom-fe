@@ -13,7 +13,7 @@ const LectureDetailIndexSkeleton = ({ limit, indexPageRef }: Props) => {
 
   const StyledSkeleton = () => {
     return (
-      <li className={'flex items-center justify-between h-20 w-full px-4'}>
+      <li className={'flex items-center justify-between h-20'}>
         <div className='w-full h-full'>
           <Skeleton height='100%' />
         </div>
@@ -21,7 +21,7 @@ const LectureDetailIndexSkeleton = ({ limit, indexPageRef }: Props) => {
     );
   };
   return (
-    <ul className='grid grid-cols-1 gap-y-4'>
+    <ul className='grid grid-cols-1 gap-4'>
       {skeletonArray.map((idx) => (
         <StyledSkeleton key={'skeleton' + idx} />
       ))}

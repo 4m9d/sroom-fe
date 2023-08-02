@@ -1,9 +1,9 @@
-import {
-  THUMBNAIL_PREVIEW_HEIGHT,
-  THUMBNAIL_PREVIEW_MIN_WIDTH
-} from '@/src/constants/ui/thumbnail';
-import Image from 'next/image';
-import React from 'react';
+import getCompactFormattedDate from '@/src/util/day/getCompactFormattedDate';
+import HorizontalBigLectureCard from '../ui/lectureCard/HorizontalBigLectureCard';
+import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
+import ThumbnailBadge from '../ui/ThumbnailBadge';
+import getCompactFormattedNumber from '@/src/util/number/getCompactFormattedNumber';
+import Button from '../ui/button/Button';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -11,66 +11,68 @@ type Props = {
 
 export default function LectureDetailCard({ lectureDetail }: Props) {
   const {
-    thumbnail,
+    lecture_code,
     lecture_title,
-    rating,
+    published_at,
+    view_count,
+    lecture_count,
+    thumbnail,
     channel,
-    review_count,
     description,
+    rating,
+    review_count,
     is_playlist,
     is_enrolled
   } = lectureDetail;
 
-  <div
-    className={`flex w-full cursor-pointer ${THUMBNAIL_PREVIEW_HEIGHT.MEDIUM} ${THUMBNAIL_PREVIEW_HEIGHT.LARGE} ${THUMBNAIL_PREVIEW_HEIGHT.XLARGE}`}
-  >
-    <div
-      className={`relative object-cover ${THUMBNAIL_PREVIEW_MIN_WIDTH.MEDIUM} ${THUMBNAIL_PREVIEW_MIN_WIDTH.LARGE} ${THUMBNAIL_PREVIEW_MIN_WIDTH.XLARGE}`}
-    >
-      <Image fill={true} sizes='100%' src={thumbnail} alt={lecture_title} />
-    </div>
-    <div className='flex flex-col w-1/2 px-4'>
-      <p className='font-semibold h-1/5 sm:text-sm lg:text-base sm:line-clamp-1 lg:line-clamp-2'>
-        {lecture_title}
-      </p>
-      <div className='flex items-center mb-1 h-1/6'>
-        <input className='mr-1 bg-orange-300 sm:w-3 sm:h-3 lg:w-4 lg:h-4 mask mask-star-2' />
-        <p className='sm:text-xs lg:text-sm'>{rating}</p>
-      </div>
-      <div className='flex items-center justify-start sm:text-xs lg:text-sm opacity-80 h-1/6'>
-        <p className='max-w-[50%] line-clamp-1'>{channel}</p>
-        <span className='ml-2 sm:text-xs lg:text-sm badge sm:badge-sm lg:badge-md badge-outline'>{`리뷰 ${review_count}개`}</span>
-      </div>
-      <p className='mt-1 sm:text-xs lg:text-sm h-1/2 opacity-80 sm:line-clamp-3 lg:line-clamp-5'>
-        {description}
-      </p>
-    </div>
-  </div>;
   return (
-    <div
-      className={`flex w-full cursor-pointer ${THUMBNAIL_PREVIEW_HEIGHT.MEDIUM} ${THUMBNAIL_PREVIEW_HEIGHT.LARGE} ${THUMBNAIL_PREVIEW_HEIGHT.XLARGE}`}
-    >
-      <div
-        className={`relative object-cover ${THUMBNAIL_PREVIEW_MIN_WIDTH.MEDIUM} ${THUMBNAIL_PREVIEW_MIN_WIDTH.LARGE} ${THUMBNAIL_PREVIEW_MIN_WIDTH.XLARGE}`}
-      >
-        <Image fill={true} sizes='100%' src={thumbnail} alt={lecture_title} />
-      </div>
-      <div className='flex flex-col w-1/2 px-4'>
-        <p className='font-semibold h-1/5 sm:text-sm lg:text-base sm:line-clamp-1 lg:line-clamp-2'>
-          {lecture_title}
-        </p>
-        <div className='flex items-center mb-1 h-1/6'>
-          <input className='mr-1 bg-orange-300 sm:w-3 sm:h-3 lg:w-4 lg:h-4 mask mask-star-2' />
-          <p className='sm:text-xs lg:text-sm'>{rating}</p>
+    <HorizontalBigLectureCard src={thumbnail} alt={lecture_title}>
+      <div className='flex flex-col justify-start h-full'>
+        <div className='flex flex-col gap-1 mt-4 md:mb-1 lg:mb-2'>
+          <p className='text-base font-bold whitespace-normal line-clamp-1 xl:line-clamp-2'>
+            {lecture_title}
+          </p>
+          <p className='text-sm font-semibold whitespace-normal text-zinc-500 line-clamp-1'>
+            {channel}
+          </p>
+          <p className='text-xs text-zinc-500'>
+            {is_playlist
+              ? `영상 ${lecture_count?.toLocaleString()}개`
+              : `조회수 ${getCompactFormattedNumber(view_count)}회`}
+            ･{getCompactFormattedDate(published_at)}
+          </p>
         </div>
-        <div className='flex items-center justify-start sm:text-xs lg:text-sm opacity-80 h-1/6'>
-          <p className='max-w-[50%] line-clamp-1'>{channel}</p>
-          <span className='ml-2 sm:text-xs lg:text-sm badge sm:badge-sm lg:badge-md badge-outline'>{`리뷰 ${review_count}개`}</span>
+        <div className='flex flex-col justify-between h-full'>
+          <div className='min-h-[3rem] whitespace-pre-wrap'>
+            <p className='text-sm text-zinc-500 line-clamp-2 xl:line-clamp-5'>
+              {description}
+            </p>
+          </div>
+          <Button className='w-full h-12 font-semibold text-zinc-200 bg-zinc-800'>
+            {is_enrolled ? '수강하러 가기' : '등록하기'}
+          </Button>
         </div>
-        <p className='mt-1 sm:text-xs lg:text-sm h-1/2 opacity-80 sm:line-clamp-3 lg:line-clamp-5'>
-          {description}
-        </p>
       </div>
-    </div>
+      <div className='absolute right-3 top-3'>
+        <StarRatingWithReviewCount
+          rating={rating}
+          review_count={review_count}
+        />
+      </div>
+      {is_enrolled && (
+        <div className='absolute top-3 left-3'>
+          <ThumbnailBadge title='수강 중' className='bg-zinc-800' />
+        </div>
+      )}
+      {is_playlist && (
+        <div
+          className={`absolute top-3 ${
+            is_enrolled ? 'left-[4.7rem]' : 'left-3'
+          }`}
+        >
+          <ThumbnailBadge title='재생목록' className='bg-orange-500' />
+        </div>
+      )}
+    </HorizontalBigLectureCard>
   );
 }

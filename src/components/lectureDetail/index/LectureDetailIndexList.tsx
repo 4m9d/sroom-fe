@@ -59,12 +59,13 @@ export default async function LectureDetailIndexList({
   );
   return (
     <>
-      <ul className='grid grid-cols-1 gap-y-4'>
+      <ul className='grid grid-cols-1 gap-4'>
         {data?.pages.map((page) =>
-          page?.index_list?.map((lectureIndex) => (
+          page?.index_list?.map((lectureIndex, idx) => (
             <LectureDetailIndexCard
               key={lectureIndex.index}
               lectureIndex={lectureIndex}
+              indexNum={idx + 1}
             />
           ))
         )}
