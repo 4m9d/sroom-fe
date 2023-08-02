@@ -38,7 +38,7 @@ export default async function SearchLectureCard({
           <p className='text-xs text-zinc-500'>
             {is_playlist
               ? `영상 ${lecture_count?.toLocaleString()}개`
-              : `조회수 ${getCompactNumberFormat(view_count as number)}회`}
+              : `조회수 ${getCompactNumberFormat(view_count)}회`}
             ･{getRelativeTime(published_at)}
           </p>
         </div>
@@ -48,7 +48,7 @@ export default async function SearchLectureCard({
           </p>
         </div>
       </div>
-      <div className='absolute top-3 -right-3'>
+      <div className='absolute right-3 top-3'>
         <StarRatingWithReviewCount
           rating={rating}
           review_count={review_count}
