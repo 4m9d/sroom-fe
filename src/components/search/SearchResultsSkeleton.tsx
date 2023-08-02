@@ -1,8 +1,4 @@
 'use client';
-import {
-  THUMBNAIL_PREVIEW_HEIGHT,
-  THUMBNAIL_PREVIEW_MIN_WIDTH
-} from '@/src/constants/ui/thumbnail';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
