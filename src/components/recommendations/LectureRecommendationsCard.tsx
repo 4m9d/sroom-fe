@@ -1,4 +1,4 @@
-import StarRatingWithReviewCount from '../ui/StarRatingWithReviewCount';
+import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
 import ThumbnailBadge from '../ui/ThumbnailBadge';
 import VerticalSmallLectureCard from '../ui/lectureCard/VerticalSmallLectureCard';
 
