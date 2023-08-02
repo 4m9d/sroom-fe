@@ -2,6 +2,8 @@ import React from 'react';
 import ProgressBar from '../../ui/ProgressBar';
 import HorizontalSmallLectureCard from '../../ui/lectureCard/HorizontalSmallLectureCard';
 import Button from '../../ui/button/Button';
+import getFormattedHour from '@/src/util/day/getFormattedHour';
+import getTimeInMinute from '@/src/util/day/getTimeInMinute';
 
 type Props = {
   course: Course;
@@ -25,8 +27,10 @@ export default function LatestLearningCourseCard({ course }: Props) {
         <div className='flex justify-between h-10 gap-5 mb-1'>
           <div className='flex flex-col justify-between flex-1 gap-1 py-1'>
             <p className='text-xs text-zinc-500'>
-              총 강의 시간 : {course.duration.toLocaleString()}분 | 수강한 영상 :{' '}
-              {course.completed_video_count.toLocaleString()}개 / {course.total_video_count.toLocaleString()}개
+              총 강의 시간 :{' '}
+              {getFormattedHour(getTimeInMinute(course.duration))} | 수강한
+              영상 : {course.completed_video_count.toLocaleString()}개 /{' '}
+              {course.total_video_count.toLocaleString()}개
             </p>
             <div className='flex items-center'>
               <ProgressBar
