@@ -5,7 +5,9 @@ import {
   getPreviousWeekRange,
   getFullWeekDate
 } from '@/src/util/day/getWeekRange';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import getFormattedHour from '@/src/util/day/getFormattedHour';
+import { useCallback, useEffect, useState } from 'react';
+import getTimeInMinute from '@/src/util/day/getTimeInMinute';
 
 type Props = {
   learning_histories: LearningHistory[];
@@ -168,7 +170,12 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
             <>
               <LearningHistoryItem
                 title={'학습 시간'}
-                value={`${selectedWeek[selectedDay].learningHistory?.learning_time}분`}
+                value={getFormattedHour(
+                  getTimeInMinute(
+                    selectedWeek[selectedDay].learningHistory?.learning_time ??
+                      0
+                  )
+                )}
               />
               <LearningHistoryItem
                 title={'푼 퀴즈'}

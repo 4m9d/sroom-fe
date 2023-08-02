@@ -2,13 +2,13 @@ import { useCallback, useRef } from 'react';
 
 export default function useIntersectionObserver(
   setId: (id: string) => void,
-  rootMargin: string,
-  root: HTMLElement | null
+  root: HTMLElement | null,
+  rootMargin?: string
 ) {
   const option = {
     threshold: 0,
-    rootMargin,
-    root
+    root,
+    rootMargin
   };
 
   const checkIntersect = useCallback(
