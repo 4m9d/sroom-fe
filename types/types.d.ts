@@ -161,18 +161,17 @@ interface LectureIndex {
   index: number;
   thumbnail: string;
   lecture_title: string;
-  duration: string;
+  duration: number;
 }
 
 interface LectureIndexList {
   index_list: LectureIndex[];
   next_page_token: string | null;
-  total_duration: string;
+  total_duration: number;
 }
 
 interface LectureReview {
   index: number;
-  review_title: string;
   review_content: string;
   submitted_rating: number;
   reviewer_name: string;
@@ -184,7 +183,7 @@ type LectureReviewList = LectureReview[];
 interface LectureDetail extends Lecture {
   published_at: string;
   view_count: number;
-  duration: string;
+  duration: number;
   lecture_count?: number;
   indexes?: LectureIndexList;
   reviews: LectureReview[];

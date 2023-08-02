@@ -13,6 +13,7 @@ import {
 } from '@/src/constants/lectureDetail/lectureDetail';
 import LectureDetailHeading from './LectureDetailHeading';
 import LectureDetailReviewSkeleton from './review/LectureDetailReviewSkeleton';
+import OneStar from '../ui/rating/OneStar';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -23,7 +24,7 @@ export default function LectureDetailModal({
   lectureDetail,
   navigationType
 }: Props) {
-  const { is_playlist, lecture_code } = lectureDetail;
+  const { is_playlist, lecture_code, rating } = lectureDetail;
   const router = useRouter();
   const onCloseHandler =
     navigationType === 'soft' ? router.back : () => router.replace('/');
@@ -33,7 +34,7 @@ export default function LectureDetailModal({
   return (
     <Modal
       id='modal'
-      className='relative h-full rounded-none scroll-smooth'
+      className='relative h-full !p-14 rounded-none scroll-smooth'
       onClose={onCloseHandler}
     >
       <LectureDetailCard lectureDetail={lectureDetail} />
@@ -59,7 +60,12 @@ export default function LectureDetailModal({
         )}
       </section>
       <section id='reviews'>
-        <LectureDetailHeading title={'후기'} />
+        <LectureDetailHeading title={'후기'}>
+          <div className='flex items-center justify-center ml-2 mr-1'>
+            <OneStar className='w-5 h-5' />
+            <p className='font-semibold text-orange-500'>{rating}</p>
+          </div>
+        </LectureDetailHeading>
         <Suspense
           fallback={
             <LectureDetailReviewSkeleton
