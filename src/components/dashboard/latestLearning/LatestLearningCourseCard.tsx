@@ -4,6 +4,7 @@ import HorizontalSmallLectureCard from '../../ui/lectureCard/HorizontalSmallLect
 import Button from '../../ui/button/Button';
 import getFormattedHour from '@/src/util/day/getFormattedHour';
 import getTimeInMinute from '@/src/util/day/getTimeInMinute';
+import Image from 'next/image';
 
 type Props = {
   course: Course;
@@ -26,11 +27,25 @@ export default function LatestLearningCourseCard({ course }: Props) {
         </div>
         <div className='flex justify-between h-10 gap-5 mb-1'>
           <div className='flex flex-col justify-between flex-1 gap-1 py-1'>
-            <p className='text-xs text-zinc-500'>
-              총 강의 시간 :{' '}
-              {getFormattedHour(getTimeInMinute(course.duration))} | 수강한
-              영상 : {course.completed_video_count.toLocaleString()}개 /{' '}
-              {course.total_video_count.toLocaleString()}개
+            <p className='flex text-xs text-zinc-500'>
+              <Image
+                className='mr-1'
+                src={'/icon/icon_time.svg'}
+                alt='총 강의 시간'
+                width={12}
+                height={12}
+              />
+              {getFormattedHour(getTimeInMinute(course.duration))}
+              <span className='mx-2 text-zinc-300'>|</span>
+              <Image
+                className='mr-1'
+                src={'/icon/icon_lecture.svg'}
+                alt='수강한 영상'
+                width={12}
+                height={12}
+              />
+              {course.completed_video_count.toLocaleString()}개 /
+              {course.total_video_count.toLocaleString()}개 완료
             </p>
             <div className='flex items-center'>
               <ProgressBar
