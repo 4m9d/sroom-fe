@@ -42,7 +42,7 @@ gitignore 되어있는 환경변수 파일을 가장 상위(./sroom-fe)에 위�
 npm run dev
 ```
 
-❗️ **만약 개발 환경에서 Mock Server 대신 로컬 백엔드 서버(http://localhost:8080)를 이용하고 싶다면, 아래 코드로 구동해주시면 됩니다**
+❗️ **만약 개발 환경에서 Mock Server 대신 [로컬 백엔드 서버](http://localhost:8080)를 이용하고 싶다면, 아래 코드로 구동해주시면 됩니다**
 
 ```bash
 npm run dev:local
