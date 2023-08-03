@@ -44,7 +44,8 @@ export default function LatestLearningCourseCard({ course }: Props) {
                 width={12}
                 height={12}
               />
-              {course.completed_video_count.toLocaleString()}개 /
+              {course.completed_video_count.toLocaleString()}개
+              <span>/</span>
               {course.total_video_count.toLocaleString()}개 완료
             </p>
             <div className='flex items-center'>
