@@ -60,7 +60,7 @@ export default function LectureDetailEnrollmentButton({
             </span>
           </div>
           <div
-            className='absolute right-0 hidden pt-5 bg-transparent top-full group-hover:block hover:block w-80 dropdown-content'
+            className='absolute right-0 hidden w-4/5 pt-5 bg-transparent top-full group-hover:block hover:block dropdown-content'
           >
             <ul className='relative bg-white border border-gray-200'>
               <EnrolledCoursesList
