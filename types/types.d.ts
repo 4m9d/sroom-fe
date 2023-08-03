@@ -180,6 +180,10 @@ interface LectureReview {
 
 type LectureReviewList = LectureReview[];
 
+type EnrolledCourse = {
+  [key in 'course_id' | 'course_title' | 'total_video_count']: Course[key];
+};
+
 interface LectureDetail extends Lecture {
   published_at: string;
   view_count: number;
@@ -187,6 +191,7 @@ interface LectureDetail extends Lecture {
   lecture_count?: number;
   indexes?: LectureIndexList;
   reviews: LectureReview[];
+  courses: EnrolledCourse[];
 }
 
 interface LectureIndexParams extends Record<string, string | number | boolean> {

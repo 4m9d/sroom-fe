@@ -3,7 +3,7 @@ import HorizontalBigLectureCard from '../ui/lectureCard/HorizontalBigLectureCard
 import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
 import ThumbnailBadge from '../ui/ThumbnailBadge';
 import getCompactFormattedNumber from '@/src/util/number/getCompactFormattedNumber';
-import Button from '../ui/button/Button';
+import LectureDetailEnrollmentButton from './LectureDetailEnrollmentButton';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -21,13 +21,14 @@ export default function LectureDetailCard({ lectureDetail }: Props) {
     description,
     rating,
     review_count,
+    courses,
     is_playlist,
     is_enrolled
   } = lectureDetail;
 
   return (
     <HorizontalBigLectureCard src={thumbnail} alt={lecture_title}>
-      <div className='flex flex-col justify-start h-full'>
+      <div className='flex flex-col justify-start h-[calc(100%-3rem)]'>
         <div className='flex flex-col gap-1 mt-4 md:mb-1 lg:mb-2'>
           <p className='text-base font-bold whitespace-normal line-clamp-1 xl:line-clamp-2'>
             {lecture_title}
@@ -42,17 +43,13 @@ export default function LectureDetailCard({ lectureDetail }: Props) {
             ･{getCompactFormattedDate(published_at)}
           </p>
         </div>
-        <div className='flex flex-col justify-between h-full'>
-          <div className='min-h-[3rem] whitespace-pre-wrap'>
-            <p className='text-sm text-zinc-500 line-clamp-2 xl:line-clamp-5'>
-              {description}
-            </p>
-          </div>
-          <Button className='w-full h-12 font-semibold text-zinc-200 bg-zinc-800'>
-            {is_enrolled ? '수강하러 가기' : '등록하기'}
-          </Button>
+        <div className='h-full whitespace-pre-wrap'>
+          <p className='text-sm text-zinc-500 line-clamp-2 xl:line-clamp-5'>
+            {description}
+          </p>
         </div>
       </div>
+      <LectureDetailEnrollmentButton is_enrolled={is_enrolled} is_playlist={is_playlist} courses={courses}/>
       <div className='absolute right-3 top-3'>
         <StarRatingWithReviewCount
           rating={rating}
