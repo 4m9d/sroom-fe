@@ -69,7 +69,7 @@ interface LoginResponse extends Response, Profile {
 ////////////////////////////////dashboards///////////////////////////////
 
 interface Course {
-  course_id: string;
+  course_id: number;
   channels: string;
   thumbnail: string;
   course_title: string;
