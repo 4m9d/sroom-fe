@@ -10,7 +10,7 @@ type Props = {
 export default function Modal({ id, className, children, onClose }: Props) {
   return (
     <AnimatePresence>
-      <div className={'modal modal-open'}>
+      <div className={'modal modal-open overflow-x-hidden'}>
         <div onClick={onClose} className='modal-backdrop' />
         <motion.div
           id={id}
@@ -18,7 +18,7 @@ export default function Modal({ id, className, children, onClose }: Props) {
           initial={{ opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.97 }}
-          className={`px-12 py-7 modal-box min-w-[70vw] ${className}`}
+          className={`px-12 py-7 modal-box min-w-[70vw] max-w-[70vw] ${className}`}
         >
           <button
             onClick={onClose}
