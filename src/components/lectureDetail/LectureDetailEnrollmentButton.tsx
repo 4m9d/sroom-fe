@@ -57,9 +57,9 @@ export default function LectureDetailEnrollmentButton({
             className={`${LIST__DIV} w-full peer relative`}
           >
             기존 강의 코스에 추가하기{' '}
-            <span className='ml-2 transition-all group-hover:rotate-90'>
+            <button type='button' className='ml-2 transition-all group-hover:rotate-90'>
               〉
-            </span>
+            </button>
           </button>
           <div className='absolute right-0 hidden w-4/5 pt-5 bg-transparent top-full group-hover:block hover:block peer-focus-within:block'>
             <ul className='relative bg-white border border-gray-200'>
