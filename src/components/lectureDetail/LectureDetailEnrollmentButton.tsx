@@ -19,7 +19,7 @@ export default function LectureDetailEnrollmentButton({
 
   const LIST__LI = 'px-3 border-b cursor-pointer border-b-gray-200';
   const LIST__DIV =
-    'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-zinc-500 hover:text-inherit';
+    'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-zinc-500 hover:text-inherit focus:text-inherit';
 
   const EnrolledCoursesList = ({
     courses,
@@ -53,15 +53,15 @@ export default function LectureDetailEnrollmentButton({
           <div className={LIST__DIV}>새 강의 코스 등록하기</div>
         </li>
         <li className={`${LIST__LI} !border-b-0 group`}>
-          <div className={`${LIST__DIV} peer relative`}>
+          <button
+            className={`${LIST__DIV} w-full peer relative`}
+          >
             기존 강의 코스에 추가하기{' '}
             <span className='ml-2 transition-all group-hover:rotate-90'>
               〉
             </span>
-          </div>
-          <div
-            className='absolute right-0 hidden w-4/5 pt-5 bg-transparent top-full group-hover:block hover:block dropdown-content'
-          >
+          </button>
+          <div className='absolute right-0 hidden w-4/5 pt-5 bg-transparent top-full group-hover:block hover:block peer-focus-within:block'>
             <ul className='relative bg-white border border-gray-200'>
               <EnrolledCoursesList
                 courses={courses}
