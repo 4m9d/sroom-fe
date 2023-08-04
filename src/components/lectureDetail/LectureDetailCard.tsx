@@ -30,9 +30,9 @@ export default function LectureDetailCard({ lectureDetail }: Props) {
     <HorizontalBigLectureCard src={thumbnail} alt={lecture_title}>
       <div className='flex flex-col justify-start h-[calc(100%-3rem)]'>
         <div className='flex flex-col gap-1 mt-4 md:mb-1 lg:mb-2'>
-          <p className='text-base font-bold whitespace-normal line-clamp-1 xl:line-clamp-2'>
+          <h2 className='text-base font-bold whitespace-normal line-clamp-1 xl:line-clamp-2'>
             {lecture_title}
-          </p>
+          </h2>
           <p className='text-sm font-semibold whitespace-normal text-zinc-500 line-clamp-1'>
             {channel}
           </p>

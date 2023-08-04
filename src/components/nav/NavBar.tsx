@@ -33,7 +33,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
         >
           <p>로그아웃</p>
         </Button>
-        <button className={`${hidden} dropdown dropdown-hover`}>
+        <button type='button' className={`${hidden} dropdown dropdown-hover`}>
           <div
             tabIndex={0}
             className='flex flex-col items-start w-44 btn btn-ghost rounded-btn'
