@@ -21,6 +21,7 @@ export default function Modal({ id, className, children, onClose }: Props) {
           className={`px-12 py-7 modal-box min-w-[70vw] max-w-[70vw] ${className}`}
         >
           <button
+            type='button'
             onClick={onClose}
             className='absolute btn btn-sm btn-circle btn-ghost right-2 top-2'
           >

@@ -126,6 +126,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
           );
         })}
         <button
+          type='button'
           onClick={previousWeekClickHandler}
           className='absolute flex items-center justify-center w-10 h-10 font-bold transition-all hover:bg-zinc-200 -left-14 top-5'
         >
@@ -133,6 +134,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
         </button>
         {getCurrentWeekRange().startOfWeek !== selectedWeek[0].fullDate && (
           <button
+            type='button'
             onClick={nextWeekClickHandler}
             className='absolute flex items-center justify-center w-10 h-10 font-bold transition-all hover:bg-zinc-200 -right-14 top-5'
           >
