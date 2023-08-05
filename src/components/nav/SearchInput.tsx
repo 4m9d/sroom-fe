@@ -25,13 +25,13 @@ export default function SearchInput() {
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form className='w-full' onSubmit={submitHandler}>
       <input
         type='text'
         value={keyword}
         onChange={changeHandler}
         placeholder='강의 검색'
-        className='form-control w-96 input input-bordered'
+        className='w-full form-control input input-bordered'
       />
     </form>
   );
