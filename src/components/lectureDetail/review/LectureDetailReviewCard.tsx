@@ -18,7 +18,7 @@ export default function LectureDetailReviewCard({ lectureReview }: Props) {
   return (
     <li className='p-3 border border-gray-200 min-h-16'>
       <div className='flex justify-between mb-5'>
-        <div>
+        <div className="flex">
           <FiveStars
             className='w-3 h-3 bg-zinc-800'
             rating={submitted_rating}
