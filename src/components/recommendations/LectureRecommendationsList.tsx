@@ -50,15 +50,14 @@ export default function LectureRecommendationsList({ recommendations }: Props) {
             swiper.isBeginning ? setIsFirstSlide(true) : setIsFirstSlide(false);
           }}
         >
-          <ul>
-            {recommendations.map((lecture) => (
-              <li key={lecture.lecture_code}>
-                <SwiperSlide className='!flex justify-center'>
-                  <LectureRecommendationsCard lecture={lecture} />
-                </SwiperSlide>
-              </li>
-            ))}
-          </ul>
+          {recommendations.map((lecture) => (
+            <SwiperSlide
+              key={lecture.lecture_code}
+              className='!flex justify-center'
+            >
+              <LectureRecommendationsCard lecture={lecture} />
+            </SwiperSlide>
+          ))}
         </Swiper>
         {!isFirstSlide && (
           <AnimatePresence>
