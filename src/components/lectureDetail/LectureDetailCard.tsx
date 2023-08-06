@@ -3,7 +3,7 @@ import HorizontalBigLectureCard from '../ui/lectureCard/HorizontalBigLectureCard
 import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
 import ThumbnailBadge from '../ui/ThumbnailBadge';
 import getCompactFormattedNumber from '@/src/util/number/getCompactFormattedNumber';
-import LectureDetailEnrollmentButton from './LectureDetailEnrollmentButton';
+import LectureEnrollmentButton from '../lectureEnrollment/LectureEnrollmentButton';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -49,7 +49,7 @@ export default function LectureDetailCard({ lectureDetail }: Props) {
           </p>
         </div>
       </div>
-      <LectureDetailEnrollmentButton is_enrolled={is_enrolled} is_playlist={is_playlist} courses={courses}/>
+      <LectureEnrollmentButton is_enrolled={is_enrolled} is_playlist={is_playlist} courses={courses}/>
       <div className='absolute right-3 top-3'>
         <StarRatingWithReviewCount
           rating={rating}
