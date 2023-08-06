@@ -69,7 +69,7 @@ export default async function SearchResultsList({
       <div className='flex justify-between gap-5 text-sm font-semibold h-9'>
         <Button
           onClick={() => onSelectHanlder('playlist')}
-          className={`w-36 border-gray-200 border ${
+          className={`!h-10 w-36 border-gray-200 border ${
             filter === 'playlist'
               ? 'bg-zinc-900 text-white'
               : 'bg-white text-zinc-900'
@@ -79,7 +79,7 @@ export default async function SearchResultsList({
         </Button>
         <Button
           onClick={() => onSelectHanlder('all')}
-          className={`w-36 border-gray-200 border ${
+          className={`!h-10 w-36 border-gray-200 border ${
             filter === 'all'
               ? 'bg-zinc-900 text-white'
               : 'bg-white text-zinc-900'

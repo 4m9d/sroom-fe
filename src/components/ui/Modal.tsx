@@ -5,13 +5,18 @@ type Props = {
   onClose: () => void;
 };
 
-export default function Modal({ id, className, children, onClose }: Props) {
+export default function Modal({
+  id,
+  className,
+  children,
+  onClose
+}: Props) {
   return (
     <dialog id={id} className={'modal overflow-x-hidden'}>
       <div
-        className={`px-12 py-7 modal-box min-w-[70vw] max-w-[70vw] ${className}`}
+        className={`modal-box ${className}`}
       >
-        <form method='dialog' onClick={onClose}>
+        <form method='dialog'>
           <button
             type='button'
             autoFocus

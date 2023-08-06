@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import Modal from '../ui/Modal';
 import LectureDetailTabNav from './LectureDetailTabNav';
-import { Suspense, useEffect, useRef } from 'react';
+import { Suspense, useEffect, useMemo, useRef } from 'react';
 import LectureDetailIndexList from './index/LectureDetailIndexList';
 import LectureDetailReviewList from './review/LectureDetailReviewList';
 import LectureDetailCard from './LectureDetailCard';
@@ -14,6 +14,10 @@ import {
 import LectureDetailHeading from './LectureDetailHeading';
 import LectureDetailReviewSkeleton from './review/LectureDetailReviewSkeleton';
 import OneStar from '../ui/rating/OneStar';
+import { ModalIDs } from '@/src/constants/modal/modal';
+import LectureEnrollmentModal from '../lectureEnrollment/LectureEnrollmentModal';
+import { closeModalHandler } from '@/src/util/modal/modalHandler';
+import SchedulingModal from '../lectureEnrollment/SchedulingModal';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -26,14 +30,19 @@ export default function LectureDetailModal({
 }: Props) {
   const { is_playlist, lecture_code, rating } = lectureDetail;
   const router = useRouter();
-  const onCloseHandler =
-    navigationType === 'soft' ? router.back : () => router.replace('/');
+  const onCloseHandler = useMemo(() => {
+    return navigationType === 'soft' ? router.back : () => router.replace('/');
+  }, [navigationType, router]);
+  const isTheOnlyModalInPage = () => {
+    return document.querySelectorAll('dialog[open]').length === 1;
+  };
+
   const indexPageRef = useRef<number>(0);
   const reviewPageRef = useRef<number>(0);
 
   useEffect(() => {
     const modal = document.getElementById(
-      'lecture_detail_modal'
+      ModalIDs.LECTURE_DETAIL
     ) as HTMLDialogElement;
 
     modal.showModal();
@@ -41,63 +50,70 @@ export default function LectureDetailModal({
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && isTheOnlyModalInPage()) {
+        console.log(isTheOnlyModalInPage());
         onCloseHandler();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  },[onCloseHandler]);
+  }, [onCloseHandler]);
 
   return (
-    <Modal
-      id='lecture_detail_modal'
-      className='relative h-full !p-14 rounded-none scroll-smooth'
-      onClose={onCloseHandler}
-    >
-      <LectureDetailCard lectureDetail={lectureDetail} />
-      <LectureDetailTabNav is_playlist={is_playlist} />
-      <section id='indexes'>
-        {is_playlist && (
-          <>
-            <LectureDetailHeading title={'목차'} />
-            <Suspense
-              fallback={
-                <LectureDetailIndexSkeleton
+    <>
+      <Modal
+        id={ModalIDs.LECTURE_DETAIL}
+        className='relative h-full p-14 rounded-none scroll-smooth min-w-[70vw] max-w-[70vw]'
+        onClose={onCloseHandler}
+      >
+        <LectureDetailCard lectureDetail={lectureDetail} />
+        <LectureDetailTabNav is_playlist={is_playlist} />
+        <section id='indexes'>
+          {is_playlist && (
+            <>
+              <LectureDetailHeading title={'목차'} />
+              <Suspense
+                fallback={
+                  <LectureDetailIndexSkeleton
+                    indexPageRef={indexPageRef}
+                    limit={INDEX_SKELETON_LIMIT}
+                  />
+                }
+              >
+                <LectureDetailIndexList
                   indexPageRef={indexPageRef}
-                  limit={INDEX_SKELETON_LIMIT}
+                  lectureCode={lecture_code}
                 />
-              }
-            >
-              <LectureDetailIndexList
-                indexPageRef={indexPageRef}
-                lectureCode={lecture_code}
+              </Suspense>
+            </>
+          )}
+        </section>
+        <section id='reviews'>
+          <LectureDetailHeading title={'후기'}>
+            <div className='flex items-center justify-center ml-2 mr-1'>
+              <OneStar className='w-5 h-5' />
+              <p className='font-semibold text-orange-500'>{rating}</p>
+            </div>
+          </LectureDetailHeading>
+          <Suspense
+            fallback={
+              <LectureDetailReviewSkeleton
+                reviewPageRef={reviewPageRef}
+                limit={REVIEW_LIMIT}
               />
-            </Suspense>
-          </>
-        )}
-      </section>
-      <section id='reviews'>
-        <LectureDetailHeading title={'후기'}>
-          <div className='flex items-center justify-center ml-2 mr-1'>
-            <OneStar className='w-5 h-5' />
-            <p className='font-semibold text-orange-500'>{rating}</p>
-          </div>
-        </LectureDetailHeading>
-        <Suspense
-          fallback={
-            <LectureDetailReviewSkeleton
+            }
+          >
+            <LectureDetailReviewList
               reviewPageRef={reviewPageRef}
-              limit={REVIEW_LIMIT}
+              lectureCode={lecture_code}
             />
-          }
-        >
-          <LectureDetailReviewList
-            reviewPageRef={reviewPageRef}
-            lectureCode={lecture_code}
-          />
-        </Suspense>
-      </section>
-    </Modal>
+          </Suspense>
+        </section>
+      </Modal>
+      <LectureEnrollmentModal
+        onClose={() => closeModalHandler('LECTURE_ENROLLMENT')}
+      />
+      <SchedulingModal lectureDetail={lectureDetail} onClose={() => closeModalHandler('SCHEDULING')} />
+    </>
   );
 }
