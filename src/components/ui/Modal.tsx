@@ -1,7 +1,5 @@
-import { AnimatePresence, motion } from 'framer-motion';
-
 type Props = {
-  id?: string;
+  id: string;
   className?: string;
   children?: React.ReactNode;
   onClose: () => void;
@@ -9,27 +7,24 @@ type Props = {
 
 export default function Modal({ id, className, children, onClose }: Props) {
   return (
-    <AnimatePresence>
-      <div className={'modal modal-open overflow-x-hidden'}>
-        <div onClick={onClose} className='modal-backdrop' />
-        <motion.div
-          id={id}
-          key={id}
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.97 }}
-          className={`px-12 py-7 modal-box min-w-[70vw] max-w-[70vw] ${className}`}
+    <dialog id={id} className={'modal overflow-x-hidden'}>
+      <form
+        method='dialog'
+        className={`px-12 py-7 modal-box min-w-[70vw] max-w-[70vw] ${className}`}
+      >
+        <button
+          type='button'
+          autoFocus
+          onClick={onClose}
+          className='absolute btn btn-sm btn-circle btn-ghost right-2 top-2'
         >
-          <button
-            type='button'
-            onClick={onClose}
-            className='absolute btn btn-sm btn-circle btn-ghost right-2 top-2'
-          >
-            ✕
-          </button>
-          {children}
-        </motion.div>
-      </div>
-    </AnimatePresence>
+          ✕
+        </button>
+        {children}
+      </form>
+      <form method='dialog' className='modal-backdrop' onClick={onClose}>
+        <button>close</button>
+      </form>
+    </dialog>
   );
 }

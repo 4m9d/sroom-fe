@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import Modal from '../ui/Modal';
 import LectureDetailTabNav from './LectureDetailTabNav';
-import { Suspense, useRef } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import LectureDetailIndexList from './index/LectureDetailIndexList';
 import LectureDetailReviewList from './review/LectureDetailReviewList';
 import LectureDetailCard from './LectureDetailCard';
@@ -31,9 +31,27 @@ export default function LectureDetailModal({
   const indexPageRef = useRef<number>(0);
   const reviewPageRef = useRef<number>(0);
 
+  useEffect(() => {
+    const modal = document.getElementById(
+      'lecture_detail_modal'
+    ) as HTMLDialogElement;
+
+    modal.showModal();
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onCloseHandler();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  });
+
   return (
     <Modal
-      id='modal'
+      id='lecture_detail_modal'
       className='relative h-full !p-14 rounded-none scroll-smooth'
       onClose={onCloseHandler}
     >
