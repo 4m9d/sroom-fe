@@ -9,7 +9,12 @@ module.exports = {
   theme: {
     extend: {}
   },
-  plugins: [require('daisyui'), require('tailwind-scrollbar-hide')],
+  plugins: [
+    require('daisyui'),
+    require('tailwind-scrollbar-hide'),
+    require('tailwindcss'),
+    require('autoprefixer')
+  ],
   daisyui: {
     themes: ['light'],
     darkTheme: 'dark', // default: 'dark'
