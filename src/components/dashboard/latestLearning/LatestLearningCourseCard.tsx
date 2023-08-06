@@ -58,7 +58,7 @@ export default function LatestLearningCourseCard({ course }: Props) {
               </p>
             </div>
           </div>
-          <Button className='flex justify-between w-32 text-sm text-zinc-200 bg-zinc-800'>
+          <Button className='!h-10 flex justify-between w-32 text-sm text-zinc-200 bg-zinc-800'>
             <p>바로 학습</p>
             <p> 〉 </p>
           </Button>
