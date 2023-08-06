@@ -6,7 +6,7 @@ type Props = {
   courses: EnrolledCourse[];
 };
 
-export default function LectureDetailEnrollmentButton({
+export default function LectureEnrollmentButton({
   is_enrolled,
   is_playlist,
   courses
@@ -58,7 +58,7 @@ export default function LectureDetailEnrollmentButton({
             className={`${LIST__DIV} w-full peer relative`}
           >
             기존 강의 코스에 추가하기{' '}
-            <span className='ml-2 transition-all group-hover:rotate-90'>
+            <span className='ml-2 transition-all group-hover:rotate-90 group-focus-within:rotate-90'>
               〉
             </span>
           </button>
@@ -94,7 +94,7 @@ export default function LectureDetailEnrollmentButton({
 
   return (
     <div className='w-full dropdown dropdown-hover !z-[60]'>
-      <Button className='w-full h-12 font-semibold peer text-zinc-200 bg-zinc-800'>
+      <Button onClick={() => {}} className='w-full h-12 font-semibold peer text-zinc-200 bg-zinc-800'>
         {buttonTitle}
       </Button>
       {is_enrolled === false && (
