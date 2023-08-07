@@ -31,7 +31,7 @@ export default function SearchInput() {
         value={keyword}
         onChange={changeHandler}
         placeholder='강의 검색'
-        className='w-full form-control input input-bordered'
+        className='w-full rounded-none bg-zinc-100 form-control input input-bordered'
       />
     </form>
   );

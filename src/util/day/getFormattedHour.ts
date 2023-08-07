@@ -3,6 +3,9 @@ export default function getFormattedHour(time: number) {
   const minute = time % 60;
   let hourFormat = [];
 
+  if(hour === 0 && minute === 0) {
+    hourFormat.push('0분');
+  }
   if (hour > 0) {
     hourFormat.push(`${hour}시간`);
   }
