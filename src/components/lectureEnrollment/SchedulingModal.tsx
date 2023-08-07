@@ -58,10 +58,10 @@ export default function SchedulingModal({ lectureDetail, onClose }: Props) {
     const schedulingList: number[] = [];
     let currWeekDurationSum = 0;
     let currWeekVideoCount = 0;
-    
+
     index_list.forEach((video, index) => {
       const videoDuration = video.duration;
-      
+
       if (currWeekDurationSum + videoDuration <= weeklyStudyTime) {
         currWeekVideoCount++;
         currWeekDurationSum += videoDuration;
@@ -69,30 +69,33 @@ export default function SchedulingModal({ lectureDetail, onClose }: Props) {
         if (
           currWeekVideoCount === 0 ||
           videoDuration < (weeklyStudyTime - currWeekDurationSum) * 2
-          ) {
-            currWeekVideoCount++;
-            currWeekDurationSum += videoDuration;
-            
-            schedulingList.push(currWeekVideoCount);
-            currWeekVideoCount = 0;
-            currWeekDurationSum = 0;
-          } else {
-            schedulingList.push(currWeekVideoCount);
+        ) {
+          currWeekVideoCount++;
+          currWeekDurationSum += videoDuration;
+
+          schedulingList.push(currWeekVideoCount);
+          currWeekVideoCount = 0;
+          currWeekDurationSum = 0;
+        } else {
+          schedulingList.push(currWeekVideoCount);
           currWeekVideoCount = 1;
           currWeekDurationSum = videoDuration;
         }
       }
-      
+
       if (index === index_list.length - 1) {
         schedulingList.push(currWeekVideoCount);
       }
     });
-    
+
     setScheduling(schedulingList);
+  }, [inputValue, durationInMinutes, indexes]);
+
+  useEffect(() => {
     controls.set('initial');
     controls.start('animate');
-  }, [inputValue, durationInMinutes, indexes, controls]);
-
+  }, [inputValue, controls]);
+  
   return (
     <Modal
       id={ModalIDs.SCHEDULING}
