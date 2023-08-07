@@ -12,7 +12,7 @@ export default function Modal({
   onClose
 }: Props) {
   return (
-    <dialog id={id} className={'modal overflow-x-hidden'}>
+    <dialog id={id} className={'modal overflow-x-hidden overflow-y-scroll'}>
       <div
         className={`modal-box ${className}`}
       >

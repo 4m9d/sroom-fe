@@ -1,4 +1,6 @@
+'use cleint';
 import Button from '../ui/button/Button';
+import { showModalHandler } from '@/src/util/modal/modalHandler';
 
 type Props = {
   is_enrolled: boolean;
@@ -17,7 +19,8 @@ export default function LectureEnrollmentButton({
     ? '등록하기'
     : '코스에 추가하기';
 
-  const LIST__LI = 'px-3 border-b cursor-pointer border-b-gray-200';
+  const LIST__LI =
+    'px-3 border-b cursor-pointer border-b-gray-200 last-of-type:border-b-0';
   const LIST__DIV =
     'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-zinc-500 hover:text-inherit focus:text-inherit';
 
@@ -35,7 +38,7 @@ export default function LectureEnrollmentButton({
             className={`${className} ${LIST__LI} w-full`}
             key={course.course_id}
           >
-            <div className={`${LIST__DIV} px-2`}>
+            <div role='button' className={`${LIST__DIV} px-2`}>
               <span className='whitespace-normal line-clamp-1'>
                 {course.course_title}
               </span>
@@ -50,13 +53,16 @@ export default function LectureEnrollmentButton({
     return (
       <>
         <li className={LIST__LI}>
-          <div className={LIST__DIV}>새 강의 코스 등록하기</div>
-        </li>
-        <li className={`${LIST__LI} !border-b-0 group`}>
-          <button
-            type='button'
-            className={`${LIST__DIV} w-full peer relative`}
+          <div
+            role='button'
+            onClick={() => showModalHandler('LECTURE_ENROLLMENT')}
+            className={LIST__DIV}
           >
+            새 강의 코스 등록하기
+          </div>
+        </li>
+        <li className={`${LIST__LI} group`}>
+          <button type='button' className={`${LIST__DIV} w-full peer relative`}>
             기존 강의 코스에 추가하기{' '}
             <span className='ml-2 transition-all group-hover:rotate-90 group-focus-within:rotate-90'>
               〉
@@ -80,12 +86,18 @@ export default function LectureEnrollmentButton({
     return (
       <>
         <EnrolledCoursesList courses={courses} />
-        <li className='flex items-center justify-center gap-2 px-3 cursor-pointer hover:bg-orange-500 hover:text-zinc-100'>
-          <div className='flex items-center justify-center w-5 h-5 rounded-full shrink-0 bg-zinc-700 text-zinc-100'>
-            +
-          </div>
-          <div className='flex items-center justify-center h-12 text-sm font-semibold rounded-none'>
-            새로운 코스 생성하기
+        <li className={`${LIST__LI} hover:bg-orange-500`}>
+          <div
+            role='button'
+            onClick={() => showModalHandler('LECTURE_ENROLLMENT')}
+            className='flex items-center justify-center gap-2 hover:text-zinc-100'
+          >
+            <div className='flex items-center justify-center w-5 h-5 rounded-full shrink-0 bg-zinc-700 text-zinc-100'>
+              +
+            </div>
+            <div className='flex items-center justify-center h-12 text-sm font-semibold rounded-none'>
+              새로운 코스 생성하기
+            </div>
           </div>
         </li>
       </>
@@ -93,22 +105,27 @@ export default function LectureEnrollmentButton({
   };
 
   return (
-    <div className='w-full dropdown dropdown-hover !z-[60]'>
-      <Button onClick={() => {}} className='w-full h-12 font-semibold peer text-zinc-200 bg-zinc-800'>
-        {buttonTitle}
-      </Button>
-      {is_enrolled === false && (
-        <div className='w-full pt-5 dropdown-content'>
-          <ul className='relative bg-white border border-gray-200'>
-            <span className='absolute -top-[0.3px] w-3 h-3 rotate-45 -translate-x-1/2 -translate-y-1/2 border-t bg-white border-l left-10 border-l-gray-200 border-t-gray-200' />
-            {is_playlist ? (
-              <PlaylistEnrollment courses={courses} />
-            ) : (
-              <VideoEnrollment courses={courses} />
-            )}
-          </ul>
-        </div>
-      )}
-    </div>
+    <>
+      <div className='w-full dropdown dropdown-hover !z-[60]'>
+        <Button
+          onClick={() => {}}
+          className='w-full !h-[3rem] font-semibold peer text-zinc-200 bg-zinc-800'
+        >
+          {buttonTitle}
+        </Button>
+        {is_enrolled === false && (
+          <div className='w-full pt-5 dropdown-content'>
+            <ul className='relative bg-white border border-gray-200'>
+              <span className='absolute -top-[0.3px] w-3 h-3 rotate-45 -translate-x-1/2 -translate-y-1/2 border-t bg-white border-l left-10 border-l-gray-200 border-t-gray-200' />
+              {is_playlist ? (
+                <PlaylistEnrollment courses={courses} />
+              ) : (
+                <VideoEnrollment courses={courses} />
+              )}
+            </ul>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
