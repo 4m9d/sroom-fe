@@ -1,4 +1,4 @@
-import getTimeInMinutes from '@/src/util/day/getTimeInMinutes';
+import convertSecondsToMinutes from '@/src/util/day/convertSecondsToMinutes';
 import { useCallback, useMemo } from 'react';
 
 type Props = {
@@ -20,7 +20,7 @@ export default function TotalLearningTime({ time }: Props) {
   }, []);
 
   const [timeInString, timeUnit] = useMemo(
-    () => timeUnitHandler(getTimeInMinutes(time)),
+    () => timeUnitHandler(convertSecondsToMinutes(time)),
     [time, timeUnitHandler]
   );
 

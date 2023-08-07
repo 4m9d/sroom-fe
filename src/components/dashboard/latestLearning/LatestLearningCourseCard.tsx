@@ -3,7 +3,7 @@ import ProgressBar from '../../ui/ProgressBar';
 import HorizontalSmallLectureCard from '../../ui/lectureCard/HorizontalSmallLectureCard';
 import Button from '../../ui/button/Button';
 import getFormattedHour from '@/src/util/day/getFormattedHour';
-import getTimeInMinutes from '@/src/util/day/getTimeInMinutes';
+import convertSecondsToMinutes from '@/src/util/day/convertSecondsToMinutes';
 import Image from 'next/image';
 
 type Props = {
@@ -35,7 +35,7 @@ export default function LatestLearningCourseCard({ course }: Props) {
                 width={12}
                 height={12}
               />
-              {getFormattedHour(getTimeInMinutes(course.duration))}
+              {getFormattedHour(convertSecondsToMinutes(course.duration))}
               <span className='mx-2 text-zinc-300'>|</span>
               <Image
                 className='w-auto h-auto mr-1'
