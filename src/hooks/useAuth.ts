@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { QueryKeys } from '../api/queryKeys';
 import { ErrorMessage } from '../api/ErrorMessage';
 import { ONE_MINUTE_IN_MS } from '../constants/auth/auth';
-import setErrorToast from '../util/error/setErrorToast';
+import setErrorToast from '../util/toast/setErrorToast';
 
 export default function useAuth() {
   const router = useRouter();

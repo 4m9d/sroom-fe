@@ -10,7 +10,7 @@ import {
   STALE_TIME
 } from '@/src/constants/lectureDetail/lectureDetail';
 import LoadMoreButton from '../../ui/button/LoadMoreButton';
-import setErrorToast from '@/src/util/error/setErrorToast';
+import setErrorToast from '@/src/util/toast/setErrorToast';
 
 export default async function LectureDetailIndexList({
   lectureCode,

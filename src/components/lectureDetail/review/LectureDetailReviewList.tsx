@@ -10,7 +10,7 @@ import {
   REVIEW_LIMIT
 } from '@/src/constants/lectureDetail/lectureDetail';
 import LectureDetailReviewCard from './LectureDetailReviewCard';
-import setErrorToast from '@/src/util/error/setErrorToast';
+import setErrorToast from '@/src/util/toast/setErrorToast';
 
 export default async function LectureDetailReviewList({
   lectureCode,

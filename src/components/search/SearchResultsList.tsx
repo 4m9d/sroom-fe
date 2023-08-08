@@ -6,7 +6,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import SearchLectureCard from './SearchLectureCard';
 import Link from 'next/link';
 import LoadMoreButton from '../ui/button/LoadMoreButton';
-import setErrorToast from '@/src/util/error/setErrorToast';
+import setErrorToast from '@/src/util/toast/setErrorToast';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/search/search';
 import Button from '../ui/button/Button';
@@ -38,14 +38,10 @@ export default async function SearchResultsList({
 
     updateSearchResultPageRef(next_page_token);
 
-    return await fetchLecturesByKeyword(params)
-      .then((res) => {
-        return res;
-      })
-      .catch(() => {
-        setErrorToast(new Error(ErrorMessage.SEARCH));
-        return null;
-      });
+    return await fetchLecturesByKeyword(params).catch(() => {
+      setErrorToast(new Error(ErrorMessage.SEARCH));
+      return null;
+    });
   };
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(

@@ -7,9 +7,10 @@ import LectureEnrollmentButton from '../lectureEnrollment/LectureEnrollmentButto
 
 type Props = {
   lectureDetail: LectureDetail;
+  onClose: () => void;
 };
 
-export default function LectureDetailCard({ lectureDetail }: Props) {
+export default function LectureDetailCard({ lectureDetail, onClose }: Props) {
   const {
     lecture_code,
     lecture_title,
@@ -49,7 +50,13 @@ export default function LectureDetailCard({ lectureDetail }: Props) {
           </p>
         </div>
       </div>
-      <LectureEnrollmentButton is_enrolled={is_enrolled} is_playlist={is_playlist} courses={courses}/>
+      <LectureEnrollmentButton
+        onEnrollSuccess={onClose}
+        is_enrolled={is_enrolled}
+        is_playlist={is_playlist}
+        courses={courses}
+        lecture_code={lectureDetail.lecture_code}
+      />
       <div className='absolute right-3 top-3'>
         <StarRatingWithReviewCount
           rating={rating}

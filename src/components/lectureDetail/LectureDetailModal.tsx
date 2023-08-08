@@ -30,15 +30,15 @@ export default function LectureDetailModal({
 }: Props) {
   const { is_playlist, lecture_code, rating } = lectureDetail;
   const router = useRouter();
+  const indexPageRef = useRef<number>(0);
+  const reviewPageRef = useRef<number>(0);
+
   const onCloseHandler = useMemo(() => {
-    return navigationType === 'soft' ? router.back : () => router.replace('/');
+    return navigationType === 'soft' ? router.back : () => router.replace('/dashboard');
   }, [navigationType, router]);
   const isTheOnlyModalInPage = () => {
     return document.querySelectorAll('dialog[open]').length === 1;
   };
-
-  const indexPageRef = useRef<number>(0);
-  const reviewPageRef = useRef<number>(0);
 
   useEffect(() => {
     const modal = document.getElementById(
@@ -66,7 +66,10 @@ export default function LectureDetailModal({
         className='relative h-full p-14 rounded-none scroll-smooth min-w-[70vw] max-w-[70vw]'
         onClose={onCloseHandler}
       >
-        <LectureDetailCard lectureDetail={lectureDetail} />
+        <LectureDetailCard
+          lectureDetail={lectureDetail}
+          onClose={onCloseHandler}
+        />
         <LectureDetailTabNav is_playlist={is_playlist} />
         <section id='indexes'>
           {is_playlist && (
@@ -112,8 +115,13 @@ export default function LectureDetailModal({
       </Modal>
       <LectureEnrollmentModal
         onClose={() => closeModalHandler('LECTURE_ENROLLMENT')}
+        onEnrollSuccess={onCloseHandler}
       />
-      <SchedulingModal lectureDetail={lectureDetail} onClose={() => closeModalHandler('SCHEDULING')} />
+      <SchedulingModal
+        lectureDetail={lectureDetail}
+        onClose={() => closeModalHandler('SCHEDULING')}
+        onEnrollSuccess={onCloseHandler}
+      />
     </>
   );
 }

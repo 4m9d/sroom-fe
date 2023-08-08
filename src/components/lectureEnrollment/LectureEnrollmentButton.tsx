@@ -2,18 +2,53 @@
 import Image from 'next/image';
 import Button from '../ui/button/Button';
 import { showModalHandler } from '@/src/util/modal/modalHandler';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { enrollLectureInExistingCourse } from '@/src/api/courses/courses';
+import { ErrorMessage } from '@/src/api/ErrorMessage';
+import setErrorToast from '@/src/util/toast/setErrorToast';
+import { QueryKeys } from '@/src/api/queryKeys';
+import LoadingSpinner from '../ui/LoadingSpinner';
+import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
 
 type Props = {
   is_enrolled: boolean;
   is_playlist: boolean;
   courses: EnrolledCourse[];
+  lecture_code: string;
+  onEnrollSuccess: () => void;
 };
 
 export default function LectureEnrollmentButton({
   is_enrolled,
   is_playlist,
-  courses
+  courses,
+  lecture_code,
+  onEnrollSuccess
 }: Props) {
+  const queryClient = useQueryClient();
+
+  const enrollLecture = async (course_id: number) => {
+    const enrollLectureInExistingCourseParams: EnrollLectureInExistingCourseParams =
+      {
+        lecture_code: lecture_code
+      };
+    return await enrollLectureInExistingCourse(
+      course_id,
+      enrollLectureInExistingCourseParams
+    ).catch(() => {
+      setErrorToast(new Error(ErrorMessage.SEARCH));
+      return null;
+    });
+  };
+
+  const { mutate, isLoading } = useMutation(enrollLecture, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([QueryKeys.SEARCH]);
+      onEnrollSuccess();
+      setLectureEnrollToast();
+    }
+  });
+
   const buttonTitle = is_enrolled
     ? '수강하러 가기'
     : is_playlist
@@ -39,7 +74,11 @@ export default function LectureEnrollmentButton({
             className={`${className} ${LIST__LI} w-full`}
             key={course.course_id}
           >
-            <div role='button' className={`${LIST__DIV} px-2 justify-center gap-2`}>
+            <div
+              role='button'
+              onClick={() => mutate(course.course_id)}
+              className={`${LIST__DIV} px-2 justify-center gap-2`}
+            >
               <span className='max-w-[70%] whitespace-normal line-clamp-1'>
                 {course.course_title}
               </span>
@@ -51,7 +90,9 @@ export default function LectureEnrollmentButton({
                   width={12}
                   height={12}
                 />
-                <span className='text-xs text-zinc-500'>{course.total_video_count}</span>
+                <span className='text-xs text-zinc-500'>
+                  {course.total_video_count}
+                </span>
               </div>
             </div>
           </li>
@@ -122,7 +163,11 @@ export default function LectureEnrollmentButton({
           onClick={() => {}}
           className='w-full !h-[3rem] font-semibold peer text-zinc-200 bg-zinc-800'
         >
-          {buttonTitle}
+          {isLoading ? (
+            <LoadingSpinner className='text-orange-500 loading-sm' />
+          ) : (
+            buttonTitle
+          )}
         </Button>
         {is_enrolled === false && (
           <div className='w-full pt-5 dropdown-content'>
