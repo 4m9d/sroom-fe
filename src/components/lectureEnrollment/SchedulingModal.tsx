@@ -47,7 +47,8 @@ export default function SchedulingModal({ lectureDetail, onClose }: Props) {
   const expectedDate = getFormattedExpectedDate();
 
   function getFormattedExpectedDate() {
-    const expectedDate = getCurrentDate().add(scheduling.length, 'week');
+    const expectedDuration = Math.floor(durationInMinutes / inputValue);
+    const expectedDate = getCurrentDate().add(expectedDuration, 'day');
 
     return [expectedDate.year(), expectedDate.month() + 1, expectedDate.date()];
   }
@@ -95,7 +96,7 @@ export default function SchedulingModal({ lectureDetail, onClose }: Props) {
     controls.set('initial');
     controls.start('animate');
   }, [inputValue, controls]);
-  
+
   return (
     <Modal
       id={ModalIDs.SCHEDULING}
