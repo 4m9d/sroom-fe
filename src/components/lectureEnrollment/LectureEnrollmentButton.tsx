@@ -1,4 +1,5 @@
 'use cleint';
+import Image from 'next/image';
 import Button from '../ui/button/Button';
 import { showModalHandler } from '@/src/util/modal/modalHandler';
 
@@ -38,10 +39,20 @@ export default function LectureEnrollmentButton({
             className={`${className} ${LIST__LI} w-full`}
             key={course.course_id}
           >
-            <div role='button' className={`${LIST__DIV} px-2`}>
-              <span className='whitespace-normal line-clamp-1'>
+            <div role='button' className={`${LIST__DIV} px-2 justify-center gap-2`}>
+              <span className='max-w-[70%] whitespace-normal line-clamp-1'>
                 {course.course_title}
               </span>
+              <div className='flex'>
+                <Image
+                  className='w-auto h-auto mr-1'
+                  src={'/icon/icon_lecture.svg'}
+                  alt='등록된 영상'
+                  width={12}
+                  height={12}
+                />
+                <span className='text-xs text-zinc-500'>{course.total_video_count}</span>
+              </div>
             </div>
           </li>
         ))}
