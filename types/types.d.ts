@@ -213,3 +213,33 @@ interface LectureRecommendations {
 }
 
 /////////////////////////////////////////////////////////////////////////
+//////////////////////////////////enroll/////////////////////////////////
+
+interface EnrollLectureInNewCourseWithoutSchedulingParams {
+  lecture_code: string;
+}
+
+interface EnrollLectureInNewCourseWithSchedulingParams
+  extends EnrollLectureInNewCourseWithoutSchedulingParams {
+  daily_target_time: number;
+  scheduling: number[];
+  expected_end_date: string;
+}
+
+interface EnrollLectureInNewCourseParams {
+  query: {
+    use_schedule: boolean;
+  };
+  body:
+    | EnrollLectureInNewCourseWithoutSchedulingParams
+    | EnrollLectureInNewCourseWithSchedulingParams;
+}
+
+interface EnrollLectureInExistingCourseParams
+extends EnrollLectureInNewCourseWithoutSchedulingParams {}
+
+interface EnrollLectureResponse extends Response {
+  course_id: number;
+  lecture_id: number;
+  title: string;
+}
