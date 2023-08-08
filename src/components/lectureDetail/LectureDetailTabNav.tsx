@@ -3,7 +3,6 @@ import Link from 'next/link';
 import TabNav from '../ui/TabNav';
 import { useEffect, useState } from 'react';
 import useIntersectionObserver from '@/src/hooks/useIntersectionObserver';
-import { ROOT_MARGIN } from '@/src/constants/modal/modal';
 
 type Props = {
   is_playlist: boolean;
@@ -15,7 +14,6 @@ export default function LectureDetailTabNav({ is_playlist }: Props) {
   );
   const [observe, unobserve] = useIntersectionObserver(
     setActiveId,
-    ROOT_MARGIN,
     document.getElementById('modal')
   );
   useEffect(() => {
@@ -26,7 +24,7 @@ export default function LectureDetailTabNav({ is_playlist }: Props) {
   }, []);
 
   return (
-    <TabNav className='sticky z-10 h-16 mb-5 tab-bordered -top-8 bg-inherit'>
+    <TabNav className='sticky z-10 h-16 mb-5 tab-bordered -top-14 bg-inherit'>
       {is_playlist && (
         <li>
           <Link
@@ -34,8 +32,8 @@ export default function LectureDetailTabNav({ is_playlist }: Props) {
             replace={true}
             scroll={false}
             shallow={true}
-            className={`tab tab-bordered ${
-              activeId === 'indexes' ? 'tab-active' : 'border-none'
+            className={`tab tab-bordered text-lg transition-colors ${
+              activeId === 'indexes' ? 'tab-active font-bold' : 'border-none font-semibold'
             }`}
           >
             목차
@@ -48,8 +46,8 @@ export default function LectureDetailTabNav({ is_playlist }: Props) {
           replace={true}
           scroll={false}
           shallow={true}
-          className={`tab tab-bordered ${
-            activeId === 'reviews' ? 'tab-active' : 'border-none'
+          className={`tab tab-bordered text-lg transition-colors ${
+            activeId === 'reviews' ? 'tab-active font-bold' : 'border-none font-semibold'
           }`}
         >
           후기

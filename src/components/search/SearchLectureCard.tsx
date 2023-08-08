@@ -1,9 +1,9 @@
 'use client';
 import getRelativeTime from '@/src/util/day/getRelativeTime';
 import HorizontalSmallLectureCard from '../ui/lectureCard/HorizontalSmallLectureCard';
-import StarRatingWithReviewCount from '../ui/StarRatingWithReviewCount';
+import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
 import ThumbnailBadge from '../ui/ThumbnailBadge';
-import getCompactNumberFormat from '@/src/util/number/getCompactNumberFormat';
+import getCompactFormattedNumber from '@/src/util/number/getCompactFormattedNumber';
 
 export default async function SearchLectureCard({
   lecture
@@ -38,7 +38,7 @@ export default async function SearchLectureCard({
           <p className='text-xs text-zinc-500'>
             {is_playlist
               ? `영상 ${lecture_count?.toLocaleString()}개`
-              : `조회수 ${getCompactNumberFormat(view_count as number)}회`}
+              : `조회수 ${getCompactFormattedNumber(view_count)}회`}
             ･{getRelativeTime(published_at)}
           </p>
         </div>
@@ -48,7 +48,7 @@ export default async function SearchLectureCard({
           </p>
         </div>
       </div>
-      <div className='absolute top-3 -right-3'>
+      <div className='absolute right-3 top-3'>
         <StarRatingWithReviewCount
           rating={rating}
           review_count={review_count}

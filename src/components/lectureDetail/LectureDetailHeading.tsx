@@ -1,13 +1,15 @@
-import React from 'react';
-
 type Props = {
   title: string;
+  children?: React.ReactNode;
 };
 
-export default function LectureDetailHeading({ title }: Props) {
+export default function LectureDetailHeading({ title, children }: Props) {
   return (
-    <div className='my-10 text-xl border-b-2 border-black border-solid'>
+    <div className='flex my-10 text-xl font-bold border-b-2 border-black border-solid'>
+      <h3>
       {title}
+      </h3>
+      {children}
     </div>
   );
 }

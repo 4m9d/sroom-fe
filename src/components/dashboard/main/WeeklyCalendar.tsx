@@ -5,21 +5,23 @@ import {
   getPreviousWeekRange,
   getFullWeekDate
 } from '@/src/util/day/getWeekRange';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import getFormattedHour from '@/src/util/day/getFormattedHour';
+import { useCallback, useEffect, useState } from 'react';
+import convertSecondsToMinutes from '@/src/util/day/convertSecondsToMinutes';
 
 type Props = {
   learning_histories: LearningHistory[];
 };
 
 const weekdayList = {
-  0: 'S',
-  1: 'M',
-  2: 'T',
-  3: 'W',
-  4: 'T',
-  5: 'F',
-  6: 'S',
-  7: 'NONE'
+  '0': 'S',
+  '1': 'M',
+  '2': 'T',
+  '3': 'W',
+  '4': 'T',
+  '5': 'F',
+  '6': 'S',
+  '7': 'NONE'
 } as const;
 
 type weekdayKey = keyof typeof weekdayList;
@@ -28,7 +30,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
   const [selectedWeek, setSelectedWeek] = useState<WeekInfo[]>(
     getFullWeekDate()
   );
-  const [selectedDay, setSelectedDay] = useState<weekdayKey>(7);
+  const [selectedDay, setSelectedDay] = useState<weekdayKey>('7');
 
   const findLearningHistory = useCallback((startOfWeek: string) => {
     const weekInfo = getFullWeekDate(startOfWeek);
@@ -56,7 +58,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
 
     const previousWeek = getPreviousWeekRange({ startOfWeek, endOfWeek });
     setSelectedWeek(findLearningHistory(previousWeek.startOfWeek));
-    setSelectedDay(7);
+    setSelectedDay('7');
   }, [selectedWeek]);
 
   const nextWeekClickHandler = useCallback(() => {
@@ -65,7 +67,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
 
     const nextWeek = getNextWeekRange({ startOfWeek, endOfWeek });
     setSelectedWeek(findLearningHistory(nextWeek.startOfWeek));
-    setSelectedDay(7);
+    setSelectedDay('7');
   }, [selectedWeek]);
 
   useEffect(() => {
@@ -117,13 +119,14 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
           return (
             <DayCard
               key={day.fullDate + index}
-              weekday={index as weekdayKey}
+              weekday={index.toString() as weekdayKey}
               date={day.date}
               hasValue={day.learningHistory !== undefined}
             />
           );
         })}
         <button
+          type='button'
           onClick={previousWeekClickHandler}
           className='absolute flex items-center justify-center w-10 h-10 font-bold transition-all hover:bg-zinc-200 -left-14 top-5'
         >
@@ -131,6 +134,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
         </button>
         {getCurrentWeekRange().startOfWeek !== selectedWeek[0].fullDate && (
           <button
+            type='button'
             onClick={nextWeekClickHandler}
             className='absolute flex items-center justify-center w-10 h-10 font-bold transition-all hover:bg-zinc-200 -right-14 top-5'
           >
@@ -168,7 +172,12 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
             <>
               <LearningHistoryItem
                 title={'학습 시간'}
-                value={`${selectedWeek[selectedDay].learningHistory?.learning_time}분`}
+                value={getFormattedHour(
+                  convertSecondsToMinutes(
+                    selectedWeek[selectedDay].learningHistory?.learning_time ??
+                      0
+                  )
+                )}
               />
               <LearningHistoryItem
                 title={'푼 퀴즈'}

@@ -2,10 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: #FA5B3E;
+}
+
 .radial-progress.radial-square::before {
   background: conic-gradient(currentColor calc(var(--value) * 1%), #ffffff4f 0);
 }
 
 .radial-progress.radial-square::after {
   inset: unset;
+}
+
+.tooltip::before {
+  border-radius: 0%;
+  bottom: 1.3rem;
+  background-color: var(--primary-color);
+  color: #FFFFFF
+}
+
+.tooltip::after {
+  bottom: 0.95rem;
+  border-color: var(--primary-color) transparent transparent transparent;
 }

@@ -10,7 +10,7 @@ import {
   REVIEW_LIMIT
 } from '@/src/constants/lectureDetail/lectureDetail';
 import LectureDetailReviewCard from './LectureDetailReviewCard';
-import setErrorToast from '@/src/util/error/setErrorToast';
+import setErrorToast from '@/src/util/toast/setErrorToast';
 
 export default async function LectureDetailReviewList({
   lectureCode,
@@ -65,7 +65,7 @@ export default async function LectureDetailReviewList({
 
   return (
     <>
-      <ul className='grid grid-cols-1'>
+      <ul className='grid grid-cols-1 gap-4'>
         {data?.pages.map((page) =>
           page?.map((lectureReview) => (
             <LectureDetailReviewCard
@@ -76,7 +76,9 @@ export default async function LectureDetailReviewList({
         )}
       </ul>
       <div className='flex justify-center my-10 mb-20'>
-        {hasNextPage ? <LoadMoreButton title='후기 더보기' onClick={fetchNextPage} /> : null}
+        {hasNextPage ? (
+          <LoadMoreButton title='후기 더보기' onClick={fetchNextPage} />
+        ) : null}
       </div>
     </>
   );

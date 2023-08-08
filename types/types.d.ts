@@ -10,8 +10,13 @@ interface WeekRange {
 
 //////////////////////////////////toast//////////////////////////////////
 
+interface Emoji  {
+  lecture_enrollment: string;
+  error: string;
+} 
+
 interface CustomToast {
-  type: 'success' | 'error';
+  type: keyof Emoji;
   title: string;
   description: string;
   buttonLabel?: string;
@@ -69,7 +74,7 @@ interface LoginResponse extends Response, Profile {
 ////////////////////////////////dashboards///////////////////////////////
 
 interface Course {
-  course_id: string;
+  course_id: number;
   channels: string;
   thumbnail: string;
   course_title: string;
@@ -161,18 +166,17 @@ interface LectureIndex {
   index: number;
   thumbnail: string;
   lecture_title: string;
-  duration: string;
+  duration: number;
 }
 
 interface LectureIndexList {
   index_list: LectureIndex[];
   next_page_token: string | null;
-  total_duration: string;
+  total_duration: number;
 }
 
 interface LectureReview {
   index: number;
-  review_title: string;
   review_content: string;
   submitted_rating: number;
   reviewer_name: string;
@@ -181,13 +185,18 @@ interface LectureReview {
 
 type LectureReviewList = LectureReview[];
 
+type EnrolledCourse = {
+  [key in 'course_id' | 'course_title' | 'total_video_count']: Course[key];
+};
+
 interface LectureDetail extends Lecture {
   published_at: string;
   view_count: number;
-  duration: string;
+  duration: number;
   lecture_count?: number;
   indexes?: LectureIndexList;
   reviews: LectureReview[];
+  courses: EnrolledCourse[];
 }
 
 interface LectureIndexParams extends Record<string, string | number | boolean> {
@@ -209,3 +218,33 @@ interface LectureRecommendations {
 }
 
 /////////////////////////////////////////////////////////////////////////
+//////////////////////////////////enroll/////////////////////////////////
+
+interface EnrollLectureInNewCourseWithoutSchedulingParams {
+  lecture_code: string;
+}
+
+interface EnrollLectureInNewCourseWithSchedulingParams
+  extends EnrollLectureInNewCourseWithoutSchedulingParams {
+  daily_target_time: number;
+  scheduling: number[];
+  expected_end_date: string;
+}
+
+interface EnrollLectureInNewCourseParams {
+  query: {
+    use_schedule: boolean;
+  };
+  body?:
+    | EnrollLectureInNewCourseWithoutSchedulingParams
+    | EnrollLectureInNewCourseWithSchedulingParams;
+}
+
+interface EnrollLectureInExistingCourseParams
+extends EnrollLectureInNewCourseWithoutSchedulingParams {}
+
+interface EnrollLectureResponse extends Response {
+  course_id: number;
+  lecture_id: number;
+  title: string;
+}

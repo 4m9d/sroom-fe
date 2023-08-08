@@ -13,7 +13,7 @@ const LectureDetailReviewSkeleton = ({ limit, reviewPageRef }: Props) => {
 
   const StyledSkeleton = () => {
     return (
-      <li className={'flex flex-col h-16'}>
+      <li className={'flex flex-col h-40'}>
         <div className='w-full h-full'>
           <Skeleton height='100%' />
         </div>
@@ -21,7 +21,7 @@ const LectureDetailReviewSkeleton = ({ limit, reviewPageRef }: Props) => {
     );
   };
   return (
-    <ul className='grid grid-cols-1 gap-y-1'>
+    <ul className='grid grid-cols-1 gap-4'>
       {skeletonArray.map((idx) => (
         <StyledSkeleton key={'skeleton' + idx} />
       ))}
