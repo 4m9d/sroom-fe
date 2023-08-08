@@ -21,7 +21,6 @@ export default function RootLayout({ children, modal }: Props) {
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <div id='toast'></div>
           <AuthSessionProvider>
             <QueryProvider>
               <NavBar
@@ -33,7 +32,7 @@ export default function RootLayout({ children, modal }: Props) {
               />
               {children}
               {modal}
-              <Toaster/>
+            <Toaster containerStyle={{zIndex: 9999}}/>
             </QueryProvider>
           </AuthSessionProvider>
       </body>

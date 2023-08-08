@@ -10,8 +10,13 @@ interface WeekRange {
 
 //////////////////////////////////toast//////////////////////////////////
 
+interface Emoji  {
+  lecture_enrollment: string;
+  error: string;
+} 
+
 interface CustomToast {
-  type: 'success' | 'error';
+  type: keyof Emoji;
   title: string;
   description: string;
   buttonLabel?: string;
@@ -230,7 +235,7 @@ interface EnrollLectureInNewCourseParams {
   query: {
     use_schedule: boolean;
   };
-  body:
+  body?:
     | EnrollLectureInNewCourseWithoutSchedulingParams
     | EnrollLectureInNewCourseWithSchedulingParams;
 }

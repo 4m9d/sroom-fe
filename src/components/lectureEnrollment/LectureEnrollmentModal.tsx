@@ -1,16 +1,46 @@
-import {
-  closeModalHandler,
-  showModalHandler
-} from '@/src/util/modal/modalHandler';
+'use client';
+import { showModalHandler } from '@/src/util/modal/modalHandler';
 import Modal from '../ui/Modal';
 import Button from '../ui/button/Button';
 import { ModalIDs } from '@/src/constants/modal/modal';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { QueryKeys } from '@/src/api/queryKeys';
+import { enrollLectureInNewCourse } from '@/src/api/courses/courses';
+import setErrorToast from '@/src/util/toast/setErrorToast';
+import { ErrorMessage } from '@/src/api/ErrorMessage';
+import LoadingSpinner from '../ui/LoadingSpinner';
+import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
 
 type Props = {
   onClose: () => void;
+  onEnrollSuccess: () => void;
 };
 
-export default function LectureEnrollmentModal({ onClose }: Props) {
+export default function LectureEnrollmentModal({ onClose, onEnrollSuccess }: Props) {
+  const queryClient = useQueryClient();
+
+  const enrollLecture = async () => {
+    const enrollLectureInNewCourseParams: EnrollLectureInNewCourseParams = {
+      query: {
+        use_schedule: false
+      }
+    };
+    return await enrollLectureInNewCourse(enrollLectureInNewCourseParams).catch(
+      () => {
+        setErrorToast(new Error(ErrorMessage.SEARCH));
+        return null;
+      }
+    );
+  };
+
+  const { mutate, isLoading } = useMutation(enrollLecture, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([QueryKeys.SEARCH]);
+      onEnrollSuccess();
+      setLectureEnrollToast();
+    }
+  });
+
   return (
     <Modal
       id={ModalIDs.LECTURE_ENROLLMENT}
@@ -25,16 +55,21 @@ export default function LectureEnrollmentModal({ onClose }: Props) {
           </p>
         </div>
         <div className='flex justify-between gap-5'>
-          <Button className='w-1/2 font-semibold text-white bg-zinc-800'>
-            괜찮아요
+          <Button
+            onClick={() => mutate()}
+            className='w-1/2 font-semibold text-white bg-zinc-800'
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <LoadingSpinner className='text-orange-500 loading-sm' />
+            ) : (
+              '괜찮아요'
+            )}
           </Button>
           <Button
-            onClick={() =>
-              showModalHandler('SCHEDULING', () =>
-                closeModalHandler('LECTURE_ENROLLMENT')
-              )
-            }
+            onClick={() => showModalHandler('SCHEDULING', onClose)}
             className='w-1/2 font-semibold text-white bg-orange-500'
+            disabled={isLoading}
           >
             네, 좋아요
           </Button>
