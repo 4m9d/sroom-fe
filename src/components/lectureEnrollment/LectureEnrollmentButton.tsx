@@ -69,7 +69,7 @@ export default function LectureEnrollmentButton({
   }) => {
     return (
       <>
-        {courses.map((course) => (
+        {courses?.map((course) => (
           <li
             className={`${className} ${LIST__LI} w-full`}
             key={course.course_id}
@@ -138,7 +138,11 @@ export default function LectureEnrollmentButton({
     return (
       <>
         <EnrolledCoursesList courses={courses} />
-        <li className={`${LIST__LI} hover:bg-orange-500`}>
+        <li
+          className={`${LIST__LI} ${
+            courses.length === 0 ? 'peer' : ''
+          } hover:bg-orange-500`}
+        >
           <div
             role='button'
             onClick={() => showModalHandler('LECTURE_ENROLLMENT')}
@@ -172,12 +176,12 @@ export default function LectureEnrollmentButton({
         {is_enrolled === false && (
           <div className='w-full pt-5 dropdown-content'>
             <ul className='relative bg-white border border-gray-200'>
-              <span className='absolute -top-[0.3px] w-3 h-3 rotate-45 -translate-x-1/2 -translate-y-1/2 border-t bg-white border-l left-10 border-l-gray-200 border-t-gray-200' />
               {is_playlist ? (
                 <PlaylistEnrollment courses={courses} />
               ) : (
                 <VideoEnrollment courses={courses} />
               )}
+              <span className='absolute -top-[0.3px] w-3 h-3 rotate-45 -translate-x-1/2 -translate-y-1/2 border-t bg-white border-l left-10 border-l-gray-200 border-t-gray-200 peer-first-of-type:peer-hover:bg-orange-500' />
             </ul>
           </div>
         )}

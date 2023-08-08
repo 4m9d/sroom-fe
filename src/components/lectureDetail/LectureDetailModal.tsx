@@ -34,7 +34,9 @@ export default function LectureDetailModal({
   const reviewPageRef = useRef<number>(0);
 
   const onCloseHandler = useMemo(() => {
-    return navigationType === 'soft' ? router.back : () => router.replace('/dashboard');
+    return navigationType === 'soft'
+      ? router.back
+      : () => router.replace('/dashboard');
   }, [navigationType, router]);
   const isTheOnlyModalInPage = () => {
     return document.querySelectorAll('dialog[open]').length === 1;
@@ -117,11 +119,13 @@ export default function LectureDetailModal({
         onClose={() => closeModalHandler('LECTURE_ENROLLMENT')}
         onEnrollSuccess={onCloseHandler}
       />
-      <SchedulingModal
-        lectureDetail={lectureDetail}
-        onClose={() => closeModalHandler('SCHEDULING')}
-        onEnrollSuccess={onCloseHandler}
-      />
+      {is_playlist && (
+        <SchedulingModal
+          lectureDetail={lectureDetail}
+          onClose={() => closeModalHandler('SCHEDULING')}
+          onEnrollSuccess={onCloseHandler}
+        />
+      )}
     </>
   );
 }
