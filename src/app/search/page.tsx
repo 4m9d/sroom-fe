@@ -1,12 +1,10 @@
 'use client';
 import { fetchLectureRecommendations } from '@/src/api/lectures/search';
-import { QueryKeys } from '@/src/api/queryKeys';
 import LectureRecommendationsList from '@/src/components/recommendations/LectureRecommendationsList';
 import SearchResultsHeading from '@/src/components/search/SearchResultsHeading';
 import SearchResultsList from '@/src/components/search/SearchResultsList';
 import SearchResultsSkeleton from '@/src/components/search/SearchResultsSkeleton';
 import { LIMIT_PER_FETCH } from '@/src/constants/search/search';
-import { useQuery } from '@tanstack/react-query';
 import { Suspense, useRef } from 'react';
 
 type Props = {
@@ -14,6 +12,8 @@ type Props = {
 };
 
 export default async function SearchResults({ searchParams }: Props) {
+  const searchResultPageRef = useRef<number>(0);
+
   const requestParam: SearchLectureParams = {
     keyword:
       searchParams.keyword === undefined
@@ -23,13 +23,9 @@ export default async function SearchResults({ searchParams }: Props) {
     next_page_token: '',
     filter: searchParams.filter ? searchParams.filter : 'all'
   };
-
-  const { data } = useQuery(
-    [QueryKeys.RECCOMENDATION],
-    fetchLectureRecommendations
-  );
-
-  const searchResultPageRef = useRef<number>(0);
+  
+  const recommendations = await fetchLectureRecommendations();
+  const recommendedLectures = recommendations.recommendations;
 
   return (
     <>
@@ -51,8 +47,8 @@ export default async function SearchResults({ searchParams }: Props) {
           </Suspense>
         </section>
       </div>
-      {data?.recommendations && (
-        <LectureRecommendationsList recommendations={data?.recommendations} />
+      {recommendations && (
+        <LectureRecommendationsList recommendations={recommendedLectures} />
       )}
     </>
   );
