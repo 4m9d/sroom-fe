@@ -115,16 +115,18 @@ export default function LectureDetailModal({
           </Suspense>
         </section>
       </Modal>
-      <LectureEnrollmentModal
-        onClose={() => closeModalHandler('LECTURE_ENROLLMENT')}
-        onEnrollSuccess={onCloseHandler}
-      />
       {is_playlist && (
-        <SchedulingModal
-          lectureDetail={lectureDetail}
-          onClose={() => closeModalHandler('SCHEDULING')}
-          onEnrollSuccess={onCloseHandler}
-        />
+        <>
+          <LectureEnrollmentModal
+            onClose={() => closeModalHandler('LECTURE_ENROLLMENT')}
+            onEnrollSuccess={onCloseHandler}
+          />
+          <SchedulingModal
+            lectureDetail={lectureDetail}
+            onClose={() => closeModalHandler('SCHEDULING')}
+            onEnrollSuccess={onCloseHandler}
+          />
+        </>
       )}
     </>
   );

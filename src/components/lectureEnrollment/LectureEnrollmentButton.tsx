@@ -3,7 +3,10 @@ import Image from 'next/image';
 import Button from '../ui/button/Button';
 import { showModalHandler } from '@/src/util/modal/modalHandler';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { enrollLectureInExistingCourse } from '@/src/api/courses/courses';
+import {
+  enrollLectureInExistingCourse,
+  enrollLectureInNewCourse
+} from '@/src/api/courses/courses';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 import setErrorToast from '@/src/util/toast/setErrorToast';
 import { QueryKeys } from '@/src/api/queryKeys';
@@ -27,18 +30,36 @@ export default function LectureEnrollmentButton({
 }: Props) {
   const queryClient = useQueryClient();
 
-  const enrollLecture = async (course_id: number) => {
-    const enrollLectureInExistingCourseParams: EnrollLectureInExistingCourseParams =
-      {
-        lecture_code: lecture_code
+  const enrollLecture = async (course_id?: number) => {
+    if (course_id !== undefined) {
+      const enrollLectureInExistingCourseParams: EnrollLectureInExistingCourseParams =
+        {
+          lecture_code: lecture_code
+        };
+      return await enrollLectureInExistingCourse(
+        course_id,
+        enrollLectureInExistingCourseParams
+      ).catch(() => {
+        setErrorToast(new Error(ErrorMessage.SEARCH));
+        return null;
+      });
+    }
+    if (course_id === undefined) {
+      const enrollLectureInNewCourseParams: EnrollLectureInNewCourseParams = {
+        query: {
+          use_schedule: false
+        },
+        body: {
+          lecture_code: lecture_code
+        }
       };
-    return await enrollLectureInExistingCourse(
-      course_id,
-      enrollLectureInExistingCourseParams
-    ).catch(() => {
-      setErrorToast(new Error(ErrorMessage.SEARCH));
-      return null;
-    });
+      return await enrollLectureInNewCourse(
+        enrollLectureInNewCourseParams
+      ).catch(() => {
+        setErrorToast(new Error(ErrorMessage.SEARCH));
+        return null;
+      });
+    }
   };
 
   const { mutate, isLoading } = useMutation(enrollLecture, {
@@ -145,7 +166,7 @@ export default function LectureEnrollmentButton({
         >
           <div
             role='button'
-            onClick={() => showModalHandler('LECTURE_ENROLLMENT')}
+            onClick={() => mutate(undefined)}
             className='flex items-center justify-center gap-2 hover:text-zinc-100'
           >
             <div className='flex items-center justify-center w-5 h-5 rounded-full shrink-0 bg-zinc-700 text-zinc-100'>

@@ -26,7 +26,8 @@ export async function fetchLectureDetail(
     getQueryURL(`${Endpoints.LECTURES}/${lecture_code}`, params),
     {
       method: 'GET',
-      headers
+      headers,
+      cache: 'no-store'
     }
   ).then(async (res) => {
     if (res.ok) {
@@ -40,7 +41,7 @@ export async function fetchLectureDetail(
 export async function fetchLectureDetailIndex(
   lecture_code: string,
   params?: LectureIndexParams
-){
+) {
   const headers = await getAuthorizedHeaders();
   return await fetch(
     getQueryURL(`${Endpoints.LECTURES}/${lecture_code}`, params),
@@ -77,16 +78,12 @@ export async function fetchLectureDetailReview(
   });
 }
 
-export async function fetchLectureRecommendations(
-) {
+export async function fetchLectureRecommendations() {
   const headers = await getAuthorizedHeaders();
-  return await fetch(
-    getQueryURL(`${Endpoints.LECTURES}/recommendations`),
-    {
-      method: 'GET',
-      headers
-    }
-  ).then(async (res) => {
+  return await fetch(getQueryURL(`${Endpoints.LECTURES}/recommendations`), {
+    method: 'GET',
+    headers
+  }).then(async (res) => {
     if (res.ok) {
       return (await res.json()) as Promise<LectureRecommendations>;
     } else {
@@ -94,4 +91,3 @@ export async function fetchLectureRecommendations(
     }
   });
 }
-
