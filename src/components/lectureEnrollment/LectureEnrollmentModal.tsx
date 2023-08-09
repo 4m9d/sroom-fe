@@ -9,7 +9,6 @@ import setErrorToast from '@/src/util/toast/setErrorToast';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
-import { revalidatePath } from 'next/cache';
 
 type Props = {
   onClose: () => void;
@@ -38,7 +37,6 @@ export default function LectureEnrollmentModal({
     onSuccess: () => {
       onEnrollSuccess();
       setLectureEnrollToast();
-      revalidatePath('/search');
     }
   });
 

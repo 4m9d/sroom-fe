@@ -11,7 +11,6 @@ import { ErrorMessage } from '@/src/api/ErrorMessage';
 import setErrorToast from '@/src/util/toast/setErrorToast';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
-import { revalidatePath } from 'next/cache';
 
 type Props = {
   is_enrolled: boolean;
@@ -64,7 +63,6 @@ export default function LectureEnrollmentButton({
     onSuccess: () => {
       onEnrollSuccess();
       setLectureEnrollToast();
-      revalidatePath('/search');
     }
   });
 

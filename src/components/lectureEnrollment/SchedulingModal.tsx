@@ -20,7 +20,6 @@ import { ErrorMessage } from '@/src/api/ErrorMessage';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import getCompactDateFormat from '@/src/util/day/getCompactFormattedDate';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
-import { revalidatePath } from 'next/cache';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -57,7 +56,6 @@ export default function SchedulingModal({
     onSuccess: () => {
       onEnrollSuccess();
       setLectureEnrollToast();
-      revalidatePath('/search');
     }
   });
   const { lecture_title, duration, indexes } = lectureDetail;
