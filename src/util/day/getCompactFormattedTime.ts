@@ -7,11 +7,7 @@ export default function getCompactFormattedDuration(time: number) {
   if (hour !== '0') {
     timeFormat.push(hour.padStart(2, '0'));
   }
-  if (minute !== '0') {
-    timeFormat.push(minute.padStart(2, '0'));
-  }
-  if (second !== '0') {
-    timeFormat.push(second.padStart(2, '0'));
-  }
+  timeFormat.push(minute.padStart(2, '0'));
+  timeFormat.push(second.padStart(2, '0'));
   return timeFormat.join(':');
 }
