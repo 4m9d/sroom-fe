@@ -57,21 +57,26 @@ export default async function LectureDetailIndexList({
       getNextPageParam: (lastPage) => lastPage?.next_page_token
     }
   );
+  const index_list = data?.pages.flatMap(
+    (page) => page?.index_list
+  ) as LectureIndex[];
+
   return (
     <>
       <ul className='grid grid-cols-1 gap-4'>
-        {data?.pages.map((page) =>
-          page?.index_list?.map((lectureIndex, idx) => (
+        {index_list &&
+          index_list.map((lectureIndex, idx) => (
             <LectureDetailIndexCard
               key={lectureIndex.index}
               lectureIndex={lectureIndex}
               indexNum={idx + 1}
             />
-          ))
-        )}
+          ))}
       </ul>
       <div className='flex justify-center my-10'>
-        {hasNextPage ? <LoadMoreButton title='목차 더보기' onClick={fetchNextPage} /> : null}
+        {hasNextPage ? (
+          <LoadMoreButton title='목차 더보기' onClick={fetchNextPage} />
+        ) : null}
       </div>
     </>
   );
