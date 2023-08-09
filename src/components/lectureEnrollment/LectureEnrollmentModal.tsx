@@ -3,22 +3,23 @@ import { showModalHandler } from '@/src/util/modal/modalHandler';
 import Modal from '../ui/Modal';
 import Button from '../ui/button/Button';
 import { ModalIDs } from '@/src/constants/modal/modal';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { QueryKeys } from '@/src/api/queryKeys';
+import { useMutation } from '@tanstack/react-query';
 import { enrollLectureInNewCourse } from '@/src/api/courses/courses';
 import setErrorToast from '@/src/util/toast/setErrorToast';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
+import { revalidatePath } from 'next/cache';
 
 type Props = {
   onClose: () => void;
   onEnrollSuccess: () => void;
 };
 
-export default function LectureEnrollmentModal({ onClose, onEnrollSuccess }: Props) {
-  const queryClient = useQueryClient();
-
+export default function LectureEnrollmentModal({
+  onClose,
+  onEnrollSuccess
+}: Props) {
   const enrollLecture = async () => {
     const enrollLectureInNewCourseParams: EnrollLectureInNewCourseParams = {
       query: {
@@ -35,9 +36,9 @@ export default function LectureEnrollmentModal({ onClose, onEnrollSuccess }: Pro
 
   const { mutate, isLoading } = useMutation(enrollLecture, {
     onSuccess: () => {
-      queryClient.invalidateQueries([QueryKeys.SEARCH]);
       onEnrollSuccess();
       setLectureEnrollToast();
+      revalidatePath('/search');
     }
   });
 

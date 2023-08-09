@@ -2,16 +2,16 @@
 import Image from 'next/image';
 import Button from '../ui/button/Button';
 import { showModalHandler } from '@/src/util/modal/modalHandler';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import {
   enrollLectureInExistingCourse,
   enrollLectureInNewCourse
 } from '@/src/api/courses/courses';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 import setErrorToast from '@/src/util/toast/setErrorToast';
-import { QueryKeys } from '@/src/api/queryKeys';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
+import { revalidatePath } from 'next/cache';
 
 type Props = {
   is_enrolled: boolean;
@@ -28,8 +28,6 @@ export default function LectureEnrollmentButton({
   lecture_code,
   onEnrollSuccess
 }: Props) {
-  const queryClient = useQueryClient();
-
   const enrollLecture = async (course_id?: number) => {
     if (course_id !== undefined) {
       const enrollLectureInExistingCourseParams: EnrollLectureInExistingCourseParams =
@@ -64,9 +62,9 @@ export default function LectureEnrollmentButton({
 
   const { mutate, isLoading } = useMutation(enrollLecture, {
     onSuccess: () => {
-      queryClient.invalidateQueries([QueryKeys.SEARCH]);
       onEnrollSuccess();
       setLectureEnrollToast();
+      revalidatePath('/search');
     }
   });
 

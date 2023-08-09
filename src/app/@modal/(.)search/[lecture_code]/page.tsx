@@ -11,3 +11,5 @@ export default async function LectureDetailModalIntercepter({
   );
 }
 //NOTE: 수정하면, search/[lectureCode]/page 에서도 수정해야함
+export const revalidate = 0;
+export const dynamic = 'force-dynamic';

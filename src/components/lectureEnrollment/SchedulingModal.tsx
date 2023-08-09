@@ -13,14 +13,14 @@ import {
 } from '@/src/constants/scheduling/scheduling';
 import getCurrentDate from '@/src/util/day/getCurrentDate';
 import convertMinutesToSeconds from '@/src/util/day/convertMinutesToSeconds';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { enrollLectureInNewCourse } from '@/src/api/courses/courses';
 import setErrorToast from '@/src/util/toast/setErrorToast';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
-import { QueryKeys } from '@/src/api/queryKeys';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import getCompactDateFormat from '@/src/util/day/getCompactFormattedDate';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
+import { revalidatePath } from 'next/cache';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -28,9 +28,11 @@ type Props = {
   onEnrollSuccess: () => void;
 };
 
-export default function SchedulingModal({ lectureDetail, onClose, onEnrollSuccess }: Props) {
-  const queryClient = useQueryClient();
-
+export default function SchedulingModal({
+  lectureDetail,
+  onClose,
+  onEnrollSuccess
+}: Props) {
   const enrollLecture = async () => {
     const enrollLectureInNewCourseParams: EnrollLectureInNewCourseParams = {
       query: {
@@ -53,9 +55,9 @@ export default function SchedulingModal({ lectureDetail, onClose, onEnrollSucces
 
   const { mutate, isLoading } = useMutation(enrollLecture, {
     onSuccess: () => {
-      queryClient.invalidateQueries([QueryKeys.SEARCH]);
       onEnrollSuccess();
       setLectureEnrollToast();
+      revalidatePath('/search');
     }
   });
   const { lecture_title, duration, indexes } = lectureDetail;
@@ -180,26 +182,36 @@ export default function SchedulingModal({ lectureDetail, onClose, onEnrollSucces
               <p className={DEFAULT_CONTENT}>
                 주 평균
                 <span className={MUTABLE_CONTENT}>
-                  <motion.span className='block' {...animationConfig}>{weeklyStudyTime}</motion.span>
+                  <motion.span className='block' {...animationConfig}>
+                    {weeklyStudyTime}
+                  </motion.span>
                 </span>
                 분 분량으로
                 <span className={MUTABLE_CONTENT}>
-                  <motion.span className='block' {...animationConfig}>{scheduling.length}</motion.span>
+                  <motion.span className='block' {...animationConfig}>
+                    {scheduling.length}
+                  </motion.span>
                 </span>
                 주차로 구성되며
               </p>
               <p className={DEFAULT_CONTENT}>
                 예상 수강 종료일은
                 <span className={MUTABLE_CONTENT}>
-                  <motion.span className='block' {...animationConfig}>{expectedDate[0]}</motion.span>
+                  <motion.span className='block' {...animationConfig}>
+                    {expectedDate[0]}
+                  </motion.span>
                 </span>
                 년
                 <span className={MUTABLE_CONTENT}>
-                  <motion.span className='block' {...animationConfig}>{expectedDate[1]}</motion.span>
+                  <motion.span className='block' {...animationConfig}>
+                    {expectedDate[1]}
+                  </motion.span>
                 </span>
                 월
                 <span className={MUTABLE_CONTENT}>
-                  <motion.span className='block' {...animationConfig}>{expectedDate[2]}</motion.span>
+                  <motion.span className='block' {...animationConfig}>
+                    {expectedDate[2]}
+                  </motion.span>
                 </span>
                 일 입니다.
               </p>

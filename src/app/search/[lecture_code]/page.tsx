@@ -19,3 +19,4 @@ export default async function LectureDetail({
   );
 }
 //NOTE: 수정하면, @modal/(.)search/[lectureCode]/page 에서도 수정해야함
+export const revalidate = 0;
