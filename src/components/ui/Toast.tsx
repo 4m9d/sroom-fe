@@ -34,9 +34,7 @@ export default function Toast({ toast }: { toast: CustomToast }) {
       >
         <div className='flex items-center gap-7 shrink-0'>
           <p className='text-xl font-bold'>
-            <span className='inline-block mr-2 align-middle'>
-              {Emoji[type]}
-            </span>
+            <span className='mr-2 text-xl'>{Emoji[type]}</span>
             {title}
           </p>
           <p
