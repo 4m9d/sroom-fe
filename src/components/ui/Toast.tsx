@@ -24,7 +24,7 @@ export default function Toast({ toast }: { toast: CustomToast }) {
           repeatDelay: TOAST_DELAY
         }}
         role='alert'
-        className={`fixed h-24 flex !z-[9999] w-[88%] md:w-[88%] lg:w-[60%] px-7 py-6 justify-between  md:bottom-10 lg:bottom-14 left-[calc(6%)] lg:left-[20%] items-center gap-5 shadow-lg ${
+        className={`fixed h-24 flex !z-[9999] w-[88%] md:w-[88%] lg:w-[60%] px-7 py-6 justify-between  md:bottom-10 lg:bottom-14 left-[calc(6%)] lg:left-[20%] items-center gap-5 shadow-xl ${
           type === 'error'
             ? 'bg-red-400'
             : type === 'lecture_enrollment'
@@ -34,9 +34,7 @@ export default function Toast({ toast }: { toast: CustomToast }) {
       >
         <div className='flex items-center gap-7 shrink-0'>
           <p className='text-xl font-bold'>
-            <span className='inline-block mr-2 align-middle'>
-              {Emoji[type]}
-            </span>
+            <span className='mr-2 text-xl'>{Emoji[type]}</span>
             {title}
           </p>
           <p

@@ -52,10 +52,9 @@ export default function LectureDetailCard({ lectureDetail, onClose }: Props) {
       </div>
       <LectureEnrollmentButton
         onEnrollSuccess={onClose}
-        is_enrolled={is_enrolled}
         is_playlist={is_playlist}
         courses={courses}
-        lecture_code={lectureDetail.lecture_code}
+        lecture_code={lecture_code}
       />
       <div className='absolute right-3 top-3'>
         <StarRatingWithReviewCount

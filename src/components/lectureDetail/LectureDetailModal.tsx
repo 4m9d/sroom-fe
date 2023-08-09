@@ -8,7 +8,7 @@ import LectureDetailReviewList from './review/LectureDetailReviewList';
 import LectureDetailCard from './LectureDetailCard';
 import LectureDetailIndexSkeleton from './index/LectureDetailIndexSkeleton';
 import {
-  INDEX_SKELETON_LIMIT,
+  INDEX_LIMIT,
   REVIEW_LIMIT
 } from '@/src/constants/lectureDetail/lectureDetail';
 import LectureDetailHeading from './LectureDetailHeading';
@@ -81,7 +81,7 @@ export default function LectureDetailModal({
                 fallback={
                   <LectureDetailIndexSkeleton
                     indexPageRef={indexPageRef}
-                    limit={INDEX_SKELETON_LIMIT}
+                    limit={INDEX_LIMIT}
                   />
                 }
               >
@@ -118,6 +118,7 @@ export default function LectureDetailModal({
       {is_playlist && (
         <>
           <LectureEnrollmentModal
+            lectureDetail={lectureDetail}
             onClose={() => closeModalHandler('LECTURE_ENROLLMENT')}
             onEnrollSuccess={onCloseHandler}
           />

@@ -19,7 +19,7 @@ export default function LectureDetailIndexCard({
         <Image fill={true} sizes='100%' src={thumbnail} alt={lecture_title} />
       </div>
       <div className='flex items-center w-full gap-5 px-5'>
-        <div className='flex items-center justify-center w-6 h-6 rounded-full shrink-0 bg-zinc-700'>
+        <div className='flex items-center justify-center rounded-full w-7 h-7 shrink-0 bg-zinc-700'>
           <span className='text-sm font-semibold text-zinc-100'>{indexNum}</span>
         </div>
         <div className='text-sm font-semibold xl:text-base line-clamp-2'>

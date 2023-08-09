@@ -13,7 +13,6 @@ import LoadingSpinner from '../ui/LoadingSpinner';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
 
 type Props = {
-  is_enrolled: boolean;
   is_playlist: boolean;
   courses: EnrolledCourse[];
   lecture_code: string;
@@ -21,7 +20,6 @@ type Props = {
 };
 
 export default function LectureEnrollmentButton({
-  is_enrolled,
   is_playlist,
   courses,
   lecture_code,
@@ -66,11 +64,7 @@ export default function LectureEnrollmentButton({
     }
   });
 
-  const buttonTitle = is_enrolled
-    ? '수강하러 가기'
-    : is_playlist
-    ? '등록하기'
-    : '코스에 추가하기';
+  const buttonTitle = is_playlist ? '등록하기' : '코스에 추가하기';
 
   const LIST__LI =
     'px-3 border-b cursor-pointer border-b-gray-200 last-of-type:border-b-0';
@@ -190,18 +184,16 @@ export default function LectureEnrollmentButton({
             buttonTitle
           )}
         </Button>
-        {is_enrolled === false && (
-          <div className='w-full pt-5 dropdown-content'>
-            <ul className='relative bg-white border border-gray-200'>
-              {is_playlist ? (
-                <PlaylistEnrollment courses={courses} />
-              ) : (
-                <VideoEnrollment courses={courses} />
-              )}
-              <span className='absolute -top-[0.3px] w-3 h-3 rotate-45 -translate-x-1/2 -translate-y-1/2 border-t bg-white border-l left-10 border-l-gray-200 border-t-gray-200 peer-first-of-type:peer-hover:bg-orange-500' />
-            </ul>
-          </div>
-        )}
+        <div className='w-full pt-5 dropdown-content'>
+          <ul className='relative bg-white border border-gray-200'>
+            {is_playlist ? (
+              <PlaylistEnrollment courses={courses} />
+            ) : (
+              <VideoEnrollment courses={courses} />
+            )}
+            <span className='absolute -top-[0.3px] w-3 h-3 rotate-45 -translate-x-1/2 -translate-y-1/2 border-t bg-white border-l left-10 border-l-gray-200 border-t-gray-200 peer-first-of-type:peer-hover:bg-orange-500' />
+          </ul>
+        </div>
       </div>
     </>
   );

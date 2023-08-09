@@ -16,7 +16,7 @@ export default function HorizontalBigLectureCard({
       <div className='relative object-cover min-w-[calc(7rem*1.78)] lg:min-w-[calc(12rem*1.78)] xl:min-w-[calc(19rem*1.78)] min-h-[7rem] lg:min-h-[12rem] xl:min-h-[19rem]'>
         <Image fill={true} sizes='100%' src={src} alt={alt} />
       </div>
-      <div className='w-full min-h-full whitespace-normal'>
+      <div className='w-full max-w-[calc(100%-1.25rem-(7rem*1.78))] lg:max-w-[calc(100%-2rem-(12rem*1.78))] xl:max-w-[calc(100%-2rem-(19rem*1.78))] min-h-full whitespace-normal'>
         {children}
       </div>
     </div>
