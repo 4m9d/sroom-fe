@@ -20,7 +20,6 @@ export default function SearchInput() {
     } else {
       const url = getQueryURL('/search', { keyword: encodedQuery });
       router.push(url);
-      setKeyword('');
     }
   };
 
