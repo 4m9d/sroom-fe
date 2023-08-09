@@ -11,11 +11,13 @@ import LoadingSpinner from '../ui/LoadingSpinner';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
 
 type Props = {
+  lectureDetail: LectureDetail;
   onClose: () => void;
   onEnrollSuccess: () => void;
 };
 
 export default function LectureEnrollmentModal({
+  lectureDetail,
   onClose,
   onEnrollSuccess
 }: Props) {
@@ -23,6 +25,9 @@ export default function LectureEnrollmentModal({
     const enrollLectureInNewCourseParams: EnrollLectureInNewCourseParams = {
       query: {
         use_schedule: false
+      },
+      body: {
+        lecture_code: lectureDetail.lecture_code
       }
     };
     return await enrollLectureInNewCourse(enrollLectureInNewCourseParams).catch(

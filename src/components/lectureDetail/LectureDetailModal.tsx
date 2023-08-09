@@ -118,6 +118,7 @@ export default function LectureDetailModal({
       {is_playlist && (
         <>
           <LectureEnrollmentModal
+            lectureDetail={lectureDetail}
             onClose={() => closeModalHandler('LECTURE_ENROLLMENT')}
             onEnrollSuccess={onCloseHandler}
           />
