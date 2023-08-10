@@ -21,7 +21,7 @@ export default function Toast({ toast }: { toast: CustomToast }) {
         transition={{
           repeat: 1,
           repeatType: 'reverse',
-          repeatDelay: TOAST_DELAY
+          repeatDelay: TOAST_DELAY + 0.25
         }}
         role='alert'
         className={`fixed h-24 flex !z-[9999] w-[88%] md:w-[88%] lg:w-[60%] px-7 py-6 justify-between  md:bottom-10 lg:bottom-14 left-[calc(6%)] lg:left-[20%] items-center gap-5 shadow-xl ${

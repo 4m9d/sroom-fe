@@ -259,3 +259,40 @@ interface CourseTakingPageParams {
     course_id: string;
   };
 }
+
+interface Video {
+  video_index: number;
+  video_id: number;
+  channel: string;
+  video_title: string;
+  video_code: string;
+  is_completed: boolean;
+  last_view_duration: number;
+  video_duration: number;
+}
+
+type LastViewVideo = {
+  [key in 'video_id' | 'video_title' | 'video_code' | 'channel' | 'last_view_duration']: Video[key];
+};
+
+interface Section {
+  section: number;
+  week_duration: number;
+  is_completed: boolean;
+  current_week_duration: number;
+  videos: Video[];
+}
+
+interface CourseDetailResponse extends Response {
+  course_id: number;
+  use_schedule: boolean;
+  course_title: string;
+  channels: string;
+  course_duration: number;
+  current_duration: number;
+  video_count: number;
+  completed_video_count: number;
+  progress: number;
+  last_view_video: LastViewVideo;
+  sections: Section[];
+}

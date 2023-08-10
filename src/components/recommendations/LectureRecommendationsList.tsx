@@ -10,7 +10,6 @@ import useWindowSize from '@/src/hooks/useWindowSize';
 import SwiperNavigationButton from '../ui/button/SwiperNavigationButton';
 import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 type Props = {

@@ -3,7 +3,9 @@ import { Endpoints } from '../Endpoints';
 import { ErrorMessage } from '../ErrorMessage';
 import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
 
-export async function enrollLectureInNewCourse(params: EnrollLectureInNewCourseParams) {
+export async function enrollLectureInNewCourse(
+  params: EnrollLectureInNewCourseParams
+) {
   const headers = await getAuthorizedHeaders();
   const body = JSON.stringify(params.body);
   return await fetch(getQueryURL(Endpoints.COURSES, params.query), {
@@ -34,6 +36,20 @@ export async function enrollLectureInExistingCourse(
       return (await res.json()) as Promise<EnrollLectureResponse>;
     } else {
       return Promise.reject(new Error(ErrorMessage.ENROLLMENT));
+    }
+  });
+}
+
+export async function fetchCourseDetail(course_id: number) {
+  const headers = await getAuthorizedHeaders();
+  return await fetch(getQueryURL(`${Endpoints.COURSES}/${course_id}`), {
+    method: 'GET',
+    headers
+  }).then(async (res) => {
+    if (res.ok) {
+      return (await res.json()) as Promise<CourseDetailResponse>;
+    } else {
+      return Promise.reject(new Error(ErrorMessage.DETAIL_COURSE));
     }
   });
 }
