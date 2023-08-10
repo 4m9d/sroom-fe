@@ -41,14 +41,10 @@ export default async function LectureDetailReviewList({
 
     updateReviewPageRef(offset);
 
-    return await fetchLectureDetailReview(lectureCode, params)
-      .then((res) => {
-        return res;
-      })
-      .catch(() => {
-        setErrorToast(new Error(ErrorMessage.DETAIL_REVIEW));
-        return null;
-      });
+    return await fetchLectureDetailReview(lectureCode, params).catch(() => {
+      setErrorToast(new Error(ErrorMessage.DETAIL_REVIEW));
+      return null;
+    });
   };
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
@@ -63,23 +59,34 @@ export default async function LectureDetailReviewList({
     }
   );
 
+  const review_list = data?.pages.flatMap((page) => page) as LectureReview[];
+
   return (
     <>
-      <ul className='grid grid-cols-1 gap-4'>
-        {data?.pages.map((page) =>
-          page?.map((lectureReview) => (
-            <LectureDetailReviewCard
-              key={lectureReview.index}
-              lectureReview={lectureReview}
-            />
-          ))
-        )}
-      </ul>
-      <div className='flex justify-center my-10 mb-20'>
-        {hasNextPage ? (
-          <LoadMoreButton title='후기 더보기' onClick={fetchNextPage} />
-        ) : null}
-      </div>
+      {review_list.length === 0 ? (
+        <>
+          <div className='flex items-center justify-center w-full h-40 pb-10 border-b border-b-zinc-200'>
+            <p className='text-base font-normal'>아직 등록된 후기가 없어요</p>
+          </div>
+        </>
+      ) : (
+        <>
+          <ul className='grid grid-cols-1 gap-4'>
+            {review_list &&
+              review_list.map((lectureReview) => (
+                <LectureDetailReviewCard
+                  key={lectureReview.index}
+                  lectureReview={lectureReview}
+                />
+              ))}
+          </ul>
+          <div className='flex justify-center my-10 mb-20'>
+            {hasNextPage ? (
+              <LoadMoreButton title='후기 더보기' onClick={fetchNextPage} />
+            ) : null}
+          </div>
+        </>
+      )}
     </>
   );
 }
