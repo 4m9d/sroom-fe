@@ -9,6 +9,7 @@ import setErrorToast from '@/src/util/toast/setErrorToast';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -21,6 +22,8 @@ export default function LectureEnrollmentModal({
   onClose,
   onEnrollSuccess
 }: Props) {
+  const router = useRouter();
+  
   const enrollLecture = async () => {
     const enrollLectureInNewCourseParams: EnrollLectureInNewCourseParams = {
       query: {
@@ -39,9 +42,12 @@ export default function LectureEnrollmentModal({
   };
 
   const { mutate, isLoading } = useMutation(enrollLecture, {
-    onSuccess: () => {
+    onSuccess: (response) => {
       onEnrollSuccess();
-      setLectureEnrollToast();
+      response &&
+        setLectureEnrollToast(() =>
+          router.push(`/course/${response.course_id}`)
+        );
     }
   });
 

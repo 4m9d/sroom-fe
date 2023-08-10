@@ -11,6 +11,7 @@ import { ErrorMessage } from '@/src/api/ErrorMessage';
 import setErrorToast from '@/src/util/toast/setErrorToast';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   is_playlist: boolean;
@@ -25,6 +26,8 @@ export default function LectureEnrollmentButton({
   lecture_code,
   onEnrollSuccess
 }: Props) {
+  const router = useRouter();
+
   const enrollLecture = async (course_id?: number) => {
     if (course_id !== undefined) {
       const enrollLectureInExistingCourseParams: EnrollLectureInExistingCourseParams =
@@ -58,9 +61,12 @@ export default function LectureEnrollmentButton({
   };
 
   const { mutate, isLoading } = useMutation(enrollLecture, {
-    onSuccess: () => {
+    onSuccess: (response) => {
       onEnrollSuccess();
-      setLectureEnrollToast();
+      response &&
+        setLectureEnrollToast(() =>
+          router.push(`/course/${response.course_id}`)
+        );
     }
   });
 
