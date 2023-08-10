@@ -13,7 +13,7 @@ export default function CourseHeader({ title, channel }: Props) {
         <h3 className='text-base font-medium text-zinc-500'>{channel}</h3>
       </div>
       <div className='flex flex-col justify-end'>
-        <Button className='px-10 py-3 text-white bg-zinc-900'>
+        <Button className='!px-10 !py-3 text-sm font-medium text-white bg-zinc-900'>
           {'강의 노트 / 퀴즈 보기'}
         </Button>
       </div>
