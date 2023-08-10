@@ -26,7 +26,7 @@ export default function YoutubePlayer({
     }
   };
   return (
-    <div className='px-20 mx-auto my-20'>
+    <div className='px-20 mx-auto mb-20'>
       <YouTube
         opts={opts}
         videoId={videoId}
