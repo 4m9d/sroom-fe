@@ -1,4 +1,5 @@
 import { fetchCourseDetail } from '@/src/api/courses/courses';
+import CourseHeader from '@/src/components/course/CourseHeader';
 import YoutubePlayer from '@/src/components/course/YoutubePlayer';
 
 export default async function CourseTakingPage({
@@ -9,10 +10,14 @@ export default async function CourseTakingPage({
 
   return (
     <>
+      <CourseHeader
+        title={last_view_video.video_title}
+        channel={last_view_video.channel}
+      />
       <YoutubePlayer
         video_code={last_view_video.video_code}
-        width={300 * 1.78}
-        height={300}
+        width={'100%'}
+        height={'100%'}
         start={last_view_video.last_view_duration}
       />
     </>
