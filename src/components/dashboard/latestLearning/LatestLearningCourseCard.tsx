@@ -31,7 +31,7 @@ export default function LatestLearningCourseCard({ course }: Props) {
               <Image
                 className='w-auto h-auto mr-1'
                 src={'/icon/icon_time.svg'}
-                alt='총 강의 시간'
+                alt='총 재생 시간'
                 width={12}
                 height={12}
               />
