@@ -18,7 +18,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
   const hidden = name ? '' : 'hidden';
 
   return (
-    <nav className='flex justify-between px-20 mx-auto gap-14 max-w-screen-2xl navbar'>
+    <nav className='flex justify-between px-20 mx-auto gap-14 navbar'>
       <h1 className='shrink-0 w-14'>
         <span className='sr-only'>스룸</span>
         <Link href='/' className='text-lg font-bold'>

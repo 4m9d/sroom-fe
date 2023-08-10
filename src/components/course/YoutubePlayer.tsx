@@ -3,13 +3,11 @@ import YouTube from 'react-youtube';
 import { Options } from 'youtube-player/dist/types';
 
 type Props = {
-  width: number;
-  height: number;
+  width: number | string;
+  height: number | string;
   video_code: string;
   start: number;
   end?: number;
-  className?: string;
-  iframeClassName?: string;
 };
 
 export default function YoutubePlayer({
@@ -17,9 +15,7 @@ export default function YoutubePlayer({
   height,
   video_code: videoId,
   start,
-  end,
-  className,
-  iframeClassName
+  end
 }: Props) {
   const opts: Options = {
     width,
@@ -30,11 +26,13 @@ export default function YoutubePlayer({
     }
   };
   return (
-    <YouTube
-      opts={opts}
-      videoId={videoId}
-      className={className}
-      iframeClassName={iframeClassName}
-    />
+    <div className='px-20 mx-auto my-20'>
+      <YouTube
+        opts={opts}
+        videoId={videoId}
+        className='text-center relative pb-[56.25%] pt-0 h-0 w-full overflow-hidden'
+        iframeClassName='absolute top-0 left-0 w-full h-full'
+      />
+    </div>
   );
 }
