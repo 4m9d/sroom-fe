@@ -10,10 +10,10 @@ interface WeekRange {
 
 //////////////////////////////////toast//////////////////////////////////
 
-interface Emoji  {
+interface Emoji {
   lecture_enrollment: string;
   error: string;
-} 
+}
 
 interface CustomToast {
   type: keyof Emoji;
@@ -218,6 +218,7 @@ interface LectureRecommendations {
 }
 
 /////////////////////////////////////////////////////////////////////////
+
 //////////////////////////////////enroll/////////////////////////////////
 
 interface EnrollLectureInNewCourseWithoutSchedulingParams {
@@ -241,10 +242,20 @@ interface EnrollLectureInNewCourseParams {
 }
 
 interface EnrollLectureInExistingCourseParams
-extends EnrollLectureInNewCourseWithoutSchedulingParams {}
+  extends EnrollLectureInNewCourseWithoutSchedulingParams {}
 
 interface EnrollLectureResponse extends Response {
   course_id: number;
   lecture_id: number;
   title: string;
+}
+
+/////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////course-taking//////////////////////////////\
+
+interface CourseTakingPageParams {
+  params: {
+    course_id: string;
+  };
 }

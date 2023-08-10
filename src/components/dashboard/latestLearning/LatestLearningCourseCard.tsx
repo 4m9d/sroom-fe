@@ -5,6 +5,7 @@ import Button from '../../ui/button/Button';
 import getFormattedHour from '@/src/util/day/getFormattedHour';
 import convertSecondsToMinutes from '@/src/util/day/convertSecondsToMinutes';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type Props = {
   course: Course;
@@ -44,8 +45,7 @@ export default function LatestLearningCourseCard({ course }: Props) {
                 width={12}
                 height={12}
               />
-              {course.completed_video_count.toLocaleString()}개
-              <span>/</span>
+              {course.completed_video_count.toLocaleString()}개<span>/</span>
               {course.total_video_count.toLocaleString()}개 완료
             </p>
             <div className='flex items-center'>
@@ -58,10 +58,12 @@ export default function LatestLearningCourseCard({ course }: Props) {
               </p>
             </div>
           </div>
-          <Button className='!h-10 flex justify-between w-32 text-sm text-zinc-200 bg-zinc-800'>
-            <p>바로 학습</p>
-            <p> 〉 </p>
-          </Button>
+          <Link href={`/course/${course.course_id}`}>
+            <Button className='!h-10 flex justify-between w-32 text-sm text-zinc-200 bg-zinc-800'>
+              <p>바로 학습</p>
+              <p> 〉 </p>
+            </Button>
+          </Link>
         </div>
       </div>
     </HorizontalSmallLectureCard>

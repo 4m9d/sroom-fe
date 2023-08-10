@@ -20,6 +20,7 @@ import { ErrorMessage } from '@/src/api/ErrorMessage';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import getCompactDateFormat from '@/src/util/day/getCompactFormattedDate';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -32,6 +33,8 @@ export default function SchedulingModal({
   onClose,
   onEnrollSuccess
 }: Props) {
+  const router = useRouter();
+
   const enrollLecture = async () => {
     const enrollLectureInNewCourseParams: EnrollLectureInNewCourseParams = {
       query: {
@@ -53,9 +56,12 @@ export default function SchedulingModal({
   };
 
   const { mutate, isLoading } = useMutation(enrollLecture, {
-    onSuccess: () => {
+    onSuccess: (response) => {
       onEnrollSuccess();
-      setLectureEnrollToast();
+      response &&
+        setLectureEnrollToast(() =>
+          router.push(`/course/${response.course_id}`)
+        );
     }
   });
   const { lecture_title, duration, indexes } = lectureDetail;
