@@ -19,7 +19,7 @@ type Props = {
 
 export default function RootLayout({ children, modal }: Props) {
   return (
-    <html lang='en'>
+    <html lang='ko'>
       <body className={inter.className}>
           <AuthSessionProvider>
             <QueryProvider>
