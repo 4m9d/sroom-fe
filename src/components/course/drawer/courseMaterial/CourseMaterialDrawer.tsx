@@ -38,23 +38,22 @@ export default function CourseMaterialDrawer({}: Props) {
   }, [drawerHandler]);
 
   return (
-    <>
-      <AnimatePresence>
-        <motion.div
-          {...animationConfig}
-          className='relative max-h-full min-h-full bg-white shadow-lg shrink-0'
-        >
-          {isDrawerOpen && (
-            <button
-              type='button'
-              onClick={drawerHandler}
-              className='absolute shrink-0 btn btn-sm btn-circle btn-ghost right-5 top-5'
-            >
-              ✕
-            </button>
-          )}
-        </motion.div>
-      </AnimatePresence>
-    </>
+    <AnimatePresence>
+      <motion.aside
+        {...animationConfig}
+        className='relative max-h-full min-h-full bg-white shadow-lg shrink-0'
+      >
+        <div className='h-[calc(100vh-4rem)]'></div>
+        {isDrawerOpen && (
+          <button
+            type='button'
+            onClick={drawerHandler}
+            className='absolute shrink-0 btn btn-sm btn-circle btn-ghost right-5 top-5'
+          >
+            ✕
+          </button>
+        )}
+      </motion.aside>
+    </AnimatePresence>
   );
 }
