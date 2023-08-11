@@ -1,8 +1,8 @@
 import { fetchCourseDetail } from '@/src/api/courses/courses';
 import CourseHeader from '@/src/components/course/CourseHeader';
 import YoutubePlayer from '@/src/components/course/YoutubePlayer';
-import CourseDetailDrawer from '@/src/components/course/drawers/CourseDetailDrawer';
-import CourseMaterialDrawer from '@/src/components/course/drawers/CourseMaterialDrawer';
+import CourseDetailDrawer from '@/src/components/course/drawer/courseDetail/CourseDetailDrawer';
+import CourseMaterialDrawer from '@/src/components/course/drawer/courseMaterial/CourseMaterialDrawer';
 
 export default async function CourseTakingPage({
   params: { course_id }

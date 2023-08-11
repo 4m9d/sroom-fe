@@ -1,5 +1,5 @@
 import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
-import ThumbnailBadge from '../ui/ThumbnailBadge';
+import ThumbnailBadge from '../ui/badge/ThumbnailBadge';
 import VerticalSmallLectureCard from '../ui/lectureCard/VerticalSmallLectureCard';
 
 type Props = {
