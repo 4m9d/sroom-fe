@@ -35,7 +35,9 @@ export default function SearchInput() {
       <button
         type='button'
         onClick={() => setKeyword('')}
-        className='absolute rounded-none btn btn-xs btn-ghost btn-circle right-2 top-3'
+        className={`absolute rounded-none justify-center items-center p-2 h-6 shrink-0 text-xs right-2 top-3 hidden opacity-0 ${
+          keyword.length > 0 ? '!inline-flex !opacity-100 transition-all' : ''
+        }`}
       >
         ✕
       </button>
