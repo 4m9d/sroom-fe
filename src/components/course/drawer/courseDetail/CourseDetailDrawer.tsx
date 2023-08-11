@@ -1,15 +1,10 @@
 'use client';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import Image from 'next/image';
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useState
-} from 'react';
+import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import SectionList from './SectionList';
 import CourseDetailHeader from './CourseDetailHeader';
+import DrawerMenuButtons from './DrawerMenuButtons';
 
 type Props = {
   courseDetail: CourseDetail;
@@ -58,47 +53,35 @@ export default function CourseDetailDrawer({
     }
   }, [controls, isDrawerOpen]);
 
-  const backgroundClickHandler = useCallback(() => {
-    if (isDrawerOpen) {
-      drawerHandler();
-    }
-  }, [isDrawerOpen, drawerHandler]);
-
-  useEffect(() => {
-    const background = document.getElementById('background') as HTMLDivElement;
-    background.addEventListener('click', backgroundClickHandler);
-
-    return () => {
-      background.removeEventListener('click', backgroundClickHandler);
-    };
-  }, [backgroundClickHandler]);
-
   return (
     <AnimatePresence>
       <motion.aside
         id='course-detail-drawer'
         {...animationConfig}
-        className='relative bg-white shadow-lg shrink-0'
+        className='relative max-h-full min-h-full bg-white shadow-lg shrink-0'
       >
         {isDrawerOpen && (
-          <>
-            <CourseDetailHeader
-              course_title={course_title}
-              channels={channels}
-              thumbnail={thumbnail}
-              total_video_count={total_video_count}
-              course_duration={course_duration}
-              current_duration={current_duration}
-              progress={progress}
-            />
-            <SectionList
-              sections={sections}
-              use_schedule={use_schedule}
-              course_title={course_title}
-              currentPlayingVideo={currentPlayingVideo}
-              setCurrentPlayingVideo={setCurrentPlayingVideo}
-            />
-          </>
+          <div className='flex flex-col justify-between h-full'>
+            <div>
+              <CourseDetailHeader
+                course_title={course_title}
+                channels={channels}
+                thumbnail={thumbnail}
+                total_video_count={total_video_count}
+                course_duration={course_duration}
+                current_duration={current_duration}
+                progress={progress}
+              />
+              <SectionList
+                sections={sections}
+                use_schedule={use_schedule}
+                course_title={course_title}
+                currentPlayingVideo={currentPlayingVideo}
+                setCurrentPlayingVideo={setCurrentPlayingVideo}
+              />
+            </div>
+            <DrawerMenuButtons />
+          </div>
         )}
         <button
           type='button'
@@ -107,7 +90,7 @@ export default function CourseDetailDrawer({
         >
           <Image
             src='/icon/icon_arrow_right_white.svg'
-            alt='사이드 바 버튼F'
+            alt='사이드 바 버튼'
             width={12}
             height={12}
             className={`${isDrawerOpen ? 'rotate-180' : ''} transition-all`}

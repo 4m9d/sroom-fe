@@ -49,7 +49,7 @@ export default function SectionAccordion({
         setIsOpen(true);
       }
     });
-  }, []);
+  }, [currentPlayingVideo, section]);
 
   return (
     <div
