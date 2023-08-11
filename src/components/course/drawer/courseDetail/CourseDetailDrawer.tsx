@@ -1,15 +1,27 @@
 'use client';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState
+} from 'react';
 import SectionList from './SectionList';
 import CourseDetailHeader from './CourseDetailHeader';
 
 type Props = {
   courseDetail: CourseDetail;
+  currentPlayingVideo: CurrentPlayingVideo;
+  setCurrentPlayingVideo: Dispatch<SetStateAction<CurrentPlayingVideo>>;
 };
 
-export default function CourseDetailDrawer({ courseDetail }: Props) {
+export default function CourseDetailDrawer({
+  courseDetail,
+  currentPlayingVideo,
+  setCurrentPlayingVideo
+}: Props) {
   const controls = useAnimationControls();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -83,6 +95,8 @@ export default function CourseDetailDrawer({ courseDetail }: Props) {
               sections={sections}
               use_schedule={use_schedule}
               course_title={course_title}
+              currentPlayingVideo={currentPlayingVideo}
+              setCurrentPlayingVideo={setCurrentPlayingVideo}
             />
           </>
         )}

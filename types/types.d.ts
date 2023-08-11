@@ -272,7 +272,16 @@ interface Video {
 }
 
 type LastViewVideo = {
-  [key in 'video_id' | 'video_title' | 'video_code' | 'channel' | 'last_view_duration']: Video[key];
+  [key in
+    | 'video_id'
+    | 'video_title'
+    | 'video_code'
+    | 'channel'
+    | 'last_view_duration']: Video[key];
+};
+
+type CurrentPlayingVideo = {
+  [key in 'video_id' | 'video_code' | 'last_view_duration']: Video[key];
 };
 
 interface Section {

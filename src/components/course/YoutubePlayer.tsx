@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from 'react';
 import YouTube from 'react-youtube';
 import { Options } from 'youtube-player/dist/types';
 
@@ -25,6 +26,11 @@ export default function YoutubePlayer({
       end
     }
   };
+
+  useEffect(() => {
+    console.log(videoId);
+  }, [videoId]);
+
   return (
     <div className='px-20 mx-auto mb-20'>
       <YouTube

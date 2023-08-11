@@ -1,19 +1,23 @@
+'use client';
 import VideoCompletionBadge from '@/src/components/ui/badge/VideoCompletionBadge';
 import getFormattedHour from '@/src/util/day/getFormattedHour';
 import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useLayoutEffect, useState } from 'react';
 
 type Props = {
   section: Section;
   use_schedule: boolean;
   course_title: string;
+  currentPlayingVideo: CurrentPlayingVideo;
+  setCurrentPlayingVideo: Dispatch<SetStateAction<CurrentPlayingVideo>>;
 };
 
 export default function SectionAccordion({
   section,
   use_schedule,
-  course_title
+  course_title,
+  currentPlayingVideo,
+  setCurrentPlayingVideo
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,6 +32,24 @@ export default function SectionAccordion({
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
   };
+
+  const videoClickHandler = (video: Video) => {
+    const clickedVideo: CurrentPlayingVideo = {
+      video_code: video.video_code,
+      video_id: video.video_id,
+      last_view_duration: video.last_view_duration
+    };
+
+    setCurrentPlayingVideo(clickedVideo);
+  };
+
+  useLayoutEffect(() => {
+    section.videos.map((video) => {
+      if (video.video_id === currentPlayingVideo.video_id) {
+        setIsOpen(true);
+      }
+    });
+  }, []);
 
   return (
     <div
@@ -71,10 +93,17 @@ export default function SectionAccordion({
             {videos.map((video) => (
               <button
                 type='button'
+                onClick={() => videoClickHandler(video)}
                 key={video.video_id}
-                className='flex items-center justify-between group h-[17px]'
+                className='flex items-center justify-between h-[17px]'
               >
-                <p className='w-5/6 text-start text-xs font-semibold whitespace-normal text-zinc-500 line-clamp-1 before:w-[2px] before:h-[2px] before:bg-zinc-500 before:mr-1 before:inline-block before:align-middle group-focus:text-orange-500 group-focus:before:bg-orange-500'>
+                <p
+                  className={`w-5/6 text-start text-xs font-semibold whitespace-normal line-clamp-1 before:w-[2px] before:h-[2px]  before:mr-1 before:inline-block before:align-middle ${
+                    currentPlayingVideo.video_id === video.video_id
+                      ? 'text-orange-500 before:bg-orange-500'
+                      : 'text-zinc-500 before:bg-zinc-500'
+                  } `}
+                >
                   {video.video_title}
                 </p>
                 {video.is_completed === true && <VideoCompletionBadge />}
