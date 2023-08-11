@@ -37,7 +37,7 @@ export default function LatestLearningCourseCard({ course }: Props) {
                 height={12}
               />
               {getFormattedHour(convertSecondsToMinutes(course.duration))}
-              <span className='mx-2 text-zinc-300'>|</span>
+              <span className='after:w-[1px] after:h-[10px] after:bg-zinc-400 after:mx-2 after:inline-block after:text-center after:align-middle'></span>
               <Image
                 className='w-auto h-auto mr-1'
                 src={'/icon/icon_lecture.svg'}

@@ -10,7 +10,7 @@ export default function CorrectnessRate({value}: Props) {
       <p className='text-sm leading-8'>
         퀴즈 총 정답율 <span className='text-2xl font-bold'>{value}</span>%
       </p>
-      <ProgressBar className='w-4/5 h-2' value={80} />
+      <ProgressBar className='!w-4/5 !h-2' value={80} />
     </div>
   );
 }
