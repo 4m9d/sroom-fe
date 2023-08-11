@@ -13,9 +13,9 @@ export default function SearchInput() {
   const submitHandler = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const encodedQuery = encodeURIComponent(keyword);
+    const encodedQuery = encodeURI(keyword.trim().replaceAll(' ', '+'));
 
-    if (encodedQuery.trim() === '') {
+    if (encodedQuery === '') {
       return;
     } else {
       const url = getQueryURL('/search', { keyword: encodedQuery });
@@ -24,7 +24,7 @@ export default function SearchInput() {
   };
 
   return (
-    <form className='w-full' onSubmit={submitHandler}>
+    <form className='relative w-full' onSubmit={submitHandler}>
       <input
         type='text'
         value={keyword}
@@ -32,6 +32,13 @@ export default function SearchInput() {
         placeholder='강의 검색'
         className='w-full rounded-none bg-zinc-100 form-control input input-bordered'
       />
+      <button
+        type='button'
+        onClick={() => setKeyword('')}
+        className='absolute rounded-none btn btn-xs btn-ghost btn-circle right-2 top-3'
+      >
+        ✕
+      </button>
     </form>
   );
 }
