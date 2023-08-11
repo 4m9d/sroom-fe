@@ -1,7 +1,7 @@
 'use client';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
-import Button from '../../ui/button/Button';
+import Button from '../../../ui/button/Button';
 
 type Props = {};
 
@@ -62,7 +62,7 @@ export default function CourseDetailDrawer({}: Props) {
             <button
               type='button'
               onClick={drawerHandler}
-              className='absolute shrink-0 btn btn-sm btn-circle btn-ghost right-2 top-2'
+              className='absolute shrink-0 btn btn-sm btn-circle btn-ghost right-5 top-5'
             >
               ✕
             </button>
