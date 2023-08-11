@@ -1,7 +1,6 @@
 'use client';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
-import Button from '../../../ui/button/Button';
 
 type Props = {};
 
@@ -28,35 +27,22 @@ export default function CourseMaterialDrawer({}: Props) {
     }
   }, [controls, isDrawerOpen]);
 
-  const backgroundClickHandler = useCallback(() => {
-    if (isDrawerOpen) {
-      drawerHandler();
-    }
-  }, [isDrawerOpen, drawerHandler]);
-
   useEffect(() => {
-    const background = document.getElementById('background') as HTMLDivElement;
-    background.addEventListener('click', backgroundClickHandler);
-
+    const button = document.getElementById(
+      'course-material-drawer'
+    ) as HTMLButtonElement;
+    button.addEventListener('click', drawerHandler);
     return () => {
-      background.removeEventListener('click', backgroundClickHandler);
+      button.removeEventListener('click', drawerHandler);
     };
-  }, [backgroundClickHandler]);
+  }, [drawerHandler]);
 
   return (
     <>
-      {isDrawerOpen === false && (
-        <Button
-          onClick={drawerHandler}
-          className='!px-10 !py-3 text-sm font-medium text-white bg-zinc-900 absolute top-[9rem] right-20'
-        >
-          {'강의 노트 / 퀴즈 보기'}
-        </Button>
-      )}
       <AnimatePresence>
         <motion.div
           {...animationConfig}
-          className='relative bg-white shadow-lg shrink-0'
+          className='relative max-h-full min-h-full bg-white shadow-lg shrink-0'
         >
           {isDrawerOpen && (
             <button

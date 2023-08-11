@@ -1,6 +1,6 @@
-import ProgressBar from "@/src/components/ui/ProgressBar";
-import getFormattedHour from "@/src/util/day/getFormattedHour";
-import Image from "next/image";
+import ProgressBar from '@/src/components/ui/ProgressBar';
+import getFormattedHour from '@/src/util/day/getFormattedHour';
+import Image from 'next/image';
 
 type Props = {
   thumbnail: string;
@@ -10,12 +10,20 @@ type Props = {
   total_video_count: number;
   progress: number;
   current_duration: number;
-}
+};
 
-export default function CourseDetailHeader({thumbnail,course_title, channels, course_duration, total_video_count, progress, current_duration}: Props) {
+export default function CourseDetailHeader({
+  thumbnail,
+  course_title,
+  channels,
+  course_duration,
+  total_video_count,
+  progress,
+  current_duration
+}: Props) {
   return (
     <section className='flex flex-col gap-3 px-5 pt-5 after:w-full after:h-[1px] after:bg-zinc-200 after:my-[30px]'>
-      <div className='relative w-full h-[9.3rem] px-5'>
+      <div className='relative w-full h-[calc((19rem-2.5rem)*0.5625)] px-5'>
         <Image fill={true} sizes='100%' src={thumbnail} alt={course_title} />
       </div>
       <h2 className='text-lg font-bold'>{course_title}</h2>
