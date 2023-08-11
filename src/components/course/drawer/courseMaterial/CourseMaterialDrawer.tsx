@@ -5,7 +5,7 @@ import Button from '../../../ui/button/Button';
 
 type Props = {};
 
-export default function CourseDetailDrawer({}: Props) {
+export default function CourseMaterialDrawer({}: Props) {
   const controls = useAnimationControls();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -17,7 +17,7 @@ export default function CourseDetailDrawer({}: Props) {
       exit: { width: 0 }
     }
   };
-  
+
   const drawerHandler = useCallback(() => {
     if (isDrawerOpen) {
       controls.start('exit');
