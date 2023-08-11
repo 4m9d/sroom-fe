@@ -47,7 +47,7 @@ export async function fetchCourseDetail(course_id: number) {
     headers
   }).then(async (res) => {
     if (res.ok) {
-      return (await res.json()) as Promise<CourseDetailResponse>;
+      return (await res.json()) as Promise<CourseDetail>;
     } else {
       return Promise.reject(new Error(ErrorMessage.DETAIL_COURSE));
     }

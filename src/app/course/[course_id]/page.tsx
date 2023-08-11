@@ -13,7 +13,7 @@ export default async function CourseTakingPage({
   return (
     <div className='h-screen bg-zinc-50'>
       <div className='flex h-full flex-nowrap'>
-        <CourseDetailDrawer />
+        <CourseDetailDrawer courseDetail={courseDetail} />
         <div id='background' className='flex-grow'>
           <CourseHeader
             title={last_view_video.video_title}

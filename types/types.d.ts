@@ -283,14 +283,15 @@ interface Section {
   videos: Video[];
 }
 
-interface CourseDetailResponse extends Response {
+interface CourseDetail {
   course_id: number;
   use_schedule: boolean;
   course_title: string;
+  thumbnail: string;
   channels: string;
   course_duration: number;
   current_duration: number;
-  video_count: number;
+  total_video_count: number;
   completed_video_count: number;
   progress: number;
   last_view_video: LastViewVideo;

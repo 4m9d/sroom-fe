@@ -13,7 +13,7 @@ export default function CourseDetailDrawer({}: Props) {
     animate: controls,
     variants: {
       initial: { width: 0 },
-      animate: { width: '500px' },
+      animate: { width: '26rem' },
       exit: { width: 0 }
     }
   };
