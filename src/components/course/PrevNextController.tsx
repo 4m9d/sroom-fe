@@ -21,7 +21,7 @@ export default function PrevNextController({
     }
   };
   return (
-    <div className='flex justify-between px-64 my-5 shrink-0'>
+    <div className='flex justify-between my-5 px-80 shrink-0'>
       <Button
         onClick={() => controllerClickHandler('prev')}
         disabled={prevPlayingVideo === null}

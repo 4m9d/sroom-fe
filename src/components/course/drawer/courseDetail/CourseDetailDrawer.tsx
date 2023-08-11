@@ -61,7 +61,7 @@ export default function CourseDetailDrawer({
         className='relative max-h-full min-h-full bg-white shadow-lg shrink-0'
       >
         {isDrawerOpen && (
-          <div className='flex flex-col justify-between h-full'>
+          <div className='flex flex-col justify-between h-[calc(100vh-4rem)]'>
             <div>
               <CourseDetailHeader
                 course_title={course_title}
