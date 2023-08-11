@@ -84,6 +84,7 @@ export default function CourseDetailDrawer({
           </div>
         )}
         <button
+          id='course-detail-drawer-btn'
           type='button'
           onClick={drawerHandler}
           className='absolute flex items-center justify-center w-5 h-12 bg-zinc-900 -right-5 top-[calc(50%-1.5rem)]'

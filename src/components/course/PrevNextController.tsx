@@ -21,12 +21,12 @@ export default function PrevNextController({
     }
   };
   return (
-    <div className='flex justify-between my-5 px-80 shrink-0'>
+    <div className='flex justify-between my-5 px-[15%] shrink-0'>
       <Button
         onClick={() => controllerClickHandler('prev')}
         disabled={prevPlayingVideo === null}
         id='prev-controller'
-        className={`w-[11.5rem] h-12 flex justify-between items-center gap-7 font-bold text-lg ${
+        className={`w-44 h-12 flex justify-between items-center gap-3 font-bold text-lg ${
           prevPlayingVideo === null ? 'opacity-50 hover:opacity-50' : ''
         }`}
       >
@@ -37,7 +37,7 @@ export default function PrevNextController({
         onClick={() => controllerClickHandler('next')}
         disabled={nextPlayingVideo === null}
         id='next-controller'
-        className={`w-[11.5rem] h-12 flex justify-between items-center gap-7 font-bold text-lg ${
+        className={`w-44 h-12 flex justify-between items-center gap-3 font-bold text-lg ${
           nextPlayingVideo === null ? 'opacity-50 hover:opacity-50' : ''
         }`}
       >
