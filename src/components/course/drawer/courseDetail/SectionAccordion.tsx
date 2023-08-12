@@ -8,8 +8,8 @@ type Props = {
   section: Section;
   use_schedule: boolean;
   course_title: string;
-  currentPlayingVideo: CurrentPlayingVideo;
-  setCurrentPlayingVideo: Dispatch<SetStateAction<CurrentPlayingVideo>>;
+  currentPlayingVideo: LastViewVideo;
+  setCurrentPlayingVideo: Dispatch<SetStateAction<LastViewVideo>>;
 };
 
 export default function SectionAccordion({
@@ -34,10 +34,12 @@ export default function SectionAccordion({
   };
 
   const videoClickHandler = (video: Video) => {
-    const clickedVideo: CurrentPlayingVideo = {
+    const clickedVideo: LastViewVideo = {
       video_code: video.video_code,
       video_id: video.video_id,
-      last_view_duration: video.last_view_duration
+      last_view_duration: video.last_view_duration,
+      channel: video.channel,
+      video_title: video.video_title
     };
 
     setCurrentPlayingVideo(clickedVideo);

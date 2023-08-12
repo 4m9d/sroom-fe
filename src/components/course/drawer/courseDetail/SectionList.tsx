@@ -5,8 +5,8 @@ type Props = {
   sections: Section[];
   use_schedule: boolean;
   course_title: string;
-  currentPlayingVideo: CurrentPlayingVideo;
-  setCurrentPlayingVideo: Dispatch<SetStateAction<CurrentPlayingVideo>>;
+  currentPlayingVideo: LastViewVideo;
+  setCurrentPlayingVideo: Dispatch<SetStateAction<LastViewVideo>>;
 };
 
 export default function SectionList({
@@ -19,7 +19,7 @@ export default function SectionList({
   return (
     <section>
       <h2 className='px-5 mb-4 text-sm font-semibold'>강의 목차</h2>
-      <div className='overflow-y-scroll max-h-[30.2rem]'>
+      <div className='overflow-y-auto max-h-[25.9rem]'>
         {sections.map((section) => {
           return (
             <SectionAccordion

@@ -2,9 +2,9 @@ import { Dispatch } from 'react';
 import Button from '../ui/button/Button';
 
 type Props = {
-  prevPlayingVideo: CurrentPlayingVideo | null;
-  nextPlayingVideo: CurrentPlayingVideo | null;
-  setCurrentPlayingVideo: Dispatch<React.SetStateAction<CurrentPlayingVideo>>;
+  prevPlayingVideo: LastViewVideo | null;
+  nextPlayingVideo: LastViewVideo | null;
+  setCurrentPlayingVideo: Dispatch<React.SetStateAction<LastViewVideo>>;
 };
 
 export default function PrevNextController({
