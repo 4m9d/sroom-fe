@@ -92,15 +92,15 @@ export default function SectionAccordion({
           aria-hidden
         />
       </div>
-      <div className='collapse-content'>
+      <div className='px-2 collapse-content'>
         {isOpen === true && (
-          <div className='flex flex-col gap-3 py-6'>
+          <div className='flex flex-col gap-1 py-6'>
             {videos.map((video) => (
               <button
                 type='button'
                 onClick={() => videoClickHandler(video)}
                 key={video.video_id}
-                className='flex items-center justify-between h-[17px]'
+                className='flex items-center justify-between h-[17px] px-3 py-3 hover:bg-zinc-100 hover:opacity-90 rounded-sm'
               >
                 <p
                   className={`w-5/6 text-start text-xs font-semibold whitespace-normal line-clamp-1 before:w-[2px] before:h-[2px]  before:mr-1 before:inline-block before:align-middle ${
