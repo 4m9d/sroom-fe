@@ -1,5 +1,6 @@
 'use client';
 import VideoCompletionBadge from '@/src/components/ui/badge/VideoCompletionBadge';
+import convertSecondsToMinutes from '@/src/util/day/convertSecondsToMinutes';
 import getFormattedHour from '@/src/util/day/getFormattedHour';
 import Image from 'next/image';
 import { Dispatch, SetStateAction, useLayoutEffect, useState } from 'react';
@@ -71,8 +72,10 @@ export default function SectionAccordion({
           </p>
           <div className='flex h-[17px] items-center gap-2'>
             <p className='text-xs font-normal text-zinc-500'>
-              {`${getFormattedHour(current_week_duration)} / ${getFormattedHour(
-                week_duration
+              {`${getFormattedHour(
+                convertSecondsToMinutes(current_week_duration)
+              )} / ${getFormattedHour(
+                convertSecondsToMinutes(week_duration)
               )}`}{' '}
             </p>
             {is_completed && <VideoCompletionBadge />}
