@@ -12,17 +12,13 @@ type Props = {
 
 export default function CourseTaking({ courseDetail }: Props) {
   const { last_view_video } = courseDetail;
-  const lastPlayingVideo: CurrentPlayingVideo = {
-    video_id: last_view_video.video_id,
-    video_code: last_view_video.video_code,
-    last_view_duration: last_view_video.last_view_duration
-  };
+
   const [currentPlayingVideo, setCurrentPlayingVideo] =
-    useState<CurrentPlayingVideo>(lastPlayingVideo);
+    useState<LastViewVideo>(last_view_video);
   const [prevPlayingVideo, setPrevPlayingVideo] =
-    useState<CurrentPlayingVideo | null>(lastPlayingVideo);
+    useState<LastViewVideo | null>(last_view_video);
   const [nextPlayingVideo, setNextPlayingVideo] =
-    useState<CurrentPlayingVideo | null>(lastPlayingVideo);
+    useState<LastViewVideo | null>(last_view_video);
 
   const searchPrevVideo = useCallback(() => {
     const videos = courseDetail.sections.flatMap((section) => section.videos);
@@ -35,10 +31,12 @@ export default function CourseTaking({ courseDetail }: Props) {
       return;
     } else {
       const prevVideo = videos[currentPlayingVideoIdx - 1];
-      const video: CurrentPlayingVideo = {
+      const video: LastViewVideo = {
         video_code: prevVideo.video_code,
         video_id: prevVideo.video_id,
-        last_view_duration: prevVideo.last_view_duration
+        last_view_duration: prevVideo.last_view_duration,
+        channel: prevVideo.channel,
+        video_title: prevVideo.video_title
       };
 
       setPrevPlayingVideo(video);
@@ -56,10 +54,12 @@ export default function CourseTaking({ courseDetail }: Props) {
       return;
     } else {
       const nextVideo = videos[currentPlayingVideoIdx + 1];
-      const video: CurrentPlayingVideo = {
+      const video: LastViewVideo = {
         video_code: nextVideo.video_code,
         video_id: nextVideo.video_id,
-        last_view_duration: nextVideo.last_view_duration
+        last_view_duration: nextVideo.last_view_duration,
+        channel: nextVideo.channel,
+        video_title: nextVideo.video_title
       };
 
       setNextPlayingVideo(video);
@@ -68,7 +68,7 @@ export default function CourseTaking({ courseDetail }: Props) {
 
   const onVideoEnd = useCallback(() => {
     searchNextVideo();
-    if(nextPlayingVideo === null) return;
+    if (nextPlayingVideo === null) return;
     setCurrentPlayingVideo(nextPlayingVideo);
   }, [searchNextVideo, nextPlayingVideo]);
 
@@ -86,8 +86,8 @@ export default function CourseTaking({ courseDetail }: Props) {
       />
       <div id='background' className='flex-1 overflow-scroll'>
         <CourseHeader
-          title={last_view_video.video_title}
-          channel={last_view_video.channel}
+          title={currentPlayingVideo.video_title}
+          channel={currentPlayingVideo.channel}
         />
         <YoutubePlayer
           video_code={currentPlayingVideo.video_code}

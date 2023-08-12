@@ -7,7 +7,7 @@ export default async function CourseTakingPage({
   const courseDetail = await fetchCourseDetail(parseInt(course_id));
 
   return (
-    <div className='min-h-[calc(100vh-4rem)] max-h-[calc(100vh-4rem)] bg-zinc-50'>
+    <div className='min-h-[calc(100vh-4rem)] max-h-[calc(100vh-4rem)] bg-zinc-50 flex items-stretch'>
       <CourseTaking courseDetail={courseDetail} />
     </div>
   );

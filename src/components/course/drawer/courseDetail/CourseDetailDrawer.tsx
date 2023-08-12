@@ -8,8 +8,8 @@ import DrawerMenuButtons from './DrawerMenuButtons';
 
 type Props = {
   courseDetail: CourseDetail;
-  currentPlayingVideo: CurrentPlayingVideo;
-  setCurrentPlayingVideo: Dispatch<SetStateAction<CurrentPlayingVideo>>;
+  currentPlayingVideo: LastViewVideo;
+  setCurrentPlayingVideo: Dispatch<SetStateAction<LastViewVideo>>;
 };
 
 export default function CourseDetailDrawer({
@@ -61,7 +61,7 @@ export default function CourseDetailDrawer({
         className='relative max-h-full min-h-full bg-white shadow-lg shrink-0'
       >
         {isDrawerOpen && (
-          <div className='flex flex-col justify-between h-[calc(100vh-4rem)]'>
+          <div className='flex flex-col justify-between'>
             <div>
               <CourseDetailHeader
                 course_title={course_title}
