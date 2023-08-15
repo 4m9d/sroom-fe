@@ -10,10 +10,10 @@ interface WeekRange {
 
 //////////////////////////////////toast//////////////////////////////////
 
-interface Emoji  {
+interface Emoji {
   lecture_enrollment: string;
   error: string;
-} 
+}
 
 interface CustomToast {
   type: keyof Emoji;
@@ -218,6 +218,7 @@ interface LectureRecommendations {
 }
 
 /////////////////////////////////////////////////////////////////////////
+
 //////////////////////////////////enroll/////////////////////////////////
 
 interface EnrollLectureInNewCourseWithoutSchedulingParams {
@@ -241,10 +242,67 @@ interface EnrollLectureInNewCourseParams {
 }
 
 interface EnrollLectureInExistingCourseParams
-extends EnrollLectureInNewCourseWithoutSchedulingParams {}
+  extends EnrollLectureInNewCourseWithoutSchedulingParams {}
 
 interface EnrollLectureResponse extends Response {
   course_id: number;
   lecture_id: number;
   title: string;
+}
+
+/////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////course-taking//////////////////////////////\
+
+interface CourseTakingPageParams {
+  params: {
+    course_id: string;
+  };
+}
+
+interface Video {
+  video_index: number;
+  video_id: number;
+  channel: string;
+  video_title: string;
+  video_code: string;
+  is_completed: boolean;
+  last_view_duration: number;
+  video_duration: number;
+}
+
+type LastViewVideo = {
+  [key in
+    | 'video_id'
+    | 'video_title'
+    | 'video_code'
+    | 'channel'
+    | 'last_view_duration']: Video[key];
+};
+
+type CurrentPlayingVideo = {
+  [key in 'video_id' | 'video_code' | 'last_view_duration']: Video[key];
+};
+
+interface Section {
+  section: number;
+  week_duration: number;
+  is_completed: boolean;
+  current_week_duration: number;
+  videos: Video[];
+}
+
+interface CourseDetail {
+  course_id: number;
+  use_schedule: boolean;
+  course_title: string;
+  thumbnail: string;
+  channels: string;
+  course_duration: number;
+  current_duration: number;
+  total_video_count: number;
+  completed_video_count: number;
+  progress: number;
+  last_view_video: LastViewVideo;
+  sections: Section[];
 }

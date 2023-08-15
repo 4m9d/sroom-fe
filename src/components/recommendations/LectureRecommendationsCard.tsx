@@ -1,5 +1,5 @@
 import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
-import ThumbnailBadge from '../ui/ThumbnailBadge';
+import ThumbnailBadge from '../ui/badge/ThumbnailBadge';
 import VerticalSmallLectureCard from '../ui/lectureCard/VerticalSmallLectureCard';
 
 type Props = {
@@ -18,7 +18,7 @@ export default function LectureRecommendationsCard({ lecture }: Props) {
   } = lecture;
 
   return (
-    <div className='transition-all hover:-translate-y-2 hover:bg-zinc-100 hover:cursor-pointer'>
+    <div className='transition-all hover:-translate-y-2 hover:cursor-pointer'>
       <VerticalSmallLectureCard src={thumbnail} alt={lecture_title}>
         <div className='h-full'>
           <div className='mb-1'>

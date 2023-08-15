@@ -10,7 +10,7 @@ import useWindowSize from '@/src/hooks/useWindowSize';
 import SwiperNavigationButton from '../ui/button/SwiperNavigationButton';
 import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   recommendations: PersonalizedLecture[];
@@ -18,6 +18,7 @@ type Props = {
 
 export default function LectureRecommendationsList({ recommendations }: Props) {
   const windowSize = useWindowSize();
+  const router = useRouter();
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const [swiper, setSwiper] = useState<SwiperCore>();
@@ -56,12 +57,14 @@ export default function LectureRecommendationsList({ recommendations }: Props) {
               key={lecture.lecture_code}
               className='!flex justify-center'
             >
-              <Link
-                href={`/search/${lecture.lecture_code}`}
-                scroll={false}
+              <div
+                onClick={() => {
+                  router.refresh();
+                  router.push(`/search/${lecture.lecture_code}`);
+                }}
               >
                 <LectureRecommendationsCard lecture={lecture} />
-              </Link>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>

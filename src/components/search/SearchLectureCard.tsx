@@ -2,7 +2,7 @@
 import getRelativeTime from '@/src/util/day/getRelativeTime';
 import HorizontalSmallLectureCard from '../ui/lectureCard/HorizontalSmallLectureCard';
 import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
-import ThumbnailBadge from '../ui/ThumbnailBadge';
+import ThumbnailBadge from '../ui/badge/ThumbnailBadge';
 import getCompactFormattedNumber from '@/src/util/number/getCompactFormattedNumber';
 
 export default async function SearchLectureCard({

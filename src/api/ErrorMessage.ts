@@ -8,6 +8,7 @@ export const ErrorMessage = {
   DETAIL_REVIEW: '강의 후기를 불러오지 못했어요',
   RECOMMENDATIONS: '추천 강의를 불러오지 못했어요',
   ENROLLMENT: '강의 등록에 실패했어요',
+  DETAIL_COURSE: '강의 정보를 불러오지 못했어요'
 } as const;
 
 type ErrorMessage = (typeof ErrorMessage)[keyof typeof ErrorMessage];

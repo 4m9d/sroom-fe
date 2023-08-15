@@ -6,7 +6,7 @@ export default function useIntersectionObserver(
   rootMargin?: string
 ) {
   const option = {
-    threshold: 0,
+    threshold: [0.1, 0.9],
     root,
     rootMargin
   };

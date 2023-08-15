@@ -1,9 +1,12 @@
 import getCompactFormattedDate from '@/src/util/day/getCompactFormattedDate';
 import HorizontalBigLectureCard from '../ui/lectureCard/HorizontalBigLectureCard';
 import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
-import ThumbnailBadge from '../ui/ThumbnailBadge';
+import ThumbnailBadge from '../ui/badge/ThumbnailBadge';
 import getCompactFormattedNumber from '@/src/util/number/getCompactFormattedNumber';
 import LectureEnrollmentButton from '../lectureEnrollment/LectureEnrollmentButton';
+import Image from 'next/image';
+import getFormattedHour from '@/src/util/day/getFormattedHour';
+import convertSecondsToMinutes from '@/src/util/day/convertSecondsToMinutes';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -15,6 +18,7 @@ export default function LectureDetailCard({ lectureDetail, onClose }: Props) {
     lecture_code,
     lecture_title,
     published_at,
+    duration,
     view_count,
     lecture_count,
     thumbnail,
@@ -37,11 +41,34 @@ export default function LectureDetailCard({ lectureDetail, onClose }: Props) {
           <p className='text-sm font-semibold whitespace-normal text-zinc-500 line-clamp-1'>
             {channel}
           </p>
-          <p className='text-xs text-zinc-500'>
-            {is_playlist
-              ? `영상 ${lecture_count?.toLocaleString()}개`
-              : `조회수 ${getCompactFormattedNumber(view_count)}회`}
-            ･{getCompactFormattedDate(published_at)}
+          <p className='flex text-xs text-zinc-500'>
+            <Image
+              className='w-auto h-auto mr-1'
+              src={'/icon/icon_time.svg'}
+              alt='총 재생 시간'
+              width={12}
+              height={12}
+            />
+            {getFormattedHour(convertSecondsToMinutes(duration))}
+            {is_playlist ? (
+              <>
+                <Image
+                  className='w-auto h-auto ml-2 mr-1'
+                  src={'/icon/icon_lecture.svg'}
+                  alt='수강한 영상'
+                  width={12}
+                  height={12}
+                />
+                {`${lecture_count?.toLocaleString()}개`}
+              </>
+            ) : (
+              <span className='ml-2'>
+                {`조회수 ${getCompactFormattedNumber(view_count)}회`}
+              </span>
+            )}
+            <span className='ml-2'>
+              {getCompactFormattedDate(published_at)}
+            </span>
           </p>
         </div>
         <div className='h-full whitespace-pre-wrap'>
