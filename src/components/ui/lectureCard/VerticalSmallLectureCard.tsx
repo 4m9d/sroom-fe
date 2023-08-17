@@ -12,9 +12,13 @@ export default function VerticalSmallLectureCard({
   children
 }: Props) {
   return (
-    <div className='relative w-[24rem] h-[23rem] flex flex-col gap-4'>
-      <div className='relative object-cover min-h-[calc(24rem/1.78)]'>
-        <Image fill={true} sizes='100%' src={src} alt={alt} />
+    <div className='relative w-[20.5rem] h-[23rem] flex flex-col gap-4'>
+      <div className='flex items-center w-full '>
+        <div className='relative w-full h-0 pb-[56.25%]'>
+          <div className='absolute top-0 left-0 object-cover w-full h-full'>
+            <Image fill={true} src={src} alt={alt} />
+          </div>
+        </div>
       </div>
       <div className='w-full h-full'>{children}</div>
     </div>

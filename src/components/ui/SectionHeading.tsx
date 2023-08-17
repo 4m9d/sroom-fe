@@ -4,6 +4,6 @@ type Props = {
 
 export default function SectionHeading({title}: Props) {
   return (
-    <h3 className="mb-10 text-2xl font-bold bg-transparent">{title}</h3>
+    <h3 className="mb-10 text-3xl font-bold bg-transparent text-sroom-black-400">{title}</h3>
   )
 }

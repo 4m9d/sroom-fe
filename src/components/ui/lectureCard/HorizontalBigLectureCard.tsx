@@ -12,13 +12,15 @@ export default function HorizontalBigLectureCard({
   children
 }: Props) {
   return (
-    <div className='relative flex w-full gap-5 p-3 whitespace-normal bg-white lg:gap-8'>
-      <div className='relative object-cover min-w-[calc(7rem*1.78)] lg:min-w-[calc(12rem*1.78)] xl:min-w-[calc(19rem*1.78)] min-h-[7rem] lg:min-h-[12rem] xl:min-h-[19rem]'>
-        <Image fill={true} sizes='100%' src={src} alt={alt} />
+    <div className='relative flex flex-col w-full gap-5 p-3 whitespace-normal bg-white lg:gap-10 lg:flex-row'>
+      <div className='w-full max-w-[38rem] lg:max-w-[27.5rem] flex items-center'>
+        <div className='relative w-full h-0 pb-[56.25%]'>
+          <div className='absolute top-0 left-0 object-cover w-full h-full'>
+            <Image fill={true} sizes='100%' src={src} alt={alt} />
+          </div>
+        </div>
       </div>
-      <div className='w-full max-w-[calc(100%-1.25rem-(7rem*1.78))] lg:max-w-[calc(100%-2rem-(12rem*1.78))] xl:max-w-[calc(100%-2rem-(19rem*1.78))] min-h-full whitespace-normal'>
-        {children}
-      </div>
+      {children}
     </div>
   );
 }

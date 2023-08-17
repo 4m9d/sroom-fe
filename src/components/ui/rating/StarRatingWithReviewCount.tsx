@@ -10,9 +10,9 @@ export default function StarRatingWithReviewCount({rating, review_count}: Props)
     <div className='flex max-w-[6.5rem] h-4'>
       <div className='flex items-center justify-center mr-1'>
         <OneStar className='w-3 h-3' />
-        <p className='text-xs font-bold text-orange-500'>{rating}</p>
+        <p className='text-xs font-bold text-sroom-brand'>{rating}</p>
       </div>
-      <p className='text-xs font-bold text-orange-500 underline'>
+      <p className='text-xs font-semibold underline text-sroom-brand'>
         후기 {review_count.toLocaleString()}개
       </p>
     </div>

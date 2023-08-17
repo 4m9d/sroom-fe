@@ -93,7 +93,7 @@ export default async function SearchResultsList({
       <div className='flex justify-end mb-5'>
         <FilterSelect />
       </div>
-      <ul className='flex flex-wrap gap-8 shrink-0'>
+      <ul className='grid grid-cols-1 gap-5 lg:grid-cols-2 shrink-0'>
         {data?.pages.map((page) =>
           page?.lectures.map((lecture: SearchResultsLecture) => (
             <div
