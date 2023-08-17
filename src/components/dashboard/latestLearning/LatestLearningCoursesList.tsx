@@ -12,7 +12,7 @@ export default function LatestLearningCoursesList({
     <div className='bg-zinc-100'>
       <section className='px-20 py-20 mx-auto my-20 max-w-screen-2xl'>
         <SectionHeading title='시작해 볼까요?' />
-        <ul className='flex flex-wrap gap-8 shrink-0'>
+        <ul className='grid grid-cols-1 gap-5 2xl:grid-cols-2 shrink-0'>
           {latestLearningCourses.map((course) => (
             <li key={course.course_id}>
               <LatestLearningLectureCard course={course} />

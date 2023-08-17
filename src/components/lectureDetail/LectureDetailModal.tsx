@@ -65,7 +65,7 @@ export default function LectureDetailModal({
     <>
       <Modal
         id={ModalIDs.LECTURE_DETAIL}
-        className='relative h-full p-14 rounded-none scroll-smooth min-w-[70vw] max-w-[70vw]'
+        className='relative h-full p-14 rounded-none scroll-smooth min-w-[75vw] max-w-[75vw]'
         onClose={onCloseHandler}
       >
         <LectureDetailCard

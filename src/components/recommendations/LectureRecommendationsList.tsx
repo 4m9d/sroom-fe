@@ -1,6 +1,5 @@
 'use client';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Mousewheel } from 'swiper/modules';
 import SwiperCore from 'swiper';
 import 'swiper/css';
 import 'swiper/css/mousewheel';
@@ -31,18 +30,12 @@ export default function LectureRecommendationsList({ recommendations }: Props) {
       <div className='relative'>
         <Swiper
           className='!py-2'
-          modules={[Mousewheel]}
           slidesPerView={
             windowSize.width < 1000 ? 1 : windowSize.width < 1400 ? 2 : 3
           }
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current
-          }}
-          mousewheel={{
-            sensitivity: 1,
-            thresholdTime: 100,
-            thresholdDelta: 15
           }}
           onBeforeInit={(swiper) => {
             setSwiper(swiper);

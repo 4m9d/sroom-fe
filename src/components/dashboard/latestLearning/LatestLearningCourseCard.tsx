@@ -17,7 +17,7 @@ export default function LatestLearningCourseCard({ course }: Props) {
       src={course.thumbnail}
       alt={course.course_title}
     >
-      <div className='flex flex-col justify-between h-full'>
+      <div className='flex flex-col justify-between h-full text-sroom-black-400'>
         <div className='mt-2'>
           <p className='text-lg font-bold whitespace-normal line-clamp-2'>
             {course.course_title}
@@ -26,9 +26,9 @@ export default function LatestLearningCourseCard({ course }: Props) {
             {course.channels}
           </p>
         </div>
-        <div className='flex justify-between h-10 gap-5 mb-1'>
-          <div className='flex flex-col justify-between flex-1 gap-1 py-1'>
-            <p className='flex text-xs text-zinc-500'>
+        <div className='flex justify-between h-10 gap-5 mb-1 shrink-0'>
+          <div className='flex flex-col justify-between flex-1 gap-1 py-1 shrink-0'>
+            <p className='flex text-xs text-zinc-500 shrink-0'>
               <Image
                 className='w-auto h-auto mr-1'
                 src={'/icon/icon_time.svg'}
@@ -48,18 +48,18 @@ export default function LatestLearningCourseCard({ course }: Props) {
               {course.completed_video_count.toLocaleString()}개<span>/</span>
               {course.total_video_count.toLocaleString()}개 완료
             </p>
-            <div className='flex items-center'>
+            <div className='flex items-center shrink-0'>
               <ProgressBar
                 className='w-full h-[5px] bg-zinc-100'
                 value={course.progress}
               />
-              <p className='ml-2 text-xs font-semibold text-orange-500'>
+              <p className='ml-2 text-xs font-semibold text-orange-500 shrink-0'>
                 {course.progress}%
               </p>
             </div>
           </div>
           <Link href={`/course/${course.course_id}`}>
-            <Button className='!h-10 flex justify-between w-32 text-sm text-zinc-200 bg-zinc-800'>
+            <Button className='!h-10 flex justify-between w-32 text-sm text-zinc-200 bg-zinc-800 shrink-0'>
               <p>바로 학습</p>
               <p> 〉 </p>
             </Button>
