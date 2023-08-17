@@ -6,7 +6,7 @@ type Props = {
 };
 
 export default function DashboardHeader({ isEnrolled }: Props) {
-  if (!isEnrolled) {
+  if (isEnrolled) {
     return (
       <section className='px-20 mx-auto pt-14 text-sroom-black-400 max-w-screen-2xl'>
         <h2 className='text-3xl font-bold lg:text-4xl md:mb-2 lg:mb-3'>

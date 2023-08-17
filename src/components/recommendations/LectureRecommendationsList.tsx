@@ -25,7 +25,7 @@ export default function LectureRecommendationsList({ recommendations }: Props) {
   const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
 
   return (
-    <section className='px-20 py-20 mx-auto my-20 max-w-screen-2xl'>
+    <section className='px-20 mx-auto my-20 max-w-screen-2xl'>
       <SectionHeading title='이런 강의는 어때요?' />
       <div className='relative'>
         <Swiper
