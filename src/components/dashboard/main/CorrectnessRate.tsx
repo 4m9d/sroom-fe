@@ -6,11 +6,11 @@ type Props = {
 
 export default function CorrectnessRate({value}: Props) {
   return (
-    <div className='flex flex-col items-center justify-center col-start-2 col-end-3 row-start-2 row-end-3 gap-5 rounded-t-full bg-zinc-100'>
-      <p className='text-sm leading-8'>
-        퀴즈 총 정답율 <span className='text-2xl font-bold'>{value}</span>%
+    <div className='flex flex-col items-center justify-center col-start-2 col-end-3 row-start-2 row-end-3 gap-5 rounded-t-full bg-sroom-gray-300 text-sroom-black-400'>
+      <p className='text-xs font-semibold leading-8 sm:text-sm md:text-md: lg:text-lg xl:text-xl'>
+        퀴즈 총 정답율 <span className='text-lg font-bold sm:text-2xl lg:text-3xl xl:text-4xl'>{value}</span>%
       </p>
-      <ProgressBar className='!w-4/5 !h-2' value={80} />
+      <ProgressBar className='w-[78%] h-2 lg:h-[0.58rem]' value={80} />
     </div>
   );
 }
