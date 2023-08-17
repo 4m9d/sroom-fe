@@ -3,7 +3,7 @@ import CompletionRate from './CompletionRate';
 import CorrectnessRate from './CorrectnessRate';
 import Motivation from './Motivation';
 import TotalLearningTime from './TotalLearningTime';
-import WeeklyCalendar from './WeeklyCalendar';
+import WeeklyCalendar from './weeklyCalendar/WeeklyCalendar';
 
 type Props = {
   dashboardInfo: DashboardInfo;
