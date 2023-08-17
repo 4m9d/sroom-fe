@@ -32,6 +32,7 @@ export default function YoutubePlayer({
     <div className='mx-auto mb-10 px-[10%]'>
       <YouTube
         opts={opts}
+        key={videoId}
         videoId={videoId}
         className='text-center relative pb-[56.25%] pt-0 h-0 w-full overflow-hidden'
         iframeClassName='absolute top-0 left-0 w-full h-full'

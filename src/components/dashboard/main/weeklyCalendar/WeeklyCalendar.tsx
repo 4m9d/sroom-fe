@@ -40,7 +40,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
   }, []);
 
   const dayCardClickHandler = useCallback((weekday: weekdayKey) => {
-    setSelectedDay(weekday);
+    setSelectedDay(() => weekday);
   }, []);
 
   const previousWeekClickHandler = useCallback(() => {
@@ -49,7 +49,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
 
     const previousWeek = getPreviousWeekRange({ startOfWeek, endOfWeek });
     setSelectedWeek(findLearningHistory(previousWeek.startOfWeek));
-    setSelectedDay('7');
+    setSelectedDay(() => '7');
   }, [selectedWeek]);
 
   const nextWeekClickHandler = useCallback(() => {
@@ -58,7 +58,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
 
     const nextWeek = getNextWeekRange({ startOfWeek, endOfWeek });
     setSelectedWeek(findLearningHistory(nextWeek.startOfWeek));
-    setSelectedDay('7');
+    setSelectedDay(() => '7');
   }, [selectedWeek]);
 
   useEffect(() => {

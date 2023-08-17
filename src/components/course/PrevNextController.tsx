@@ -14,10 +14,10 @@ export default function PrevNextController({
 }: Props) {
   const controllerClickHandler = (type: 'prev' | 'next') => {
     if (type === 'prev' && prevPlayingVideo !== null) {
-      setCurrentPlayingVideo(prevPlayingVideo);
+      setCurrentPlayingVideo(() => prevPlayingVideo);
     }
     if (type === 'next' && nextPlayingVideo !== null) {
-      setCurrentPlayingVideo(nextPlayingVideo);
+      setCurrentPlayingVideo(() => nextPlayingVideo);
     }
   };
   return (

@@ -27,7 +27,7 @@ export default function CourseTaking({ courseDetail }: Props) {
     });
 
     if (currentPlayingVideoIdx === 0) {
-      setPrevPlayingVideo(null);
+      setPrevPlayingVideo(() => null);
       return;
     } else {
       const prevVideo = videos[currentPlayingVideoIdx - 1];
@@ -39,7 +39,7 @@ export default function CourseTaking({ courseDetail }: Props) {
         video_title: prevVideo.video_title
       };
 
-      setPrevPlayingVideo(video);
+      setPrevPlayingVideo(() => video);
     }
   }, [courseDetail.sections, currentPlayingVideo.video_id]);
 
@@ -50,7 +50,7 @@ export default function CourseTaking({ courseDetail }: Props) {
     });
 
     if (currentPlayingVideoIdx === videos.length - 1) {
-      setNextPlayingVideo(null);
+      setNextPlayingVideo(() => null);
       return;
     } else {
       const nextVideo = videos[currentPlayingVideoIdx + 1];
@@ -62,14 +62,14 @@ export default function CourseTaking({ courseDetail }: Props) {
         video_title: nextVideo.video_title
       };
 
-      setNextPlayingVideo(video);
+      setNextPlayingVideo(() => video);
     }
   }, [courseDetail.sections, currentPlayingVideo.video_id]);
 
   const onVideoEnd = useCallback(() => {
     searchNextVideo();
     if (nextPlayingVideo === null) return;
-    setCurrentPlayingVideo(nextPlayingVideo);
+    setCurrentPlayingVideo(() => nextPlayingVideo);
   }, [searchNextVideo, nextPlayingVideo]);
 
   useEffect(() => {

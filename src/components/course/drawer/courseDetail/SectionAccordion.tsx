@@ -43,7 +43,7 @@ export default function SectionAccordion({
       video_title: video.video_title
     };
 
-    setCurrentPlayingVideo(clickedVideo);
+    setCurrentPlayingVideo(() => clickedVideo);
   };
 
   useLayoutEffect(() => {
