@@ -11,7 +11,6 @@ import convertSecondsToMinutes from '@/src/util/day/convertSecondsToMinutes';
 import CalendarForOneWeek from './CalendarForOneWeek';
 import LearningHistoryItem from './LearningHistoryItem';
 import { weekdayKey } from '.';
-import Button from '@/src/components/ui/button/Button';
 
 type Props = {
   learning_histories: LearningHistory[];
@@ -75,12 +74,13 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
       </div>
       <div className='flex justify-between w-full h-full pb-5 overflow-auto md:pb-8 xl:pb-10'>
         <div className='w-5 pt-[3%] sm:pt-[6%] md:pt-[10%] xl:pt-[12%] md:w-8 xl:w-10 shrink-0'>
-          <Button
+          <button
+            type='button'
             onClick={previousWeekClickHandler}
-            className='flex items-center justify-center w-5 h-5 text-xs font-bold transition-all md:w-8 md:h-8 xl:w-10 xl:h-10 md:text-base xl:text-lg hover:bg-zinc-200'
+            className='flex items-center justify-center w-5 h-5 text-xs font-bold transition-all md:w-8 md:h-8 xl:w-10 xl:h-10 md:text-base xl:text-lg hover:opacity-80 hover:bg-sroom-gray-500'
           >
             〈
-          </Button>
+          </button>
         </div>
         <div className='flex flex-col grow bg-sroom-white'>
           <div className='flex items-center justify-center flex-1 border-b border-sroom-gray-400'>
@@ -116,12 +116,13 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
         </div>
         <div className='w-5 pt-[3%] sm:pt-[6%] md:pt-[10%] xl:pt-[12%] md:w-8 xl:w-10 shrink-0'>
           {getCurrentWeekRange().startOfWeek !== selectedWeek[0].fullDate && (
-            <Button
+            <button
+              type='button'
               onClick={nextWeekClickHandler}
-              className='flex items-center justify-center w-5 h-5 text-xs font-bold transition-all md:w-8 md:h-8 xl:w-10 xl:h-10 md:text-base xl:text-lg hover:bg-zinc-200'
+              className='flex items-center justify-center w-5 h-5 text-xs font-bold transition-all md:w-8 md:h-8 xl:w-10 xl:h-10 md:text-base xl:text-lg hover:opacity-80 hover:bg-sroom-gray-500'
             >
               〉
-            </Button>
+            </button>
           )}
         </div>
       </div>
