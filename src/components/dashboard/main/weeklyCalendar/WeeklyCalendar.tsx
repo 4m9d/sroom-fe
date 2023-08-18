@@ -82,7 +82,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
             〈
           </button>
         </div>
-        <div className='flex flex-col grow bg-sroom-white'>
+        <div className='flex flex-col px-2 grow bg-sroom-white'>
           <div className='flex items-center justify-center flex-1 border-b border-sroom-gray-400'>
             <CalendarForOneWeek
               selectedDay={selectedDay}
