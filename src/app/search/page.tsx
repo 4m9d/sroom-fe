@@ -29,7 +29,7 @@ export default async function SearchResults({ searchParams }: Props) {
 
   return (
     <>
-      <div className='py-20 bg-zinc-100'>
+      <div className='py-20 bg-sroom-gray-200'>
         <section className='px-20 mx-auto max-w-screen-2xl'>
           <SearchResultsHeading keyword={requestParam.keyword} />
           <Suspense
