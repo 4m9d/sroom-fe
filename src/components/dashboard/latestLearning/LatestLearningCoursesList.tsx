@@ -10,7 +10,7 @@ export default function LatestLearningCoursesList({
 }: Props) {
   return (
     <div className='bg-sroom-gray-200'>
-      <section className='px-8 py-20 mx-auto mt-20 lg:px-24 max-w-screen-2xl'>
+      <section className='px-4 py-20 mx-auto mt-20 lg:px-24 max-w-screen-2xl'>
         <SectionHeading title='시작해 볼까요?' />
         <ul className='grid grid-cols-1 gap-5 2xl:grid-cols-2 shrink-0'>
           {latestLearningCourses.map((course) => (

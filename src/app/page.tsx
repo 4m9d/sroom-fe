@@ -3,7 +3,7 @@ import LoginButton from '../components/login/LoginButton';
 
 export default async function Main() {
   return (
-    <div className='px-8 lg:px-24 max-w-screen-2xl pt-[7.5rem] pb-20 mx-auto'>
+    <div className='px-4 lg:px-24 max-w-screen-2xl pt-[7.5rem] pb-20 mx-auto'>
       <GoogleOneTapPortal />
       <h2 className='mb-5 text-5xl font-bold text-sroom-black-400'>
         유튜브 강의를 쉽고 편하게.

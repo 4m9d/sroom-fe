@@ -19,7 +19,7 @@ export default async function MainDashboard({ dashboardInfo }: Props) {
   } = dashboardInfo;
 
   return (
-    <section className='px-8 lg:px-24 mx-auto mt-20 max-w-screen-2xl h-[32.90%]'>
+    <section className='px-4 lg:px-24 mx-auto mt-20 max-w-screen-2xl h-[32.90%]'>
       <SectionHeading title='대시보드' />
       <div className='w-full'>
         <div className='relative pb-[32.90%] w-full'>

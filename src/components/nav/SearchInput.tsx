@@ -30,7 +30,7 @@ export default function SearchInput() {
         value={keyword}
         onChange={changeHandler}
         placeholder='강의 검색'
-        className='w-full rounded-none bg-sroom-gray-400 form-control input'
+        className='w-full pr-8 text-xs rounded-none lg:text-base bg-sroom-gray-400 form-control input'
       />
       <button
         type='button'
