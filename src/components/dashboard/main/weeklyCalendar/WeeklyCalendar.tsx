@@ -73,7 +73,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
         </p>
       </div>
       <div className='flex justify-between w-full h-full pb-5 overflow-auto md:pb-8 xl:pb-10'>
-        <div className='w-5 pt-[3%] sm:pt-[6%] md:pt-[10%] xl:pt-[12%] md:w-8 xl:w-10 shrink-0'>
+        <div className='w-5 pt-[12%] md:w-8 xl:w-10 shrink-0'>
           <button
             type='button'
             onClick={previousWeekClickHandler}
@@ -114,7 +114,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
             )}
           </div>
         </div>
-        <div className='w-5 pt-[3%] sm:pt-[6%] md:pt-[10%] xl:pt-[12%] md:w-8 xl:w-10 shrink-0'>
+        <div className='w-5 pt-[12%] md:w-8 xl:w-10 shrink-0'>
           {getCurrentWeekRange().startOfWeek !== selectedWeek[0].fullDate && (
             <button
               type='button'
