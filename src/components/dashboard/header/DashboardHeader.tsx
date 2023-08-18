@@ -8,7 +8,7 @@ type Props = {
 export default function DashboardHeader({ isEnrolled }: Props) {
   if (isEnrolled) {
     return (
-      <section className='px-20 mx-auto pt-14 text-sroom-black-400 max-w-screen-2xl'>
+      <section className='px-8 mx-auto lg:px-24 pt-14 text-sroom-black-400 max-w-screen-2xl'>
         <h2 className='text-3xl font-bold lg:text-4xl md:mb-2 lg:mb-3'>
           안녕하세요!
         </h2>
@@ -20,7 +20,7 @@ export default function DashboardHeader({ isEnrolled }: Props) {
   } else {
     return (
       <div className='bg-sroom-gray-200 h-[23rem] lg:h-[36rem] text-sroom-black-400'>
-        <section className='flex flex-col justify-between h-full px-20 pt-12 mx-auto lg:pt-20 max-w-screen-2xl'>
+        <section className='flex flex-col justify-between h-full px-8 pt-12 mx-auto lg:px-24 lg:pt-20 max-w-screen-2xl'>
           <div className='flex flex-col items-center'>
             <h2 className='mb-5 text-4xl font-bold lg:text-5xl'>반가워요!</h2>
             <h3 className='flex flex-col items-center text-lg font-normal text-sroom-black-200'>
