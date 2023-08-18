@@ -97,7 +97,7 @@ export default function SchedulingModal({
     return [expectedDate.year(), expectedDate.month() + 1, expectedDate.date()];
   }
 
-  useEffect(() => {
+  function reschedule() {
     const weeklyStudyTime = convertMinutesToSeconds(inputValue * 7);
     const index_list = indexes!.index_list;
     const schedulingList: number[] = [];
@@ -134,6 +134,10 @@ export default function SchedulingModal({
     });
 
     setScheduling(schedulingList);
+  }
+
+  useEffect(() => {
+    reschedule();
   }, [inputValue, durationInMinutes, indexes]);
 
   useEffect(() => {

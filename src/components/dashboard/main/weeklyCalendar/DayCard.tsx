@@ -17,10 +17,8 @@ export default function DayCard({
     <div
       onClick={() => dayCardClickHandler(weekday)}
       className={`flex flex-1 flex-col justify-center items-center gap-1 py-1 lg:py-3 cursor-pointer w-[100%/7] ${
-        selectedDay === weekday
-          ? 'bg-sroom-brand text-sroom-white'
-          : 'text-sroom-black-400'
-      }}`}
+        selectedDay === weekday ? 'bg-sroom-brand' : ''
+      }`}
     >
       <div className='flex items-center justify-center'>
         <p className='text-xs font-semibold lg:text-sm xl:text-lg'>
@@ -28,7 +26,11 @@ export default function DayCard({
         </p>
       </div>
       <div className='items-center justify-center'>
-        <p className='text-xs font-semibold lg:text-sm xl:text-lg'>
+        <p
+          className={`text-xs font-semibold lg:text-sm xl:text-lg ${
+            selectedDay === weekday ? 'text-sroom-white' : 'text-sroom-black-400'
+          }`}
+        >
           {date === 'Invalid Date' ? '' : date}
         </p>
       </div>
