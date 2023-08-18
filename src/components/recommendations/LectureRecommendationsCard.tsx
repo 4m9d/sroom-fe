@@ -26,7 +26,7 @@ export default function LectureRecommendationsCard({ lecture }: Props) {
               {lecture_title}
             </p>
           </div>
-          <div className='mb-1'>
+          <div className='mb-2'>
             <p className='text-sm whitespace-normal text-sroom-black-300 line-clamp-1'>
               {channel}
             </p>

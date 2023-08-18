@@ -30,7 +30,7 @@ export default async function SearchResults({ searchParams }: Props) {
   return (
     <>
       <div className='py-20 bg-zinc-100'>
-        <section className='px-20 py-20 mx-auto max-w-screen-2xl'>
+        <section className='px-20 mx-auto max-w-screen-2xl'>
           <SearchResultsHeading keyword={requestParam.keyword} />
           <Suspense
             fallback={

@@ -63,23 +63,23 @@ export default async function SearchResultsList({
     };
 
     return (
-      <div className='flex justify-between gap-5 text-sm font-semibold h-9'>
+      <div className='flex justify-between h-10 gap-3 text-sm font-medium'>
         <Button
           onClick={() => onSelectHanlder('playlist')}
-          className={`!h-10 w-36 border-gray-200 border ${
+          className={`!h-10 w-36 border-sroom-gray-500 border ${
             filter === 'playlist'
-              ? 'bg-zinc-900 text-white'
-              : 'bg-white text-zinc-900'
+              ? 'bg-sroom-black-400 text-sroom-white'
+              : 'bg-sroom-white text-sroom-black-100'
           }`}
         >
           재생목록만 보기
         </Button>
         <Button
           onClick={() => onSelectHanlder('all')}
-          className={`!h-10 w-36 border-gray-200 border ${
+          className={`!h-10 w-36 border-sroom-gray-500 border ${
             filter === 'all'
-              ? 'bg-zinc-900 text-white'
-              : 'bg-white text-zinc-900'
+              ? 'bg-sroom-black-400 text-sroom-white'
+              : 'bg-sroom-white text-sroom-black-100'
           }`}
         >
           전체보기
@@ -120,7 +120,7 @@ export default async function SearchResultsList({
         )}
       </ul>
       {hasNextPage ? (
-        <div className='flex justify-center my-16'>
+        <div className='flex justify-center mt-12'>
           <LoadMoreButton title='강의 더보기' onClick={fetchNextPage} />
         </div>
       ) : null}

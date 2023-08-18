@@ -32,10 +32,10 @@ export default async function SearchLectureCard({
           <p className='text-base font-bold whitespace-normal line-clamp-1'>
             {lecture_title}
           </p>
-          <p className='text-sm font-semibold whitespace-normal text-zinc-500 line-clamp-1'>
+          <p className='mb-1 text-sm whitespace-normal text-sroom-black-300 line-clamp-1'>
             {channel}
           </p>
-          <p className='text-xs text-zinc-500'>
+          <p className='text-xs text-sroom-black-100'>
             {is_playlist
               ? `영상 ${lecture_count?.toLocaleString()}개`
               : `조회수 ${getCompactFormattedNumber(view_count)}회`}
@@ -43,7 +43,7 @@ export default async function SearchLectureCard({
           </p>
         </div>
         <div className='mb-1 min-h-[3rem]'>
-          <p className='text-sm whitespace-normal text-zinc-500 line-clamp-2'>
+          <p className='text-sm whitespace-normal text-sroom-black-200 line-clamp-2'>
             {description}
           </p>
         </div>
@@ -56,7 +56,7 @@ export default async function SearchLectureCard({
       </div>
       {is_enrolled && (
         <div className='absolute top-3 left-3'>
-          <ThumbnailBadge title='수강 중' className='bg-zinc-800' />
+          <ThumbnailBadge title='수강 중' className='bg-sroom-black-400' />
         </div>
       )}
       {is_playlist && (
@@ -65,7 +65,7 @@ export default async function SearchLectureCard({
             is_enrolled ? 'left-[4.7rem]' : 'left-3'
           }`}
         >
-          <ThumbnailBadge title='재생목록' className='bg-orange-500' />
+          <ThumbnailBadge title='재생목록' className='bg-sroom-brand' />
         </div>
       )}
     </HorizontalSmallLectureCard>
