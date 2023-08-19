@@ -26,15 +26,14 @@ module.exports = {
       keyframes: {
         flow: {
           '0%': {
-            transform: 'translate3d(0%, 0, 0)'
+            transform: 'translate3d(100%, 0, 0)'
           },
           '100%': { transform: 'translate3d(-100%, 0, 0)' }
         }
       },
       animation: {
-        'flow-fast': 'flow 5s linear infinite',
-        'flow-medium': 'flow 10s linear infinite',
-        'flow-slow': 'flow 20s linear infinite'
+        'flow': 'flow 20s linear infinite',
+        'flow-backup' : 'flow 20s linear infinite 10.1s'
       }
     }
   },
