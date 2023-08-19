@@ -47,7 +47,7 @@ export default function TextLoopIntro({}) {
       <TextLoop
         type='main'
         duration={20}
-        delayGap={3.2}
+        delayGap={2}
         className='top-[20%] sm:top-1/4'
       >
         {MOTIVATION_GENERAL.map((item, index) => (
@@ -56,7 +56,7 @@ export default function TextLoopIntro({}) {
       </TextLoop>
       <TextLoop
         duration={20}
-        delayGap={3.2}
+        delayGap={2}
         type='back-up'
         className='top-[20%] sm:top-1/4'
       >
@@ -67,7 +67,7 @@ export default function TextLoopIntro({}) {
       <TextLoop
         type='main'
         duration={20}
-        delayGap={4.1}
+        delayGap={3}
         className='top-[60%] sm:top-2/4'
       >
         {MOTIVATION_SPECIFIC.map((item, index) => (
@@ -77,7 +77,7 @@ export default function TextLoopIntro({}) {
       <TextLoop
         type='back-up'
         duration={20}
-        delayGap={4.1}
+        delayGap={3}
         className='top-[60%] sm:top-2/4'
       >
         {MOTIVATION_SPECIFIC.map((item, index) => (
