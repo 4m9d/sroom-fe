@@ -1,8 +1,3 @@
-import {
-  MOTIVATION_GENERAL,
-  MOTIVATION_SPECIFIC
-} from '@/src/constants/main/main';
-import Image from 'next/image';
 import EnrollmentIntro from './enrollment/EnrollmentIntro';
 import SchedulingIntro from './scheduling/SchedulingIntro';
 import CourseMaterialIntro from './courseMaterial/CourseMaterialIntro';
