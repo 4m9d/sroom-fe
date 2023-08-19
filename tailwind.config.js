@@ -22,35 +22,23 @@ module.exports = {
         'sroom-red': '#FF0000',
         'sroom-white': '#FFFFFF',
         'sroom-brand': '#FA5B3E'
-      },
-      keyframes: {
-        flow: {
-          '0%': {
-            transform: 'translate3d(100%, 0, 0)'
-          },
-          '100%': { transform: 'translate3d(-100%, 0, 0)' }
-        }
-      },
-      animation: {
-        'flow': 'flow 20s linear infinite',
-        'flow-backup' : 'flow 20s linear infinite 10.1s'
       }
+    },
+    plugins: [
+      require('daisyui'),
+      require('tailwind-scrollbar-hide'),
+      require('tailwindcss'),
+      require('autoprefixer')
+    ],
+    daisyui: {
+      themes: ['light'],
+      darkTheme: 'dark', // default: 'dark'
+      base: true, // default: true
+      styled: true, // default: true
+      utils: true, // default: true
+      rtl: false, // default: false
+      prefix: '', // default: ''
+      logs: false // default:
     }
-  },
-  plugins: [
-    require('daisyui'),
-    require('tailwind-scrollbar-hide'),
-    require('tailwindcss'),
-    require('autoprefixer')
-  ],
-  daisyui: {
-    themes: ['light'],
-    darkTheme: 'dark', // default: 'dark'
-    base: true, // default: true
-    styled: true, // default: true
-    utils: true, // default: true
-    rtl: false, // default: false
-    prefix: '', // default: ''
-    logs: false // default:
   }
 };
