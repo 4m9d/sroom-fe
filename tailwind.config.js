@@ -22,6 +22,19 @@ module.exports = {
         'sroom-red': '#FF0000',
         'sroom-white': '#FFFFFF',
         'sroom-brand': '#FA5B3E'
+      },
+      keyframes: {
+        flow: {
+          '0%': {
+            transform: 'translate3d(0%, 0, 0)'
+          },
+          '100%': { transform: 'translate3d(-100%, 0, 0)' }
+        }
+      },
+      animation: {
+        'flow-fast': 'flow 5s linear infinite',
+        'flow-medium': 'flow 10s linear infinite',
+        'flow-slow': 'flow 20s linear infinite'
       }
     }
   },
