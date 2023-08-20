@@ -26,9 +26,9 @@ export default function LatestLearningCourseCard({ course }: Props) {
             {course.channels}
           </p>
         </div>
-        <div className='flex justify-between h-10 gap-5 mb-1 shrink-0'>
-          <div className='flex flex-col justify-between flex-1 gap-1 py-1 shrink-0'>
-            <p className='flex flex-wrap text-xs text-sroom-black-100 shrink-0'>
+        <div className='flex justify-between gap-5 mb-1 min-h-10 shrink-0'>
+          <div className='flex-col justify-between flex-1 hidden gap-1 py-1 sm:flex shrink-0'>
+            <p className='flex text-xs text-sroom-black-100 shrink-0'>
               <Image
                 className='w-auto h-auto mr-1'
                 src={'/icon/icon_time.svg'}

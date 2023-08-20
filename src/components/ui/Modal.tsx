@@ -19,7 +19,6 @@ export default function Modal({
         <form method='dialog'>
           <button
             type='button'
-            autoFocus
             onClick={onClose}
             className='absolute btn btn-sm btn-circle btn-ghost right-2 top-2'
           >

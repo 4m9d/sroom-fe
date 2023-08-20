@@ -18,11 +18,11 @@ export default function NavBar({ logo, profileDropdown }: Props) {
   const hidden = name ? '' : 'hidden';
 
   return (
-    <nav className='flex justify-between gap-8 px-20 mx-auto max-h-[4rem] navbar'>
-      <h1 className='shrink-0 w-[calc(2.5rem*2.57)] h-14'>
-        <Link href='/' className='text-lg font-bold shrink-0 mr-14'>
+    <nav className='flex justify-between gap-4 lg:gap-8 px-4 lg:px-24 mx-auto max-h-[4rem] navbar max-w-screen-2xl'>
+      <h1 className='w-20 lg:w-36 shrink-0'>
+        <Link href='/' className='shrink-0 mr-14'>
           <Image
-            className='w-[calc(2.5rem*2.57)] h-14'
+            className='w-20 lg:w-36'
             src={'/logo/logo_en.svg'}
             alt={logo}
             width={102}
@@ -33,35 +33,38 @@ export default function NavBar({ logo, profileDropdown }: Props) {
       <div className={`${hidden} flex-1`}>
         <SearchInput />
       </div>
-      <div className='flex gap-4 w-72'>
-        <Button onClick={logout} className={`${hidden} g_id_signout w-24 bg-sroom-brand`}>
-          <p className='text-sm font-semibold text-sroom-white'>로그아웃</p>
-        </Button>
-        <button
-          type='button'
-          className={`${hidden} dropdown dropdown-hover w-44 text-sroom-black-400`}
+      <Button
+        onClick={logout}
+        className={`${hidden} g_id_signout w-20 lg:w-24 bg-sroom-brand`}
+      >
+        <p className='text-xs font-semibold lg:text-sm text-sroom-white'>로그아웃</p>
+      </Button>
+      <button
+        type='button'
+        className={`${hidden} dropdown dropdown-hover w-36 lg:w-52 text-sroom-black-400`}
+      >
+        <div
+          tabIndex={0}
+          className='flex flex-col items-start justify-between h-full rounded-none w-36 lg:w-52 btn btn-ghost hover:bg-sroom-gray-300'
         >
-          <div
-            tabIndex={0}
-            className='flex flex-col items-start justify-between h-full rounded-none w-52 btn btn-ghost hover:bg-sroom-gray-300'
-          >
-            <p className='text-sm font-semibold text-left'>{name}</p>
-            <p className='text-xs font-normal text-left whitespace-normal text-sroom-black-100 line-clamp-1'>{bio}</p>
-          </div>
-          <ul
-            tabIndex={0}
-            className='menu dropdown-content z-[1] p-2 w-52 shadow rounded-none'
-          >
-            {profileDropdown?.map((menu) => {
-              return (
-                <li key={menu.id}>
-                  <Link href={menu.menuRoute}>{menu.menuTitle}</Link>
-                </li>
-              );
-            })}
-          </ul>
-        </button>
-      </div>
+          <p className='text-xs font-semibold text-left lg:text-sm'>{name}</p>
+          <p className='text-xs font-normal text-left whitespace-normal text-sroom-black-100 line-clamp-1'>
+            {bio}
+          </p>
+        </div>
+        <ul
+          tabIndex={0}
+          className='menu dropdown-content z-[1] p-1 w-36 lg:w-52 shadow rounded-none text-xs font-medium text-sroom-black-400 bg-sroom-white'
+        >
+          {profileDropdown?.map((menu) => {
+            return (
+              <li key={menu.id}>
+                <Link href={menu.menuRoute}>{menu.menuTitle}</Link>
+              </li>
+            );
+          })}
+        </ul>
+      </button>
     </nav>
   );
 }
