@@ -1,4 +1,4 @@
-import RadialProgress from '../../ui/RadialProgress';
+import RadialProgress from '../../../ui/RadialProgress';
 
 type Props = {
   value: number;

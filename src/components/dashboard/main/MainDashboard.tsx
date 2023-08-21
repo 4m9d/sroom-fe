@@ -1,8 +1,8 @@
 import SectionHeading from '../../ui/SectionHeading';
-import CompletionRate from './CompletionRate';
-import CorrectnessRate from './CorrectnessRate';
-import Motivation from './Motivation';
-import TotalLearningTime from './TotalLearningTime';
+import CompletionRate from './completionRate/CompletionRate';
+import CorrectnessRate from './correctnessRate/CorrectnessRate';
+import Motivation from './motivation/Motivation';
+import TotalLearningTime from './totalLearningTime/TotalLearningTime';
 import WeeklyCalendar from './weeklyCalendar/WeeklyCalendar';
 
 type Props = {

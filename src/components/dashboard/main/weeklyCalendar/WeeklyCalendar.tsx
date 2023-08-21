@@ -67,7 +67,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
 
   return (
     <div className='flex flex-col items-center justify-center col-start-3 col-end-4 row-start-1 row-end-4 bg-sroom-gray-300 text-sroom-black-400'>
-      <div className='flex items-center justify-center py-2 md:py-4 xl:py-7'>
+      <div className='flex items-center justify-center py-2 sm:py-3 md:py-4 xl:py-7'>
         <p className='text-xs font-semibold md:text-base xl:text-lg'>
           주간 수강 캘린더
         </p>
@@ -90,7 +90,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
               dayCardClickHandler={dayCardClickHandler}
             />
           </div>
-          <div className='flex flex-col items-center justify-center flex-1 gap-2'>
+          <div className='flex flex-col items-center justify-center flex-1 sm:gap-1 md:gap-2'>
             {selectedWeek && selectedWeek[selectedDay]?.learningHistory && (
               <>
                 <LearningHistoryItem

@@ -21,13 +21,13 @@ export default function DayCard({
       }`}
     >
       <div className='flex items-center justify-center'>
-        <p className='text-xs font-semibold lg:text-sm xl:text-lg'>
+        <p className='text-[0.5rem] sm:text-xs font-semibold lg:text-sm xl:text-lg'>
           {weekdayList[weekday]}
         </p>
       </div>
       <div className='items-center justify-center'>
         <p
-          className={`text-xs font-semibold lg:text-sm xl:text-lg ${
+          className={`text-[0.5rem] sm:text-xs font-semibold lg:text-sm xl:text-lg ${
             selectedDay === weekday ? 'text-sroom-white' : 'text-sroom-black-400'
           }`}
         >
