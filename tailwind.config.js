@@ -23,22 +23,22 @@ module.exports = {
         'sroom-white': '#FFFFFF',
         'sroom-brand': '#FA5B3E'
       }
-    },
-    plugins: [
-      require('daisyui'),
-      require('tailwind-scrollbar-hide'),
-      require('tailwindcss'),
-      require('autoprefixer')
-    ],
-    daisyui: {
-      themes: ['light'],
-      darkTheme: 'dark', // default: 'dark'
-      base: true, // default: true
-      styled: true, // default: true
-      utils: true, // default: true
-      rtl: false, // default: false
-      prefix: '', // default: ''
-      logs: false // default:
     }
+  },
+  plugins: [
+    require('daisyui'),
+    require('tailwind-scrollbar-hide'),
+    require('tailwindcss'),
+    require('autoprefixer')
+  ],
+  daisyui: {
+    themes: ['light'],
+    darkTheme: 'dark', // default: 'dark'
+    base: true, // default: true
+    styled: true, // default: true
+    utils: true, // default: true
+    rtl: false, // default: false
+    prefix: '', // default: ''
+    logs: false // default:
   }
 };
