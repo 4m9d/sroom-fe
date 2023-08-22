@@ -1,3 +1,5 @@
+import ArrowRightSVG from '@/public/icon/ArrowRight';
+
 export default function GuideBox({
   title,
   description,
@@ -12,11 +14,11 @@ export default function GuideBox({
       <p className='mb-1 text-xs font-normal lg:text-lg'>{title}</p>
       <div className='flex items-center gap-2'>
         <p className='text-base font-bold lg:text-2xl'>{description}</p>
-        <p className='text-sm font-bold lg:text-base'>〉</p>
+        <span className='w-3 lg:w-4 xl:w-5 stroke-sroom-black-400 group-hover:stroke-sroom-white'>
+          <ArrowRightSVG />
+        </span>
       </div>
-      <div>
-        {children}
-      </div>
+      <div>{children}</div>
     </div>
   );
 }
