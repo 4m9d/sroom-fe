@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from './Button';
 
 type Props = {
@@ -10,7 +9,7 @@ export default function LoadMoreButton({ title, onClick }: Props) {
   return (
     <Button
       onClick={onClick}
-      className='gap-2 mx-auto text-lg font-bold btn-md btn-wide text-sroom-black-200'
+      className='gap-2 mx-auto text-lg font-semibold btn-md btn-wide text-sroom-black-200'
     >
       {title}
       <svg

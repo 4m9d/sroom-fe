@@ -1,5 +1,6 @@
-'use cleint';
-import Image from 'next/image';
+'use client';
+import ArrowRightSVG from '@/public/icon/ArrowRight';
+import LectureSVG from '@/public/icon/Lecture';
 import Button from '../ui/button/Button';
 import { showModalHandler } from '@/src/util/modal/modalHandler';
 import { useMutation } from '@tanstack/react-query';
@@ -73,43 +74,43 @@ export default function LectureEnrollmentButton({
   const buttonTitle = is_playlist ? '등록하기' : '코스에 추가하기';
 
   const LIST__LI =
-    'px-3 border-b cursor-pointer border-b-gray-200 last-of-type:border-b-0';
+    'px-3 border-b cursor-pointer border-b-sroom-gray-500 last-of-type:border-b-0';
+  const LIST__SUB__LI =
+    'px-3 border-b cursor-pointer border-b-sroom-gray-500 last-of-type:border-b-0 hover:bg-sroom-brand peer';
   const LIST__DIV =
-    'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-zinc-500 hover:text-inherit focus:text-inherit';
+    'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-sroom-black-100 stroke-sroom-black-100 hover:text-sroom-black-400 focus:text-sroom-black-400 hover:stroke-sroom-black-400 focus:stroke-sroom-black-400';
+  const LIST__SUB__DIV =
+    'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-sroom-black-100 stroke-sroom-black-100 hover:text-sroom-white focus:text-sroom-white hover:stroke-sroom-white focus:stroke-sroom-white';
 
   const EnrolledCoursesList = ({
     courses,
-    className
+    isSubList
   }: {
     courses: EnrolledCourse[];
-    className?: string;
+    isSubList: boolean;
   }) => {
     return (
       <>
         {courses?.map((course) => (
           <li
-            className={`${className} ${LIST__LI} w-full`}
+            className={`${isSubList ? LIST__SUB__LI : LIST__LI} w-full`}
             key={course.course_id}
           >
             <div
               role='button'
               onClick={() => mutate(course.course_id)}
-              className={`${LIST__DIV} px-2 justify-center gap-2`}
+              className={`${
+                isSubList ? LIST__SUB__DIV : LIST__DIV
+              } px-2 justify-center gap-2`}
             >
               <span className='max-w-[70%] whitespace-normal line-clamp-1'>
                 {course.course_title}
               </span>
               <div className='flex'>
-                <Image
-                  className='w-auto h-auto mr-1'
-                  src={'/icon/icon_lecture.svg'}
-                  alt='등록된 영상'
-                  width={12}
-                  height={12}
-                />
-                <span className='text-xs text-zinc-500'>
-                  {course.total_video_count}
+                <span className='w-3 mr-1'>
+                  <LectureSVG />
                 </span>
+                <span className='text-xs'>{course.total_video_count}</span>
               </div>
             </div>
           </li>
@@ -132,18 +133,15 @@ export default function LectureEnrollmentButton({
         </li>
         <li className={`${LIST__LI} group`}>
           <button type='button' className={`${LIST__DIV} w-full peer relative`}>
-            기존 강의 코스에 추가하기{' '}
-            <span className='ml-2 transition-all group-hover:rotate-90 group-focus-within:rotate-90'>
-              〉
+            기존 강의 코스에 추가하기
+            <span className='w-3 ml-2 transition-all group-hover:rotate-90 group-focus-within:rotate-90 stroke-sroom-black-100'>
+              <ArrowRightSVG />
             </span>
           </button>
           <div className='absolute right-0 hidden w-4/5 pt-5 bg-transparent top-full group-hover:block hover:block peer-focus-within:block'>
-            <ul className='relative bg-white border border-gray-200'>
-              <EnrolledCoursesList
-                courses={courses}
-                className={'peer hover:bg-orange-500 hover:text-zinc-100'}
-              />
-              <span className='peer-first-of-type:peer-hover:bg-orange-500 absolute -top-[0.3px] w-3 h-3 rotate-45 -translate-x-1/2 -translate-y-1/2 border-t bg-white border-l left-10 border-l-gray-200 border-t-gray-200' />
+            <ul className='relative border bg-sroom-white border-sroom-gray-500'>
+              <EnrolledCoursesList isSubList={true} courses={courses} />
+              <span className='peer-first-of-type:peer-hover:bg-sroom-brand absolute -top-[0.3px] w-3 h-3 rotate-45 -translate-x-1/2 -translate-y-1/2 border-t bg-sroom-white border-l left-10 border-l-sroom-gray-500 border-t-sroom-gray-500' />
             </ul>
           </div>
         </li>
@@ -154,18 +152,18 @@ export default function LectureEnrollmentButton({
   const VideoEnrollment = ({ courses }: { courses: EnrolledCourse[] }) => {
     return (
       <>
-        <EnrolledCoursesList courses={courses} />
+        <EnrolledCoursesList isSubList={false} courses={courses} />
         <li
           className={`${LIST__LI} ${
             courses.length === 0 ? 'peer' : ''
-          } hover:bg-orange-500`}
+          } hover:bg-sroom-brand`}
         >
           <div
             role='button'
             onClick={() => mutate(undefined)}
-            className='flex items-center justify-center gap-2 hover:text-zinc-100'
+            className='flex items-center justify-center gap-2 hover:text-sroom-white'
           >
-            <div className='flex items-center justify-center w-5 h-5 rounded-full shrink-0 bg-zinc-700 text-zinc-100'>
+            <div className='flex items-center justify-center w-5 h-5 rounded-full shrink-0 bg-sroom-black-400 text-sroom-white'>
               +
             </div>
             <div className='flex items-center justify-center h-12 text-sm font-semibold rounded-none'>
@@ -182,22 +180,22 @@ export default function LectureEnrollmentButton({
       <div className='w-full dropdown dropdown-hover !z-[60]'>
         <Button
           onClick={() => {}}
-          className='w-full !h-[3rem] font-semibold peer text-zinc-200 bg-zinc-800'
+          className='w-full !h-[3rem] font-bold peer text-sroom-white bg-sroom-black-400 text-sm md:text-base'
         >
           {isLoading ? (
-            <LoadingSpinner className='text-orange-500 loading-sm' />
+            <LoadingSpinner className='text-sroom-brand loading-sm' />
           ) : (
             buttonTitle
           )}
         </Button>
         <div className='w-full pt-5 dropdown-content'>
-          <ul className='relative bg-white border border-gray-200'>
+          <ul className='relative border bg-sroom-white border-sroom-gray-500'>
             {is_playlist ? (
               <PlaylistEnrollment courses={courses} />
             ) : (
               <VideoEnrollment courses={courses} />
             )}
-            <span className='absolute -top-[0.3px] w-3 h-3 rotate-45 -translate-x-1/2 -translate-y-1/2 border-t bg-white border-l left-10 border-l-gray-200 border-t-gray-200 peer-first-of-type:peer-hover:bg-orange-500' />
+            <span className='absolute -top-[0.3px] w-3 h-3 rotate-45 -translate-x-1/2 -translate-y-1/2 border-t bg-sroom-white border-l left-10 border-l-gray-200 border-t-sroom-gray-500 peer-first-of-type:peer-hover:bg-sroom-brand' />
           </ul>
         </div>
       </div>

@@ -95,9 +95,16 @@ export default function LectureDetailModal({
         </section>
         <section id='reviews'>
           <LectureDetailHeading title={'후기'}>
-            <div className='flex items-center justify-center ml-2 mr-1'>
-              <OneStar className='w-5 h-5' />
-              <p className='font-semibold text-orange-500'>{rating}</p>
+            <div className='flex items-center justify-center gap-1 ml-1'>
+              <p>{`(${lectureDetail.review_count})`}</p>
+              {lectureDetail.review_count > 0 && (
+                <>
+                  <OneStar className='w-4 h-4' />
+                  <p className='text-base font-medium text-sroom-brand'>
+                    {rating}
+                  </p>
+                </>
+              )}
             </div>
           </LectureDetailHeading>
           <Suspense

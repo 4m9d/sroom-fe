@@ -44,7 +44,7 @@ export default function FiveStars({
 
   if (rating === undefined) {
     return (
-      <div className='rating'>
+      <div className='gap-[1px] rating'>
         {new Array(5).fill(0).map((_, index) => {
           return (
             <input
@@ -53,7 +53,7 @@ export default function FiveStars({
               type='radio'
               name={`rating-${ref ? ref.current : rating}`}
               value={index + 1}
-              className={`${className} bg-orange-500 mask mask-star-2`}
+              className={`${className} mask mask-star-2`}
               checked={checkedHandler(index + 1)}
             />
           );

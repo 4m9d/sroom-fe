@@ -29,8 +29,11 @@ export default async function LectureDetailReviewList({
   const checkNextPage = (
     lastPage: LectureReviewList | null,
     allPages: (LectureReviewList | null)[]
-  ) =>
-    lastPage && lastPage.length > 0 ? allPages.length * lastPage.length : 0;
+  ) => {
+    return lastPage && lastPage.length > 0
+      ? allPages.length * lastPage.length
+      : 0;
+  };
 
   const fetchLectureReviewList = async ({ pageParam: offset = 0 }) => {
     const params: LectureReviewParams = {
@@ -65,8 +68,10 @@ export default async function LectureDetailReviewList({
     <>
       {review_list.length === 0 ? (
         <>
-          <div className='flex items-center justify-center w-full h-40 pb-10 border-b border-b-zinc-200'>
-            <p className='text-base font-normal'>아직 등록된 후기가 없어요</p>
+          <div className='flex items-center justify-center w-full pb-6 border-b h-36 border-b-sroom-gray-500'>
+            <p className='text-base font-normal text-sroom-black-400'>
+              아직 등록된 후기가 없어요
+            </p>
           </div>
         </>
       ) : (

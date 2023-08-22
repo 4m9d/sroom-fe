@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import TabNav from '../ui/TabNav';
 import { useEffect, useState } from 'react';
 import useIntersectionObserver from '@/src/hooks/useIntersectionObserver';
@@ -24,34 +23,34 @@ export default function LectureDetailTabNav({ is_playlist }: Props) {
   }, []);
 
   return (
-    <TabNav className='sticky z-10 h-16 mb-5 tab-bordered -top-14 bg-inherit'>
+    <TabNav className='sticky z-10 h-16 border-b tab-bordered border-b-sroom-black-100 -top-14 bg-sroom-white text-sroom-black-400'>
       {is_playlist && (
         <li>
-          <Link
+          <a
             href='#indexes'
-            replace={true}
-            scroll={false}
-            shallow={true}
-            className={`tab tab-bordered text-lg transition-colors ${
-              activeId === 'indexes' ? 'tab-active font-bold' : 'border-none font-semibold'
+            className={`tab tab-bordered text-lg transition-colors p-1 ${
+              activeId === 'indexes'
+                ? 'tab-active font-bold border-b-sroom-black-400 border-b-2'
+                : 'border-none text-sroom-black-100 font-medium'
             }`}
           >
             목차
-          </Link>
+          </a>
         </li>
       )}
       <li>
-        <Link
+        <a
           href='#reviews'
-          replace={true}
-          scroll={false}
-          shallow={true}
           className={`tab tab-bordered text-lg transition-colors ${
-            activeId === 'reviews' ? 'tab-active font-bold' : 'border-none font-semibold'
+            is_playlist ? 'ml-3' : ''
+          } p-1 ${
+            activeId === 'reviews'
+              ? 'tab-active font-bold border-b-sroom-black-400 border-b-2'
+              : 'border-none text-sroom-black-100 font-medium'
           }`}
         >
           후기
-        </Link>
+        </a>
       </li>
     </TabNav>
   );
