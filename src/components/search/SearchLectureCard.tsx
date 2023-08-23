@@ -28,8 +28,8 @@ export default async function SearchLectureCard({
   return (
     <HorizontalSmallLectureCard src={thumbnail} alt={lecture_title}>
       <div className='flex flex-col justify-between h-full'>
-        <div className='flex flex-col gap-1 mt-4 mb-1'>
-          <p className='text-base font-bold whitespace-normal line-clamp-1'>
+        <div className='flex flex-col gap-1 mt-6 mb-1'>
+          <p className='text-base font-bold whitespace-normal line-clamp-2'>
             {lecture_title}
           </p>
           <p className='mb-1 text-sm whitespace-normal text-sroom-black-300 line-clamp-1'>
@@ -42,11 +42,7 @@ export default async function SearchLectureCard({
             ･{getRelativeTime(published_at)}
           </p>
         </div>
-        <div className='mb-1 min-h-[3rem]'>
-          <p className='text-sm whitespace-normal text-sroom-black-200 line-clamp-2'>
-            {description}
-          </p>
-        </div>
+        
       </div>
       <div className='absolute right-3 top-3'>
         <StarRatingWithReviewCount
