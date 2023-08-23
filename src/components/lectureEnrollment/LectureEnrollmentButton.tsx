@@ -101,16 +101,18 @@ export default function LectureEnrollmentButton({
               onClick={() => mutate(course.course_id)}
               className={`${
                 isSubList ? LIST__SUB__DIV : LIST__DIV
-              } px-2 justify-center gap-2`}
+              } px-2 justify-between gap-2`}
             >
-              <span className='max-w-[70%] whitespace-normal line-clamp-1'>
-                {course.course_title}
-              </span>
-              <div className='flex'>
+              <div className='flex items-center justify-center flex-1'>
+                <span className='max-w-[70%] whitespace-normal line-clamp-1'>
+                  {course.course_title}
+                </span>
+              </div>
+              <div className='flex items-center justify-start w-14'>
                 <span className='w-3 mr-1'>
                   <LectureSVG />
                 </span>
-                <span className='text-xs'>{course.total_video_count}</span>
+                <span className='text-xs'>{course.total_video_count}개</span>
               </div>
             </div>
           </li>
