@@ -18,6 +18,7 @@ export default function CalendarForOneWeek({
             selectedDay={selectedDay}
             key={day.fullDate + index}
             weekday={index.toString() as weekdayKey}
+            fullDate={day.fullDate}
             date={day.date}
             hasValue={day.learningHistory !== undefined}
             dayCardClickHandler={dayCardClickHandler}

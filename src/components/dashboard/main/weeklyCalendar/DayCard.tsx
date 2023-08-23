@@ -1,20 +1,27 @@
+import compareIsFutureDate from '@/src/util/day/compareIsFutureDate';
 import { weekdayKey, weekdayList } from '.';
 
 export default function DayCard({
   selectedDay,
   weekday,
   date,
+  fullDate,
   hasValue,
   dayCardClickHandler
 }: {
   selectedDay: weekdayKey;
   weekday: weekdayKey;
   date: string;
+  fullDate: string;
   hasValue: boolean;
   dayCardClickHandler: (weekday: weekdayKey) => void;
 }) {
+  const disabled = compareIsFutureDate(fullDate);
+
   return (
-    <div
+    <button
+      type='button'
+      disabled={disabled}
       onClick={() => dayCardClickHandler(weekday)}
       className={`flex flex-1 flex-col justify-center items-center gap-1 py-1 lg:py-3 cursor-pointer w-[100%/7] ${
         selectedDay === weekday ? 'bg-sroom-brand' : ''
@@ -28,7 +35,10 @@ export default function DayCard({
       <div className='items-center justify-center'>
         <p
           className={`text-[0.5rem] sm:text-xs font-semibold lg:text-sm xl:text-lg ${
-            selectedDay === weekday ? 'text-sroom-white' : 'text-sroom-black-400'
+            selectedDay === weekday
+              ? 'text-sroom-white'
+              : disabled ? 'text-sroom-black-100'
+              : 'text-sroom-black-400'
           }`}
         >
           {date === 'Invalid Date' ? '' : date}
@@ -45,6 +55,6 @@ export default function DayCard({
           <div className='w-2 h-2 rounded-full bg-inherit' />
         )}
       </div>
-    </div>
+    </button>
   );
 }
