@@ -1,20 +1,21 @@
 export default function LectureSVG() {
   return (
     <svg
+      xmlns='http://www.w3.org/2000/svg'
       width='current'
       height='current'
-      viewBox='0 0 12 12'
+      viewBox='0 0 20 20'
       fill='none'
-      xmlns='http://www.w3.org/2000/svg'
     >
-      <path d='M8 6.00002L4.5 8.16509L4.5 3.83496L8 6.00002Z' fill='current' />
+      <path d='M14 9.5L8.75 12.5311L8.75 6.46891L14 9.5Z' fill='current' />
       <rect
-        x='0.5'
-        y='1.5'
-        width='11'
-        height='9'
+        x='2'
+        y='3'
+        width='17'
+        height='13'
         stroke='current'
-        stroke-linejoin='round'
+        strokeWidth='1.5'
+        strokeLinejoin='round'
       />
     </svg>
   );

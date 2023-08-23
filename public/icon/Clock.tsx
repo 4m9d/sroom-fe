@@ -8,7 +8,7 @@ export default function ClockSVG() {
       xmlns='http://www.w3.org/2000/svg'
     >
       <circle cx='6' cy='6' r='5.5' stroke='current' />
-      <path d='M6 3V6.5H9' stroke='current' stroke-linecap='square' />
+      <path d='M6 3V6.5H9' stroke='current' strokeLinecap='square' />
     </svg>
   );
 }
