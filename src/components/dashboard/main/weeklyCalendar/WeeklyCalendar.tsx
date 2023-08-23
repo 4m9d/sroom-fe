@@ -3,11 +3,12 @@ import {
   getCurrentWeekRange,
   getNextWeekRange,
   getPreviousWeekRange,
-  getFullWeekDate
+  getFullWeekDate,
 } from '@/src/util/day/getWeekRange';
-import getFormattedHour from '@/src/util/day/getFormattedHour';
+import { getCurrentWeekDay } from '@/src/util/day/getCurrentDate';
+import getFormattedTime from '@/src/util/time/getFormattedTime';
 import { useCallback, useEffect, useState } from 'react';
-import convertSecondsToMinutes from '@/src/util/day/convertSecondsToMinutes';
+import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import CalendarForOneWeek from './CalendarForOneWeek';
 import LearningHistoryItem from './LearningHistoryItem';
 import { weekdayKey } from '.';
@@ -20,7 +21,9 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
   const [selectedWeek, setSelectedWeek] = useState<WeekInfo[]>(
     getFullWeekDate()
   );
-  const [selectedDay, setSelectedDay] = useState<weekdayKey>('7');
+  const [selectedDay, setSelectedDay] = useState<weekdayKey>(
+    getCurrentWeekDay().toString() as weekdayKey
+  );
 
   const findLearningHistory = useCallback((startOfWeek: string) => {
     const weekInfo = getFullWeekDate(startOfWeek);
@@ -95,7 +98,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
               <>
                 <LearningHistoryItem
                   title={'학습 시간'}
-                  value={getFormattedHour(
+                  value={getFormattedTime(
                     convertSecondsToMinutes(
                       selectedWeek[selectedDay].learningHistory
                         ?.learning_time ?? 0

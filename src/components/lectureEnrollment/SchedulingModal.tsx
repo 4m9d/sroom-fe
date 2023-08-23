@@ -5,14 +5,14 @@ import SchedulingSlider from '../scheduling/SchedulingSlider';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { ModalIDs } from '@/src/constants/modal/modal';
 import { useEffect, useState } from 'react';
-import getFormattedHour from '@/src/util/day/getFormattedHour';
-import convertSecondsToMinutes from '@/src/util/day/convertSecondsToMinutes';
+import getFormattedTime from '@/src/util/time/getFormattedTime';
+import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import {
   FOUR_HOURS_IN_MINUTES,
   THIRTY_MINUTES
 } from '@/src/constants/scheduling/scheduling';
 import getCurrentDate from '@/src/util/day/getCurrentDate';
-import convertMinutesToSeconds from '@/src/util/day/convertMinutesToSeconds';
+import convertMinutesToSeconds from '@/src/util/time/convertMinutesToSeconds';
 import { useMutation } from '@tanstack/react-query';
 import { enrollLectureInNewCourse } from '@/src/api/courses/courses';
 import setErrorToast from '@/src/util/toast/setErrorToast';
@@ -148,7 +148,7 @@ export default function SchedulingModal({
   return (
     <Modal
       id={ModalIDs.SCHEDULING}
-      className='rounded-none min-w-[44rem] min-h-[48rem] px-12 py-16'
+      className='rounded-none min-w-[40%] min-h-[48rem] px-12 py-16'
       onClose={onClose}
     >
       <AnimatePresence>
@@ -229,7 +229,7 @@ export default function SchedulingModal({
             <p className='flex gap-1'>
               총 재생 시간 :
               <span className='text-orange-500'>
-                {getFormattedHour(
+                {getFormattedTime(
                   convertSecondsToMinutes(lectureDetail.duration)
                 )}
               </span>

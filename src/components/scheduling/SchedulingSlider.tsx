@@ -1,4 +1,4 @@
-import getFormattedHour from '@/src/util/day/getFormattedHour';
+import getFormattedTime from '@/src/util/time/getFormattedTime';
 
 type Props = {
   min: number;
@@ -46,7 +46,7 @@ export default function SchedulingSlider({
         {new Array(level + 1).fill(0).map((_, index) => (
           <div
             aria-hidden
-            data-tip={getFormattedHour(value)}
+            data-tip={getFormattedTime(value)}
             key={index}
             className={`w-[12px] h-[12px] border-2 z-20
              ${

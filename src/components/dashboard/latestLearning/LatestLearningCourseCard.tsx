@@ -1,9 +1,8 @@
-import React from 'react';
 import ProgressBar from '../../ui/ProgressBar';
 import HorizontalSmallLectureCard from '../../ui/lectureCard/HorizontalSmallLectureCard';
 import Button from '../../ui/button/Button';
-import getFormattedHour from '@/src/util/day/getFormattedHour';
-import convertSecondsToMinutes from '@/src/util/day/convertSecondsToMinutes';
+import getFormattedTime from '@/src/util/time/getFormattedTime';
+import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import Link from 'next/link';
 import ClockSVG from '@/public/icon/Clock';
 import LectureSVG from '@/public/icon/Lecture';
@@ -33,9 +32,9 @@ export default function LatestLearningCourseCard({ course }: Props) {
               <span className='w-3 mr-1 stroke-sroom-black-100'>
                 <ClockSVG />
               </span>
-              {getFormattedHour(convertSecondsToMinutes(course.duration))}
+              {getFormattedTime(convertSecondsToMinutes(course.duration))}
               <span className='after:w-[1px] after:h-[10px] after:bg-sroom-black-100 after:mx-2 after:inline-block after:text-center after:align-middle'></span>
-              <span className='w-3 mr-1 stroke-sroom-black-100'>
+              <span className='w-3 mr-1 align-middle stroke-sroom-black-100'>
                 <LectureSVG />
               </span>
               {course.completed_video_count.toLocaleString()}개<span>/</span>

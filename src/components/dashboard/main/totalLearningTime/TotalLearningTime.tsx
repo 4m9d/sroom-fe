@@ -1,4 +1,4 @@
-import convertSecondsToMinutes from '@/src/util/day/convertSecondsToMinutes';
+import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import { useCallback, useMemo } from 'react';
 
 type Props = {

@@ -1,5 +1,5 @@
 'use client';
-import getRelativeTime from '@/src/util/day/getRelativeTime';
+import getRelativeTime from '@/src/util/time/getRelativeTime';
 import HorizontalSmallLectureCard from '../ui/lectureCard/HorizontalSmallLectureCard';
 import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
 import ThumbnailBadge from '../ui/badge/ThumbnailBadge';

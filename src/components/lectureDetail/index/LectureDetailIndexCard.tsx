@@ -1,5 +1,5 @@
 'use client';
-import getCompactFormattedTime from '@/src/util/day/getCompactFormattedTime';
+import getCompactFormattedTime from '@/src/util/time/getCompactFormattedTime';
 import Image from 'next/image';
 import React from 'react';
 

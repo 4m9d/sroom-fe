@@ -1,12 +1,11 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
+import { getCurrentWeekDay } from './getCurrentDate';
 
 dayjs.locale('ko');
 
 export function getCurrentWeekRange() {
-  // (0 ~ 6) : 일 ~ 토
-  const currentWeekDay = dayjs().get('day');
-
+  const currentWeekDay = getCurrentWeekDay();
   const startOfWeek = dayjs()
     .subtract(currentWeekDay, 'day')
     .format('YYYY-MM-DD');

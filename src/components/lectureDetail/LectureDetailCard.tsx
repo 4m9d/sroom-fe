@@ -4,8 +4,8 @@ import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
 import ThumbnailBadge from '../ui/badge/ThumbnailBadge';
 import getCompactFormattedNumber from '@/src/util/number/getCompactFormattedNumber';
 import LectureEnrollmentButton from '../lectureEnrollment/LectureEnrollmentButton';
-import getFormattedHour from '@/src/util/day/getFormattedHour';
-import convertSecondsToMinutes from '@/src/util/day/convertSecondsToMinutes';
+import getFormattedTime from '@/src/util/time/getFormattedTime';
+import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import ClockSVG from '@/public/icon/Clock';
 import LectureSVG from '@/public/icon/Lecture';
 
@@ -49,7 +49,7 @@ export default function LectureDetailCard({ lectureDetail, onClose }: Props) {
                   <ClockSVG />
                 </span>
 
-                {getFormattedHour(convertSecondsToMinutes(duration))}
+                {getFormattedTime(convertSecondsToMinutes(duration))}
                 {is_playlist ? (
                   <>
                     <span className='w-3 ml-2 mr-1 stroke-sroom-black-100'>

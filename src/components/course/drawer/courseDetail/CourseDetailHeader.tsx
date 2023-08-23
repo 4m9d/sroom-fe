@@ -1,6 +1,6 @@
 import ProgressBar from '@/src/components/ui/ProgressBar';
-import convertSecondsToMinutes from '@/src/util/day/convertSecondsToMinutes';
-import getFormattedHour from '@/src/util/day/getFormattedHour';
+import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
+import getFormattedTime from '@/src/util/time/getFormattedTime';
 import Image from 'next/image';
 
 type Props = {
@@ -33,7 +33,7 @@ export default function CourseDetailHeader({
       </h3>
       <h4 className='flex text-sm font-normal text-zinc-400'>
         <span className='after:w-[1px] after:h-[10px] after:bg-zinc-400 after:mx-2 after:inline-block after:text-center after:align-middle'>
-          {`총 재생 시간 : ${getFormattedHour(
+          {`총 재생 시간 : ${getFormattedTime(
             convertSecondsToMinutes(course_duration)
           )}`}
         </span>
@@ -41,7 +41,7 @@ export default function CourseDetailHeader({
       </h4>
       <ProgressBar value={progress} className='bg-zinc-100' />
       <h5 className='text-xs font-normal text-zinc-400'>
-        {`수강 시간 : ${getFormattedHour(
+        {`수강 시간 : ${getFormattedTime(
           convertSecondsToMinutes(current_duration)
         )} (진도율 : ${progress}%)`}
       </h5>
