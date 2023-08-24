@@ -23,7 +23,7 @@ export default function DayCard({
       type='button'
       disabled={disabled}
       onClick={() => dayCardClickHandler(weekday)}
-      className={`flex flex-1 flex-col justify-center items-center gap-1 py-1 lg:py-3 w-[100%/7]
+      className={`flex flex-1 flex-col justify-center items-center sm:gap-1 py-1 sm:py-2 lg:py-3 w-[100%/7]
       ${disabled === false ? 'cursor-pointer' : ''}
       ${selectedDay === weekday ? 'bg-sroom-brand' : ''}`}
     >

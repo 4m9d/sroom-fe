@@ -11,7 +11,7 @@ export default function CalendarForOneWeek({
   dayCardClickHandler: (weekday: weekdayKey) => void;
 }) {
   return (
-    <div className='relative flex w-full h-[90%] md:h-[80%] lg:h-[65%] justify-evenly'>
+    <div className='relative flex w-full min-h-12 max-h-28 h-[80%] justify-evenly'>
       {selectedWeek?.map((day, index) => {
         return (
           <DayCard
