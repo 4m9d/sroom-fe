@@ -54,7 +54,7 @@ export default function LectureEnrollmentModal({
   return (
     <Modal
       id={ModalIDs.LECTURE_ENROLLMENT}
-      className='rounded-none w-[70%] min-w-[15rem] max-w-[35rem] h-64 px-12 py-12 lg:px-16'
+      className='rounded-none w-[80%] min-w-[15rem] max-w-[35rem] h-64 px-12 py-12 lg:px-16'
       onClose={onClose}
     >
       <div className='flex flex-col justify-between w-full h-full'>

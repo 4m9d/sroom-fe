@@ -72,9 +72,11 @@ export default function SchedulingModal({
     Math.min(FOUR_HOURS_IN_MINUTES, convertedDuration),
     THIRTY_MINUTES
   );
-  const DEFAULT_CONTENT = 'flex items-center gap-1 h-8 text-lg';
+  const DEFAULT_CONTENT =
+    'flex items-center gap-1 h-8 text-lg text-sroom-black-200';
   const MUTABLE_CONTENT =
-    'align-middle px-3 py-1 font-semibold bg-white border border-zinc-200  whitespace-normal line-clamp-1';
+    'align-middle px-3 py-1 font-semibold bg-sroom-white border border-sroom-gray-400 text-sroom-black-400  whitespace-normal line-clamp-1';
+
   const controls = useAnimationControls();
   const animationConfig = {
     animate: controls,
@@ -148,18 +150,18 @@ export default function SchedulingModal({
   return (
     <Modal
       id={ModalIDs.SCHEDULING}
-      className='rounded-none min-w-[40%] min-h-[48rem] px-12 py-16'
+      className='rounded-none w-[85vw] max-w-2xl px-12 py-16'
       onClose={onClose}
     >
       <AnimatePresence>
         <div className='flex flex-col items-center justify-between w-full h-full gap-10'>
-          <div className='flex flex-col items-center justify-center h-16 gap-5'>
+          <div className='flex flex-col items-center justify-center h-16 gap-4'>
             <p className='text-xl font-bold'>강의 일정관리 설정</p>
-            <p className='text-base text-zinc-500'>
+            <p className='text-base font-medium'>
               매 주차별로 강의를 묶어 제공해 드려요
             </p>
           </div>
-          <div className='bg-zinc-100 w-[37rem] h-96 px-16 py-10 flex flex-col gap-12'>
+          <div className='bg-sroom-gray-200 border border-sroom-gray-500 w-[37rem] h-96 px-16 py-10 flex flex-col gap-12'>
             <p>일평균 목표 학습 시간을 입력해 주세요</p>
             <SchedulingSlider
               min={THIRTY_MINUTES}
@@ -228,7 +230,7 @@ export default function SchedulingModal({
           <div className='flex flex-col items-center gap-10 text-xl font-bold'>
             <p className='flex gap-1'>
               총 재생 시간 :
-              <span className='text-orange-500'>
+              <span className='text-sroom-brand'>
                 {getFormattedTime(
                   convertSecondsToMinutes(lectureDetail.duration)
                 )}
@@ -236,11 +238,11 @@ export default function SchedulingModal({
             </p>
             <Button
               onClick={() => mutate()}
-              className='font-semibold w-[25rem] text-white bg-zinc-800'
+              className='font-bold text-base w-[25rem] text-sroom-white bg-sroom-black-400'
               disabled={isLoading}
             >
               {isLoading ? (
-                <LoadingSpinner className='text-orange-500 loading-sm' />
+                <LoadingSpinner className='text-sroom-brand loading-sm' />
               ) : (
                 '완료'
               )}
