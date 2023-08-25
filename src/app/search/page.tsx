@@ -1,5 +1,4 @@
 'use client';
-import { fetchLectureRecommendations } from '@/src/api/lectures/search';
 import LectureRecommendationsList from '@/src/components/recommendations/LectureRecommendationsList';
 import SearchResultsHeading from '@/src/components/search/SearchResultsHeading';
 import SearchResultsList from '@/src/components/search/SearchResultsList';
@@ -8,7 +7,7 @@ import { LIMIT_PER_FETCH } from '@/src/constants/search/search';
 import { Suspense, useRef } from 'react';
 
 type Props = {
-  searchParams: SearchLectureParams
+  searchParams: SearchLectureParams;
 };
 
 export default async function SearchResults({ searchParams }: Props) {
@@ -23,9 +22,6 @@ export default async function SearchResults({ searchParams }: Props) {
     next_page_token: '',
     filter: searchParams.filter ? searchParams.filter : 'all'
   };
-  
-  const recommendations = await fetchLectureRecommendations();
-  const recommendedLectures = recommendations.recommendations;
 
   return (
     <>
@@ -47,9 +43,7 @@ export default async function SearchResults({ searchParams }: Props) {
           </Suspense>
         </section>
       </div>
-      {recommendations && (
-        <LectureRecommendationsList recommendations={recommendedLectures} />
-      )}
+      <LectureRecommendationsList />
     </>
   );
 }

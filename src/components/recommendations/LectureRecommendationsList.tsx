@@ -9,12 +9,15 @@ import useWindowSize from '@/src/hooks/useWindowSize';
 import SwiperNavigationButton from '../ui/button/SwiperNavigationButton';
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
+import { QueryKeys } from '@/src/api/queryKeys';
+import { fetchLectureRecommendations } from '@/src/api/lectures/search';
+import {
+  CACHE_TIME,
+  STALE_TIME
+} from '@/src/constants/lectureRecommendations/lectureRecommendations';
 
-type Props = {
-  recommendations: PersonalizedLecture[];
-};
-
-export default function LectureRecommendationsList({ recommendations }: Props) {
+export default function LectureRecommendationsList() {
   const windowSize = useWindowSize();
   const router = useRouter();
   const prevRef = useRef<HTMLButtonElement>(null);
@@ -23,6 +26,18 @@ export default function LectureRecommendationsList({ recommendations }: Props) {
   const [currPageIdx, setCurrPageIdx] = useState(1);
   const [isFirstSlide, setIsFirstSlide] = useState<boolean>(true);
   const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
+
+  const { data } = useQuery(
+    [QueryKeys.RECCOMENDATION],
+    fetchLectureRecommendations,
+    {
+      cacheTime: CACHE_TIME,
+      staleTime: STALE_TIME
+    }
+  );
+
+  const { recommendations } = data || { recommendations: [] };
+
   const slidesPerView =
     windowSize.width < 800 ? 1 : windowSize.width < 1400 ? 2 : 3;
 
