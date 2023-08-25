@@ -32,7 +32,9 @@ export default function LectureRecommendationsList() {
     fetchLectureRecommendations,
     {
       cacheTime: CACHE_TIME,
-      staleTime: STALE_TIME
+      staleTime: STALE_TIME,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false
     }
   );
 
