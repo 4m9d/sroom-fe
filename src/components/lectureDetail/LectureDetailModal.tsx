@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import Modal from '../ui/Modal';
 import LectureDetailTabNav from './LectureDetailTabNav';
-import { Suspense, useEffect, useMemo, useRef } from 'react';
+import { Suspense, useCallback, useEffect, useRef } from 'react';
 import LectureDetailIndexList from './index/LectureDetailIndexList';
 import LectureDetailReviewList from './review/LectureDetailReviewList';
 import LectureDetailCard from './LectureDetailCard';
@@ -33,14 +33,24 @@ export default function LectureDetailModal({
   const indexPageRef = useRef<number>(0);
   const reviewPageRef = useRef<number>(0);
 
-  const onCloseHandler = useMemo(() => {
+  const onCloseHandler = useCallback(() => {
     return navigationType === 'soft'
-      ? router.back
-      : () => router.replace('/dashboard');
+      ? router.back()
+      : router.replace('/dashboard');
   }, [navigationType, router]);
+
   const isTheOnlyModalInPage = () => {
     return document.querySelectorAll('dialog[open]').length === 1;
   };
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isTheOnlyModalInPage()) {
+        onCloseHandler();
+      }
+    },
+    [onCloseHandler]
+  );
 
   useEffect(() => {
     const modal = document.getElementById(
@@ -51,15 +61,9 @@ export default function LectureDetailModal({
   }, []);
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isTheOnlyModalInPage()) {
-        console.log(isTheOnlyModalInPage());
-        onCloseHandler();
-      }
-    };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onCloseHandler]);
+  }, [onCloseHandler, handleKeyDown]);
 
   return (
     <>
