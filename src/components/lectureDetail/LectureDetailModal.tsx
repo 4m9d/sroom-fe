@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import Modal from '../ui/Modal';
 import LectureDetailTabNav from './LectureDetailTabNav';
-import { Suspense, useEffect, useMemo, useRef } from 'react';
+import { Suspense, useCallback, useEffect, useRef } from 'react';
 import LectureDetailIndexList from './index/LectureDetailIndexList';
 import LectureDetailReviewList from './review/LectureDetailReviewList';
 import LectureDetailCard from './LectureDetailCard';
@@ -33,14 +33,24 @@ export default function LectureDetailModal({
   const indexPageRef = useRef<number>(0);
   const reviewPageRef = useRef<number>(0);
 
-  const onCloseHandler = useMemo(() => {
+  const onCloseHandler = useCallback(() => {
     return navigationType === 'soft'
-      ? router.back
-      : () => router.replace('/dashboard');
+      ? router.back()
+      : router.replace('/dashboard');
   }, [navigationType, router]);
+
   const isTheOnlyModalInPage = () => {
     return document.querySelectorAll('dialog[open]').length === 1;
   };
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isTheOnlyModalInPage()) {
+        onCloseHandler();
+      }
+    },
+    [onCloseHandler]
+  );
 
   useEffect(() => {
     const modal = document.getElementById(
@@ -51,21 +61,15 @@ export default function LectureDetailModal({
   }, []);
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isTheOnlyModalInPage()) {
-        console.log(isTheOnlyModalInPage());
-        onCloseHandler();
-      }
-    };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onCloseHandler]);
+  }, [onCloseHandler, handleKeyDown]);
 
   return (
     <>
       <Modal
         id={ModalIDs.LECTURE_DETAIL}
-        className='relative h-full pt-14 p-5 lg:p-14 rounded-none scroll-smooth min-w-[70vw] max-w-[70vw]'
+        className='relative h-full pt-14 p-5 lg:p-14 rounded-none scroll-smooth w-[85vw] md:w-[70vw] lg:w-[65vw] max-w-screen-2xl'
         onClose={onCloseHandler}
       >
         <LectureDetailCard
@@ -95,9 +99,16 @@ export default function LectureDetailModal({
         </section>
         <section id='reviews'>
           <LectureDetailHeading title={'후기'}>
-            <div className='flex items-center justify-center ml-2 mr-1'>
-              <OneStar className='w-5 h-5' />
-              <p className='font-semibold text-orange-500'>{rating}</p>
+            <div className='flex items-center justify-center gap-1 ml-1'>
+              <p>{`(${lectureDetail.review_count})`}</p>
+              {lectureDetail.review_count > 0 && (
+                <>
+                  <OneStar className='w-4 h-4' />
+                  <p className='text-base font-medium text-sroom-brand'>
+                    {rating}
+                  </p>
+                </>
+              )}
             </div>
           </LectureDetailHeading>
           <Suspense

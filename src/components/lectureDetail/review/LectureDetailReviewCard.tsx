@@ -1,7 +1,7 @@
 'use client';
 
-import getCompactDateFormat from "@/src/util/day/getCompactFormattedDate";
-import FiveStars from "../../ui/rating/FiveStars";
+import getCompactDateFormat from '@/src/util/day/getCompactFormattedDate';
+import FiveStars from '../../ui/rating/FiveStars';
 
 type Props = {
   lectureReview: LectureReview;
@@ -16,21 +16,23 @@ export default function LectureDetailReviewCard({ lectureReview }: Props) {
     submitted_rating
   } = lectureReview;
   return (
-    <li className='p-3 border border-gray-200 min-h-16'>
-      <div className='flex justify-between mb-5'>
-        <div className="flex">
+    <li className='px-4 py-5 overflow-hidden border border-sroom-gray-500 min-h-[5rem] transition-all'>
+      <div className='flex items-center justify-between mb-5'>
+        <div className='flex'>
           <FiveStars
-            className='w-3 h-3 bg-zinc-800'
+            className='w-3 h-3 bg-sroom-black-400'
             rating={submitted_rating}
           />
-          <span className='ml-2 text-sm'>{reviewer_name}</span>
+          <span className='ml-2 text-sm text-sroom-black-300'>{reviewer_name}</span>
         </div>
-        <div className='text-sm text-zinc-500'>
+        <div className='text-xs text-sroom-black-100'>
           {getCompactDateFormat(published_at)}
         </div>
       </div>
       <div className='whitespace-pre-wrap'>
-        <p className='overflow-auto text-sm text-zinc-500'>{review_content}</p>
+        <p className='overflow-auto text-sm text-sroom-black-200'>
+          {review_content}
+        </p>
       </div>
     </li>
   );

@@ -5,7 +5,7 @@ type Props = {
 
 export default function LectureDetailHeading({ title, children }: Props) {
   return (
-    <div className='flex my-10 text-xl font-bold border-b-2 border-black border-solid'>
+    <div className='flex items-center my-10 text-xl font-bold border-b-2 border-solid h-9 border-sroom-black-400'>
       <h3>
       {title}
       </h3>

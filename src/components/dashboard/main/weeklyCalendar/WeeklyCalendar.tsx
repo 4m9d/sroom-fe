@@ -3,11 +3,12 @@ import {
   getCurrentWeekRange,
   getNextWeekRange,
   getPreviousWeekRange,
-  getFullWeekDate
+  getFullWeekDate,
 } from '@/src/util/day/getWeekRange';
-import getFormattedHour from '@/src/util/day/getFormattedHour';
+import { getCurrentWeekDay } from '@/src/util/day/getCurrentDate';
+import getFormattedTime from '@/src/util/time/getFormattedTime';
 import { useCallback, useEffect, useState } from 'react';
-import convertSecondsToMinutes from '@/src/util/day/convertSecondsToMinutes';
+import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import CalendarForOneWeek from './CalendarForOneWeek';
 import LearningHistoryItem from './LearningHistoryItem';
 import { weekdayKey } from '.';
@@ -20,7 +21,9 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
   const [selectedWeek, setSelectedWeek] = useState<WeekInfo[]>(
     getFullWeekDate()
   );
-  const [selectedDay, setSelectedDay] = useState<weekdayKey>('7');
+  const [selectedDay, setSelectedDay] = useState<weekdayKey>(
+    getCurrentWeekDay().toString() as weekdayKey
+  );
 
   const findLearningHistory = useCallback((startOfWeek: string) => {
     const weekInfo = getFullWeekDate(startOfWeek);
@@ -67,17 +70,17 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
 
   return (
     <div className='flex flex-col items-center justify-center col-start-3 col-end-4 row-start-1 row-end-4 bg-sroom-gray-300 text-sroom-black-400'>
-      <div className='flex items-center justify-center py-2 md:py-4 xl:py-7'>
+      <div className='flex items-center justify-center py-2 sm:py-3 md:py-4 xl:py-7'>
         <p className='text-xs font-semibold md:text-base xl:text-lg'>
           주간 수강 캘린더
         </p>
       </div>
       <div className='flex justify-between w-full h-full pb-5 overflow-auto md:pb-8 xl:pb-10'>
-        <div className='w-5 pt-[12%] md:w-8 xl:w-10 shrink-0'>
+        <div className='w-4 pt-[12%] md:w-8 xl:w-10 shrink-0'>
           <button
             type='button'
             onClick={previousWeekClickHandler}
-            className='flex items-center justify-center w-5 h-5 text-xs font-bold transition-all md:w-8 md:h-8 xl:w-10 xl:h-10 md:text-base xl:text-lg hover:opacity-80 hover:bg-sroom-gray-500'
+            className='flex items-center justify-center w-4 h-4 text-xs font-bold transition-all md:w-8 md:h-8 xl:w-10 xl:h-10 md:text-base xl:text-lg hover:opacity-80 hover:bg-sroom-gray-500'
           >
             〈
           </button>
@@ -90,12 +93,12 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
               dayCardClickHandler={dayCardClickHandler}
             />
           </div>
-          <div className='flex flex-col items-center justify-center flex-1 gap-2'>
+          <div className='flex flex-col items-center justify-center flex-1 sm:gap-1 md:gap-2'>
             {selectedWeek && selectedWeek[selectedDay]?.learningHistory && (
               <>
                 <LearningHistoryItem
                   title={'학습 시간'}
-                  value={getFormattedHour(
+                  value={getFormattedTime(
                     convertSecondsToMinutes(
                       selectedWeek[selectedDay].learningHistory
                         ?.learning_time ?? 0
@@ -114,12 +117,12 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
             )}
           </div>
         </div>
-        <div className='w-5 pt-[12%] md:w-8 xl:w-10 shrink-0'>
+        <div className='w-4 pt-[12%] md:w-8 xl:w-10 shrink-0'>
           {getCurrentWeekRange().startOfWeek !== selectedWeek[0].fullDate && (
             <button
               type='button'
               onClick={nextWeekClickHandler}
-              className='flex items-center justify-center w-5 h-5 text-xs font-bold transition-all md:w-8 md:h-8 xl:w-10 xl:h-10 md:text-base xl:text-lg hover:opacity-80 hover:bg-sroom-gray-500'
+              className='flex items-center justify-center w-4 h-4 text-xs font-bold transition-all md:w-8 md:h-8 xl:w-10 xl:h-10 md:text-base xl:text-lg hover:opacity-80 hover:bg-sroom-gray-500'
             >
               〉
             </button>

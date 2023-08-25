@@ -13,7 +13,7 @@ const LectureDetailIndexSkeleton = ({ limit, indexPageRef }: Props) => {
 
   const StyledSkeleton = () => {
     return (
-      <li className={'flex items-center justify-between h-20'}>
+      <li className={'flex items-center justify-between h-[4.5rem]'}>
         <div className='w-full h-full'>
           <Skeleton height='100%' />
         </div>

@@ -1,4 +1,4 @@
-export default function getFormattedHour(time: number) {
+export default function getFormattedTime(time: number) {
   const hour = Math.floor(time / 60);
   const minute = time % 60;
   let hourFormat = [];

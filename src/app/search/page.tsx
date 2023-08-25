@@ -8,7 +8,7 @@ import { LIMIT_PER_FETCH } from '@/src/constants/search/search';
 import { Suspense, useRef } from 'react';
 
 type Props = {
-  searchParams: SearchLectureParams;
+  searchParams: SearchLectureParams
 };
 
 export default async function SearchResults({ searchParams }: Props) {

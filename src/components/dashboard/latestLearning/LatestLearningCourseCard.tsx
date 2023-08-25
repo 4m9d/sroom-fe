@@ -1,11 +1,11 @@
-import React from 'react';
 import ProgressBar from '../../ui/ProgressBar';
 import HorizontalSmallLectureCard from '../../ui/lectureCard/HorizontalSmallLectureCard';
 import Button from '../../ui/button/Button';
-import getFormattedHour from '@/src/util/day/getFormattedHour';
-import convertSecondsToMinutes from '@/src/util/day/convertSecondsToMinutes';
-import Image from 'next/image';
+import getFormattedTime from '@/src/util/time/getFormattedTime';
+import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import Link from 'next/link';
+import ClockSVG from '@/public/icon/Clock';
+import LectureSVG from '@/public/icon/Lecture';
 
 type Props = {
   course: Course;
@@ -29,22 +29,14 @@ export default function LatestLearningCourseCard({ course }: Props) {
         <div className='flex justify-between gap-5 mb-1 min-h-10 shrink-0'>
           <div className='flex-col justify-between flex-1 hidden gap-1 py-1 sm:flex shrink-0'>
             <p className='flex text-xs text-sroom-black-100 shrink-0'>
-              <Image
-                className='w-auto h-auto mr-1'
-                src={'/icon/icon_time.svg'}
-                alt='총 재생 시간'
-                width={12}
-                height={12}
-              />
-              {getFormattedHour(convertSecondsToMinutes(course.duration))}
-              <span className='after:w-[1px] after:h-[10px] after:bg-zinc-400 after:mx-2 after:inline-block after:text-center after:align-middle'></span>
-              <Image
-                className='w-auto h-auto mr-1'
-                src={'/icon/icon_lecture.svg'}
-                alt='수강한 영상'
-                width={12}
-                height={12}
-              />
+              <span className='w-3 mr-1 stroke-sroom-black-100'>
+                <ClockSVG />
+              </span>
+              {getFormattedTime(convertSecondsToMinutes(course.duration))}
+              <span className='after:w-[1px] after:h-[10px] after:bg-sroom-black-100 after:mx-2 after:inline-block after:text-center after:align-middle'></span>
+              <span className='w-3 mr-1 align-middle stroke-sroom-black-100'>
+                <LectureSVG />
+              </span>
               {course.completed_video_count.toLocaleString()}개<span>/</span>
               {course.total_video_count.toLocaleString()}개 완료
             </p>

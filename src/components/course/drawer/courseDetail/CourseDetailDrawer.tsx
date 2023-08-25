@@ -1,10 +1,10 @@
 'use client';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
-import Image from 'next/image';
 import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import SectionList from './SectionList';
 import CourseDetailHeader from './CourseDetailHeader';
 import DrawerMenuButtons from './DrawerMenuButtons';
+import ArrowRightSVG from '@/public/icon/ArrowRight';
 
 type Props = {
   courseDetail: CourseDetail;
@@ -89,13 +89,11 @@ export default function CourseDetailDrawer({
           onClick={drawerHandler}
           className='absolute flex items-center justify-center w-5 h-12 bg-zinc-900 -right-5 top-[calc(50%-1.5rem)]'
         >
-          <Image
-            src='/icon/icon_arrow_right_white.svg'
-            alt='사이드 바 버튼'
-            width={12}
-            height={12}
-            className={`${isDrawerOpen ? 'rotate-180' : ''} transition-all`}
-          />
+          <span
+            className={`w-3 stroke-sroom-white ${isDrawerOpen ? 'rotate-180' : ''} transition-all`}
+          >
+            <ArrowRightSVG />
+          </span>
         </button>
       </motion.aside>
     </AnimatePresence>

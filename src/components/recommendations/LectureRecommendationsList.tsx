@@ -8,7 +8,6 @@ import LectureRecommendationsCard from './LectureRecommendationsCard';
 import useWindowSize from '@/src/hooks/useWindowSize';
 import SwiperNavigationButton from '../ui/button/SwiperNavigationButton';
 import { useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
 type Props = {
@@ -21,8 +20,11 @@ export default function LectureRecommendationsList({ recommendations }: Props) {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const [swiper, setSwiper] = useState<SwiperCore>();
+  const [currPageIdx, setCurrPageIdx] = useState(1);
   const [isFirstSlide, setIsFirstSlide] = useState<boolean>(true);
   const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
+  const slidesPerView =
+    windowSize.width < 800 ? 1 : windowSize.width < 1400 ? 2 : 3;
 
   return (
     <section className='px-4 mx-auto my-20 lg:px-24 max-w-screen-2xl'>
@@ -30,9 +32,7 @@ export default function LectureRecommendationsList({ recommendations }: Props) {
       <div className='relative'>
         <Swiper
           className='!py-2'
-          slidesPerView={
-            windowSize.width < 1000 ? 1 : windowSize.width < 1400 ? 2 : 3
-          }
+          slidesPerView={slidesPerView}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current
@@ -43,12 +43,13 @@ export default function LectureRecommendationsList({ recommendations }: Props) {
           onSlideChange={(swiper) => {
             swiper.isEnd ? setIsLastSlide(true) : setIsLastSlide(false);
             swiper.isBeginning ? setIsFirstSlide(true) : setIsFirstSlide(false);
+            setCurrPageIdx(() => swiper.activeIndex + 1);
           }}
         >
           {recommendations.map((lecture) => (
             <SwiperSlide
               key={lecture.lecture_code}
-              className='!flex justify-center'
+              className='!flex justify-between'
             >
               <div
                 onClick={() => {
@@ -61,36 +62,23 @@ export default function LectureRecommendationsList({ recommendations }: Props) {
             </SwiperSlide>
           ))}
         </Swiper>
-        {!isFirstSlide && (
-          <AnimatePresence>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className='absolute left-0 z-10 top-1/3'
-            >
-              <SwiperNavigationButton
-                onClick={() => swiper?.slidePrev()}
-                navigation='prev'
-              />
-            </motion.div>
-          </AnimatePresence>
-        )}
-        {!isLastSlide && (
-          <AnimatePresence>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className='absolute right-0 z-10 top-1/3'
-            >
-              <SwiperNavigationButton
-                onClick={() => swiper?.slideNext()}
-                navigation='next'
-              />
-            </motion.div>
-          </AnimatePresence>
-        )}
+        <div className='flex items-center justify-center gap-10 mt-3'>
+          <SwiperNavigationButton
+            onClick={() => swiper?.slidePrev()}
+            disabled={isFirstSlide}
+            navigation='prev'
+          />
+          <div>
+            <span>
+              {currPageIdx} / {recommendations.length - (slidesPerView - 1)}
+            </span>
+          </div>
+          <SwiperNavigationButton
+            disabled={isLastSlide}
+            onClick={() => swiper?.slideNext()}
+            navigation='next'
+          />
+        </div>
       </div>
     </section>
   );

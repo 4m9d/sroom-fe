@@ -2,7 +2,7 @@
 import { TOAST_DELAY } from '@/src/constants/ui/toast';
 import { AnimatePresence, motion } from 'framer-motion';
 import Button from './button/Button';
-import Image from 'next/image';
+import LectureSVG from '@/public/icon/Lecture';
 
 const Emoji: Emoji = {
   lecture_enrollment: '🤓',
@@ -24,47 +24,47 @@ export default function Toast({ toast }: { toast: CustomToast }) {
           repeatDelay: TOAST_DELAY - 0.25
         }}
         role='alert'
-        className={`fixed h-24 flex !z-[9999] w-[88%] md:w-[88%] lg:w-[60%] px-7 py-6 justify-between  md:bottom-10 lg:bottom-14 left-[calc(6%)] lg:left-[20%] items-center gap-5 shadow-xl ${
+        className={`fixed h-[5.5rem] z-50 flex w-[88%] lg:w-[60%] px-7 py-6 justify-between bottom-10 lg:bottom-14 left-[calc(6%)] lg:left-[20%] items-center gap-5 shadow-xl text-sroom-black-400 ${
           type === 'error'
             ? 'bg-red-400'
             : type === 'lecture_enrollment'
-            ? 'bg-white'
+            ? 'bg-sroom-white'
             : ''
         }`}
       >
         <div className='flex items-center gap-7 shrink-0'>
-          <p className='text-xl font-bold'>
-            <span className='mr-2 text-xl'>{Emoji[type]}</span>
+          <p className='text-base font-bold lg:text-xl'>
+            <span className='mr-2'>{Emoji[type]}</span>
             {title}
           </p>
           <p
-            className={`text-sm ${
+            className={`${
+              type === 'lecture_enrollment' ? 'hidden' : 'block'
+            } sm:block text-xs md:text-sm ${
               type === 'error'
-                ? 'text-black'
+                ? 'text-sroom-black-400'
                 : type === 'lecture_enrollment'
-                ? 'text-zinc-500'
+                ? 'text-sroom-black-200'
                 : ''
             }`}
           >
             {description}
           </p>
         </div>
-        <div className='w-[12rem] h-12 text-white'>
+        <div className='w-[35%] h-12 min-w-[5rem] max-w-[12rem] text-sroom-white'>
           {buttonLabel && buttonOnClick && (
             <Button
               onClick={buttonOnClick}
-              className='flex items-center justify-center !px-7 !py-4 w-full h-full bg-orange-500'
+              className='flex items-center justify-center w-full h-full bg-sroom-brand'
             >
               {type === 'lecture_enrollment' && (
-                <Image
-                  className='w-auto h-auto mr-3'
-                  src={'/icon/icon_lecture_white.svg'}
-                  alt='재생 버튼'
-                  width={20}
-                  height={20}
-                />
+                <span className='w-3 mr-3 align-middle md:w-5 stroke-sroom-white fill-sroom-white'>
+                  <LectureSVG />
+                </span>
               )}
-              <span className='text-sm font-bold'>{buttonLabel}</span>
+              <span className='text-xs font-bold md:text-sm'>
+                {buttonLabel}
+              </span>
             </Button>
           )}
         </div>

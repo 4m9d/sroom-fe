@@ -1,3 +1,5 @@
+'use client';
+
 type Props = {
   id: string;
   className?: string;
@@ -5,17 +7,15 @@ type Props = {
   onClose: () => void;
 };
 
-export default function Modal({
-  id,
-  className,
-  children,
-  onClose
-}: Props) {
+export default function Modal({ id, className, children, onClose }: Props) {
   return (
-    <dialog id={id} className={'modal overflow-x-hidden overflow-y-scroll'}>
-      <div
-        className={`modal-box ${className}`}
-      >
+    <dialog
+      id={id}
+      className={
+        'modal overflow-x-hidden overflow-y-scroll text-sroom-black-400'
+      }
+    >
+      <div className={`modal-box ${className}`}>
         <form method='dialog'>
           <button
             type='button'
@@ -27,7 +27,11 @@ export default function Modal({
         </form>
         {children}
       </div>
-      <form method='dialog' className='modal-backdrop' onClick={onClose}>
+      <form
+        method='dialog'
+        className='modal-backdrop'
+        onSubmit={onClose}
+      >
         <button>close</button>
       </form>
     </dialog>
