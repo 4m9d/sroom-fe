@@ -4,24 +4,23 @@ import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
 import ThumbnailBadge from '../ui/badge/ThumbnailBadge';
 import getCompactFormattedNumber from '@/src/util/number/getCompactFormattedNumber';
 import LectureEnrollmentButton from '../lectureEnrollment/LectureEnrollmentButton';
-import getFormattedTime from '@/src/util/time/getFormattedTime';
-import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
-import ClockSVG from '@/public/icon/Clock';
-import LectureSVG from '@/public/icon/Lecture';
 
 type Props = {
   lectureDetail: LectureDetail;
+  isIndexListFetched: boolean;
   onClose: () => void;
 };
 
-export default function LectureDetailCard({ lectureDetail, onClose }: Props) {
+export default function LectureDetailCard({
+  lectureDetail,
+  isIndexListFetched,
+  onClose
+}: Props) {
   const {
     lecture_code,
     lecture_title,
     published_at,
-    duration,
     view_count,
-    lecture_count,
     thumbnail,
     channel,
     description,
@@ -45,21 +44,10 @@ export default function LectureDetailCard({ lectureDetail, onClose }: Props) {
                 {channel}
               </p>
               <p className='flex text-xs text-sroom-black-100'>
-                <span className='w-3 mr-1 stroke-sroom-black-100'>
-                  <ClockSVG />
-                </span>
-
-                {getFormattedTime(convertSecondsToMinutes(duration))}
-                {is_playlist ? (
-                  <>
-                    <span className='w-3 ml-2 mr-1 stroke-sroom-black-100'>
-                      <LectureSVG />
-                    </span>
-                    {`${lecture_count?.toLocaleString()}개`}
-                  </>
-                ) : (
-                  <span className='ml-2'>
-                    {`조회수 ${getCompactFormattedNumber(view_count)}회`}
+                {is_playlist === false && (
+                  <span>
+                    {view_count &&
+                      `조회수 ${getCompactFormattedNumber(view_count)}회`}
                   </span>
                 )}
                 <span className='ml-2'>
@@ -80,6 +68,7 @@ export default function LectureDetailCard({ lectureDetail, onClose }: Props) {
             </div>
           </div>
           <LectureEnrollmentButton
+            disabled={isIndexListFetched}
             onEnrollSuccess={onClose}
             is_playlist={is_playlist}
             courses={courses}

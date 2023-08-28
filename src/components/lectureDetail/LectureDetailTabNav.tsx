@@ -15,16 +15,16 @@ export default function LectureDetailTabNav({ is_playlist }: Props) {
     setActiveId,
     document.getElementById('modal')
   );
+  
   useEffect(() => {
     const entries = document.querySelectorAll('section');
     entries.forEach((entry) => observe(entry));
 
     return () => entries.forEach((entry) => unobserve(entry));
-  }, []);
+  }, [observe, unobserve]);
 
   return (
     <TabNav className='sticky z-10 h-16 border-b tab-bordered border-b-sroom-black-100 -top-14 bg-sroom-white text-sroom-black-400'>
-      {is_playlist && (
         <li>
           <a
             href='#indexes'
@@ -37,13 +37,10 @@ export default function LectureDetailTabNav({ is_playlist }: Props) {
             목차
           </a>
         </li>
-      )}
       <li>
         <a
           href='#reviews'
-          className={`tab tab-bordered text-lg transition-colors ${
-            is_playlist ? 'ml-3' : ''
-          } p-1 ${
+          className={`tab tab-bordered text-lg transition-colors ml-3 p-1 ${
             activeId === 'reviews'
               ? 'tab-active font-bold border-b-sroom-black-400 border-b-2'
               : 'border-none text-sroom-black-100 font-medium'

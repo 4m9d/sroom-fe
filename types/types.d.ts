@@ -167,12 +167,13 @@ interface LectureIndex {
   thumbnail: string;
   lecture_title: string;
   duration: number;
+  is_members_only: boolean;
 }
 
 interface LectureIndexList {
   index_list: LectureIndex[];
-  next_page_token: string | null;
-  total_duration: number;
+  duration?: number;
+  lecture_count?: number;
 }
 
 interface LectureReview {
@@ -191,9 +192,9 @@ type EnrolledCourse = {
 
 interface LectureDetail extends Lecture {
   published_at: string;
-  view_count: number;
-  duration: number;
-  lecture_count?: number;
+  view_count?: number;
+  duration?: number;
+  is_members_only?: boolean;
   indexes?: LectureIndexList;
   reviews: LectureReview[];
   courses: EnrolledCourse[];
@@ -201,8 +202,6 @@ interface LectureDetail extends Lecture {
 
 interface LectureIndexParams extends Record<string, string | number | boolean> {
   index_only?: boolean;
-  index_next_token?: string;
-  index_limit?: number;
 }
 
 interface LectureReviewParams extends Record<string, number | boolean> {

@@ -9,7 +9,7 @@ import setErrorToast from '@/src/util/toast/setErrorToast';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/search/search';
 import Button from '../ui/button/Button';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default async function SearchResultsList({
   requestParam,
@@ -21,7 +21,6 @@ export default async function SearchResultsList({
   const [filter, setFilter] = useState<SearchResultsFilter>(
     requestParam.filter
   );
-  const router = useRouter();
 
   const updateSearchResultPageRef = (next_page_token: string) => {
     if (next_page_token === '') {
@@ -96,18 +95,14 @@ export default async function SearchResultsList({
       <ul className='grid grid-cols-1 gap-5 lg:grid-cols-2 shrink-0'>
         {data?.pages.map((page) =>
           page?.lectures.map((lecture: SearchResultsLecture) => (
-            <div
-              className='cursor-pointer'
+            <Link
               key={lecture.lecture_code}
-              onClick={() => {
-                router.refresh();
-                router.push(`/search/${lecture.lecture_code}`);
-              }}
+              href={`/search/${lecture.lecture_code}`}
             >
               <li>
                 <SearchLectureCard lecture={lecture} />
               </li>
-            </div>
+            </Link>
           ))
         )}
         {data?.pages[0]?.lectures.length === 0 && (

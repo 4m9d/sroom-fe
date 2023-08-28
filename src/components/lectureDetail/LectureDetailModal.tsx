@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import Modal from '../ui/Modal';
 import LectureDetailTabNav from './LectureDetailTabNav';
-import { Suspense, useCallback, useEffect, useRef } from 'react';
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import LectureDetailIndexList from './index/LectureDetailIndexList';
 import LectureDetailReviewList from './review/LectureDetailReviewList';
 import LectureDetailCard from './LectureDetailCard';
@@ -18,6 +18,7 @@ import { ModalIDs } from '@/src/constants/modal/modal';
 import LectureEnrollmentModal from '../lectureEnrollment/LectureEnrollmentModal';
 import { closeModalHandler } from '@/src/util/modal/modalHandler';
 import SchedulingModal from '../lectureEnrollment/SchedulingModal';
+import LectureDetailIndexCard from './index/LectureDetailIndexCard';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -28,10 +29,10 @@ export default function LectureDetailModal({
   lectureDetail,
   navigationType
 }: Props) {
-  const { is_playlist, lecture_code, rating } = lectureDetail;
+  const { is_playlist, lecture_code, rating, indexes } = lectureDetail;
   const router = useRouter();
-  const indexPageRef = useRef<number>(0);
   const reviewPageRef = useRef<number>(0);
+  const [isIndexListFetched, setIsIndexListFetched] = useState<boolean>(false);
 
   const onCloseHandler = useCallback(() => {
     return navigationType === 'soft'
@@ -75,26 +76,31 @@ export default function LectureDetailModal({
         <LectureDetailCard
           lectureDetail={lectureDetail}
           onClose={onCloseHandler}
+          isIndexListFetched={isIndexListFetched}
         />
         <LectureDetailTabNav is_playlist={is_playlist} />
         <section id='indexes'>
-          {is_playlist && (
+          <LectureDetailHeading title={'목차'} />
+          {is_playlist ? (
             <>
-              <LectureDetailHeading title={'목차'} />
               <Suspense
-                fallback={
-                  <LectureDetailIndexSkeleton
-                    indexPageRef={indexPageRef}
-                    limit={INDEX_LIMIT}
-                  />
-                }
+                fallback={<LectureDetailIndexSkeleton limit={INDEX_LIMIT} />}
               >
                 <LectureDetailIndexList
-                  indexPageRef={indexPageRef}
                   lectureCode={lecture_code}
+                  setIsFetched={setIsIndexListFetched}
                 />
               </Suspense>
             </>
+          ) : (
+            indexes && (
+              <>
+                <LectureDetailIndexCard
+                  lectureIndex={indexes.index_list[0]}
+                  indexNum={1}
+                />
+              </>
+            )
           )}
         </section>
         <section id='reviews'>
@@ -126,7 +132,7 @@ export default function LectureDetailModal({
           </Suspense>
         </section>
       </Modal>
-      {is_playlist && (
+      {is_playlist && isIndexListFetched === true && (
         <>
           <LectureEnrollmentModal
             lectureDetail={lectureDetail}

@@ -13,7 +13,7 @@ import {
 } from '@/src/constants/scheduling/scheduling';
 import getCurrentDate from '@/src/util/day/getCurrentDate';
 import convertMinutesToSeconds from '@/src/util/time/convertMinutesToSeconds';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { enrollLectureInNewCourse } from '@/src/api/courses/courses';
 import setErrorToast from '@/src/util/toast/setErrorToast';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
@@ -21,6 +21,8 @@ import LoadingSpinner from '../ui/LoadingSpinner';
 import getCompactDateFormat from '@/src/util/day/getCompactFormattedDate';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
 import { useRouter } from 'next/navigation';
+import { QueryKeys } from '@/src/api/queryKeys';
+import { revalidateTag } from 'next/cache';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -34,6 +36,7 @@ export default function SchedulingModal({
   onEnrollSuccess
 }: Props) {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const enrollLecture = async () => {
     const enrollLectureInNewCourseParams: EnrollLectureInNewCourseParams = {
@@ -62,10 +65,16 @@ export default function SchedulingModal({
         setLectureEnrollToast(() =>
           router.push(`/course/${response.course_id}`)
         );
+      revalidateTag(lecture_code);
     }
   });
-  const { lecture_title, duration, indexes } = lectureDetail;
-  const durationInMinutes = convertSecondsToMinutes(duration);
+  const { lecture_title, lecture_code } = lectureDetail;
+  const { duration, index_list } = queryClient.getQueryData([
+    QueryKeys.LECTURE_INDEX,
+    lecture_code
+  ]) as LectureIndexList;
+
+  const durationInMinutes = convertSecondsToMinutes(duration as number);
   const convertedDuration =
     Math.floor(durationInMinutes / THIRTY_MINUTES) * THIRTY_MINUTES;
   const sliderMaxValue = Math.max(
@@ -101,7 +110,6 @@ export default function SchedulingModal({
 
   function reschedule() {
     const weeklyStudyTime = convertMinutesToSeconds(inputValue * 7);
-    const index_list = indexes!.index_list;
     const schedulingList: number[] = [];
     let currWeekDurationSum = 0;
     let currWeekVideoCount = 0;
@@ -140,7 +148,7 @@ export default function SchedulingModal({
 
   useEffect(() => {
     reschedule();
-  }, [inputValue, durationInMinutes, indexes]);
+  }, [inputValue, durationInMinutes]);
 
   useEffect(() => {
     controls.set('initial');
@@ -231,9 +239,7 @@ export default function SchedulingModal({
             <p className='flex gap-1'>
               총 재생 시간 :
               <span className='text-sroom-brand'>
-                {getFormattedTime(
-                  convertSecondsToMinutes(lectureDetail.duration)
-                )}
+                {getFormattedTime(convertSecondsToMinutes(duration as number))}
               </span>
             </p>
             <Button
