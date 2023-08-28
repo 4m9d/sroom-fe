@@ -1,5 +1,6 @@
 import { Dispatch } from 'react';
 import Button from '../ui/button/Button';
+import ArrowRightSVG from '@/public/icon/ArrowRight';
 
 type Props = {
   prevPlayingVideo: LastViewVideo | null;
@@ -21,28 +22,32 @@ export default function PrevNextController({
     }
   };
   return (
-    <div className='flex justify-between my-5 px-[15%] shrink-0'>
+    <div className='flex flex-wrap justify-center max-w-screen-lg gap-1 mx-auto my-2 md:gap-3 lg:my-5 lg:px-28 shrink-0'>
       <Button
         onClick={() => controllerClickHandler('prev')}
         disabled={prevPlayingVideo === null}
         id='prev-controller'
-        className={`w-44 h-12 flex justify-between items-center gap-3 font-bold text-lg ${
+        className={`w-28 md:w-32 lg:w-36 flex justify-between items-center font-bold text-lg lg:text-xl hover:scale-105 hover:bg-sroom-gray-300 ${
           prevPlayingVideo === null ? 'opacity-50 hover:opacity-50' : ''
         }`}
       >
-        <div>〈</div>
-        <div>이전 강의</div>
+        <span className='w-3 rotate-180 lg:w-4 fill-sroom-black-400 stroke-sroom-black-400'>
+          <ArrowRightSVG />
+        </span>
+        <div className='whitespace-nowrap'>이전 강의</div>
       </Button>
       <Button
         onClick={() => controllerClickHandler('next')}
         disabled={nextPlayingVideo === null}
         id='next-controller'
-        className={`w-44 h-12 flex justify-between items-center gap-3 font-bold text-lg ${
+        className={`w-28 md:w-32 lg:w-36 flex justify-between items-center font-bold text-lg lg:text-xl hover:scale-105 hover:bg-sroom-gray-300 ${
           nextPlayingVideo === null ? 'opacity-50 hover:opacity-50' : ''
         }`}
       >
-        <div>다음 강의</div>
-        <div>〉</div>
+        <div className='whitespace-nowrap'>다음 강의</div>
+        <span className='w-3 lg:w-4 fill-sroom-black-400 stroke-sroom-black-400'>
+          <ArrowRightSVG />
+        </span>
       </Button>
     </div>
   );

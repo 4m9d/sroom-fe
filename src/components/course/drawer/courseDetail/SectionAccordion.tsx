@@ -1,8 +1,8 @@
 'use client';
+import PolygonSVG from '@/public/icon/Polygon';
 import VideoCompletionBadge from '@/src/components/ui/badge/VideoCompletionBadge';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import getFormattedTime from '@/src/util/time/getFormattedTime';
-import Image from 'next/image';
 import { Dispatch, SetStateAction, useLayoutEffect, useState } from 'react';
 
 type Props = {
@@ -58,12 +58,14 @@ export default function SectionAccordion({
     <div
       className={`collapse ${
         isOpen === true ? 'collapse-open' : ''
-      } cursor-pointer rounded-none bg-white`}
+      } cursor-pointer rounded-none text-sroom-black-400 bg-sroom-white`}
     >
       <div
         onClick={toggleAccordion}
         className={`flex justify-between px-5 py-4 collapse-title ${
-          isOpen === true ? 'bg-zinc-100 border-l-[3px] border-l-black' : ''
+          isOpen === true
+            ? 'bg-sroom-gray-200 border-l-[3px] border-l-sroom-black-400'
+            : ''
         }`}
       >
         <h3 className='flex flex-col'>
@@ -71,7 +73,7 @@ export default function SectionAccordion({
             {use_schedule ? `${index}주차` : `${course_title}`}
           </p>
           <div className='flex h-[17px] items-center gap-2'>
-            <p className='text-xs font-normal text-zinc-500'>
+            <p className='text-xs font-normal text-sroom-black-200'>
               {`${getFormattedTime(
                 convertSecondsToMinutes(current_week_duration)
               )} / ${getFormattedTime(
@@ -81,16 +83,13 @@ export default function SectionAccordion({
             {is_completed && <VideoCompletionBadge />}
           </div>
         </h3>
-        <Image
-          src={'/icon/icon_polygon_black.svg'}
+        <span
           className={`${
             isOpen === true ? 'rotate-180' : 'rotate-0'
-          } mr-2 transition-all`}
-          alt='화살표'
-          width={10}
-          height={8}
-          aria-hidden
-        />
+          } w-[10px] h-[10px] fill-sroom-black-400 mr-2 transition-all`}
+        >
+          <PolygonSVG />
+        </span>
       </div>
       <div className='px-2 collapse-content'>
         {isOpen === true && (
@@ -100,13 +99,13 @@ export default function SectionAccordion({
                 type='button'
                 onClick={() => videoClickHandler(video)}
                 key={video.video_id}
-                className='flex items-center justify-between h-[17px] px-3 py-3 hover:bg-zinc-100 hover:opacity-90 rounded-sm'
+                className='flex items-center justify-between h-[17px] px-3 py-3 hover:bg-sroom-gray-200 hover:opacity-80 rounded-sm hover:scale-105 transition-all'
               >
                 <p
-                  className={`w-5/6 text-start text-xs font-semibold whitespace-normal line-clamp-1 before:w-[2px] before:h-[2px]  before:mr-1 before:inline-block before:align-middle ${
+                  className={`w-5/6 text-start text-xs md:text-sm font-semibold whitespace-normal line-clamp-1 before:w-[2px] before:h-[2px]  before:mr-1 before:inline-block before:align-middle ${
                     currentPlayingVideo.video_id === video.video_id
-                      ? 'text-orange-500 before:bg-orange-500'
-                      : 'text-zinc-500 before:bg-zinc-500'
+                      ? 'text-sroom-brand before:bg-sroom-brand !font-bold'
+                      : 'text-sroom-black-200 before:bg-sroom-black-200'
                   } `}
                 >
                   {video.video_title}

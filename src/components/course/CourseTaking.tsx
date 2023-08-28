@@ -78,7 +78,7 @@ export default function CourseTaking({ courseDetail }: Props) {
   }, [currentPlayingVideo, searchPrevVideo, searchNextVideo]);
 
   return (
-    <div className='flex items-stretch flex-1 h-full bg-zinc-50'>
+    <div className='flex items-stretch flex-1 h-full bg-sroom-gray-200'>
       <CourseDetailDrawer
         courseDetail={courseDetail}
         currentPlayingVideo={currentPlayingVideo}

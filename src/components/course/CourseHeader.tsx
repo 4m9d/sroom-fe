@@ -7,19 +7,19 @@ type Props = {
 
 export default function CourseHeader({ title, channel }: Props) {
   return (
-    <div className='flex justify-between h-20 mx-auto mt-12 mb-5 px-[10%]'>
+    <div className='flex justify-between max-w-screen-lg px-5 mx-auto mt-12 mb-5 h-14 md:h-16 lg:h-20 text-sroom-black-400'>
       <div className='flex flex-col justify-between'>
-        <h2 className='text-3xl font-bold whitespace-normal line-clamp-1'>
+        <h2 className='text-xl font-bold whitespace-normal md:text-2xl lg:text-3xl line-clamp-1'>
           {title}
         </h2>
-        <h3 className='text-base font-medium whitespace-normal text-zinc-500 line-clamp-1'>
+        <h3 className='text-sm font-medium whitespace-normal lg:text-base text-sroom-black-300 line-clamp-1'>
           {channel}
         </h3>
       </div>
       <div className='flex flex-col justify-end shrink-0'>
         <Button
           id='course-material-drawer'
-          className='!px-10 !py-3 text-sm font-medium text-white bg-zinc-900'
+          className='text-xs lg:text-sm lg:!px-10 font-bold text-sroom-white bg-sroom-black-400'
         >
           {'강의 노트 / 퀴즈 보기'}
         </Button>

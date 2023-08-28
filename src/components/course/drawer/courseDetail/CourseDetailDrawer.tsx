@@ -38,7 +38,7 @@ export default function CourseDetailDrawer({
     animate: controls,
     variants: {
       initial: { width: 0 },
-      animate: { width: '19rem' },
+      animate: { width: '40%', maxWidth: '19rem' },
       exit: { width: 0 }
     }
   };
@@ -58,7 +58,7 @@ export default function CourseDetailDrawer({
       <motion.aside
         id='course-detail-drawer'
         {...animationConfig}
-        className='relative max-h-full min-h-full bg-white shadow-lg shrink-0'
+        className='relative max-h-full min-h-full shadow-lg bg-sroom-white shrink-0'
       >
         {isDrawerOpen && (
           <div className='flex flex-col justify-between h-full'>
@@ -87,7 +87,7 @@ export default function CourseDetailDrawer({
           id='course-detail-drawer-btn'
           type='button'
           onClick={drawerHandler}
-          className='absolute flex items-center justify-center w-5 h-12 bg-zinc-900 -right-5 top-[calc(50%-1.5rem)]'
+          className='absolute flex items-center justify-center w-5 h-12 bg-zinc-900 -right-5 top-[calc(50%-1.5rem)] z-50  hover:scale-105 transition-all hover:opacity-90'
         >
           <span
             className={`w-3 stroke-sroom-white ${isDrawerOpen ? 'rotate-180' : ''} transition-all`}
