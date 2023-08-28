@@ -10,19 +10,26 @@ const LectureDetailIndexSkeleton = ({ limit }: Props) => {
 
   const StyledSkeleton = () => {
     return (
-      <li className={'flex items-center justify-between h-[4.5rem]'}>
-        <div className='w-full h-full'>
-          <Skeleton height='100%' />
-        </div>
-      </li>
+      <>
+        <li className={'flex items-center justify-between h-[4.5rem]'}>
+          <div className='w-full h-full'>
+            <Skeleton height='100%' />
+          </div>
+        </li>
+      </>
     );
   };
   return (
-    <ul className='grid grid-cols-1 gap-4'>
-      {skeletonArray.map((idx) => (
-        <StyledSkeleton key={'skeleton' + idx} />
-      ))}
-    </ul>
+    <>
+      <div className='h-20 mb-10'>
+        <Skeleton height='100%' baseColor='#333333' />
+      </div>
+      <ul className='grid grid-cols-1 gap-4'>
+        {skeletonArray.map((idx) => (
+          <StyledSkeleton key={'skeleton' + idx} />
+        ))}
+      </ul>
+    </>
   );
 };
 

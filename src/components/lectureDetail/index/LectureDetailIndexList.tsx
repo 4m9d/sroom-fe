@@ -11,6 +11,7 @@ import {
 import LoadMoreButton from '../../ui/button/LoadMoreButton';
 import setErrorToast from '@/src/util/toast/setErrorToast';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import LectureIndexNotice from './LectureIndexNotice';
 
 export default async function LectureDetailIndexList({
   lectureCode,
@@ -56,6 +57,10 @@ export default async function LectureDetailIndexList({
     <>
       {data?.index_list && (
         <>
+          <LectureIndexNotice
+            duration={data.duration as number}
+            lecture_count={data.lecture_count as number}
+          />
           <ul className='grid grid-cols-1 gap-4'>
             {isCollapsed === true
               ? data.index_list

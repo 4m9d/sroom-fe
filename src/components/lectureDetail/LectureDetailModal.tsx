@@ -19,6 +19,7 @@ import LectureEnrollmentModal from '../lectureEnrollment/LectureEnrollmentModal'
 import { closeModalHandler } from '@/src/util/modal/modalHandler';
 import SchedulingModal from '../lectureEnrollment/SchedulingModal';
 import LectureDetailIndexCard from './index/LectureDetailIndexCard';
+import LectureIndexNotice from './index/LectureIndexNotice';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -95,6 +96,10 @@ export default function LectureDetailModal({
           ) : (
             indexes && (
               <>
+                <LectureIndexNotice
+                  duration={lectureDetail.duration as number}
+                  lecture_count={1}
+                />
                 <LectureDetailIndexCard
                   lectureIndex={indexes.index_list[0]}
                   indexNum={1}
