@@ -99,6 +99,7 @@ export default function LectureDetailModal({
                 <LectureIndexNotice
                   duration={lectureDetail.duration as number}
                   lecture_count={1}
+                  hasMembersOnly={lectureDetail.is_members_only as boolean}
                 />
                 <LectureDetailIndexCard
                   lectureIndex={indexes.index_list[0]}

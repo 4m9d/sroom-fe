@@ -21,6 +21,7 @@ export default async function LectureDetailIndexList({
   setIsFetched: Dispatch<SetStateAction<boolean>>;
 }) {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
+  const [hasMembersOnly, setHasMembersOnly] = useState<boolean>(false);
 
   const fetchLectureIndexList = async () => {
     const params: LectureDeatilParams = {
@@ -50,6 +51,9 @@ export default async function LectureDetailIndexList({
   useEffect(() => {
     if (isFetched) {
       setIsFetched(true);
+      setHasMembersOnly(() => {
+        return data!.index_list.some((index) => index.is_members_only === true);
+      });
     }
   }, [isFetched, setIsFetched]);
 
@@ -60,7 +64,9 @@ export default async function LectureDetailIndexList({
           <LectureIndexNotice
             duration={data.duration as number}
             lecture_count={data.lecture_count as number}
+            hasMembersOnly={hasMembersOnly}
           />
+          
           <ul className='grid grid-cols-1 gap-4'>
             {isCollapsed === true
               ? data.index_list
