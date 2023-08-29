@@ -18,7 +18,7 @@ export default function LectureDetailIndexCard({
   return (
     <li
       className={`flex items-center justify-between h-[4.5rem] p-3 border bg-sroom-gray-200 relative ${
-        is_members_only ? 'border-[#FCCE00] border-2' : 'border-sroom-gray-400'
+        is_members_only ? 'border-sroom-brand border-2 rounded-sm' : 'border-sroom-gray-400'
       }`}
     >
       <div className='flex items-center w-24'>
@@ -44,7 +44,7 @@ export default function LectureDetailIndexCard({
         </div>
       </div>
       {is_members_only && (
-        <span className='absolute -translate-y-1/2 -top-1 left-2 w-7'>
+        <span className='absolute w-6 -translate-y-1/2 -top-1 left-2'>
           <CrownSVG />
         </span>
       )}
