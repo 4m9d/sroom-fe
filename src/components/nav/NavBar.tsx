@@ -24,13 +24,23 @@ export default function NavBar({ logo, profileDropdown }: Props) {
     <nav className='flex justify-between gap-4 lg:gap-8 px-4 lg:px-24 mx-auto max-h-[4rem] navbar max-w-screen-2xl'>
       <h1 className='w-6 sm:w-20 lg:w-36 shrink-0'>
         <Link href='/' className='shrink-0 mr-14'>
-          <Image
-            className='w-6 sm:w-20 lg:w-36'
-            src={width < WIDTH_SM ? '/logo/logo.svg' : '/logo/logo_en.svg'}
-            alt={logo}
-            width={width < WIDTH_SM ? 25 : 150}
-            height={width < WIDTH_SM ? 25 : 40}
-          />
+          {width && width < WIDTH_SM ? (
+            <Image
+              className='w-6'
+              src={'/logo/logo.svg'}
+              alt={logo}
+              width={25}
+              height={25}
+            />
+          ) : (
+            <Image
+              className='w-20 lg:w-36'
+              src={'/logo/logo_en.svg'}
+              alt={logo}
+              width={150}
+              height={40}
+            />
+          )}
         </Link>
       </h1>
       <div className={`${hidden} flex-1`}>
