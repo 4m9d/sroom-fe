@@ -12,6 +12,7 @@ import LoadMoreButton from '../../ui/button/LoadMoreButton';
 import setErrorToast from '@/src/util/toast/setErrorToast';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import LectureIndexNotice from './LectureIndexNotice';
+import LectureDetailIndexSkeleton from './LectureDetailIndexSkeleton';
 
 export default async function LectureDetailIndexList({
   lectureCode,
@@ -55,7 +56,12 @@ export default async function LectureDetailIndexList({
         return data!.index_list.some((index) => index.is_members_only === true);
       });
     }
-  }, [isFetched, setIsFetched]);
+    console.log('is fetched?', isFetched);
+  }, [isFetched, setIsFetched, data]);
+
+  if (isFetched === false) {
+    return <LectureDetailIndexSkeleton limit={5} />;
+  }
 
   return (
     <>
@@ -66,19 +72,19 @@ export default async function LectureDetailIndexList({
             lecture_count={data.lecture_count as number}
             hasMembersOnly={hasMembersOnly}
           />
-          
+
           <ul className='grid grid-cols-1 gap-4'>
-            {isCollapsed === true
-              ? data.index_list
-                  .slice(0, 5)
-                  .map((lectureIndex, idx) => (
-                    <LectureDetailIndexCard
-                      key={lectureIndex.index}
-                      lectureIndex={lectureIndex}
-                      indexNum={idx + 1}
-                    />
-                  ))
-              : data.index_list.map((lectureIndex, idx) => (
+            {data.index_list.slice(0, 5).map((lectureIndex, idx) => (
+              <LectureDetailIndexCard
+                key={lectureIndex.index}
+                lectureIndex={lectureIndex}
+                indexNum={idx + 1}
+              />
+            ))}
+            {isCollapsed === false &&
+              data.index_list
+                .slice(5)
+                .map((lectureIndex, idx) => (
                   <LectureDetailIndexCard
                     key={lectureIndex.index}
                     lectureIndex={lectureIndex}
