@@ -53,3 +53,7 @@ export function getFullWeekDate(startOfWeek: string = '') {
 
   return weekInfo as WeekInfo[];
 }
+
+export function getMonth(fullDate:string) {
+  return dayjs(fullDate).format('M');
+}

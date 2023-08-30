@@ -3,11 +3,12 @@ import {
   getCurrentWeekRange,
   getNextWeekRange,
   getPreviousWeekRange,
-  getFullWeekDate
+  getFullWeekDate,
+  getMonth
 } from '@/src/util/day/getWeekRange';
 import { getCurrentWeekDay } from '@/src/util/day/getCurrentDate';
 import getFormattedTime from '@/src/util/time/getFormattedTime';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useLayoutEffect, useState } from 'react';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import CalendarForOneWeek from './CalendarForOneWeek';
 import LearningHistoryItem from './LearningHistoryItem';
@@ -24,6 +25,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
   const [selectedDay, setSelectedDay] = useState<weekdayKey>(
     getCurrentWeekDay().toString() as weekdayKey
   );
+  const selectedMonth = getMonth(selectedWeek[0].fullDate);
 
   const findLearningHistory = useCallback(
     (startOfWeek: string) => {
@@ -66,7 +68,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
     setSelectedDay(() => '7');
   }, [selectedWeek, findLearningHistory]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const { startOfWeek } = getCurrentWeekRange();
     setSelectedWeek(findLearningHistory(startOfWeek));
   }, [findLearningHistory]);
@@ -75,7 +77,10 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
     <div className='flex flex-col items-center justify-center col-start-3 col-end-4 row-start-1 row-end-4 bg-sroom-gray-300 text-sroom-black-400'>
       <div className='flex items-center justify-center py-2 sm:py-3 md:py-4 xl:py-7'>
         <p className='text-xs font-semibold md:text-base xl:text-lg'>
-          주간 수강 캘린더
+          <span className='px-2 py-[2px] mr-1 font-bold bg-sroom-white rounded-sm text-sroom-black-300'>
+            {selectedMonth}
+          </span>
+          월 주간 수강 캘린더
         </p>
       </div>
       <div className='flex justify-between w-full h-full pb-5 overflow-auto md:pb-8 xl:pb-10'>
