@@ -3,7 +3,7 @@ import {
   getCurrentWeekRange,
   getNextWeekRange,
   getPreviousWeekRange,
-  getFullWeekDate,
+  getFullWeekDate
 } from '@/src/util/day/getWeekRange';
 import { getCurrentWeekDay } from '@/src/util/day/getCurrentDate';
 import getFormattedTime from '@/src/util/time/getFormattedTime';
@@ -25,21 +25,24 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
     getCurrentWeekDay().toString() as weekdayKey
   );
 
-  const findLearningHistory = useCallback((startOfWeek: string) => {
-    const weekInfo = getFullWeekDate(startOfWeek);
+  const findLearningHistory = useCallback(
+    (startOfWeek: string) => {
+      const weekInfo = getFullWeekDate(startOfWeek);
 
-    const mappedWeekInfo: WeekInfo[] = weekInfo.map((day) => {
-      const learningHistory = learning_histories.find((history) => {
-        if (history.date === day.fullDate) {
-          return true;
-        }
+      const mappedWeekInfo: WeekInfo[] = weekInfo.map((day) => {
+        const learningHistory = learning_histories.find((history) => {
+          if (history.date === day.fullDate) {
+            return true;
+          }
+        });
+        const result: WeekInfo = { ...day, learningHistory };
+
+        return result;
       });
-      const result: WeekInfo = { ...day, learningHistory };
-
-      return result;
-    });
-    return mappedWeekInfo;
-  }, []);
+      return mappedWeekInfo;
+    },
+    [learning_histories]
+  );
 
   const dayCardClickHandler = useCallback((weekday: weekdayKey) => {
     setSelectedDay(() => weekday);
@@ -52,7 +55,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
     const previousWeek = getPreviousWeekRange({ startOfWeek, endOfWeek });
     setSelectedWeek(findLearningHistory(previousWeek.startOfWeek));
     setSelectedDay(() => '7');
-  }, [selectedWeek]);
+  }, [selectedWeek, findLearningHistory]);
 
   const nextWeekClickHandler = useCallback(() => {
     const startOfWeek = selectedWeek[0].fullDate;
@@ -61,12 +64,12 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
     const nextWeek = getNextWeekRange({ startOfWeek, endOfWeek });
     setSelectedWeek(findLearningHistory(nextWeek.startOfWeek));
     setSelectedDay(() => '7');
-  }, [selectedWeek]);
+  }, [selectedWeek, findLearningHistory]);
 
   useEffect(() => {
-    const { startOfWeek, endOfWeek } = getCurrentWeekRange();
+    const { startOfWeek } = getCurrentWeekRange();
     setSelectedWeek(findLearningHistory(startOfWeek));
-  }, []);
+  }, [findLearningHistory]);
 
   return (
     <div className='flex flex-col items-center justify-center col-start-3 col-end-4 row-start-1 row-end-4 bg-sroom-gray-300 text-sroom-black-400'>

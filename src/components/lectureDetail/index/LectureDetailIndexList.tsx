@@ -56,7 +56,6 @@ export default async function LectureDetailIndexList({
         return data!.index_list.some((index) => index.is_members_only === true);
       });
     }
-    console.log('is fetched?', isFetched);
   }, [isFetched, setIsFetched, data]);
 
   if (isFetched === false) {
