@@ -18,8 +18,8 @@ export default function SectionList({
 }: Props) {
   return (
     <section>
-      <h2 className='px-5 mb-4 text-sm font-semibold'>강의 목차</h2>
-      <div className='overflow-y-auto max-h-[25.9rem]'>
+      <h2 className='px-5 py-2 font-semibold border-b-2 border-sroom-gray-200'>강의 목차</h2>
+      <div className='overflow-y-auto max-h-[22rem]'>
         {sections.map((section) => {
           return (
             <SectionAccordion

@@ -18,7 +18,9 @@ export default function Button({
       id={id}
       disabled={disabled}
       onClick={onClick}
-      className={`${className} text-base h-12 py-1 px-4 flex hover:opacity-90 active:focus:scale-95 transition-all items-center justify-center rounded-none`}
+      className={`${className} ${
+        disabled ? '' : 'hover:opacity-90'
+      } text-sm font-bold h-12 py-1 px-4 flex active:focus:scale-95 transition-all items-center justify-center rounded-none`}
     >
       {children}
     </button>

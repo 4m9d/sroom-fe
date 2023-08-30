@@ -4,14 +4,17 @@ import SearchInput from './SearchInput';
 import useAuth from '@/src/hooks/useAuth';
 import Button from '../ui/button/Button';
 import Image from 'next/image';
+import useWindowSize from '@/src/hooks/useWindowSize';
 
 type Props = {
   logo: string;
   profileDropdown?: ProfileDropdown[];
 };
+const WIDTH_SM = 640;
 
 export default function NavBar({ logo, profileDropdown }: Props) {
   const { session, logout } = useAuth();
+  const { width } = useWindowSize();
 
   const name = session?.name;
   const bio = session?.bio;
@@ -19,15 +22,25 @@ export default function NavBar({ logo, profileDropdown }: Props) {
 
   return (
     <nav className='flex justify-between gap-4 lg:gap-8 px-4 lg:px-24 mx-auto max-h-[4rem] navbar max-w-screen-2xl'>
-      <h1 className='w-20 lg:w-36 shrink-0'>
+      <h1 className='w-6 sm:w-20 lg:w-36 shrink-0'>
         <Link href='/' className='shrink-0 mr-14'>
-          <Image
-            className='w-20 lg:w-36'
-            src={'/logo/logo_en.svg'}
-            alt={logo}
-            width={102}
-            height={56}
-          />
+          {width && width < WIDTH_SM ? (
+            <Image
+              className='w-6'
+              src={'/logo/logo.svg'}
+              alt={logo}
+              width={25}
+              height={25}
+            />
+          ) : (
+            <Image
+              className='w-20 lg:w-36'
+              src={'/logo/logo_en.svg'}
+              alt={logo}
+              width={150}
+              height={40}
+            />
+          )}
         </Link>
       </h1>
       <div className={`${hidden} flex-1`}>
@@ -37,7 +50,9 @@ export default function NavBar({ logo, profileDropdown }: Props) {
         onClick={logout}
         className={`${hidden} g_id_signout w-20 lg:w-24 bg-sroom-brand`}
       >
-        <p className='text-xs font-semibold lg:text-sm text-sroom-white'>로그아웃</p>
+        <p className='text-xs font-semibold lg:text-sm text-sroom-white'>
+          로그아웃
+        </p>
       </Button>
       <button
         type='button'

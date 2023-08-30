@@ -2,6 +2,7 @@ import getQueryURL from '@/src/util/http/getQueryURL';
 import { Endpoints } from '../Endpoints';
 import { ErrorMessage } from '../ErrorMessage';
 import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
+import { QueryKeys } from '../queryKeys';
 
 export async function fetchLecturesByKeyword(params: SearchLectureParams) {
   const headers = await getAuthorizedHeaders();
@@ -27,7 +28,7 @@ export async function fetchLectureDetail(
     {
       method: 'GET',
       headers,
-      cache: 'no-store'
+      next: { tags: [QueryKeys.DETAIL, lecture_code] }
     }
   ).then(async (res) => {
     if (res.ok) {

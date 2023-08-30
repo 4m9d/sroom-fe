@@ -10,6 +10,7 @@ import { ErrorMessage } from '@/src/api/ErrorMessage';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
 import { useRouter } from 'next/navigation';
+import { revalidateTag } from 'next/cache';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -23,6 +24,7 @@ export default function LectureEnrollmentModal({
   onEnrollSuccess
 }: Props) {
   const router = useRouter();
+  const { lecture_code } = lectureDetail;
 
   const enrollLecture = async () => {
     const enrollLectureInNewCourseParams: EnrollLectureInNewCourseParams = {
@@ -30,7 +32,7 @@ export default function LectureEnrollmentModal({
         use_schedule: false
       },
       body: {
-        lecture_code: lectureDetail.lecture_code
+        lecture_code
       }
     };
     return await enrollLectureInNewCourse(enrollLectureInNewCourseParams).catch(
@@ -48,6 +50,7 @@ export default function LectureEnrollmentModal({
         setLectureEnrollToast(() =>
           router.push(`/course/${response.course_id}`)
         );
+      revalidateTag(lecture_code);
     }
   });
 

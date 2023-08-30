@@ -12,7 +12,7 @@ export default function CourseMaterialDrawer({}: Props) {
     animate: controls,
     variants: {
       initial: { width: 0 },
-      animate: { width: '26rem' },
+      animate: { width: '40%', maxWidth: '25rem' },
       exit: { width: 0 }
     }
   };

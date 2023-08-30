@@ -4,11 +4,13 @@ type Props = {};
 
 export default function DrawerMenuButtons({}: Props) {
   return (
-    <div className='flex justify-between px-5 my-5 shrink-0'>
-      <Button className='w-[7.5rem] h-[3.75rem] bg-orange-500 text-white'>
+    <div className='flex justify-between gap-2 px-2 mb-5 md:px-5 md:gap-5 shrink-0'>
+      <Button className='w-1/2 bg-sroom-brand text-sroom-white break-keep'>
         강의 자료
       </Button>
-      <Button className='w-[7.5rem] h-[3.75rem] bg-zinc-900 text-white'>강의 편집</Button>
+      <Button className='w-1/2 bg-sroom-black-400 text-sroom-white break-keep'>
+        강의 편집
+      </Button>
     </div>
   );
 }

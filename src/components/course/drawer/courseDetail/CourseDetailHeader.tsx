@@ -23,27 +23,34 @@ export default function CourseDetailHeader({
   current_duration
 }: Props) {
   return (
-    <section className='flex flex-col gap-3 px-5 pt-5 after:w-full after:h-[1px] after:bg-zinc-200 after:my-[30px]'>
-      <div className='relative w-full h-[calc((19rem-2.5rem)*0.5625)] px-5'>
-        <Image fill={true} sizes='100%' src={thumbnail} alt={course_title} />
+    <section className='flex flex-col gap-3 px-5 pt-5 after:w-full after:h-[1px] after:bg-sroom-gray-500 after:my-[30px] text-sroom-black-400'>
+      <div className='relative pb-[56.25%] pt-0 h-0 w-full'>
+        <div className='absolute top-0 left-0 w-full h-full'>
+          <Image fill={true} sizes='100%' src={thumbnail} alt={course_title} />
+        </div>
       </div>
-      <h2 className='text-lg font-bold'>{course_title}</h2>
-      <h3 className='text-sm font-normal whitespace-normal text-zinc-500 line-clamp-1'>
+      <h2 className='text-base font-bold whitespace-normal md:text-lg line-clamp-1'>
+        {course_title}
+      </h2>
+      <h3 className='text-xs font-normal whitespace-normal md:text-sm text-sroom-black-300 line-clamp-1'>
         {channels}
       </h3>
-      <h4 className='flex text-sm font-normal text-zinc-400'>
-        <span className='after:w-[1px] after:h-[10px] after:bg-zinc-400 after:mx-2 after:inline-block after:text-center after:align-middle'>
+      <h4 className='flex flex-wrap text-xs font-normal md:text-sm text-sroom-black-200'>
+        <span className='after:w-[1px] after:h-[9px] after:bg-sroom-black-100 after:mx-2 after:inline-block after:text-center after:align-middle'>
           {`총 재생 시간 : ${getFormattedTime(
             convertSecondsToMinutes(course_duration)
           )}`}
         </span>
         <span>{`영상 ${total_video_count}개`}</span>
       </h4>
-      <ProgressBar value={progress} className='bg-zinc-100' />
-      <h5 className='text-xs font-normal text-zinc-400'>
-        {`수강 시간 : ${getFormattedTime(
-          convertSecondsToMinutes(current_duration)
-        )} (진도율 : ${progress}%)`}
+      <ProgressBar value={progress} className='!bg-sroom-gray-400' />
+      <h5 className='flex flex-wrap gap-1 text-xs font-normal text-sroom-black-100'>
+        <span>
+          {`수강 시간 : ${getFormattedTime(
+            convertSecondsToMinutes(current_duration)
+          )}`}
+        </span>
+        <span>{`(진도율 : ${progress}%)`}</span>
       </h5>
     </section>
   );

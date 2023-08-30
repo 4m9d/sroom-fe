@@ -13,19 +13,22 @@ import setErrorToast from '@/src/util/toast/setErrorToast';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
 import { useRouter } from 'next/navigation';
+import { revalidateTag } from 'next/cache';
 
 type Props = {
   is_playlist: boolean;
   courses: EnrolledCourse[];
   lecture_code: string;
   onEnrollSuccess: () => void;
+  disabled?: boolean;
 };
 
 export default function LectureEnrollmentButton({
   is_playlist,
   courses,
   lecture_code,
-  onEnrollSuccess
+  onEnrollSuccess,
+  disabled
 }: Props) {
   const router = useRouter();
 
@@ -68,6 +71,7 @@ export default function LectureEnrollmentButton({
         setLectureEnrollToast(() =>
           router.push(`/course/${response.course_id}`)
         );
+      revalidateTag(lecture_code);
     }
   });
 
@@ -181,8 +185,9 @@ export default function LectureEnrollmentButton({
     <>
       <div className='w-full dropdown dropdown-hover !z-[60]'>
         <Button
+          disabled={disabled}
           onClick={() => {}}
-          className='w-full !h-[3rem] font-bold peer text-sroom-white bg-sroom-black-400 text-sm md:text-base'
+          className='w-full !h-[3rem] font-bold peer text-sroom-white bg-sroom-black-400 md:text-base'
         >
           {isLoading ? (
             <LoadingSpinner className='text-sroom-brand loading-sm' />
