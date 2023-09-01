@@ -61,7 +61,13 @@ export default function CourseDetailDrawer({
         className='relative max-h-full min-h-full shadow-lg bg-sroom-white shrink-0'
       >
         {isDrawerOpen && (
-          <div className='flex flex-col justify-between h-full'>
+          <motion.div
+            initial={{ opacity: 0, translateX: '-100%' }}
+            animate={{ opacity: 1, translateX: 0 }}
+            exit={{ opacity: 0, translateX: '-100%' }}
+            transition={{ ease: 'linear', duration: 0.13 }}
+            className='flex flex-col justify-between h-full'
+          >
             <div>
               <CourseDetailHeader
                 course_title={course_title}
@@ -81,7 +87,7 @@ export default function CourseDetailDrawer({
               />
             </div>
             <DrawerMenuButtons />
-          </div>
+          </motion.div>
         )}
         <button
           id='course-detail-drawer-btn'
@@ -90,7 +96,9 @@ export default function CourseDetailDrawer({
           className='absolute flex items-center justify-center w-5 h-12 bg-zinc-900 -right-5 top-[calc(50%-1.5rem)] z-50  hover:scale-105 transition-all hover:opacity-90'
         >
           <span
-            className={`w-3 stroke-sroom-white ${isDrawerOpen ? 'rotate-180' : ''} transition-all`}
+            className={`w-3 stroke-sroom-white ${
+              isDrawerOpen ? 'rotate-180' : ''
+            } transition-all`}
           >
             <ArrowRightSVG />
           </span>
