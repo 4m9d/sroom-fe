@@ -2,7 +2,7 @@
 import {
   MOTIVATION_GENERAL,
   MOTIVATION_SPECIFIC
-} from '@/src/constants/main/main';
+} from '@/src/constants/motivation/motivation';
 import { motion } from 'framer-motion';
 
 const TextLoop = ({

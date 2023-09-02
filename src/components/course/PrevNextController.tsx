@@ -24,10 +24,11 @@ export default function PrevNextController({
   return (
     <div className='flex flex-wrap justify-center max-w-screen-lg gap-1 mx-auto my-2 md:gap-3 lg:my-5 lg:px-28 shrink-0'>
       <Button
+        hoverEffect={true}
         onClick={() => controllerClickHandler('prev')}
         disabled={prevPlayingVideo === null}
         id='prev-controller'
-        className={`w-28 md:w-32 lg:w-36 flex justify-between items-center font-bold text-lg lg:text-xl hover:scale-105 hover:bg-sroom-gray-300 ${
+        className={`w-28 md:w-32 lg:w-36 flex justify-between items-center font-bold text-lg lg:text-xl ${
           prevPlayingVideo === null ? 'opacity-50 hover:opacity-50' : ''
         }`}
       >
@@ -37,10 +38,11 @@ export default function PrevNextController({
         <div className='whitespace-nowrap'>이전 강의</div>
       </Button>
       <Button
+        hoverEffect={true}
         onClick={() => controllerClickHandler('next')}
         disabled={nextPlayingVideo === null}
         id='next-controller'
-        className={`w-28 md:w-32 lg:w-36 flex justify-between items-center font-bold text-lg lg:text-xl hover:scale-105 hover:bg-sroom-gray-300 ${
+        className={`w-28 md:w-32 lg:w-36 flex justify-between items-center font-bold text-lg lg:text-xl ${
           nextPlayingVideo === null ? 'opacity-50 hover:opacity-50' : ''
         }`}
       >

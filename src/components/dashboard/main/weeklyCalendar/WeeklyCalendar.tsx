@@ -78,13 +78,13 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
       <div className='flex items-center justify-center py-2 sm:py-3 md:py-4 xl:py-7'>
         <p className='text-xs font-semibold md:text-base xl:text-lg'>
           <span className='px-2 py-[2px] mr-1 font-bold bg-sroom-white rounded-sm text-sroom-black-300'>
-            {selectedMonth}
+            {selectedMonth === 'Invalid Date' ? '' : selectedMonth}
           </span>
           월 주간 수강 캘린더
         </p>
       </div>
       <div className='flex justify-between w-full h-full pb-5 overflow-auto md:pb-8 xl:pb-10'>
-        <div className='w-4 pt-[12%] md:w-8 xl:w-10 shrink-0'>
+        <div className='w-[12%] pt-[12%] flex justify-center shrink-0'>
           <button
             type='button'
             onClick={previousWeekClickHandler}
@@ -125,7 +125,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
             )}
           </div>
         </div>
-        <div className='w-4 pt-[12%] md:w-8 xl:w-10 shrink-0'>
+        <div className='w-[12%] pt-[12%] flex justify-center shrink-0'>
           {getCurrentWeekRange().startOfWeek !== selectedWeek[0].fullDate && (
             <button
               type='button'

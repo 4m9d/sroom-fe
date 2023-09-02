@@ -9,10 +9,10 @@ export default function DashboardHeader({ isEnrolled }: Props) {
   if (isEnrolled) {
     return (
       <section className='px-4 mx-auto lg:px-24 pt-14 text-sroom-black-400 max-w-screen-2xl'>
-        <h2 className='text-3xl font-bold lg:text-4xl md:mb-2 lg:mb-3'>
+        <h2 className='text-2xl font-bold md:text-3xl lg:text-4xl md:mb-2 lg:mb-3'>
           안녕하세요!
         </h2>
-        <h3 className='text-2xl font-bold lg:text-3xl'>
+        <h3 className='text-xl font-bold md:text-2xl lg:text-3xl'>
           거 참 공부하기 딱 좋은 날씨네요 😉
         </h3>
       </section>
@@ -22,8 +22,8 @@ export default function DashboardHeader({ isEnrolled }: Props) {
       <div className='bg-sroom-gray-200 h-[23rem] lg:h-[36rem] text-sroom-black-400'>
         <section className='flex flex-col justify-between h-full px-4 pt-12 mx-auto lg:px-24 lg:pt-20 max-w-screen-2xl'>
           <div className='flex flex-col items-center'>
-            <h2 className='mb-5 text-4xl font-bold lg:text-5xl'>반가워요!</h2>
-            <h3 className='flex flex-col items-center text-lg font-normal text-sroom-black-200'>
+            <h2 className='mb-5 text-3xl font-bold md:text-4xl lg:text-5xl'>반가워요!</h2>
+            <h3 className='flex flex-col items-center text-base font-normal md:text-lg text-sroom-black-200'>
               <p>유튜브에 저장만 해놨던 강의, 듣다가 중간에 포기해버린 강의</p>
               <p>이젠 스룸과 함께 체계적으로 학습을 시작해 보세요!</p>
             </h3>

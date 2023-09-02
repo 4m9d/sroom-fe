@@ -1,5 +1,5 @@
 import QueryProvider from '../providers/QueryProvider';
-import NavBar from '../components/nav/NavBar';
+import NavBar from '../components/gnb/NavBar';
 import AuthSessionProvider from '../providers/AuthSessionProvider';
 import './globals.css';
 import { Inter } from 'next/font/google';
@@ -26,7 +26,7 @@ export default function RootLayout({ children, modal }: Props) {
               <NavBar
                 logo='스룸'
                 profileDropdown={[
-                  { id: 1, menuTitle: '내 강의실', menuRoute: '/' },
+                  { id: 1, menuTitle: '내 강의실', menuRoute: '/classroom' },
                   { id: 2, menuTitle: '강의 자료', menuRoute: '/' }
                 ]}
               />

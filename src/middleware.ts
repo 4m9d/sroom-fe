@@ -5,7 +5,7 @@ const secret = process.env.NEXTAUTH_SECRET;
 
 export async function middleware(req: NextRequest) {
   const session = await getToken({ req, secret, raw: true });
-  const { pathname, searchParams } = req.nextUrl;
+  const { pathname } = req.nextUrl;
   const authenticated = session !== null;
 
   //NOTE: 로그인 상태에서 메인 페이지로 접근하면 대시보드로 리다이렉트
@@ -38,5 +38,13 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/dashboard', '/auth/signin', '/auth/signout', '/search/:path*', '/course/:path*']
+  matcher: [
+    '/',
+    '/dashboard',
+    '/classroom',
+    '/auth/signin',
+    '/auth/signout',
+    '/search/:path*',
+    '/course/:path*'
+  ]
 };

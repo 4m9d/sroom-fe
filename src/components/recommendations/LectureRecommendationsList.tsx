@@ -15,7 +15,7 @@ import { fetchLectureRecommendations } from '@/src/api/lectures/search';
 import {
   CACHE_TIME,
   STALE_TIME
-} from '@/src/constants/lectureRecommendations/lectureRecommendations';
+} from '@/src/constants/query/query';
 
 export default function LectureRecommendationsList() {
   const windowSize = useWindowSize();

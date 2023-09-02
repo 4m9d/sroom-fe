@@ -4,11 +4,8 @@ import { ErrorMessage } from '@/src/api/ErrorMessage';
 import LoadMoreButton from '../../ui/button/LoadMoreButton';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
-import {
-  STALE_TIME,
-  CACHE_TIME,
-  REVIEW_LIMIT
-} from '@/src/constants/lectureDetail/lectureDetail';
+import { STALE_TIME, CACHE_TIME } from '@/src/constants/query/query';
+import { REVIEW_LIMIT } from '@/src/constants/skeleton/skeleton';
 import LectureDetailReviewCard from './LectureDetailReviewCard';
 import setErrorToast from '@/src/util/toast/setErrorToast';
 

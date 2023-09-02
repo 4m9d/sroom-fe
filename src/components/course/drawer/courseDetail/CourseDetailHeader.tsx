@@ -23,7 +23,7 @@ export default function CourseDetailHeader({
   current_duration
 }: Props) {
   return (
-    <section className='flex flex-col gap-3 px-5 pt-5 after:w-full after:h-[1px] after:bg-sroom-gray-500 after:my-[30px] text-sroom-black-400'>
+    <section className='flex flex-col gap-3 px-5 pt-5 after:w-full after:h-[1px] after:bg-sroom-gray-500 after:my-[30px] text-sroom-black-400 max-h-[25rem]'>
       <div className='relative pb-[56.25%] pt-0 h-0 w-full'>
         <div className='absolute top-0 left-0 w-full h-full'>
           <Image fill={true} sizes='100%' src={thumbnail} alt={course_title} />

@@ -10,7 +10,7 @@ import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import {
   FOUR_HOURS_IN_MINUTES,
   THIRTY_MINUTES
-} from '@/src/constants/scheduling/scheduling';
+} from '@/src/constants/time/time';
 import getCurrentDate from '@/src/util/day/getCurrentDate';
 import convertMinutesToSeconds from '@/src/util/time/convertMinutesToSeconds';
 import { useMutation, useQueryClient } from '@tanstack/react-query';

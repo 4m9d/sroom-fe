@@ -53,3 +53,17 @@ export async function fetchCourseDetail(course_id: number) {
     }
   });
 }
+
+export async function fetchClassroom() {
+  const headers = await getAuthorizedHeaders();
+  return await fetch(getQueryURL(`${Endpoints.COURSES}`), {
+    method: 'GET',
+    headers
+  }).then(async (res) => {
+    if (res.ok) {
+      return (await res.json()) as Promise<ClassRoom>;
+    } else {
+      return Promise.reject(new Error(ErrorMessage.CLASSROOM));
+    }
+  });
+}

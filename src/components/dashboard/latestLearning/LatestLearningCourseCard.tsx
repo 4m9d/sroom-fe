@@ -6,6 +6,7 @@ import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import Link from 'next/link';
 import ClockSVG from '@/public/icon/Clock';
 import LectureSVG from '@/public/icon/Lecture';
+import ArrowRightSVG from '@/public/icon/ArrowRight';
 
 type Props = {
   course: Course;
@@ -42,18 +43,21 @@ export default function LatestLearningCourseCard({ course }: Props) {
             </p>
             <div className='flex items-center shrink-0'>
               <ProgressBar
-                className='w-full h-[4px] bg-sroom-gray-300'
+                className='w-full h-[4px] !bg-sroom-gray-300'
                 value={course.progress}
               />
-              <p className='ml-2 text-xs text-sroom-brand shrink-0'>
-                {course.progress}%
+              <p className='ml-2 text-xs font-semibold text-sroom-brand shrink-0'>
+                {course.progress}
+                <span className='font-normal'>%</span>
               </p>
             </div>
           </div>
           <Link href={`/course/${course.course_id}`}>
-            <Button className='!h-10 flex justify-between w-28 text-sm font-semibold text-sroom-white bg-sroom-black-400 shrink-0 gap-5'>
+            <Button className='!h-10 flex justify-between w-28 text-sm font-semibold text-sroom-white bg-sroom-black-400 shrink-0 gap-3'>
               <p>바로 학습</p>
-              <p> 〉 </p>
+              <span className='w-3 stroke-sroom-white'>
+                <ArrowRightSVG />
+              </span>
             </Button>
           </Link>
         </div>

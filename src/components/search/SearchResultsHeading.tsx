@@ -4,7 +4,7 @@ type Props = {
 
 export default function SearchResultsHeading({ keyword }: Props) {
   return (
-    <h2 className='flex justify-center mb-12 text-4xl font-bold'>
+    <h2 className='flex justify-center mb-12 text-3xl font-bold md:text-4xl'>
       <span>{"'"}</span>
       <div className="max-w-[50%]">
         <p className='whitespace-normal line-clamp-1'>{keyword}</p>

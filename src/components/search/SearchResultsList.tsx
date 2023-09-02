@@ -7,7 +7,7 @@ import SearchLectureCard from './SearchLectureCard';
 import LoadMoreButton from '../ui/button/LoadMoreButton';
 import setErrorToast from '@/src/util/toast/setErrorToast';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
-import { CACHE_TIME, STALE_TIME } from '@/src/constants/search/search';
+import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
 import Button from '../ui/button/Button';
 import Link from 'next/link';
 
