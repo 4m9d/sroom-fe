@@ -41,6 +41,7 @@ export const config = {
   matcher: [
     '/',
     '/dashboard',
+    '/classroom',
     '/auth/signin',
     '/auth/signout',
     '/search/:path*',
