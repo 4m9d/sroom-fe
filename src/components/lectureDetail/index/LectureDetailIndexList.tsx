@@ -7,7 +7,7 @@ import { ErrorMessage } from '@/src/api/ErrorMessage';
 import {
   CACHE_TIME,
   STALE_TIME
-} from '@/src/constants/lectureDetail/lectureDetail';
+} from '@/src/constants/query/query';
 import LoadMoreButton from '../../ui/button/LoadMoreButton';
 import setErrorToast from '@/src/util/toast/setErrorToast';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';

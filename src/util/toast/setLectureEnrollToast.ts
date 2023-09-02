@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 import Toast from '../../components/ui/Toast';
-import { TOAST_TIMEOUT } from '../../constants/ui/toast';
+import { TOAST_TIMEOUT } from '.';
 
 export default function setLectureEnrollToast(buttonOnClick: () => void) {
   const lectureEnrollToast: CustomToast = {

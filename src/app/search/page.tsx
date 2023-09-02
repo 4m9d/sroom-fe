@@ -3,12 +3,12 @@ import LectureRecommendationsList from '@/src/components/recommendations/Lecture
 import SearchResultsHeading from '@/src/components/search/SearchResultsHeading';
 import SearchResultsList from '@/src/components/search/SearchResultsList';
 import SearchResultsSkeleton from '@/src/components/search/SearchResultsSkeleton';
-import { LIMIT_PER_FETCH } from '@/src/constants/search/search';
 import { Suspense, useRef } from 'react';
 
 type Props = {
   searchParams: SearchLectureParams;
 };
+const LIMIT_PER_FETCH = 20;
 
 export default async function SearchResults({ searchParams }: Props) {
   const searchResultPageRef = useRef<number>(0);

@@ -1,5 +1,4 @@
 'use client';
-import { TOAST_DELAY } from '@/src/constants/ui/toast';
 import { AnimatePresence, motion } from 'framer-motion';
 import Button from './button/Button';
 import LectureSVG from '@/public/icon/Lecture';
@@ -8,6 +7,8 @@ const Emoji: Emoji = {
   lecture_enrollment: '🤓',
   error: '🚫'
 };
+
+const TOAST_DELAY = 4;
 
 export default function Toast({ toast }: { toast: CustomToast }) {
   const { type, title, description, buttonLabel, buttonOnClick } = toast;

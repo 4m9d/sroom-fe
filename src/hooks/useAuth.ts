@@ -4,7 +4,7 @@ import { fetchUserAuthWithRefreshToken } from '../api/members/login';
 import { useQuery } from '@tanstack/react-query';
 import { QueryKeys } from '../api/queryKeys';
 import { ErrorMessage } from '../api/ErrorMessage';
-import { ONE_MINUTE_IN_MS } from '../constants/auth/auth';
+import { ONE_MINUTE_IN_MS } from '../constants/time/time';
 import setErrorToast from '../util/toast/setErrorToast';
 
 export default function useAuth() {

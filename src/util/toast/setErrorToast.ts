@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 import Toast from '../../components/ui/Toast';
-import { TOAST_TIMEOUT } from '../../constants/ui/toast';
+import { TOAST_TIMEOUT } from '.';
 
 export default function setErrorToast(error: Error) {
   const errorToast: CustomToast = {
