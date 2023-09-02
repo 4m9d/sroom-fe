@@ -18,8 +18,10 @@ export default function SectionList({
 }: Props) {
   return (
     <section>
-      <h2 className='px-5 py-2 font-semibold border-b-2 border-sroom-gray-200'>강의 목차</h2>
-      <div className='overflow-y-auto max-h-[22rem]'>
+      <h2 className='px-5 py-2 font-semibold border-b-2 border-sroom-gray-200'>
+        강의 목차
+      </h2>
+      <ul className='overflow-y-scroll max-h-[calc(100vh-33rem)] sm:max-h-[calc(100vh-35rem)] md:max-h-[calc(100vh-37rem)] border-b-2 border-sroom-gray-200'>
         {sections.map((section) => {
           return (
             <SectionAccordion
@@ -32,7 +34,7 @@ export default function SectionList({
             />
           );
         })}
-      </div>
+      </ul>
     </section>
   );
 }

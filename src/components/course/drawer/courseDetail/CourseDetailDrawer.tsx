@@ -36,10 +36,11 @@ export default function CourseDetailDrawer({
   } = courseDetail;
   const animationConfig = {
     animate: controls,
+    transition: { ease: 'easeInOut', duration: 0.25 },
     variants: {
-      initial: { width: 0 },
+      initial: { width: '0%' },
       animate: { width: '40%', maxWidth: '19rem' },
-      exit: { width: 0 }
+      exit: { width: '0%' }
     }
   };
 
@@ -60,35 +61,37 @@ export default function CourseDetailDrawer({
         {...animationConfig}
         className='relative max-h-full min-h-full shadow-lg bg-sroom-white shrink-0'
       >
-        {isDrawerOpen && (
-          <motion.div
-            initial={{ opacity: 0, translateX: '-100%' }}
-            animate={{ opacity: 1, translateX: 0 }}
-            exit={{ opacity: 0, translateX: '-100%' }}
-            transition={{ ease: 'linear', duration: 0.13 }}
-            className='flex flex-col justify-between h-full'
-          >
-            <div>
-              <CourseDetailHeader
-                course_title={course_title}
-                channels={channels}
-                thumbnail={thumbnail}
-                total_video_count={total_video_count}
-                course_duration={course_duration}
-                current_duration={current_duration}
-                progress={progress}
-              />
-              <SectionList
-                sections={sections}
-                use_schedule={use_schedule}
-                course_title={course_title}
-                currentPlayingVideo={currentPlayingVideo}
-                setCurrentPlayingVideo={setCurrentPlayingVideo}
-              />
-            </div>
-            <DrawerMenuButtons />
-          </motion.div>
-        )}
+        <AnimatePresence>
+          {isDrawerOpen && (
+            <motion.div
+              initial={{ opacity: 0, translateX: '-100%' }}
+              animate={{ opacity: 1, translateX: '0%' }}
+              exit={{ opacity: 0, translateX: '-100%' }}
+              transition={{ ease: 'easeInOut', duration: 0.25 }}
+              className='absolute top-0 left-0 flex flex-col justify-between h-full'
+            >
+              <div>
+                <CourseDetailHeader
+                  course_title={course_title}
+                  channels={channels}
+                  thumbnail={thumbnail}
+                  total_video_count={total_video_count}
+                  course_duration={course_duration}
+                  current_duration={current_duration}
+                  progress={progress}
+                />
+                <SectionList
+                  sections={sections}
+                  use_schedule={use_schedule}
+                  course_title={course_title}
+                  currentPlayingVideo={currentPlayingVideo}
+                  setCurrentPlayingVideo={setCurrentPlayingVideo}
+                />
+              </div>
+              <DrawerMenuButtons />
+            </motion.div>
+          )}
+        </AnimatePresence>
         <button
           id='course-detail-drawer-btn'
           type='button'
