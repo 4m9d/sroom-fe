@@ -65,7 +65,7 @@ export default function CourseDetailDrawer({
               transition={{ ease: 'easeInOut', duration: 0.25 }}
               className='absolute top-0 left-0 flex flex-col justify-between h-full'
             >
-              <div className='overflow-y-scroll'>
+              <div className='flex-1 overflow-y-scroll'>
                 <CourseDetailHeader
                   course_title={course_title}
                   channels={channels}
