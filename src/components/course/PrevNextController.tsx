@@ -1,26 +1,53 @@
-import { Dispatch } from 'react';
+'use client';
+import { useRouter } from 'next/navigation';
 import Button from '../ui/button/Button';
 import ArrowRightSVG from '@/public/icon/ArrowRight';
+import { useCallback, useEffect } from 'react';
 
 type Props = {
+  course_id: number;
   prevPlayingVideo: LastViewVideo | null;
   nextPlayingVideo: LastViewVideo | null;
-  setCurrentPlayingVideo: Dispatch<React.SetStateAction<LastViewVideo>>;
 };
 
 export default function PrevNextController({
+  course_id,
   prevPlayingVideo,
-  nextPlayingVideo,
-  setCurrentPlayingVideo
+  nextPlayingVideo
 }: Props) {
+  const router = useRouter();
+  
+  const prevVideoRoute = `/course/${course_id}?course_video_id=${prevPlayingVideo?.course_video_id}`;
+  const nextVideoRoute = `/course/${course_id}?course_video_id=${nextPlayingVideo?.course_video_id}`;
+
   const controllerClickHandler = (type: 'prev' | 'next') => {
     if (type === 'prev' && prevPlayingVideo !== null) {
-      setCurrentPlayingVideo(() => prevPlayingVideo);
+      router.push(prevVideoRoute);
     }
     if (type === 'next' && nextPlayingVideo !== null) {
-      setCurrentPlayingVideo(() => nextPlayingVideo);
+      router.push(nextVideoRoute);
     }
   };
+
+  const prefetchPrevAndNextVideo = useCallback(() => {
+    if (prevPlayingVideo !== null) {
+      router.prefetch(prevVideoRoute);
+    }
+    if (nextPlayingVideo !== null) {
+      router.prefetch(nextVideoRoute);
+    }
+  }, [
+    prevVideoRoute,
+    nextVideoRoute,
+    prevPlayingVideo,
+    nextPlayingVideo,
+    router
+  ]);
+
+  useEffect(() => {
+    prefetchPrevAndNextVideo();
+  }, [prefetchPrevAndNextVideo]);
+
   return (
     <div className='flex flex-wrap justify-center max-w-screen-lg gap-1 mx-auto my-2 md:gap-3 lg:my-5 lg:px-28 shrink-0'>
       <Button
