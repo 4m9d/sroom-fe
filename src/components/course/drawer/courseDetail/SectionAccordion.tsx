@@ -3,24 +3,26 @@ import PolygonSVG from '@/public/icon/Polygon';
 import VideoCompletionBadge from '@/src/components/ui/badge/VideoCompletionBadge';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import getFormattedTime from '@/src/util/time/getFormattedTime';
-import { Dispatch, SetStateAction, useLayoutEffect, useState } from 'react';
+import Link from 'next/link';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 type Props = {
   section: Section;
   use_schedule: boolean;
+  course_id: number;
   course_title: string;
   currentPlayingVideo: LastViewVideo;
-  setCurrentPlayingVideo: Dispatch<SetStateAction<LastViewVideo>>;
 };
 
 export default function SectionAccordion({
   section,
   use_schedule,
+  course_id,
   course_title,
-  currentPlayingVideo,
-  setCurrentPlayingVideo
+  currentPlayingVideo
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const currentPlayingVideoTabRef = useRef<HTMLAnchorElement>(null);
 
   const {
     section: index,
@@ -34,28 +36,28 @@ export default function SectionAccordion({
     setIsOpen(!isOpen);
   };
 
-  const videoClickHandler = (video: Video) => {
-    const clickedVideo: LastViewVideo = {
-      video_code: video.video_code,
-      video_id: video.video_id,
-      last_view_duration: video.last_view_duration,
-      channel: video.channel,
-      video_title: video.video_title
-    };
-
-    setCurrentPlayingVideo(() => clickedVideo);
-  };
-
   useLayoutEffect(() => {
     section.videos.map((video) => {
-      if (video.video_id === currentPlayingVideo.video_id) {
+      if (video.course_video_id === currentPlayingVideo.course_video_id) {
         setIsOpen(true);
       }
     });
   }, [currentPlayingVideo, section]);
 
+  useEffect(() => {
+    if (
+      currentPlayingVideoTabRef.current &&
+      currentPlayingVideo.course_video_id.toString() === currentPlayingVideoTabRef.current.id
+    ) {
+      currentPlayingVideoTabRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  }, [currentPlayingVideo.course_video_id]);
+
   return (
-    <div
+    <li
       className={`collapse ${
         isOpen === true ? 'collapse-open' : ''
       } cursor-pointer rounded-none text-sroom-black-400 bg-sroom-white`}
@@ -95,15 +97,19 @@ export default function SectionAccordion({
         {isOpen === true && (
           <div className='flex flex-col gap-1 py-6'>
             {videos.map((video) => (
-              <button
-                type='button'
-                onClick={() => videoClickHandler(video)}
-                key={video.video_id}
+              <Link
+                id={video.course_video_id.toString()}
+                ref={currentPlayingVideoTabRef}
+                href={{
+                  pathname: `/course/${course_id}/`,
+                  query: { course_video_id: video.course_video_id }
+                }}
+                key={video.course_video_id}
                 className='flex items-center justify-between h-[17px] px-3 py-3 hover:bg-sroom-gray-200 hover:opacity-80 rounded-sm hover:scale-105 transition-all'
               >
                 <p
                   className={`w-5/6 text-start text-xs md:text-sm font-semibold whitespace-normal line-clamp-1 before:w-[2px] before:h-[2px]  before:mr-1 before:inline-block before:align-middle ${
-                    currentPlayingVideo.video_id === video.video_id
+                    currentPlayingVideo.course_video_id === video.course_video_id
                       ? 'text-sroom-brand before:bg-sroom-brand !font-bold'
                       : 'text-sroom-black-200 before:bg-sroom-black-200'
                   } `}
@@ -111,11 +117,11 @@ export default function SectionAccordion({
                   {video.video_title}
                 </p>
                 {video.is_completed === true && <VideoCompletionBadge />}
-              </button>
+              </Link>
             ))}
           </div>
         )}
       </div>
-    </div>
+    </li>
   );
 }

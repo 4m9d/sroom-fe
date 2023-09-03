@@ -1,6 +1,6 @@
 'use client';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
-import { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import SectionList from './SectionList';
 import CourseDetailHeader from './CourseDetailHeader';
 import DrawerMenuButtons from './DrawerMenuButtons';
@@ -9,28 +9,23 @@ import ArrowRightSVG from '@/public/icon/ArrowRight';
 type Props = {
   courseDetail: CourseDetail;
   currentPlayingVideo: LastViewVideo;
-  setCurrentPlayingVideo: Dispatch<SetStateAction<LastViewVideo>>;
 };
 
 export default function CourseDetailDrawer({
   courseDetail,
-  currentPlayingVideo,
-  setCurrentPlayingVideo
+  currentPlayingVideo
 }: Props) {
   const controls = useAnimationControls();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const {
-    course_id,
     thumbnail,
     course_title,
     channels,
     course_duration,
     total_video_count,
-    completed_video_count,
     progress,
     current_duration,
-    last_view_video,
     sections,
     use_schedule
   } = courseDetail;
@@ -70,7 +65,7 @@ export default function CourseDetailDrawer({
               transition={{ ease: 'easeInOut', duration: 0.25 }}
               className='absolute top-0 left-0 flex flex-col justify-between h-full'
             >
-              <div>
+              <div className='flex-1 overflow-y-scroll'>
                 <CourseDetailHeader
                   course_title={course_title}
                   channels={channels}
@@ -81,13 +76,14 @@ export default function CourseDetailDrawer({
                   progress={progress}
                 />
                 <SectionList
+                  course_id={courseDetail.course_id}
                   sections={sections}
                   use_schedule={use_schedule}
                   course_title={course_title}
                   currentPlayingVideo={currentPlayingVideo}
-                  setCurrentPlayingVideo={setCurrentPlayingVideo}
                 />
               </div>
+              <div className='h-[2px] bg-sroom-gray-200' />
               <DrawerMenuButtons />
             </motion.div>
           )}

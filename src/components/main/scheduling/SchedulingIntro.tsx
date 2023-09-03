@@ -17,7 +17,7 @@ export default function SchedulingIntro({}) {
             />
           </div>
         </div>
-        <div className='absolute bottom-0 right-0 w-[79%]'>
+        <div className='absolute bottom-0 -right-[0.3px] w-[79%]'>
           <div className='pb-[56.5%] relative object-cover'>
             <Image
               src={'/image/main/calendar.webp'}

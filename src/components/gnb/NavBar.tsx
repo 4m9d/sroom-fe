@@ -21,7 +21,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
   const hidden = name ? '' : 'hidden';
 
   return (
-    <nav className='max-h-[4rem] navbar shadow-sm'>
+    <nav className='max-h-[4rem] navbar shadow-sm z-50'>
       <div className='flex justify-between gap-4 lg:gap-8 px-4 lg:px-24 mx-auto max-h-[4rem] navbar max-w-screen-2xl'>
         <h1 className='w-6 sm:w-20 lg:w-36 shrink-0'>
           <Link href='/' className='shrink-0 mr-14'>
