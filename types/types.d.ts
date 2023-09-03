@@ -267,11 +267,15 @@ interface CourseTakingPageParams {
   params: {
     course_id: string;
   };
+  searchParams: {
+    course_video_id: string;
+  };
 }
 
 interface Video {
   video_index: number;
   video_id: number;
+  course_video_id: number;
   channel: string;
   video_title: string;
   video_code: string;
@@ -282,6 +286,7 @@ interface Video {
 
 type LastViewVideo = {
   [key in
+    | 'course_video_id'
     | 'video_id'
     | 'video_title'
     | 'video_code'
