@@ -21,7 +21,6 @@ type Props = {
   setCurrentIntervalID: React.Dispatch<
     React.SetStateAction<NodeJS.Timer | null>
   >;
-  onEnd: () => void;
 };
 
 const UPDATE_INTERVAL = 10;
@@ -38,8 +37,7 @@ const YoutubePlayer = ({
   end,
   viewDuration,
   currentIntervalID,
-  setCurrentIntervalID,
-  onEnd: navigateToNextLecture
+  setCurrentIntervalID
 }: Props) => {
   const queryClient = useQueryClient();
 
@@ -105,7 +103,6 @@ const YoutubePlayer = ({
       updateViewDurationOnlyOnce(currentTime);
       clearIntervalID();
       revalidateCourseDetail(isRevalidated);
-      navigateToNextLecture();
     }
   }
 

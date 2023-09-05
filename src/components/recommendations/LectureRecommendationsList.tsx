@@ -39,10 +39,11 @@ export default function LectureRecommendationsList() {
   );
 
   const { recommendations } = data || { recommendations: [] };
-
+  
   const slidesPerView =
-    windowSize.width < 800 ? 1 : windowSize.width < 1400 ? 2 : 3;
-
+  windowSize.width < 800 ? 1 : windowSize.width < 1400 ? 2 : 3;
+  const totalPage = recommendations.length - (slidesPerView - 1) > 0 ? recommendations.length - (slidesPerView - 1) : 1;
+  
   return (
     <section className='px-4 mx-auto my-20 lg:px-24 max-w-screen-2xl'>
       <SectionHeading title='이런 강의는 어때요?' />
@@ -87,7 +88,7 @@ export default function LectureRecommendationsList() {
           />
           <div>
             <span>
-              {currPageIdx} / {recommendations.length - (slidesPerView - 1)}
+              {currPageIdx} / {totalPage}
             </span>
           </div>
           <SwiperNavigationButton

@@ -99,14 +99,6 @@ export default function CourseTaking({
     }
   }, [courseDetail.sections, currentCourseVideoId]);
 
-  const navigateToNextLecture = useCallback(() => {
-    searchNextVideo();
-    if (nextPlayingVideo === null) return;
-    router.push(
-      `/course/${courseDetail.course_id}?course_video_id=${nextPlayingVideo.course_video_id}`
-    );
-  }, [searchNextVideo, nextPlayingVideo, router, courseDetail.course_id]);
-
   useEffect(() => {
     searchPrevVideo();
     searchNextVideo();
@@ -133,7 +125,6 @@ export default function CourseTaking({
           viewDuration={viewDuration}
           currentIntervalID={currentIntervalID}
           setCurrentIntervalID={setCurrentIntervalID}
-          onEnd={navigateToNextLecture}
         />
         <div id='controller'>
           <CourseVideoController
