@@ -3,20 +3,70 @@ import { useRouter } from 'next/navigation';
 import Button from '../ui/button/Button';
 import ArrowRightSVG from '@/public/icon/ArrowRight';
 import { useCallback, useEffect } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { QueryKeys } from '@/src/api/queryKeys';
+import { updateViewDuration } from '@/src/api/lectures/time';
 
 type Props = {
   course_id: number;
+  course_video_id: number;
+  is_completed: boolean;
+  viewDuration: React.MutableRefObject<number>;
   prevPlayingVideo: LastViewVideo | null;
   nextPlayingVideo: LastViewVideo | null;
+  currentIntervalID: NodeJS.Timer | null;
+  setCurrentIntervalID: React.Dispatch<
+    React.SetStateAction<NodeJS.Timer | null>
+  >;
 };
+let isCompleted = false;
 
-export default function PrevNextController({
+export default function CourseVideoController({
   course_id,
+  course_video_id,
+  is_completed,
+  viewDuration,
   prevPlayingVideo,
-  nextPlayingVideo
+  nextPlayingVideo,
+  currentIntervalID,
+  setCurrentIntervalID
 }: Props) {
   const router = useRouter();
-  
+  const queryClient = useQueryClient();
+
+  isCompleted = is_completed;
+
+  const updateIsCompletedManually = async () => {
+    isCompleted = true;
+    const response = await updateViewDuration(
+      {
+        course_video_id,
+        view_duration: viewDuration.current
+      },
+      true
+    );
+
+    return response;
+  };
+
+  const { mutate, status } = useMutation(
+    [QueryKeys.COURSE_TAKING],
+    updateIsCompletedManually,
+    {
+      onSuccess: (data) => {
+        isCompleted = data.is_completed;
+        if (currentIntervalID !== null) {
+          clearInterval(currentIntervalID);
+          setCurrentIntervalID(null);
+        }
+        queryClient.invalidateQueries([
+          QueryKeys.COURSE_DETAIL,
+          course_id.toString()
+        ]);
+      }
+    }
+  );
+
   const prevVideoRoute = `/course/${course_id}?course_video_id=${prevPlayingVideo?.course_video_id}`;
   const nextVideoRoute = `/course/${course_id}?course_video_id=${nextPlayingVideo?.course_video_id}`;
 
@@ -63,6 +113,17 @@ export default function PrevNextController({
           <ArrowRightSVG />
         </span>
         <div className='whitespace-nowrap'>이전 강의</div>
+      </Button>
+      <Button
+        hoverEffect={true}
+        onClick={mutate}
+        disabled={isCompleted === true || status === 'loading'}
+        id='completion-controller'
+        className={`w-28 md:w-32 lg:w-36 flex justify-center items-center font-bold text-lg lg:text-xl ${
+          isCompleted === true ? 'opacity-50 hover:opacity-50' : ''
+        }`}
+      >
+        <div className='whitespace-nowrap'>봤어요</div>
       </Button>
       <Button
         hoverEffect={true}

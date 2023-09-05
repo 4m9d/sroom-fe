@@ -1,10 +1,10 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import CourseHeader from './CourseHeader';
 import YoutubePlayer from './YoutubePlayer';
 import CourseDetailDrawer from './drawer/courseDetail/CourseDetailDrawer';
 import CourseMaterialDrawer from './drawer/courseMaterial/CourseMaterialDrawer';
-import PrevNextController from './PrevNextController';
+import CourseVideoController from './CourseVideoController';
 import { useRouter } from 'next/navigation';
 
 type Props = {
@@ -17,13 +17,17 @@ export default function CourseTaking({
   currentCourseVideoId
 }: Props) {
   const last_view_video = findVideoById() as LastViewVideo;
-  const router = useRouter();
   const currentPlayingVideo = last_view_video;
   
+  const router = useRouter();
+
   const [prevPlayingVideo, setPrevPlayingVideo] =
     useState<LastViewVideo | null>(last_view_video);
   const [nextPlayingVideo, setNextPlayingVideo] =
     useState<LastViewVideo | null>(last_view_video);
+  const viewDuration = useRef<number>(0);
+  const [currentIntervalID, setCurrentIntervalID] =
+    useState<NodeJS.Timer | null>(null);
 
   function findVideoById() {
     const videos = courseDetail.sections.flatMap((section) => section.videos);
@@ -34,12 +38,13 @@ export default function CourseTaking({
       return null;
     }
     const last_view_video: LastViewVideo = {
+      video_id: video.video_id,
       video_code: video.video_code,
       course_video_id: video.course_video_id,
-      video_id: video.video_id,
-      last_view_duration: video.last_view_duration,
+      video_title: video.video_title,
       channel: video.channel,
-      video_title: video.video_title
+      last_view_duration: video.last_view_duration,
+      is_completed: video.is_completed
     };
     return last_view_video;
   }
@@ -56,12 +61,13 @@ export default function CourseTaking({
     } else {
       const prevVideo = videos[currentPlayingVideoIdx - 1];
       const video: LastViewVideo = {
+        video_id: prevVideo.video_id,
         video_code: prevVideo.video_code,
         course_video_id: prevVideo.course_video_id,
-        video_id: prevVideo.video_id,
-        last_view_duration: prevVideo.last_view_duration,
+        video_title: prevVideo.video_title,
         channel: prevVideo.channel,
-        video_title: prevVideo.video_title
+        last_view_duration: prevVideo.last_view_duration,
+        is_completed: prevVideo.is_completed
       };
 
       setPrevPlayingVideo(() => video);
@@ -80,19 +86,20 @@ export default function CourseTaking({
     } else {
       const nextVideo = videos[currentPlayingVideoIdx + 1];
       const video: LastViewVideo = {
+        video_id: nextVideo.video_id,
         video_code: nextVideo.video_code,
         course_video_id: nextVideo.course_video_id,
-        video_id: nextVideo.video_id,
+        video_title: nextVideo.video_title,
         last_view_duration: nextVideo.last_view_duration,
         channel: nextVideo.channel,
-        video_title: nextVideo.video_title
+        is_completed: nextVideo.is_completed
       };
 
       setNextPlayingVideo(() => video);
     }
   }, [courseDetail.sections, currentCourseVideoId]);
 
-  const onVideoEnd = useCallback(() => {
+  const navigateToNextLecture = useCallback(() => {
     searchNextVideo();
     if (nextPlayingVideo === null) return;
     router.push(
@@ -117,17 +124,27 @@ export default function CourseTaking({
           channel={currentPlayingVideo.channel}
         />
         <YoutubePlayer
-          video_code={currentPlayingVideo.video_code}
           width={'100%'}
           height={'100%'}
+          video_code={currentPlayingVideo.video_code}
+          course_video_id={currentPlayingVideo.course_video_id}
+          course_id={courseDetail.course_id}
           start={currentPlayingVideo.last_view_duration}
-          onEnd={onVideoEnd}
+          viewDuration={viewDuration}
+          currentIntervalID={currentIntervalID}
+          setCurrentIntervalID={setCurrentIntervalID}
+          onEnd={navigateToNextLecture}
         />
         <div id='controller'>
-          <PrevNextController
+          <CourseVideoController
             course_id={courseDetail.course_id}
+            course_video_id={currentCourseVideoId}
+            is_completed={currentPlayingVideo.is_completed}
             prevPlayingVideo={prevPlayingVideo}
             nextPlayingVideo={nextPlayingVideo}
+            viewDuration={viewDuration}
+            currentIntervalID={currentIntervalID}
+            setCurrentIntervalID={setCurrentIntervalID}
           />
         </div>
       </div>

@@ -291,7 +291,8 @@ type LastViewVideo = {
     | 'video_title'
     | 'video_code'
     | 'channel'
-    | 'last_view_duration']: Video[key];
+    | 'last_view_duration'
+    | 'is_completed']: Video[key];
 };
 
 type CurrentPlayingVideo = {
@@ -319,4 +320,15 @@ interface CourseDetail {
   progress: number;
   last_view_video: LastViewVideo;
   sections: Section[];
+}
+
+interface CourseTakingParams extends Record<number> {
+  course_video_id: number;
+  view_duration: number;
+}
+
+interface CourseTakingInfo {
+  course_video_id: number;
+  view_duration: number;
+  is_completed: boolean;
 }

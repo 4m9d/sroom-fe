@@ -5,7 +5,9 @@ export const QueryKeys = {
   DETAIL: 'lectureDetail',
   LECTURE_INDEX: 'lectureIndex',
   LECTURE_REVIEW: 'lectureReview',
-  RECCOMENDATION: 'reccomendation'
+  RECCOMENDATION: 'reccomendation',
+  COURSE_TAKING: 'courseTaking',
+  COURSE_DETAIL: 'courseDetail',
 } as const;
 
 type QueryKeys = (typeof QueryKeys)[keyof typeof QueryKeys];
