@@ -67,8 +67,8 @@ export default function CourseVideoController({
     }
   );
 
-  const prevVideoRoute = `/course/${course_id}?course_video_id=${prevPlayingVideo?.course_video_id}`;
-  const nextVideoRoute = `/course/${course_id}?course_video_id=${nextPlayingVideo?.course_video_id}`;
+  const prevVideoRoute = `/course/${course_id}?courseVideoId=${prevPlayingVideo?.course_video_id}`;
+  const nextVideoRoute = `/course/${course_id}?courseVideoId=${nextPlayingVideo?.course_video_id}`;
 
   const controllerClickHandler = (type: 'prev' | 'next') => {
     if (type === 'prev' && prevPlayingVideo !== null) {

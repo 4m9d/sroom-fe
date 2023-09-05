@@ -102,7 +102,7 @@ export default function SectionAccordion({
                 ref={currentPlayingVideoTabRef}
                 href={{
                   pathname: `/course/${course_id}/`,
-                  query: { course_video_id: video.course_video_id }
+                  query: { courseVideoId: video.course_video_id }
                 }}
                 key={video.course_video_id}
                 className='flex items-center justify-between h-[17px] px-3 py-3 hover:bg-sroom-gray-200 hover:opacity-80 rounded-sm hover:scale-105 transition-all'

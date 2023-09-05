@@ -268,7 +268,7 @@ interface CourseTakingPageParams {
     course_id: string;
   };
   searchParams: {
-    course_video_id: string;
+    courseVideoId: string;
   };
 }
 

@@ -24,8 +24,8 @@ export default function CourseTakingPage({
         <CourseTaking
           courseDetail={courseDetail}
           currentCourseVideoId={
-            searchParams.course_video_id
-              ? parseInt(searchParams.course_video_id)
+            searchParams.courseVideoId
+              ? parseInt(searchParams.courseVideoId)
               : courseDetail.last_view_video.course_video_id
           }
         />
