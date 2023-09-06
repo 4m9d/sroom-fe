@@ -92,7 +92,7 @@ export default function CourseDetailDrawer({
           id='course-detail-drawer-btn'
           type='button'
           onClick={drawerHandler}
-          className='absolute flex items-center justify-center w-5 h-12 bg-zinc-900 -right-5 top-[calc(50%-1.5rem)] z-50  hover:scale-105 transition-all hover:opacity-90'
+          className='absolute flex items-center justify-center w-5 h-12 bg-zinc-900 -right-5 top-[calc(50%-1.5rem)] z-50  hover:scale-y-125 transition-all hover:opacity-90'
         >
           <span
             className={`w-3 stroke-sroom-white ${

@@ -102,7 +102,7 @@ export default function CourseVideoController({
         disabled={prevPlayingVideo === null}
         id='prev-controller'
         className={`w-24 md:w-28 lg:w-32 xl:w-36 flex justify-between items-center font-bold text-lg lg:text-xl ${
-          prevPlayingVideo === null ? 'opacity-50 hover:opacity-50' : ''
+          prevPlayingVideo === null ? 'opacity-30' : ''
         }`}
       >
         <span className='w-3 rotate-180 lg:w-4 fill-sroom-black-400 stroke-sroom-black-400'>
@@ -116,10 +116,10 @@ export default function CourseVideoController({
         disabled={isCompleted === true || status === 'loading'}
         id='completion-controller'
         className={`w-24 md:w-28 lg:w-32 xl:w-36 flex justify-center items-center font-bold text-lg lg:text-xl ${
-          isCompleted === true ? 'opacity-50 hover:opacity-50' : ''
+          isCompleted === true ? 'opacity-30' : ''
         }`}
       >
-        <div className='whitespace-nowrap'>봤어요</div>
+        <div className='whitespace-nowrap'>완료하기</div>
       </Button>
       <Button
         hoverEffect={true}
@@ -127,7 +127,7 @@ export default function CourseVideoController({
         disabled={nextPlayingVideo === null}
         id='next-controller'
         className={`w-24 md:w-28 lg:w-32 xl:w-36 flex justify-between items-center font-bold text-lg lg:text-xl ${
-          nextPlayingVideo === null ? 'opacity-50 hover:opacity-50' : ''
+          nextPlayingVideo === null ? 'opacity-30' : ''
         }`}
       >
         <div className='whitespace-nowrap'>다음 강의</div>

@@ -111,6 +111,7 @@ export default function CourseTaking({
         <CourseHeader
           title={currentPlayingVideo.video_title}
           channel={currentPlayingVideo.channel}
+          is_completed={currentPlayingVideo.is_completed}
         />
         <YoutubePlayer
           width={'100%'}
