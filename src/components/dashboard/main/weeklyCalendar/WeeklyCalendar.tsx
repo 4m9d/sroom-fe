@@ -102,7 +102,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
             />
           </div>
           <div className='flex flex-col items-center justify-center flex-1 sm:gap-1 md:gap-2'>
-            {selectedWeek && selectedWeek[selectedDay]?.learningHistory && (
+            {selectedWeek && selectedWeek[selectedDay]?.learningHistory ? (
               <>
                 <LearningHistoryItem
                   title={'학습 시간'}
@@ -122,6 +122,10 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
                   value={`${selectedWeek[selectedDay].learningHistory?.lecture_count}개`}
                 />
               </>
+            ) : (
+              <p className='text-xs font-medium break-keep md:text-sm lg:text-base xl:text-lg text-sroom-black-200'>
+                수강 이력이 없어요
+              </p>
             )}
           </div>
         </div>
