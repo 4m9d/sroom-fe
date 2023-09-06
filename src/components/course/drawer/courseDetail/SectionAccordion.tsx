@@ -95,7 +95,7 @@ export default function SectionAccordion({
       </div>
       <div className='px-2 collapse-content'>
         {isOpen === true && (
-          <div className='flex flex-col gap-1 py-6'>
+          <div className='flex flex-col gap-1 py-6 font-normal'>
             {videos.map((video) => (
               <Link
                 id={video.course_video_id.toString()}
@@ -108,9 +108,9 @@ export default function SectionAccordion({
                 className='flex items-center justify-between h-[17px] px-3 py-3 hover:bg-sroom-gray-200 hover:opacity-80 rounded-sm hover:scale-105 transition-all'
               >
                 <p
-                  className={`w-5/6 text-start text-xs md:text-sm font-semibold whitespace-normal line-clamp-1 before:w-[2px] before:h-[2px]  before:mr-1 before:inline-block before:align-middle ${
+                  className={`w-5/6 text-start text-xs md:text-sm font-semibold whitespace-normal line-clamp-1 before:w-[2px] before:h-[2px] before:mr-1 before:inline-block before:align-middle ${
                     currentPlayingVideo.course_video_id === video.course_video_id
-                      ? 'text-sroom-brand before:bg-sroom-brand !font-bold'
+                      ? 'text-sroom-brand before:bg-sroom-brand'
                       : 'text-sroom-black-200 before:bg-sroom-black-200'
                   } `}
                 >

@@ -63,7 +63,7 @@ export default function CourseDetailDrawer({
               animate={{ opacity: 1, translateX: '0%' }}
               exit={{ opacity: 0, translateX: '-100%' }}
               transition={{ ease: 'easeInOut', duration: 0.25 }}
-              className='absolute top-0 left-0 flex flex-col justify-between h-full'
+              className='absolute top-0 left-0 flex flex-col justify-between w-full h-full'
             >
               <div className='flex-1 overflow-y-scroll'>
                 <CourseDetailHeader
