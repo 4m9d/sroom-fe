@@ -137,20 +137,25 @@ export default function LectureEnrollmentButton({
             새 강의 코스 등록하기
           </div>
         </li>
-        <li className={`${LIST__LI} group`}>
-          <button type='button' className={`${LIST__DIV} w-full peer relative`}>
-            기존 강의 코스에 추가하기
-            <span className='w-3 ml-2 transition-all group-hover:rotate-90 group-focus-within:rotate-90 stroke-sroom-black-100'>
-              <ArrowRightSVG />
-            </span>
-          </button>
-          <div className='absolute right-0 hidden w-4/5 pt-5 bg-transparent top-full group-hover:block hover:block peer-focus-within:block'>
-            <ul className='relative border bg-sroom-white border-sroom-gray-500'>
-              <EnrolledCoursesList isSubList={true} courses={courses} />
-              <span className='peer-first-of-type:peer-hover:bg-sroom-brand absolute -top-[0.3px] w-3 h-3 rotate-45 -translate-x-1/2 -translate-y-1/2 border-t bg-sroom-white border-l left-10 border-l-sroom-gray-500 border-t-sroom-gray-500' />
-            </ul>
-          </div>
-        </li>
+        {courses.length > 0 && (
+          <li className={`${LIST__LI} group`}>
+            <button
+              type='button'
+              className={`${LIST__DIV} w-full peer relative`}
+            >
+              기존 강의 코스에 추가하기
+              <span className='w-3 ml-2 transition-all group-hover:rotate-90 group-focus-within:rotate-90 stroke-sroom-black-100'>
+                <ArrowRightSVG />
+              </span>
+            </button>
+            <div className='absolute right-0 hidden w-4/5 pt-5 bg-transparent top-full group-hover:block hover:block peer-focus-within:block'>
+              <ul className='relative border bg-sroom-white border-sroom-gray-500'>
+                <EnrolledCoursesList isSubList={true} courses={courses} />
+                <span className='peer-first-of-type:peer-hover:bg-sroom-brand absolute -top-[0.3px] w-3 h-3 rotate-45 -translate-x-1/2 -translate-y-1/2 border-t bg-sroom-white border-l left-10 border-l-sroom-gray-500 border-t-sroom-gray-500' />
+              </ul>
+            </div>
+          </li>
+        )}
       </>
     );
   };
