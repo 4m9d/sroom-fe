@@ -3,7 +3,7 @@ import { updateViewDuration } from '@/src/api/lectures/time';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { memo, useCallback, useEffect } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import YouTube, { YouTubeEvent } from 'react-youtube';
 import PlayerStates from 'youtube-player/dist/constants/PlayerStates';
 import { Options } from 'youtube-player/dist/types';
@@ -17,15 +17,13 @@ type Props = {
   start: number;
   end?: number;
   viewDuration: React.MutableRefObject<number>;
-  currentIntervalID: NodeJS.Timer | null;
-  setCurrentIntervalID: React.Dispatch<
-    React.SetStateAction<NodeJS.Timer | null>
-  >;
+  is_completed: boolean;
+  currentIntervalID: React.MutableRefObject<NodeJS.Timer | null>;
 };
 
 const UPDATE_INTERVAL = 10;
 const UPDATE_INTERVAL_IN_MS = UPDATE_INTERVAL * ONE_SECOND_IN_MS;
-let isRevalidated = false;
+let isCompleted = false;
 
 const YoutubePlayer = ({
   width,
@@ -36,10 +34,11 @@ const YoutubePlayer = ({
   start,
   end,
   viewDuration,
-  currentIntervalID,
-  setCurrentIntervalID
+  is_completed,
+  currentIntervalID
 }: Props) => {
   const queryClient = useQueryClient();
+  isCompleted = is_completed;
 
   const silentUpdateViewDuration = async () => {
     const response = await updateViewDuration({
@@ -50,34 +49,32 @@ const YoutubePlayer = ({
     return response;
   };
 
-  const revalidateCourseDetail = (isRevalidated: boolean) => {
-    if (isRevalidated === false) {
-      isRevalidated = true;
-      queryClient.invalidateQueries([
-        QueryKeys.COURSE_DETAIL,
-        course_id.toString()
-      ]);
-    }
+  const revalidateCourseDetail = () => {
+    queryClient.invalidateQueries([
+      QueryKeys.COURSE_DETAIL,
+      course_id.toString()
+    ]);
   };
 
   const { mutate } = useMutation(
     [QueryKeys.COURSE_TAKING],
-    () => silentUpdateViewDuration(),
+    silentUpdateViewDuration,
     {
       onSuccess: (data) => {
-        if (data.is_completed === true) {
-          revalidateCourseDetail(isRevalidated);
+        if (data.is_completed === true && isCompleted === false) {
+          isCompleted = true;
+          revalidateCourseDetail();
         }
       }
     }
   );
 
   const clearIntervalID = useCallback(() => {
-    if (currentIntervalID !== null) {
-      clearInterval(currentIntervalID);
-      setCurrentIntervalID(() => null);
+    if (currentIntervalID.current !== null) {
+      clearInterval(currentIntervalID.current);
+      currentIntervalID.current = null;
     }
-  }, [currentIntervalID, setCurrentIntervalID]);
+  }, [currentIntervalID]);
 
   function updateViewDurationOnlyOnce(currentTime: number) {
     viewDuration.current = currentTime;
@@ -95,14 +92,13 @@ const YoutubePlayer = ({
         viewDuration.current += UPDATE_INTERVAL;
         mutate();
       }, UPDATE_INTERVAL_IN_MS);
-      setCurrentIntervalID(() => intervalID);
+      currentIntervalID.current = intervalID;
     } else if (event.data === PlayerStates.PAUSED) {
       clearIntervalID();
-      updateViewDurationOnlyOnce(currentTime);
     } else if (event.data === PlayerStates.ENDED) {
       updateViewDurationOnlyOnce(currentTime);
       clearIntervalID();
-      revalidateCourseDetail(isRevalidated);
+      revalidateCourseDetail();
     }
   }
 

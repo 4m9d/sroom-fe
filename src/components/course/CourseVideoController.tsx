@@ -14,10 +14,7 @@ type Props = {
   viewDuration: React.MutableRefObject<number>;
   prevPlayingVideo: LastViewVideo | null;
   nextPlayingVideo: LastViewVideo | null;
-  currentIntervalID: NodeJS.Timer | null;
-  setCurrentIntervalID: React.Dispatch<
-    React.SetStateAction<NodeJS.Timer | null>
-  >;
+  currentIntervalID: React.MutableRefObject<NodeJS.Timer | null>;
 };
 let isCompleted = false;
 
@@ -28,8 +25,7 @@ export default function CourseVideoController({
   viewDuration,
   prevPlayingVideo,
   nextPlayingVideo,
-  currentIntervalID,
-  setCurrentIntervalID
+  currentIntervalID
 }: Props) {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -55,9 +51,9 @@ export default function CourseVideoController({
     {
       onSuccess: (data) => {
         isCompleted = data.is_completed;
-        if (currentIntervalID !== null) {
-          clearInterval(currentIntervalID);
-          setCurrentIntervalID(null);
+        if (currentIntervalID.current !== null) {
+          clearInterval(currentIntervalID.current);
+          currentIntervalID.current = null;
         }
         queryClient.invalidateQueries([
           QueryKeys.COURSE_DETAIL,

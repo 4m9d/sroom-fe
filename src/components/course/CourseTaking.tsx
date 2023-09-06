@@ -5,7 +5,6 @@ import YoutubePlayer from './YoutubePlayer';
 import CourseDetailDrawer from './drawer/courseDetail/CourseDetailDrawer';
 import CourseMaterialDrawer from './drawer/courseMaterial/CourseMaterialDrawer';
 import CourseVideoController from './CourseVideoController';
-import { useRouter } from 'next/navigation';
 
 type Props = {
   courseDetail: CourseDetail;
@@ -18,16 +17,14 @@ export default function CourseTaking({
 }: Props) {
   const last_view_video = findVideoById() as LastViewVideo;
   const currentPlayingVideo = last_view_video;
-  
-  const router = useRouter();
 
   const [prevPlayingVideo, setPrevPlayingVideo] =
     useState<LastViewVideo | null>(last_view_video);
   const [nextPlayingVideo, setNextPlayingVideo] =
     useState<LastViewVideo | null>(last_view_video);
   const viewDuration = useRef<number>(0);
-  const [currentIntervalID, setCurrentIntervalID] =
-    useState<NodeJS.Timer | null>(null);
+  const currentIntervalID=
+    useRef<NodeJS.Timer | null>(null);
 
   function findVideoById() {
     const videos = courseDetail.sections.flatMap((section) => section.videos);
@@ -123,8 +120,8 @@ export default function CourseTaking({
           course_id={courseDetail.course_id}
           start={currentPlayingVideo.last_view_duration}
           viewDuration={viewDuration}
+          is_completed={currentPlayingVideo.is_completed}
           currentIntervalID={currentIntervalID}
-          setCurrentIntervalID={setCurrentIntervalID}
         />
         <div id='controller'>
           <CourseVideoController
@@ -135,7 +132,6 @@ export default function CourseTaking({
             nextPlayingVideo={nextPlayingVideo}
             viewDuration={viewDuration}
             currentIntervalID={currentIntervalID}
-            setCurrentIntervalID={setCurrentIntervalID}
           />
         </div>
       </div>
