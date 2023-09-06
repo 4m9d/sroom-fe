@@ -2,6 +2,7 @@ import getQueryURL from '@/src/util/http/getQueryURL';
 import { Endpoints } from '../Endpoints';
 import { ErrorMessage } from '../ErrorMessage';
 import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
+import { QueryKeys } from '../queryKeys';
 
 export async function enrollLectureInNewCourse(
   params: EnrollLectureInNewCourseParams
@@ -44,7 +45,8 @@ export async function fetchCourseDetail(course_id: number) {
   const headers = await getAuthorizedHeaders();
   return await fetch(getQueryURL(`${Endpoints.COURSES}/${course_id}`), {
     method: 'GET',
-    headers
+    headers,
+    next: { tags: [QueryKeys.COURSE_TAKING, course_id.toString()] }
   }).then(async (res) => {
     if (res.ok) {
       return (await res.json()) as Promise<CourseDetail>;

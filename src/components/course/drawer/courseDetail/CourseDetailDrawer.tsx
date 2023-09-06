@@ -63,7 +63,7 @@ export default function CourseDetailDrawer({
               animate={{ opacity: 1, translateX: '0%' }}
               exit={{ opacity: 0, translateX: '-100%' }}
               transition={{ ease: 'easeInOut', duration: 0.25 }}
-              className='absolute top-0 left-0 flex flex-col justify-between h-full'
+              className='absolute top-0 left-0 flex flex-col justify-between w-full h-full'
             >
               <div className='flex-1 overflow-y-scroll'>
                 <CourseDetailHeader
@@ -92,7 +92,7 @@ export default function CourseDetailDrawer({
           id='course-detail-drawer-btn'
           type='button'
           onClick={drawerHandler}
-          className='absolute flex items-center justify-center w-5 h-12 bg-zinc-900 -right-5 top-[calc(50%-1.5rem)] z-50  hover:scale-105 transition-all hover:opacity-90'
+          className='absolute flex items-center justify-center w-5 h-12 bg-zinc-900 -right-5 top-[calc(50%-1.5rem)] z-50  hover:scale-y-125 transition-all hover:opacity-90'
         >
           <span
             className={`w-3 stroke-sroom-white ${

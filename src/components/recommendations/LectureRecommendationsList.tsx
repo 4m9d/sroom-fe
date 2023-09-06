@@ -12,10 +12,7 @@ import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { fetchLectureRecommendations } from '@/src/api/lectures/search';
-import {
-  CACHE_TIME,
-  STALE_TIME
-} from '@/src/constants/query/query';
+import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
 
 export default function LectureRecommendationsList() {
   const windowSize = useWindowSize();
@@ -42,61 +39,70 @@ export default function LectureRecommendationsList() {
 
   const slidesPerView =
     windowSize.width < 800 ? 1 : windowSize.width < 1400 ? 2 : 3;
-
+  const totalPage =
+    recommendations.length - (slidesPerView - 1) > 0
+      ? recommendations.length - (slidesPerView - 1)
+      : 1;
   return (
-    <section className='px-4 mx-auto my-20 lg:px-24 max-w-screen-2xl'>
-      <SectionHeading title='이런 강의는 어때요?' />
-      <div className='relative'>
-        <Swiper
-          className='!py-2'
-          slidesPerView={slidesPerView}
-          navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current
-          }}
-          onBeforeInit={(swiper) => {
-            setSwiper(swiper);
-          }}
-          onSlideChange={(swiper) => {
-            swiper.isEnd ? setIsLastSlide(true) : setIsLastSlide(false);
-            swiper.isBeginning ? setIsFirstSlide(true) : setIsFirstSlide(false);
-            setCurrPageIdx(() => swiper.activeIndex + 1);
-          }}
-        >
-          {recommendations.map((lecture) => (
-            <SwiperSlide
-              key={lecture.lecture_code}
-              className='!flex justify-between'
+    <>
+      {recommendations.length > 0 && (
+        <section className='px-4 mx-auto my-20 lg:px-24 max-w-screen-2xl'>
+          <SectionHeading title='이런 강의는 어때요?' />
+          <div className='relative'>
+            <Swiper
+              className='!py-2'
+              slidesPerView={slidesPerView}
+              navigation={{
+                prevEl: prevRef.current,
+                nextEl: nextRef.current
+              }}
+              onBeforeInit={(swiper) => {
+                setSwiper(swiper);
+              }}
+              onSlideChange={(swiper) => {
+                swiper.isEnd ? setIsLastSlide(true) : setIsLastSlide(false);
+                swiper.isBeginning
+                  ? setIsFirstSlide(true)
+                  : setIsFirstSlide(false);
+                setCurrPageIdx(() => swiper.activeIndex + 1);
+              }}
             >
-              <div
-                onClick={() => {
-                  router.refresh();
-                  router.push(`/search/${lecture.lecture_code}`);
-                }}
-              >
-                <LectureRecommendationsCard lecture={lecture} />
+              {recommendations.map((lecture) => (
+                <SwiperSlide
+                  key={lecture.lecture_code}
+                  className='!flex justify-between'
+                >
+                  <div
+                    onClick={() => {
+                      router.refresh();
+                      router.push(`/search/${lecture.lecture_code}`);
+                    }}
+                  >
+                    <LectureRecommendationsCard lecture={lecture} />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <div className='flex items-center justify-center gap-10 mt-3'>
+              <SwiperNavigationButton
+                onClick={() => swiper?.slidePrev()}
+                disabled={isFirstSlide}
+                navigation='prev'
+              />
+              <div>
+                <span>
+                  {currPageIdx} / {totalPage}
+                </span>
               </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        <div className='flex items-center justify-center gap-10 mt-3'>
-          <SwiperNavigationButton
-            onClick={() => swiper?.slidePrev()}
-            disabled={isFirstSlide}
-            navigation='prev'
-          />
-          <div>
-            <span>
-              {currPageIdx} / {recommendations.length - (slidesPerView - 1)}
-            </span>
+              <SwiperNavigationButton
+                disabled={isLastSlide}
+                onClick={() => swiper?.slideNext()}
+                navigation='next'
+              />
+            </div>
           </div>
-          <SwiperNavigationButton
-            disabled={isLastSlide}
-            onClick={() => swiper?.slideNext()}
-            navigation='next'
-          />
-        </div>
-      </div>
-    </section>
+        </section>
+      )}
+    </>
   );
 }

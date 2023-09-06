@@ -102,16 +102,19 @@ export default function SectionAccordion({
                 ref={currentPlayingVideoTabRef}
                 href={{
                   pathname: `/course/${course_id}/`,
-                  query: { course_video_id: video.course_video_id }
+                  query: { courseVideoId: video.course_video_id }
                 }}
                 key={video.course_video_id}
                 className='flex items-center justify-between h-[17px] px-3 py-3 hover:bg-sroom-gray-200 hover:opacity-80 rounded-sm hover:scale-105 transition-all'
               >
                 <p
-                  className={`w-5/6 text-start text-xs md:text-sm font-semibold whitespace-normal line-clamp-1 before:w-[2px] before:h-[2px]  before:mr-1 before:inline-block before:align-middle ${
-                    currentPlayingVideo.course_video_id === video.course_video_id
-                      ? 'text-sroom-brand before:bg-sroom-brand !font-bold'
-                      : 'text-sroom-black-200 before:bg-sroom-black-200'
+                  className={`w-5/6 text-start text-xs md:text-sm whitespace-normal line-clamp-1 before:w-[2px] before:h-[2px] before:mr-1 before:inline-block before:align-middle ${
+                    video.is_completed === true ? 'text-sroom-black-200' : 'text-sroom-black-400'
+                  } ${
+                    currentPlayingVideo.course_video_id ===
+                    video.course_video_id
+                      ? 'text-sroom-brand before:bg-sroom-brand font-medium'
+                      : 'before:bg-sroom-black-200'
                   } `}
                 >
                   {video.video_title}
