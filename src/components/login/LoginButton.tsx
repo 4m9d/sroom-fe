@@ -33,7 +33,7 @@ function LoginButton() {
 
   return (
     <div
-      className='inline-block mt-2 align-middle md:mt-5'
+      className='inline-block h-10 mt-2 align-middle md:mt-5'
       id='google-login-button'
       ref={loginButton}
     />

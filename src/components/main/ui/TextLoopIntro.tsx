@@ -34,7 +34,7 @@ const TextLoop = ({
         repeatDelay: repeatDelay,
         delay: type === 'back-up' ? delay : 0
       }}
-      className={`${className} pl-[100%] absolute flex h-full min-w-full gap-3 whitespace-nowrap`}
+      className={`${className} pl-[100%] absolute flex h-full min-w-full gap-3 whitespace-nowrap text-[5px] sm:text-sm md:text-lg lg:text-xl xl:text-2xl opacity-90`}
     >
       {children}
     </motion.div>
@@ -48,7 +48,7 @@ export default function TextLoopIntro({}) {
         type='main'
         duration={20}
         delayGap={2}
-        className='top-[20%] sm:top-1/4'
+        className='top-[20%]'
       >
         {MOTIVATION_GENERAL.map((item, index) => (
           <p key={index}>{item}</p>
@@ -58,7 +58,7 @@ export default function TextLoopIntro({}) {
         duration={20}
         delayGap={2}
         type='back-up'
-        className='top-[20%] sm:top-1/4'
+        className='top-[20%]'
       >
         {MOTIVATION_GENERAL.map((item, index) => (
           <p key={index}>{item}</p>
@@ -68,7 +68,7 @@ export default function TextLoopIntro({}) {
         type='main'
         duration={20}
         delayGap={3}
-        className='top-[60%] sm:top-2/4'
+        className='top-[60%]'
       >
         {MOTIVATION_SPECIFIC.map((item, index) => (
           <p key={index}>{item}</p>
@@ -78,7 +78,7 @@ export default function TextLoopIntro({}) {
         type='back-up'
         duration={20}
         delayGap={3}
-        className='top-[60%] sm:top-2/4'
+        className='top-[60%]'
       >
         {MOTIVATION_SPECIFIC.map((item, index) => (
           <p key={index}>{item}</p>

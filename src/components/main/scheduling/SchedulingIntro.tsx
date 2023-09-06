@@ -3,8 +3,8 @@ import Image from 'next/image';
 export default function SchedulingIntro({}) {
   return (
     <>
-      <div className='col-start-2 col-end-3 row-start-2 row-end-3 p-3 bg-sroom-brand md:p-5 xl:p-7'>
-        <p>강의 일정 관리</p>
+      <div className='col-start-2 col-end-3 row-start-2 row-end-3 p-2 sm:p-3 bg-sroom-brand md:p-5 xl:p-7'>
+        <p className='text-[5px] sm:text-sm md:text-base lg:text-lg xl:text-xl'>강의 일정 관리</p>
       </div>
       <div className='relative col-start-2 col-end-3 row-start-3 row-end-6 bg-sroom-brand'>
         <div className='absolute top-0 left-0 w-full'>
