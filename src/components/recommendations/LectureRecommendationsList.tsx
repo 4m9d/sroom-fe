@@ -7,7 +7,7 @@ import SectionHeading from '../ui/SectionHeading';
 import LectureRecommendationsCard from './LectureRecommendationsCard';
 import useWindowSize from '@/src/hooks/useWindowSize';
 import SwiperNavigationButton from '../ui/button/SwiperNavigationButton';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
@@ -43,6 +43,20 @@ export default function LectureRecommendationsList() {
     recommendations.length - (slidesPerView - 1) > 0
       ? recommendations.length - (slidesPerView - 1)
       : 1;
+
+  useEffect(() => {
+    if (currPageIdx === totalPage) {
+      setIsLastSlide(true);
+    } else {
+      setIsLastSlide(false);
+    }
+    if (currPageIdx === 1) {
+      setIsFirstSlide(true);
+    } else {
+      setIsFirstSlide(false);
+    }
+  }, [totalPage, currPageIdx]);
+
   return (
     <>
       {recommendations.length > 0 && (
@@ -60,10 +74,6 @@ export default function LectureRecommendationsList() {
                 setSwiper(swiper);
               }}
               onSlideChange={(swiper) => {
-                swiper.isEnd ? setIsLastSlide(true) : setIsLastSlide(false);
-                swiper.isBeginning
-                  ? setIsFirstSlide(true)
-                  : setIsFirstSlide(false);
                 setCurrPageIdx(() => swiper.activeIndex + 1);
               }}
             >
