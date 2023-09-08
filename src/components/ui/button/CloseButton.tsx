@@ -9,7 +9,7 @@ export default function CloseButton({ onClick }: Props) {
     <button
       type='button'
       onClick={onClick}
-      className={`absolute z-50 shrink-0 btn btn-sm btn-circle btn-ghost right-3 top-3`}
+      className={`absolute z-50 shrink-0 btn btn-sm btn-circle btn-ghost right-3 top-3 hover:bg-sroom-gray-200`}
     >
       ✕
     </button>
