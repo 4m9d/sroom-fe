@@ -2,8 +2,9 @@
 import useWindowSize from '@/src/hooks/useWindowSize';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
+import CourseMaterialContent from './CourseMaterialContent';
 
-const TABLET_BREAKPOINT = 768;
+const BREAK_POINT = 900;
 
 export default function CourseMaterialDrawer() {
   const controls = useAnimationControls();
@@ -12,19 +13,33 @@ export default function CourseMaterialDrawer() {
 
   const drawerAnimationConfig = {
     animate: controls,
+    transition: { ease: 'easeInOut', duration: 0.25 },
     variants: {
       initial: { width: '0%' },
       animate: { width: '40%', maxWidth: '25rem' },
       exit: { width: '0%' }
     }
   };
+  const drawerContentAnimationConfig = {
+    initial: { opacity: 0, translateX: '100%' },
+    animate: { opacity: 1, translateX: '0%' },
+    exit: { opacity: 0, translateX: '100%' },
+    transition: { ease: 'easeInOut', duration: 0.2 }
+  };
   const bottomSheetAnimationConfig = {
     animate: controls,
+    transition: { ease: 'easeInOut', duration: 0.25 },
     variants: {
       initial: { height: '0%' },
       animate: { height: '60%', maxHeight: '35rem' },
       exit: { height: '0%' }
     }
+  };
+  const bottomSheetContentAnimationConfig = {
+    initial: { opacity: 0, translateY: '100%' },
+    animate: { opacity: 1, translateY: '0%' },
+    exit: { opacity: 0, translateY: '100%' },
+    transition: { ease: 'easeInOut', duration: 0.25 }
   };
 
   const drawerHandler = useCallback(() => {
@@ -52,22 +67,20 @@ export default function CourseMaterialDrawer() {
     setIsDrawerOpen(false);
   }, [width, controls]);
 
-  if (width > TABLET_BREAKPOINT) {
+  if (width > BREAK_POINT) {
     return (
       <AnimatePresence>
         <motion.aside
           {...drawerAnimationConfig}
           className='relative max-h-full min-h-full shadow-lg bg-sroom-white shrink-0'
         >
-          <div className='w-full h-full'></div>
           {isDrawerOpen && (
-            <button
-              type='button'
-              onClick={drawerHandler}
-              className='absolute shrink-0 btn btn-sm btn-circle btn-ghost right-5 top-5'
-            >
-              ✕
-            </button>
+            <AnimatePresence>
+              <motion.div {...drawerContentAnimationConfig}>
+                <CourseMaterialContent drawerHandler={drawerHandler} />
+              </motion.div>
+              
+            </AnimatePresence>
           )}
         </motion.aside>
       </AnimatePresence>
@@ -77,17 +90,14 @@ export default function CourseMaterialDrawer() {
       <AnimatePresence>
         <motion.aside
           {...bottomSheetAnimationConfig}
-          className='absolute bottom-0 z-50 max-w-full min-w-full shadow-lg bg-sroom-white shrink-0'
+          className='absolute bottom-0 z-50 max-w-full min-w-full shadow-2xl shadow- bg-sroom-white shrink-0'
         >
-          <div className='w-full '></div>
           {isDrawerOpen && (
-            <button
-              type='button'
-              onClick={drawerHandler}
-              className='absolute shrink-0 btn btn-sm btn-circle btn-ghost right-5 top-5'
-            >
-              ✕
-            </button>
+            <AnimatePresence>
+              <motion.div {...bottomSheetContentAnimationConfig}>
+                <CourseMaterialContent drawerHandler={drawerHandler} />
+              </motion.div>
+            </AnimatePresence>
           )}
         </motion.aside>
       </AnimatePresence>
