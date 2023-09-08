@@ -23,8 +23,7 @@ export default function CourseTaking({
   const [nextPlayingVideo, setNextPlayingVideo] =
     useState<LastViewVideo | null>(last_view_video);
   const viewDuration = useRef<number>(0);
-  const currentIntervalID=
-    useRef<NodeJS.Timer | null>(null);
+  const currentIntervalID = useRef<NodeJS.Timer | null>(null);
 
   function findVideoById() {
     const videos = courseDetail.sections.flatMap((section) => section.videos);
@@ -102,7 +101,7 @@ export default function CourseTaking({
   }, [searchPrevVideo, searchNextVideo]);
 
   return (
-    <div className='flex items-stretch flex-1 h-full bg-sroom-gray-200'>
+    <div className='flex items-stretch flex-1 h-[calc(100vh-4rem)] bg-sroom-gray-200'>
       <CourseDetailDrawer
         courseDetail={courseDetail}
         currentPlayingVideo={currentPlayingVideo}
