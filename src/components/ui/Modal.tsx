@@ -1,5 +1,7 @@
 'use client';
 
+import CloseButton from "./button/CloseButton";
+
 type Props = {
   id: string;
   className?: string;
@@ -17,13 +19,7 @@ export default function Modal({ id, className, children, onClose }: Props) {
     >
       <div className={`modal-box ${className}`}>
         <form method='dialog'>
-          <button
-            type='button'
-            onClick={onClose}
-            className='absolute btn btn-sm btn-circle btn-ghost right-2 top-2'
-          >
-            ✕
-          </button>
+          <CloseButton onClick={onClose}/>
         </form>
         {children}
       </div>
