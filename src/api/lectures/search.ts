@@ -27,8 +27,7 @@ export async function fetchLectureDetail(
     getQueryURL(`${Endpoints.LECTURES}/${lecture_code}`, params),
     {
       method: 'GET',
-      headers,
-      next: { tags: [QueryKeys.DETAIL, lecture_code] }
+      headers
     }
   ).then(async (res) => {
     if (res.ok) {

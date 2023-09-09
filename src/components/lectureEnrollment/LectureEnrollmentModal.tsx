@@ -3,14 +3,14 @@ import { showModalHandler } from '@/src/util/modal/modalHandler';
 import Modal from '../ui/Modal';
 import Button from '../ui/button/Button';
 import { ModalIDs } from '@/src/constants/modal/modal';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { enrollLectureInNewCourse } from '@/src/api/courses/courses';
 import setErrorToast from '@/src/util/toast/setErrorToast';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
 import { useRouter } from 'next/navigation';
-import { revalidateTag } from 'next/cache';
+import { QueryKeys } from '@/src/api/queryKeys';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -24,6 +24,7 @@ export default function LectureEnrollmentModal({
   onEnrollSuccess
 }: Props) {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { lecture_code } = lectureDetail;
 
   const enrollLecture = async () => {
@@ -50,7 +51,7 @@ export default function LectureEnrollmentModal({
         setLectureEnrollToast(() =>
           router.push(`/course/${response.course_id}`)
         );
-      revalidateTag(lecture_code);
+      queryClient.invalidateQueries([QueryKeys.DETAIL, lecture_code]);
     }
   });
 

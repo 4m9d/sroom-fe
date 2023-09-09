@@ -1,4 +1,8 @@
+'use client';
 import { fetchLectureDetail } from '@/src/api/lectures/search';
+import { QueryKeys } from '@/src/api/queryKeys';
+import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
+import { useQuery } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
 
 const DynamicLectureDetailModal = dynamic(
@@ -9,13 +13,20 @@ const DynamicLectureDetailModal = dynamic(
 export default async function LectureDetail({
   params: { lecture_code }
 }: LectureDetailModalParams) {
-  const lectureDetail = await fetchLectureDetail(lecture_code);
+  const { data: lectureDetail } = useQuery(
+    [QueryKeys.DETAIL, lecture_code],
+    () => fetchLectureDetail(lecture_code),
+    {
+      staleTime: STALE_TIME,
+      cacheTime: CACHE_TIME,
+      suspense: true
+    }
+  );
 
   return (
     <DynamicLectureDetailModal
-      lectureDetail={lectureDetail}
+      lectureDetail={lectureDetail as LectureDetail}
       navigationType='hard'
     />
   );
 }
-//NOTE: 수정하면, @modal/(.)search/[lectureCode]/page 에서도 수정해야함

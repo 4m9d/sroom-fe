@@ -3,7 +3,7 @@ import ArrowRightSVG from '@/public/icon/ArrowRight';
 import LectureSVG from '@/public/icon/Lecture';
 import Button from '../ui/button/Button';
 import { showModalHandler } from '@/src/util/modal/modalHandler';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   enrollLectureInExistingCourse,
   enrollLectureInNewCourse
@@ -13,7 +13,7 @@ import setErrorToast from '@/src/util/toast/setErrorToast';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
 import { useRouter } from 'next/navigation';
-import { revalidateTag } from 'next/cache';
+import { QueryKeys } from '@/src/api/queryKeys';
 
 type Props = {
   is_playlist: boolean;
@@ -31,6 +31,7 @@ export default function LectureEnrollmentButton({
   disabled
 }: Props) {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const enrollLecture = async (course_id?: number) => {
     if (course_id !== undefined) {
@@ -71,7 +72,7 @@ export default function LectureEnrollmentButton({
         setLectureEnrollToast(() =>
           router.push(`/course/${response.course_id}`)
         );
-      revalidateTag(lecture_code);
+      queryClient.invalidateQueries([QueryKeys.DETAIL, lecture_code]);
     }
   });
 
