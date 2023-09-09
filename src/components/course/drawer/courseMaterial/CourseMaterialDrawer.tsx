@@ -1,20 +1,45 @@
 'use client';
+import useWindowSize from '@/src/hooks/useWindowSize';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
+import CourseMaterialContent from './CourseMaterialContent';
 
-type Props = {};
+const BREAK_POINT = 900;
 
-export default function CourseMaterialDrawer({}: Props) {
+export default function CourseMaterialDrawer() {
   const controls = useAnimationControls();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { width } = useWindowSize();
 
-  const animationConfig = {
+  const drawerAnimationConfig = {
     animate: controls,
+    transition: { ease: 'easeInOut', duration: 0.25 },
     variants: {
-      initial: { width: 0 },
+      initial: { width: '0%' },
       animate: { width: '40%', maxWidth: '25rem' },
-      exit: { width: 0 }
+      exit: { width: '0%' }
     }
+  };
+  const drawerContentAnimationConfig = {
+    initial: { opacity: 0, translateX: '100%' },
+    animate: { opacity: 1, translateX: '0%' },
+    exit: { opacity: 0, translateX: '100%' },
+    transition: { ease: 'easeInOut', duration: 0.2 }
+  };
+  const bottomSheetAnimationConfig = {
+    animate: controls,
+    transition: { ease: 'easeInOut', duration: 0.25 },
+    variants: {
+      initial: { height: '0%' },
+      animate: { height: '60%', maxHeight: '35rem' },
+      exit: { height: '0%' }
+    }
+  };
+  const bottomSheetContentAnimationConfig = {
+    initial: { opacity: 0, translateY: '100%' },
+    animate: { opacity: 1, translateY: '0%' },
+    exit: { opacity: 0, translateY: '100%' },
+    transition: { ease: 'easeInOut', duration: 0.25 }
   };
 
   const drawerHandler = useCallback(() => {
@@ -37,23 +62,45 @@ export default function CourseMaterialDrawer({}: Props) {
     };
   }, [drawerHandler]);
 
-  return (
-    <AnimatePresence>
-      <motion.aside
-        {...animationConfig}
-        className='relative max-h-full min-h-full bg-white shadow-lg shrink-0'
-      >
-        <div className='h-[calc(100vh-4rem)]'></div>
-        {isDrawerOpen && (
-          <button
-            type='button'
-            onClick={drawerHandler}
-            className='absolute shrink-0 btn btn-sm btn-circle btn-ghost right-5 top-5'
-          >
-            ✕
-          </button>
-        )}
-      </motion.aside>
-    </AnimatePresence>
-  );
+  useEffect(() => {
+    controls.start('exit');
+    setIsDrawerOpen(false);
+  }, [width, controls]);
+
+  if (width > BREAK_POINT) {
+    return (
+      <AnimatePresence>
+        <motion.aside
+          {...drawerAnimationConfig}
+          className='relative max-h-full min-h-full shadow-lg bg-sroom-white shrink-0'
+        >
+          {isDrawerOpen && (
+            <AnimatePresence>
+              <motion.div {...drawerContentAnimationConfig}>
+                <CourseMaterialContent drawerHandler={drawerHandler} />
+              </motion.div>
+              
+            </AnimatePresence>
+          )}
+        </motion.aside>
+      </AnimatePresence>
+    );
+  } else {
+    return (
+      <AnimatePresence>
+        <motion.aside
+          {...bottomSheetAnimationConfig}
+          className='absolute bottom-0 z-50 max-w-full min-w-full shadow-2xl shadow- bg-sroom-white shrink-0'
+        >
+          {isDrawerOpen && (
+            <AnimatePresence>
+              <motion.div {...bottomSheetContentAnimationConfig}>
+                <CourseMaterialContent drawerHandler={drawerHandler} />
+              </motion.div>
+            </AnimatePresence>
+          )}
+        </motion.aside>
+      </AnimatePresence>
+    );
+  }
 }
