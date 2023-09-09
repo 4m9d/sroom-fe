@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import Button from '../ui/button/Button';
 import ArrowRightSVG from '@/public/icon/ArrowRight';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { updateViewDuration } from '@/src/api/lectures/time';
@@ -16,7 +16,6 @@ type Props = {
   nextPlayingVideo: LastViewVideo | null;
   currentIntervalID: React.MutableRefObject<NodeJS.Timer | null>;
 };
-let isCompleted = false;
 
 export default function CourseVideoController({
   course_id,
@@ -29,11 +28,10 @@ export default function CourseVideoController({
 }: Props) {
   const router = useRouter();
   const queryClient = useQueryClient();
-
-  isCompleted = is_completed;
+  const [isCompleted, setIsCompleted] = useState(is_completed);
 
   const updateIsCompletedManually = async () => {
-    isCompleted = true;
+    setIsCompleted(true);
     const response = await updateViewDuration(
       {
         course_video_id,
@@ -50,7 +48,8 @@ export default function CourseVideoController({
     updateIsCompletedManually,
     {
       onSuccess: (data) => {
-        isCompleted = data.is_completed;
+        setIsCompleted(data.is_completed);
+
         if (currentIntervalID.current !== null) {
           clearInterval(currentIntervalID.current);
           currentIntervalID.current = null;
@@ -93,6 +92,10 @@ export default function CourseVideoController({
   useEffect(() => {
     prefetchPrevAndNextVideo();
   }, [prefetchPrevAndNextVideo]);
+
+  useLayoutEffect(() => {
+    setIsCompleted(is_completed);
+  }, [course_video_id, is_completed]);
 
   return (
     <div className='flex flex-wrap justify-center max-w-screen-lg gap-1 mx-auto my-2 md:gap-3 lg:my-5 lg:px-28 shrink-0'>
