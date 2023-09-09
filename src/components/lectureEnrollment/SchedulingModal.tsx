@@ -2,9 +2,9 @@
 import Modal from '../ui/Modal';
 import Button from '../ui/button/Button';
 import SchedulingSlider from '../scheduling/SchedulingSlider';
-import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ModalIDs } from '@/src/constants/modal/modal';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import getFormattedTime from '@/src/util/time/getFormattedTime';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import {
@@ -22,7 +22,6 @@ import getCompactDateFormat from '@/src/util/day/getCompactFormattedDate';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
 import { useRouter } from 'next/navigation';
 import { QueryKeys } from '@/src/api/queryKeys';
-import { revalidateTag } from 'next/cache';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -65,7 +64,10 @@ export default function SchedulingModal({
         setLectureEnrollToast(() =>
           router.push(`/course/${response.course_id}`)
         );
-      revalidateTag(lecture_code);
+      queryClient.invalidateQueries([
+        QueryKeys.DETAIL,
+        lectureDetail.lecture_code
+      ]);
     }
   });
   const { lecture_title, lecture_code } = lectureDetail;
@@ -86,13 +88,9 @@ export default function SchedulingModal({
   const MUTABLE_CONTENT =
     'align-middle px-3 py-1 font-semibold bg-sroom-white border border-sroom-gray-400 text-sroom-black-400  whitespace-normal line-clamp-1';
 
-  const controls = useAnimationControls();
   const animationConfig = {
-    animate: controls,
-    variants: {
-      initial: { opacity: 0, y: '10%' },
-      animate: { opacity: 1, y: '0%' }
-    },
+    initial: { opacity: 0, y: '10%' },
+    animate: { opacity: 1, y: '0%' },
     transition: { duration: 0.4 }
   };
 
@@ -108,7 +106,7 @@ export default function SchedulingModal({
     return [expectedDate.year(), expectedDate.month() + 1, expectedDate.date()];
   }
 
-  function reschedule() {
+  const reschedule = useCallback(() => {
     const weeklyStudyTime = convertMinutesToSeconds(inputValue * 7);
     const schedulingList: number[] = [];
     let currWeekDurationSum = 0;
@@ -144,16 +142,11 @@ export default function SchedulingModal({
     });
 
     setScheduling(schedulingList);
-  }
+  }, [index_list, inputValue]);
 
   useEffect(() => {
     reschedule();
-  }, [inputValue, durationInMinutes]);
-
-  useEffect(() => {
-    controls.set('initial');
-    controls.start('animate');
-  }, [inputValue, controls]);
+  }, [inputValue, durationInMinutes, reschedule]);
 
   return (
     <Modal
@@ -200,13 +193,21 @@ export default function SchedulingModal({
               <p className={DEFAULT_CONTENT}>
                 주 평균
                 <span className={MUTABLE_CONTENT}>
-                  <motion.span className='block' {...animationConfig}>
+                  <motion.span
+                    className='block'
+                    key={weeklyStudyTime}
+                    {...animationConfig}
+                  >
                     {weeklyStudyTime}
                   </motion.span>
                 </span>
                 분 분량으로
                 <span className={MUTABLE_CONTENT}>
-                  <motion.span className='block' {...animationConfig}>
+                  <motion.span
+                    className='block'
+                    key={scheduling.length}
+                    {...animationConfig}
+                  >
                     {scheduling.length}
                   </motion.span>
                 </span>
@@ -215,19 +216,31 @@ export default function SchedulingModal({
               <p className={DEFAULT_CONTENT}>
                 예상 수강 종료일은
                 <span className={MUTABLE_CONTENT}>
-                  <motion.span className='block' {...animationConfig}>
+                  <motion.span
+                    className='block'
+                    key={expectedDate[0]}
+                    {...animationConfig}
+                  >
                     {expectedDate[0]}
                   </motion.span>
                 </span>
                 년
                 <span className={MUTABLE_CONTENT}>
-                  <motion.span className='block' {...animationConfig}>
+                  <motion.span
+                    className='block'
+                    key={expectedDate[1]}
+                    {...animationConfig}
+                  >
                     {expectedDate[1]}
                   </motion.span>
                 </span>
                 월
                 <span className={MUTABLE_CONTENT}>
-                  <motion.span className='block' {...animationConfig}>
+                  <motion.span
+                    className='block'
+                    key={expectedDate[2]}
+                    {...animationConfig}
+                  >
                     {expectedDate[2]}
                   </motion.span>
                 </span>

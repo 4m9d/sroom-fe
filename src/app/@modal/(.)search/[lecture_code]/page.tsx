@@ -1,13 +1,27 @@
+'use client';
 import { fetchLectureDetail } from '@/src/api/lectures/search';
+import { QueryKeys } from '@/src/api/queryKeys';
 import LectureDetailModal from '@/src/components/lectureDetail/LectureDetailModal';
+import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
+import { useQuery } from '@tanstack/react-query';
 
 export default async function LectureDetailModalIntercepter({
   params: { lecture_code }
 }: LectureDetailModalParams) {
-  const lectureDetail = await fetchLectureDetail(lecture_code);
+  const { data: lectureDetail } = useQuery(
+    [QueryKeys.DETAIL, lecture_code],
+    () => fetchLectureDetail(lecture_code),
+    {
+      staleTime: STALE_TIME,
+      cacheTime: CACHE_TIME,
+      suspense: true
+    }
+  );
 
   return (
-    <LectureDetailModal lectureDetail={lectureDetail} navigationType='soft' />
+    <LectureDetailModal
+      lectureDetail={lectureDetail as LectureDetail}
+      navigationType='soft'
+    />
   );
 }
-//NOTE: 수정하면, search/[lectureCode]/page 에서도 수정해야함
