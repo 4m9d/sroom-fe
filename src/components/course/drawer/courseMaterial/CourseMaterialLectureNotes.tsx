@@ -104,7 +104,7 @@ export default function CourseMaterialLectureNotes({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className='text-xs font-medium text-sroom-brand'
+                className='text-xs font-medium text-sroom-green'
               >
                 클립보드에 복사되었어요!
               </motion.span>
