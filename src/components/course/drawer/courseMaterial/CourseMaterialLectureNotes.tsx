@@ -9,6 +9,7 @@ import 'easymde/dist/easymde.min.css';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { updateCourseLectureNotes } from '@/src/api/materials/materials';
+import getRelativeTime from '@/src/util/time/getRelativeTime';
 
 const MarkdownPreview = dynamic(
   () => import('@uiw/react-markdown-preview').then((mod) => mod.default),
@@ -76,21 +77,30 @@ export default function CourseMaterialLectureNotes({
         animate={{ opacity: 1, y: 0 }}
         className={`w-full my-10 flex flex-col justify-center items-center gap-10`}
       >
-        {isEditMode ? (
-          <SimpleMdeReact
-            options={editorOptions}
-            value={content}
-            style={{ position: 'static' }}
-            onChange={onContentChange}
-          />
-        ) : (
-          <div className='w-full h-full p-5 border rounded-md border-sroom-gray-500'>
-            <MarkdownPreview
-              source={content}
-              wrapperElement={{ 'data-color-mode': 'light' }}
+        <div>
+          {isEditMode ? (
+            <SimpleMdeReact
+              options={editorOptions}
+              value={content}
+              style={{ position: 'static' }}
+              onChange={onContentChange}
             />
+          ) : (
+            <div className='w-full h-full p-5 border rounded-md border-sroom-gray-500'>
+              <MarkdownPreview
+                source={content}
+                wrapperElement={{ 'data-color-mode': 'light' }}
+              />
+            </div>
+          )}
+          <div className='flex justify-end w-full mt-2'>
+            <span className='text-sm font-normal text-sroom-black-200'>
+              {`${getRelativeTime(lectureNotes.modified_at)}${
+                lectureNotes.is_modified ? ' (수정됨)' : ''
+              }`}
+            </span>
           </div>
-        )}
+        </div>
         <div className='w-full'>
           <Button
             onClick={copyButtonClickHandler}
