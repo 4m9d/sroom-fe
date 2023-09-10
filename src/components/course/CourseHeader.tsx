@@ -38,9 +38,9 @@ export default function CourseHeader({ title, channel, is_completed }: Props) {
         <div className='flex flex-col justify-end shrink-0'>
           <Button
             id='course-material-drawer'
-            className='text-xs lg:text-sm lg:!px-10 font-bold text-sroom-white bg-sroom-black-400'
+            className='text-xs md:text-sm px-4 md:!px-8 font-bold text-sroom-white bg-sroom-black-400'
           >
-            {'강의 노트 / 퀴즈 보기'}
+            {'강의 자료 보기'}
           </Button>
         </div>
       </div>

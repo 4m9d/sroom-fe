@@ -10,6 +10,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { updateCourseLectureNotes } from '@/src/api/materials/materials';
 import getRelativeTime from '@/src/util/time/getRelativeTime';
+import ClipboardSVG from '@/public/icon/Clipboard';
 
 const MarkdownPreview = dynamic(
   () => import('@uiw/react-markdown-preview').then((mod) => mod.default),
@@ -104,8 +105,11 @@ export default function CourseMaterialLectureNotes({
         <div className='w-full'>
           <Button
             onClick={copyButtonClickHandler}
-            className='w-full mb-1 border py-7 bg-sroom-black-400 text-sroom-white'
+            className='w-full mb-1 border py-7 border-sroom-black-400 bg-sroom-white'
           >
+            <span className='w-5 mr-3 stroke-sroom-black-400'>
+              <ClipboardSVG />
+            </span>
             복사하기
           </Button>
           <AnimatePresence>
@@ -124,7 +128,7 @@ export default function CourseMaterialLectureNotes({
             onClick={toggleButtonClickHandler}
             className='w-full mt-2 border py-7 border-sroom-black-400 bg-sroom-white'
           >
-            <span className='mr-5 stroke-sroom-black-400'>
+            <span className='w-5 mr-3 stroke-sroom-black-400'>
               <PencilSVG />
             </span>
             {isEditMode ? '저장하기' : '수정하기'}
