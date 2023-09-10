@@ -3,7 +3,7 @@ import HorizontalSmallLectureCard from '../ui/lectureCard/HorizontalSmallLecture
 import getFormattedTime from '@/src/util/time/getFormattedTime';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import LectureSVG from '@/public/icon/Lecture';
-import ProgressBar from '../ui/ProgressBar';
+import ProgressBar from '../ui/progress/ProgressBar';
 import Button from '../ui/button/Button';
 import { useRouter } from 'next/navigation';
 import ArrowRightSVG from '@/public/icon/ArrowRight';

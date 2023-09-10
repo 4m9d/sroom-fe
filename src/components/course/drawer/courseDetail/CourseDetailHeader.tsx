@@ -1,4 +1,4 @@
-import ProgressBar from '@/src/components/ui/ProgressBar';
+import ProgressBar from '@/src/components/ui/progress/ProgressBar';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import getFormattedTime from '@/src/util/time/getFormattedTime';
 import Image from 'next/image';

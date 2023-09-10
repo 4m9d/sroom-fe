@@ -1,4 +1,4 @@
-import ProgressBar from '../../ui/ProgressBar';
+import ProgressBar from '../../ui/progress/ProgressBar';
 import HorizontalSmallLectureCard from '../../ui/lectureCard/HorizontalSmallLectureCard';
 import Button from '../../ui/button/Button';
 import getFormattedTime from '@/src/util/time/getFormattedTime';

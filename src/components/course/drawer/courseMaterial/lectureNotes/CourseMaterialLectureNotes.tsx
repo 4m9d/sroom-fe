@@ -83,7 +83,7 @@ export default function CourseMaterialLectureNotes({
             <SimpleMdeReact
               options={editorOptions}
               value={content}
-              style={{ position: 'static' }}
+              style={{ width: '100%', height: '100%' }}
               onChange={onContentChange}
             />
           ) : (
