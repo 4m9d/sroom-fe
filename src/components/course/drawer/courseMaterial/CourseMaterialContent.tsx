@@ -8,6 +8,7 @@ import { QueryKeys } from '@/src/api/queryKeys';
 import { fetchCourseMaterials } from '@/src/api/materials/materials';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
 import LoadingSpinnerSVG from '@/public/icon/LoadingSpinner';
+import { ONE_MINUTE_IN_MS } from '@/src/constants/time/time';
 
 type Props = {
   courseVideoId: number;
@@ -20,6 +21,8 @@ const STATUS = {
   SUCCESS: 1
 } as const;
 
+const REFETCH_INTERVAL = 10 * ONE_MINUTE_IN_MS;
+
 export default function CourseMaterialContent({
   courseVideoId,
   drawerHandler
@@ -31,7 +34,10 @@ export default function CourseMaterialContent({
     () => fetchCourseMaterials(courseVideoId),
     {
       cacheTime: CACHE_TIME,
-      staleTime: STALE_TIME
+      staleTime: STALE_TIME,
+      refetchInterval(data) {
+        return data?.status === STATUS.PENDING ? REFETCH_INTERVAL : false;
+      }
     }
   );
   return (
@@ -43,7 +49,7 @@ export default function CourseMaterialContent({
         />
         <CloseButton className='!right-0' onClick={drawerHandler} />
       </div>
-      {(data && data.status === STATUS.PENDING) && (
+      {data && data.status === STATUS.PENDING && (
         <div className='flex flex-col items-center justify-center h-[calc(100%-5rem)] gap-7'>
           <div className='flex items-center justify-center w-12 h-12 animate-spin'>
             <LoadingSpinnerSVG />
