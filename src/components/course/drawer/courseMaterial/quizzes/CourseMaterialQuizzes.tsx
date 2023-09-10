@@ -30,7 +30,7 @@ export default function CourseMaterialQuizzes({
                 selectedAnswerList={selectedAnswerList}
                 setSelectedAnswerList={setSelectedAnswerList}
                 quiz={quiz}
-                idx={idx + 1}
+                questionNumber={idx + 1}
               />
             </motion.section>
           );

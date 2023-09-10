@@ -8,7 +8,7 @@ type Props = {
     React.SetStateAction<SelectedQuizAnswer[]>
   >;
   quiz: Quiz;
-  idx: number;
+  questionNumber: number;
 };
 const QuizType = {
   MULTIPLE_CHOICE: 1,
@@ -20,7 +20,7 @@ export default function QuizCard({
   selectedAnswerList,
   setSelectedAnswerList,
   quiz,
-  idx
+  questionNumber
 }: Props) {
   const [selectedAnswer, setSelectedAnswer] = useState<SelectedQuizAnswer>({
     id: quiz.id,
@@ -34,11 +34,11 @@ export default function QuizCard({
     });
   };
 
-  const multipleChoiceHandler = (option: string) => {
+  const multipleChoiceHandler = (index: string) => {
     setSelectedAnswer(() => {
       return {
         id: quiz.id,
-        submitted_answer: option
+        submitted_answer: index
       };
     });
 
@@ -65,40 +65,42 @@ export default function QuizCard({
     });
 
     updateSelectedAnswerList();
-  }
+  };
 
   return (
     <article className='w-full px-2 text-sroom-black-400'>
       <p className='mb-4 font-bold px-9 -indent-9 whitespace-break-spaces'>
-        <span className='mr-[0.65rem] text-lg'>{`Q.${idx}`}</span>
+        <span className='mr-[0.65rem] text-lg'>{`Q.${questionNumber}`}</span>
         {quiz.question}
       </p>
       {quiz.type === QuizType.MULTIPLE_CHOICE && (
         <div className='flex flex-col gap-5 px-5 py-3 border border-sroom-gray-500'>
-          {quiz.options.map((option, idx) => {
+          {quiz.options.map((option, index) => {
             return (
               <div
-                key={`quiz-${quiz.id}-${idx}`}
+                key={`quiz-${quiz.id}-${index}`}
                 className='flex items-start w-full'
               >
                 <input
                   type='radio'
                   name={`quiz-${quiz.id}`}
-                  id={`quiz-${quiz.id}-multiple-${idx}`}
+                  id={`quiz-${quiz.id}-multiple-${index}`}
                   className='hidden'
-                  onChange={() => multipleChoiceHandler(option)}
+                  onChange={() => multipleChoiceHandler((index + 1).toString())}
                 />
                 <button
                   type='button'
                   className='mr-2'
-                  onClick={() => multipleChoiceHandler(option)}
+                  onClick={() => multipleChoiceHandler((index + 1).toString())}
                 >
                   <MultipleChoiceSVG
-                    selected={selectedAnswer.submitted_answer === option}
+                    selected={
+                      selectedAnswer.submitted_answer === (index + 1).toString()
+                    }
                   />
                 </button>
                 <label
-                  htmlFor={`quiz-${quiz.id}-multiple-${idx}`}
+                  htmlFor={`quiz-${quiz.id}-multiple-${index}`}
                   className='w-full break-all cursor-pointer'
                 >
                   {option}
