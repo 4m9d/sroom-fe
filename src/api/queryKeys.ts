@@ -8,6 +8,8 @@ export const QueryKeys = {
   RECCOMENDATION: 'reccomendation',
   COURSE_TAKING: 'courseTaking',
   COURSE_DETAIL: 'courseDetail',
+  COURSE_MATERIAL: 'courseMaterial',
+  LECTURENOTE: 'lectureNote',
 } as const;
 
 type QueryKeys = (typeof QueryKeys)[keyof typeof QueryKeys];
