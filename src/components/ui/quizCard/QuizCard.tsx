@@ -54,12 +54,8 @@ export default function QuizCard({
 
   const multipleChoiceHandler = (index: string) => {
     selectedAnswer.current = {
-      id: quiz.id,
-      type: quiz.type,
-      submitted_answer: index,
-      is_correct: isCorrect,
-      is_scrapped: isScrapped,
-      is_submitted: isSubmitted
+      ...selectedAnswer.current,
+      submitted_answer: index
     };
 
     updateSelectedAnswerList();
@@ -67,12 +63,8 @@ export default function QuizCard({
 
   const shortAnswerHandler = (inputtedAnswer: string) => {
     selectedAnswer.current = {
-      id: quiz.id,
-      type: quiz.type,
-      submitted_answer: inputtedAnswer.trim(),
-      is_correct: isCorrect,
-      is_scrapped: isScrapped,
-      is_submitted: isSubmitted
+      ...selectedAnswer.current,
+      submitted_answer: inputtedAnswer.trim()
     };
 
     updateSelectedAnswerList();
@@ -80,12 +72,8 @@ export default function QuizCard({
 
   const trueOrFalseHandler = (inputtedAnswer: string) => {
     selectedAnswer.current = {
-      id: quiz.id,
-      type: quiz.type,
-      submitted_answer: inputtedAnswer,
-      is_correct: isCorrect,
-      is_scrapped: isScrapped,
-      is_submitted: isSubmitted
+      ...selectedAnswer.current,
+      submitted_answer: inputtedAnswer
     };
 
     updateSelectedAnswerList();
@@ -93,12 +81,8 @@ export default function QuizCard({
 
   const quizScrapHandler = () => {
     selectedAnswer.current = {
-      id: quiz.id,
-      type: quiz.type,
-      submitted_answer: selectedAnswer.current.submitted_answer,
-      is_correct: isCorrect,
-      is_scrapped: !isScrapped,
-      is_submitted: isSubmitted
+      ...selectedAnswer.current,
+      is_scrapped: !isScrapped
     };
 
     updateSelectedAnswerList();

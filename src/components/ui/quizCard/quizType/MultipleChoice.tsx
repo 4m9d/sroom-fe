@@ -17,7 +17,7 @@ export default function MultipleChoice({
         const currIndex = (index + 1).toString();
         const isAnswer = quiz.answer === currIndex;
         const isWrong =
-          isSubmitted && selectedAnswer.current.is_correct === false;
+          isSubmitted && selectedAnswer.current.submitted_answer !== currIndex;
         const isSelected =
           selectedAnswer.current.submitted_answer === currIndex;
 
