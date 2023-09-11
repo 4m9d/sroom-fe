@@ -1,6 +1,6 @@
 'use client';
 import MultipleChoiceSVG from '@/public/icon/MultipleChoice';
-import { useState } from 'react';
+import { useRef } from 'react';
 
 type Props = {
   selectedAnswerList: SelectedQuizAnswer[];
@@ -22,47 +22,46 @@ export default function QuizCard({
   quiz,
   questionNumber
 }: Props) {
-  const [selectedAnswer, setSelectedAnswer] = useState<SelectedQuizAnswer>({
-    id: quiz.id,
-    submitted_answer: null
-  });
+  const previouslySelectedAnswer = selectedAnswerList.find(
+    (answer) => answer.id === quiz.id
+  );
+  const selectedAnswer = useRef<SelectedQuizAnswer>(
+    previouslySelectedAnswer ?? {
+      id: quiz.id,
+      submitted_answer: ''
+    }
+  );
 
   const updateSelectedAnswerList = () => {
     setSelectedAnswerList((prev) => {
       const filtered = prev.filter((prevAnswer) => prevAnswer.id !== quiz.id);
-      return [...filtered, selectedAnswer];
+      return [...filtered, selectedAnswer.current];
     });
   };
 
   const multipleChoiceHandler = (index: string) => {
-    setSelectedAnswer(() => {
-      return {
-        id: quiz.id,
-        submitted_answer: index
-      };
-    });
+    selectedAnswer.current = {
+      id: quiz.id,
+      submitted_answer: index
+    };
 
     updateSelectedAnswerList();
   };
 
   const shortAnswerHandler = (inputtedAnswer: string) => {
-    setSelectedAnswer(() => {
-      return {
-        id: quiz.id,
-        submitted_answer: inputtedAnswer
-      };
-    });
+    selectedAnswer.current = {
+      id: quiz.id,
+      submitted_answer: inputtedAnswer
+    };
 
     updateSelectedAnswerList();
   };
 
   const trueOrFalseHandler = (inputtedAnswer: string) => {
-    setSelectedAnswer(() => {
-      return {
-        id: quiz.id,
-        submitted_answer: inputtedAnswer
-      };
-    });
+    selectedAnswer.current = {
+      id: quiz.id,
+      submitted_answer: inputtedAnswer
+    };
 
     updateSelectedAnswerList();
   };
@@ -78,13 +77,13 @@ export default function QuizCard({
           {quiz.options.map((option, index) => {
             return (
               <div
-                key={`quiz-${quiz.id}-${index}`}
+                key={`quiz-${quiz.id}-${index + 1}`}
                 className='flex items-start w-full'
               >
                 <input
                   type='radio'
                   name={`quiz-${quiz.id}`}
-                  id={`quiz-${quiz.id}-multiple-${index}`}
+                  id={`quiz-${quiz.id}-multiple-${index + 1}`}
                   className='hidden'
                   onChange={() => multipleChoiceHandler((index + 1).toString())}
                 />
@@ -95,12 +94,13 @@ export default function QuizCard({
                 >
                   <MultipleChoiceSVG
                     selected={
-                      selectedAnswer.submitted_answer === (index + 1).toString()
+                      selectedAnswer.current.submitted_answer ===
+                      (index + 1).toString()
                     }
                   />
                 </button>
                 <label
-                  htmlFor={`quiz-${quiz.id}-multiple-${index}`}
+                  htmlFor={`quiz-${quiz.id}-multiple-${index + 1}`}
                   className='w-full break-all cursor-pointer'
                 >
                   {option}
@@ -115,6 +115,7 @@ export default function QuizCard({
           className='w-full !h-40 p-3 border rounded-none resize-none textarea border-sroom-gray-500'
           placeholder='정답을 입력해 주세요.'
           onChange={(e) => shortAnswerHandler(e.target.value)}
+          defaultValue={selectedAnswer.current.submitted_answer ?? ''}
         />
       )}
       {quiz.type === QuizType.TRUE_OR_FALSE && (
@@ -134,7 +135,7 @@ export default function QuizCard({
             <label
               htmlFor={`quiz-${quiz.id}-true`}
               className={`text-2xl font-bold cursor-pointer ${
-                selectedAnswer.submitted_answer === 'true'
+                selectedAnswer.current.submitted_answer === 'true'
                   ? 'text-sroom-black-400'
                   : 'text-sroom-gray-500'
               }`}
@@ -158,7 +159,7 @@ export default function QuizCard({
             <label
               htmlFor={`quiz-${quiz.id}-false`}
               className={`text-2xl font-bold cursor-pointer ${
-                selectedAnswer.submitted_answer === 'false'
+                selectedAnswer.current.submitted_answer === 'false'
                   ? 'text-sroom-black-400'
                   : 'text-sroom-gray-500'
               }`}

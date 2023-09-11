@@ -8,7 +8,7 @@ import { QueryKeys } from '@/src/api/queryKeys';
 import { fetchCourseMaterials } from '@/src/api/materials/materials';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
 import LoadingSpinnerSVG from '@/public/icon/LoadingSpinner';
-import { ONE_MINUTE_IN_MS } from '@/src/constants/time/time';
+import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import CourseMaterialQuizzes from './quizzes/CourseMaterialQuizzes';
 
 type Props = {
@@ -22,7 +22,7 @@ const STATUS = {
   SUCCESS: 1
 } as const;
 
-const REFETCH_INTERVAL = 10 * ONE_MINUTE_IN_MS;
+const REFETCH_INTERVAL = 10 * ONE_SECOND_IN_MS;
 
 export default function CourseMaterialContent({
   courseVideoId,

@@ -1,7 +1,8 @@
 'use client';
 import QuizCard from '@/src/components/ui/quizCard/QuizCard';
+import { SessionStorageKeys } from '@/src/constants/materials/materials';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type Props = { quizzes: Quiz[]; courseVideoId: number };
 
@@ -9,9 +10,22 @@ export default function CourseMaterialQuizzes({
   quizzes,
   courseVideoId
 }: Props) {
+  const sessionStorageKey = `${SessionStorageKeys.QUIZZES_SELECTED_ANSWER}-${courseVideoId}`;
+  const previouslySelectedAnswerList =
+    sessionStorage.getItem(sessionStorageKey);
+
   const [selectedAnswerList, setSelectedAnswerList] = useState<
     SelectedQuizAnswer[]
-  >([]);
+  >(
+    previouslySelectedAnswerList ? JSON.parse(previouslySelectedAnswerList) : []
+  );
+
+  useEffect(() => {
+    sessionStorage.setItem(
+      sessionStorageKey,
+      JSON.stringify(selectedAnswerList)
+    );
+  }, [sessionStorageKey, selectedAnswerList, courseVideoId]);
 
   return (
     <AnimatePresence>

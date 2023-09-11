@@ -3,7 +3,7 @@ import PencilSVG from '@/public/icon/Pencil';
 import Button from '@/src/components/ui/button/Button';
 import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { SimpleMdeReact } from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -11,6 +11,7 @@ import { QueryKeys } from '@/src/api/queryKeys';
 import { updateCourseLectureNotes } from '@/src/api/materials/materials';
 import getRelativeTime from '@/src/util/time/getRelativeTime';
 import ClipboardSVG from '@/public/icon/Clipboard';
+import { SessionStorageKeys } from '@/src/constants/materials/materials';
 
 const MarkdownPreview = dynamic(
   () => import('@uiw/react-markdown-preview').then((mod) => mod.default),
@@ -26,9 +27,15 @@ export default function CourseMaterialLectureNotes({
   lectureNotes,
   courseVideoId
 }: Props) {
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(
+    sessionStorage.getItem(SessionStorageKeys.LECTURE_NOTES_IS_EDIT_MODE) === 'true'
+      ? true
+      : false
+  );
   const [isCopied, setIsCopied] = useState(false);
-  const [content, setContent] = useState(lectureNotes.content);
+  const [content, setContent] = useState(
+    sessionStorage.getItem(SessionStorageKeys.LECTURE_NOTES) ?? lectureNotes.content
+  );
   const queryClient = useQueryClient();
 
   const onContentChange = useCallback((value: string) => {
@@ -70,6 +77,14 @@ export default function CourseMaterialLectureNotes({
     }
     setIsEditMode((prev) => !prev);
   }, [isEditMode, mutate]);
+
+  useEffect(() => {
+    sessionStorage.setItem(SessionStorageKeys.LECTURE_NOTES, content);
+    sessionStorage.setItem(
+      SessionStorageKeys.LECTURE_NOTES_IS_EDIT_MODE,
+      isEditMode.toString()
+    );
+  }, [isEditMode, content]);
 
   return (
     <AnimatePresence>
