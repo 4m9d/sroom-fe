@@ -346,18 +346,18 @@ interface Quiz {
   options: string[];
   answer: string;
   submitted_at: string;
-  submitted_answer: string | null;
+  submitted_answer: string
   is_submitted: boolean;
   is_correct: boolean;
   is_scrapped: boolean;
 }
 
-type SelectedQuizAnswer = {
-  [key in 'id' | 'submitted_answer']: Quiz[key];
-};
-
-type SubmittedQuizAnswer = {
-  [key in 'id' | 'submitted_answer' | 'is_correct']: Quiz[key];
+interface SelectedQuizAnswer {
+  id: number;
+  submitted_answer: string
+  is_submitted?: boolean;
+  is_correct?: boolean;
+  is_scrapped?: boolean;
 };
 
 interface LectureNote {
