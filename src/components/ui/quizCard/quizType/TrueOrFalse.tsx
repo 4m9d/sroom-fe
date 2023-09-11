@@ -1,14 +1,18 @@
 export default function TrueOrFalse({
+  quiz,
   id,
   isSubmitted,
   trueOrFalseHandler,
   selectedAnswer
 }: {
+  quiz: Quiz;
   id: number;
   isSubmitted: boolean;
   trueOrFalseHandler: (inputtedAnswer: string) => void;
   selectedAnswer: React.MutableRefObject<SelectedQuizAnswer>;
 }) {
+  const isAnswer = isSubmitted && quiz.answer !== selectedAnswer.current.submitted_answer;
+
   return (
     <div className='flex items-center justify-between w-full h-20'>
       <input
@@ -29,6 +33,8 @@ export default function TrueOrFalse({
           className={`text-2xl font-bold cursor-pointer ${
             selectedAnswer.current.submitted_answer === 'true'
               ? 'text-sroom-black-400'
+              : isAnswer
+              ? 'text-sroom-brand'
               : 'text-sroom-gray-500'
           }`}
         >
@@ -54,6 +60,8 @@ export default function TrueOrFalse({
           className={`text-2xl font-bold cursor-pointer ${
             selectedAnswer.current.submitted_answer === 'false'
               ? 'text-sroom-black-400'
+              : isAnswer
+              ? 'text-sroom-brand'
               : 'text-sroom-gray-500'
           }`}
         >

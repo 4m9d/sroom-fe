@@ -15,10 +15,18 @@ export default function MultipleChoice({
     <div className='flex flex-col gap-5 px-5 py-3 border border-sroom-gray-500'>
       {quiz.options.map((option, index) => {
         const currIndex = (index + 1).toString();
+        const isAnswer = quiz.answer === currIndex;
+        const isWrong =
+          isSubmitted && selectedAnswer.current.is_correct === false;
+        const isSelected =
+          selectedAnswer.current.submitted_answer === currIndex;
+
         return (
           <div
             key={`quiz-${quiz.id}-${currIndex}`}
-            className='flex items-start w-full'
+            className={`flex items-start w-full p-2 ${
+              isWrong && isAnswer ? 'bg-sroom-brand' : 'bg-sroom-white'
+            }`}
           >
             <input
               type='radio'
@@ -38,12 +46,19 @@ export default function MultipleChoice({
               }
             >
               <MultipleChoiceSVG
-                selected={selectedAnswer.current.submitted_answer === currIndex}
+                isAnswer={isSubmitted && isAnswer}
+                selected={isSelected}
               />
             </button>
             <label
               htmlFor={`quiz-${quiz.id}-multiple-${currIndex}`}
-              className='w-full break-all cursor-pointer'
+              className={`w-full break-all cursor-pointer ${
+                isSelected
+                  ? 'text-sroom-black-400 font-bold'
+                  : isWrong && isAnswer
+                  ? 'text-sroom-white font-normal'
+                  : 'text-sroom-black-300 font-normal'
+              }`}
             >
               {option}
             </label>

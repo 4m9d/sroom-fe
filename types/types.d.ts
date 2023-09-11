@@ -345,8 +345,8 @@ interface Quiz {
   question: string;
   options: string[];
   answer: string;
-  submitted_at: string;
-  submitted_answer: string
+  submitted_at: string | null;
+  submitted_answer: string | null;
   is_submitted: boolean;
   is_correct: boolean;
   is_scrapped: boolean;
@@ -354,11 +354,12 @@ interface Quiz {
 
 interface SelectedQuizAnswer {
   id: number;
-  submitted_answer: string
-  is_submitted?: boolean;
-  is_correct?: boolean;
-  is_scrapped?: boolean;
-};
+  type: 1 | 2 | 3;
+  submitted_answer: string;
+  is_submitted: boolean;
+  is_correct: boolean;
+  is_scrapped: boolean;
+}
 
 interface LectureNote {
   content: string;
@@ -373,6 +374,8 @@ interface CourseMaterials {
   summary_brief: LectureNote;
 }
 
-interface UpdateLectureNoteResponse extends Response {
-  summary_id: number;
+interface updateQuizGradeParams {
+  id: number;
+  submitted_answer: string;
+  is_correct: boolean;
 }

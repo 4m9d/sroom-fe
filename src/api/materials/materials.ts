@@ -28,9 +28,28 @@ export async function updateCourseLectureNotes(
     body
   }).then(async (res) => {
     if (res.ok) {
-      return (await res.json()) as Promise<UpdateLectureNoteResponse>;
+      return (await res.json()) as Promise<Response>;
     } else {
-      return Promise.reject(new Error(ErrorMessage.LECTURENOTE));
+      return Promise.reject(new Error(ErrorMessage.LECTURENOTES));
+    }
+  });
+}
+
+export async function updateCourseQuizGrade(
+  course_video_id: number,
+  params: updateQuizGradeParams[]
+) {
+  const headers = await getAuthorizedHeaders();
+  const body = JSON.stringify(params);
+  return await fetch(`${Endpoints.MATERIALS}/quizzes/${course_video_id}`, {
+    method: 'POST',
+    headers,
+    body
+  }).then(async (res) => {
+    if (res.ok) {
+      return (await res.json()) as Promise<Response>;
+    } else {
+      return Promise.reject(new Error(ErrorMessage.QUIZZES));
     }
   });
 }
