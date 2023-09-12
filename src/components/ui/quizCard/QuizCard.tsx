@@ -30,20 +30,8 @@ export default function QuizCard({
   questionNumber,
   courseVideoId
 }: Props) {
-  const previouslySelectedAnswer = selectedAnswerList.find(
-    (answer) => answer.id === quiz.id
-  );
-
-  const selectedAnswer = useRef<SelectedQuizAnswer>(
-    previouslySelectedAnswer ?? {
-      id: quiz.id,
-      type: quiz.type,
-      submitted_answer: '',
-      is_correct: isCorrect,
-      is_scrapped: isScrapped,
-      is_submitted: isSubmitted
-    }
-  );
+  const selectedAnswer = useRef<SelectedQuizAnswer>(quiz);
+  console.log(selectedAnswer.current);
 
   const updateSelectedAnswerList = () => {
     setSelectedAnswerList((prev) => {
@@ -91,9 +79,9 @@ export default function QuizCard({
   return (
     <article className='w-full px-2 text-sroom-black-400'>
       <QuizHeader
+        quiz={quiz}
         type={quiz.type}
         courseVideoId={courseVideoId}
-        isCorrect={isCorrect}
         isSubmitted={isSubmitted}
         question={quiz.question}
         questionNumber={questionNumber}

@@ -29,7 +29,7 @@ export default function CourseMaterialQuizzes({
       ? quizzes
       : previouslySelectedAnswerList
       ? JSON.parse(previouslySelectedAnswerList)
-      : []
+      : quizzes
   );
   const queryClient = useQueryClient();
 
@@ -38,7 +38,6 @@ export default function CourseMaterialQuizzes({
     () => updateCourseQuizGradeMutation(),
     {
       onSuccess: () => {
-        sessionStorage.removeItem(sessionStorageKey);
         queryClient.invalidateQueries([
           QueryKeys.COURSE_MATERIAL,
           courseVideoId.toString()
@@ -97,7 +96,7 @@ export default function CourseMaterialQuizzes({
         JSON.stringify(selectedAnswerList)
       );
     }, ONE_SECOND_IN_MS);
-    
+
     return () => {
       clearTimeout(debounceTimer);
     };

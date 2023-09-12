@@ -19,7 +19,7 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
     transition: { ease: 'easeInOut', duration: 0.25 },
     variants: {
       initial: { width: '0%' },
-      animate: { width: '40%', maxWidth: '25rem' },
+      animate: { width: '40%', maxWidth: '30rem' },
       exit: { width: '0%' }
     }
   };

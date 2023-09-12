@@ -5,16 +5,16 @@ import { QuizType } from '@/src/constants/materials/materials';
 import { AnimatePresence, motion } from 'framer-motion';
 
 export default function QuizHeader({
+  quiz,
   type,
   courseVideoId,
-  isCorrect,
   isSubmitted,
   questionNumber,
   question
 }: {
+  quiz: Quiz;
   type: 1 | 2 | 3;
   courseVideoId: number;
-  isCorrect: boolean;
   isSubmitted: boolean;
   questionNumber: number;
   question: string;
@@ -38,21 +38,21 @@ export default function QuizHeader({
         {isSubmitted && type !== QuizType.SHORT_ANSWER && (
           <p
             className={`flex flex-col mr-2 text-xs items-center ${
-              isCorrect ? 'text-sroom-green' : 'text-sroom-red'
+              quiz.is_correct ? 'text-sroom-green' : 'text-sroom-red'
             }`}
           >
             <AnimatePresence>
               <motion.span
                 key={`quiz-${courseVideoId}-${questionNumber}-isCorrect`}
-                {...(isCorrect ? correctAnimationConfig : wrongAnimationConfig)}
+                {...(quiz.is_correct ? correctAnimationConfig : wrongAnimationConfig)}
               >
-                {isCorrect ? '정답' : '오답'}
+                {quiz.is_correct ? '정답' : '오답'}
               </motion.span>
               <motion.span
                 key={`quiz-${courseVideoId}-${questionNumber}-check`}
-                {...(isCorrect ? correctAnimationConfig : wrongAnimationConfig)}
+                {...(quiz.is_correct ? correctAnimationConfig : wrongAnimationConfig)}
               >
-                {isCorrect ? <CorrectCheckSVG /> : <WrongCheckSVG />}
+                {quiz.is_correct ? <CorrectCheckSVG /> : <WrongCheckSVG />}
               </motion.span>
             </AnimatePresence>
           </p>

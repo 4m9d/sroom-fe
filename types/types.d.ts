@@ -355,7 +355,7 @@ interface Quiz {
 interface SelectedQuizAnswer {
   id: number;
   type: 1 | 2 | 3;
-  submitted_answer: string;
+  submitted_answer: string | null;
   is_submitted: boolean;
   is_correct: boolean;
   is_scrapped: boolean;
