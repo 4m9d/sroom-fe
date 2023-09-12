@@ -338,3 +338,44 @@ interface CourseTakingInfo {
 /////////////////////////////course-material/////////////////////////////
 
 type CourseMaterialType = 'lecture-notes' | 'quizzes';
+
+interface Quiz {
+  id: number;
+  type: 1 | 2 | 3;
+  question: string;
+  options: string[];
+  answer: string;
+  submitted_at: string | null;
+  submitted_answer: string | null;
+  is_submitted: boolean;
+  is_correct: boolean;
+  is_scrapped: boolean;
+}
+
+interface SelectedQuizAnswer {
+  id: number;
+  type: 1 | 2 | 3;
+  submitted_answer: string | null;
+  is_submitted: boolean;
+  is_correct: boolean;
+  is_scrapped: boolean;
+}
+
+interface LectureNote {
+  content: string;
+  modified_at: string;
+  is_modified: boolean;
+}
+
+interface CourseMaterials {
+  status: number;
+  total_quiz_count: number;
+  quizzes: Quiz[];
+  summary_brief: LectureNote;
+}
+
+interface updateQuizGradeParams {
+  id: number;
+  submitted_answer: string;
+  is_correct: boolean;
+}

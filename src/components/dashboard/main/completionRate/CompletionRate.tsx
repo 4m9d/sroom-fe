@@ -1,5 +1,5 @@
 'use client';
-import RadialProgress from '../../../ui/RadialProgress';
+import RadialProgress from '../../../ui/progress/RadialProgress';
 import useWindowSize from '@/src/hooks/useWindowSize';
 
 type Props = {

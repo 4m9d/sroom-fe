@@ -14,10 +14,10 @@ export default function CourseMaterialTopNav({
     setActiveTab(buttonID);
   };
   return (
-    <TabNav className='sticky z-10 flex justify-center h-16 border-b tab-bordered -top-14 bg-sroom-white text-sroom-black-400 border-b-sroom-gray-500'>
+    <TabNav className='z-10 flex justify-center h-20 border-b tab-bordered -top-14 bg-sroom-white text-sroom-black-400 border-b-sroom-gray-500'>
       <li
         id='lecture-notes'
-        className={`flex items-center justify-center flex-1 ${
+        className={`flex items-center justify-center flex-1 cursor-pointer ${
           activeTab === 'lecture-notes'
             ? 'border-b-sroom-black-400 border-b-2'
             : 'border-none'
@@ -38,7 +38,7 @@ export default function CourseMaterialTopNav({
       </li>
       <li
         id='quizzes'
-        className={`flex items-center justify-center flex-1 ${
+        className={`flex items-center justify-center flex-1 cursor-pointer ${
           activeTab === 'quizzes'
             ? 'border-b-sroom-black-400 border-b-2'
             : 'border-none'

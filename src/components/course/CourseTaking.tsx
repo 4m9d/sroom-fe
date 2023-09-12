@@ -135,7 +135,9 @@ export default function CourseTaking({
           />
         </div>
       </div>
-      <CourseMaterialDrawer />
+      <CourseMaterialDrawer
+        courseVideoId={currentCourseVideoId}
+      />
     </div>
   );
 }

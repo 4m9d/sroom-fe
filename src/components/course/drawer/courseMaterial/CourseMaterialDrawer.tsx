@@ -3,10 +3,13 @@ import useWindowSize from '@/src/hooks/useWindowSize';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 import CourseMaterialContent from './CourseMaterialContent';
+import { COURSE_MATERIAL_BREAKPOINT } from '@/src/constants/window/window';
 
-const BREAK_POINT = 900;
+type Props = {
+  courseVideoId: number;
+};
 
-export default function CourseMaterialDrawer() {
+export default function CourseMaterialDrawer({ courseVideoId }: Props) {
   const controls = useAnimationControls();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { width } = useWindowSize();
@@ -16,7 +19,7 @@ export default function CourseMaterialDrawer() {
     transition: { ease: 'easeInOut', duration: 0.25 },
     variants: {
       initial: { width: '0%' },
-      animate: { width: '40%', maxWidth: '25rem' },
+      animate: { width: '40%', maxWidth: '30rem' },
       exit: { width: '0%' }
     }
   };
@@ -67,19 +70,24 @@ export default function CourseMaterialDrawer() {
     setIsDrawerOpen(false);
   }, [width, controls]);
 
-  if (width > BREAK_POINT) {
+  if (width > COURSE_MATERIAL_BREAKPOINT) {
     return (
       <AnimatePresence>
         <motion.aside
           {...drawerAnimationConfig}
-          className='relative max-h-full min-h-full shadow-lg bg-sroom-white shrink-0'
+          className='relative h-full max-h-full min-h-full shadow-lg bg-sroom-white shrink-0'
         >
           {isDrawerOpen && (
             <AnimatePresence>
-              <motion.div {...drawerContentAnimationConfig}>
-                <CourseMaterialContent drawerHandler={drawerHandler} />
+              <motion.div
+                className='h-full'
+                {...drawerContentAnimationConfig}
+              >
+                <CourseMaterialContent
+                  courseVideoId={courseVideoId}
+                  drawerHandler={drawerHandler}
+                />
               </motion.div>
-              
             </AnimatePresence>
           )}
         </motion.aside>
@@ -90,12 +98,18 @@ export default function CourseMaterialDrawer() {
       <AnimatePresence>
         <motion.aside
           {...bottomSheetAnimationConfig}
-          className='absolute bottom-0 z-50 max-w-full min-w-full shadow-2xl shadow- bg-sroom-white shrink-0'
+          className='absolute bottom-0 z-50 max-w-full min-w-full max-h-[35rem] shadow-2xl bg-sroom-white shrink-0'
         >
           {isDrawerOpen && (
             <AnimatePresence>
-              <motion.div {...bottomSheetContentAnimationConfig}>
-                <CourseMaterialContent drawerHandler={drawerHandler} />
+              <motion.div
+                className='h-full'
+                {...bottomSheetContentAnimationConfig}
+              >
+                <CourseMaterialContent
+                  courseVideoId={courseVideoId}
+                  drawerHandler={drawerHandler}
+                />
               </motion.div>
             </AnimatePresence>
           )}

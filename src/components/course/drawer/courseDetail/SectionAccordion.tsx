@@ -70,7 +70,7 @@ export default function SectionAccordion({
             : ''
         }`}
       >
-        <h3 className='flex flex-col'>
+        <h3 className='flex flex-col pr-1'>
           <p className='text-sm font-bold whitespace-normal line-clamp-1'>
             {use_schedule ? `${index}주차` : `${course_title}`}
           </p>
@@ -88,7 +88,7 @@ export default function SectionAccordion({
         <span
           className={`${
             isOpen === true ? 'rotate-180' : 'rotate-0'
-          } w-[10px] h-[10px] fill-sroom-black-400 mr-2 transition-all`}
+          } w-[10px] h-[10px] fill-sroom-black-400 mr-2 transition-all shrink-0 mt-1`}
         >
           <PolygonSVG />
         </span>

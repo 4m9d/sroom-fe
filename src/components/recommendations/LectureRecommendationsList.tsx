@@ -13,6 +13,7 @@ import { useQuery } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { fetchLectureRecommendations } from '@/src/api/lectures/search';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
+import { RECOMMENDATION_BREAKPOINT_LG, RECOMMENDATION_BREAKPOINT_SM } from '@/src/constants/window/window';
 
 export default function LectureRecommendationsList() {
   const windowSize = useWindowSize();
@@ -38,7 +39,7 @@ export default function LectureRecommendationsList() {
   const { recommendations } = data || { recommendations: [] };
 
   const slidesPerView =
-    windowSize.width < 800 ? 1 : windowSize.width < 1400 ? 2 : 3;
+    windowSize.width < RECOMMENDATION_BREAKPOINT_SM ? 1 : windowSize.width < RECOMMENDATION_BREAKPOINT_LG ? 2 : 3;
   const totalPage =
     recommendations.length - (slidesPerView - 1) > 0
       ? recommendations.length - (slidesPerView - 1)

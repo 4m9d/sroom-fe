@@ -18,7 +18,7 @@ module.exports = {
         'sroom-gray-300': '#F1F1F1',
         'sroom-gray-400': '#EEEEEE',
         'sroom-gray-500': '#DDDDDD',
-        'sroom-green': '24BC61',
+        'sroom-green': '#24BC61',
         'sroom-red': '#FF0000',
         'sroom-white': '#FFFFFF',
         'sroom-brand': '#FA5B3E'

@@ -10,7 +10,10 @@ export const ErrorMessage = {
   RECOMMENDATIONS: '추천 강의를 불러오지 못했어요',
   ENROLLMENT: '강의 등록에 실패했어요',
   DETAIL_COURSE: '강의 정보를 불러오지 못했어요',
-  COURSE_TAKING: '강의 수강 정보를 업데이트하지 못했어요'
+  COURSE_TAKING: '강의 수강 정보를 업데이트하지 못했어요',
+  COURSE_MATERIALS: '강의 자료를 불러오지 못했어요',
+  LECTURENOTES: '강의 노트를 업데이트하지 못했어요',
+  QUIZZES: '퀴즈 채점 결과를 업데이트하지 못했어요',
 } as const;
 
 type ErrorMessage = (typeof ErrorMessage)[keyof typeof ErrorMessage];

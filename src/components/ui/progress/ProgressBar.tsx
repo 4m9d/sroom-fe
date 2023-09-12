@@ -13,7 +13,7 @@ export default function ProgressBar({ className, value }: Props) {
       <motion.div className={`${className} w-full h-[6px] bg-sroom-white`}>
         <motion.div
           className='h-full bg-sroom-brand'
-          initial={{ width: 0 }}
+          initial={{ width: '0%' }}
           animate={{ width: `${value}%` }}
         ></motion.div>
       </motion.div>

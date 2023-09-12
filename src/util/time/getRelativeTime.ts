@@ -6,12 +6,13 @@ dayjs.locale('ko');
 dayjs.extend(relativeTime);
 
 export default function getRelativeTime(time: string) {
+  const dayjsTime = dayjs(time);
   const format = {
-    year: dayjs(time).diff(dayjs(), 'year'),
-    month: dayjs(time).diff(dayjs(), 'month'),
-    day: dayjs(time).diff(dayjs(), 'day'),
-    hour: dayjs(time).diff(dayjs(), 'hour'),
-    minute: dayjs(time).diff(dayjs(), 'minute')
+    year: dayjsTime.diff(dayjs(), 'year'),
+    month: dayjsTime.diff(dayjs(), 'month'),
+    day: dayjsTime.diff(dayjs(), 'day'),
+    hour: dayjsTime.diff(dayjs(), 'hour'),
+    minute: dayjsTime.diff(dayjs(), 'minute')
   } as const;
   const formatKeys = Object.keys(format);
 
@@ -26,4 +27,5 @@ export default function getRelativeTime(time: string) {
       }).format(currFormat, formatKeys[i] as Intl.RelativeTimeFormatUnit);
     }
   }
+  return '방금 전'
 }
