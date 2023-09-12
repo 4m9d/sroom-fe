@@ -47,7 +47,7 @@ export default function CourseMaterialQuizzes({
   );
 
   const isSubmitButtonDisabled =
-    selectedAnswerList.filter((answer) => answer.submitted_answer !== '')
+    selectedAnswerList.filter((selectedAnswer) => selectedAnswer.submitted_answer !== null)
       .length !== quizzes.length || selectedAnswerList[0].is_submitted === true;
 
   function gradeSelectedQuizzes() {
@@ -119,7 +119,6 @@ export default function CourseMaterialQuizzes({
               key={quiz.id}
             >
               <QuizCard
-                selectedAnswerList={selectedAnswerList}
                 setSelectedAnswerList={setSelectedAnswerList}
                 quiz={quiz}
                 selectedAnswer={selectedAnswer}

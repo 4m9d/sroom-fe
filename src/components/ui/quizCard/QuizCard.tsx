@@ -1,5 +1,4 @@
 'use client';
-import { useRef, useState } from 'react';
 import TrueOrFalse from './quizType/TrueOrFalse';
 import ShortAnswer from './quizType/ShortAnswer';
 import MultipleChoice from './quizType/MultipleChoice';
@@ -8,7 +7,6 @@ import Button from '../button/Button';
 import { QuizType } from '@/src/constants/materials/materials';
 
 type Props = {
-  selectedAnswerList: SelectedQuizAnswer[];
   setSelectedAnswerList: React.Dispatch<
     React.SetStateAction<SelectedQuizAnswer[]>
   >;
@@ -19,7 +17,6 @@ type Props = {
 };
 
 export default function QuizCard({
-  selectedAnswerList,
   setSelectedAnswerList,
   quiz,
   selectedAnswer,
@@ -97,16 +94,16 @@ export default function QuizCard({
           trueOrFalseHandler={trueOrFalseHandler}
         />
       )}
-      {quiz.is_submitted && (
+      {selectedAnswer.is_submitted && (
         <Button
           onClick={() => quizScrapHandler()}
           className={`w-full mt-4 py-7 ${
-            quiz.is_scrapped
+            selectedAnswer.is_scrapped
               ? 'text-sroom-black-200 bg-sroom-gray-300'
               : 'text-sroom-black-400 bg-sroom-white border border-sroom-black-400'
           }`}
         >
-          {quiz.is_scrapped ? '등록 취소' : '오답노트 등록'}
+          {selectedAnswer.is_scrapped ? '등록 취소' : '오답노트 등록'}
         </Button>
       )}
     </article>
