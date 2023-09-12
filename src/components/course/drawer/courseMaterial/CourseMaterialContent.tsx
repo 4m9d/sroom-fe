@@ -10,6 +10,7 @@ import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
 import LoadingSpinnerSVG from '@/public/icon/LoadingSpinner';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import CourseMaterialQuizzes from './quizzes/CourseMaterialQuizzes';
+import ForbiddenSVG from '@/public/icon/Forbidden';
 
 type Props = {
   courseVideoId: number;
@@ -56,7 +57,7 @@ export default function CourseMaterialContent({
             <LoadingSpinnerSVG />
           </div>
           <div className='flex flex-col items-center justify-center'>
-            <p className='mb-1 font-semibold text-sroom-black-300'>
+            <p className='mb-1 text-lg font-semibold text-sroom-black-300'>
               강의 자료를 생성중이에요!
             </p>
             <p className='font-normal text-sroom-black-100'>
@@ -81,7 +82,21 @@ export default function CourseMaterialContent({
           )}
         </>
       )}
-      {data && data.status === STATUS.ERROR && <></>}
+      {data && data.status === STATUS.ERROR && (
+        <div className='flex flex-col items-center justify-center h-[calc(100%-5rem)] gap-7'>
+          <div className='flex items-center justify-center animate-pulse'>
+            <ForbiddenSVG />
+          </div>
+          <div className='flex flex-col items-center justify-center'>
+            <p className='mb-1 text-lg font-semibold text-sroom-black-300'>
+              정책상 강의 자료를 생성할 수 없어요!
+            </p>
+            <p className='font-normal text-sroom-black-100'>
+              다른 강의에서 스룸의 AI 자동 생성 자료를 확인해보세요
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
