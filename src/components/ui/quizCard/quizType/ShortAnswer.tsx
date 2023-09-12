@@ -1,14 +1,13 @@
 export default function ShortAnswer({
   quiz,
-  isSubmitted,
-  shortAnswerHandler,
-  selectedAnswer
+  selectedAnswer,
+  shortAnswerHandler
 }: {
   quiz: Quiz;
-  isSubmitted: boolean;
+  selectedAnswer: SelectedQuizAnswer;
   shortAnswerHandler: (inputtedAnswer: string) => void;
-  selectedAnswer: React.MutableRefObject<SelectedQuizAnswer>;
 }) {
+  const isSubmitted = quiz.is_submitted;
   return (
     <>
       <textarea
@@ -18,11 +17,11 @@ export default function ShortAnswer({
         onChange={(e) =>
           isSubmitted === false && shortAnswerHandler(e.target.value)
         }
-        defaultValue={selectedAnswer.current.submitted_answer ?? ''}
+        defaultValue={selectedAnswer.submitted_answer ?? ''}
       />
       {isSubmitted && (
         <div>
-          <p className="text-sm font-medium text-sroom-brand">{`정답 : ${quiz.answer}`}</p>
+          <p className='text-sm font-medium text-sroom-brand'>{`정답 : ${quiz.answer}`}</p>
         </div>
       )}
     </>

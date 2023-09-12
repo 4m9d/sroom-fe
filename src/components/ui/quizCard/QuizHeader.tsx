@@ -6,16 +6,16 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 export default function QuizHeader({
   quiz,
+  selectedAnswer,
   type,
   courseVideoId,
-  isSubmitted,
   questionNumber,
   question
 }: {
   quiz: Quiz;
+  selectedAnswer: SelectedQuizAnswer;
   type: 1 | 2 | 3;
   courseVideoId: number;
-  isSubmitted: boolean;
   questionNumber: number;
   question: string;
 }) {
@@ -32,27 +32,28 @@ export default function QuizHeader({
       delay: 0.2
     }
   };
+  const isSubmitted = selectedAnswer.is_submitted;
   return (
     <>
       <div className='flex items-end mb-4 font-bold'>
         {isSubmitted && type !== QuizType.SHORT_ANSWER && (
           <p
             className={`flex flex-col mr-2 text-xs items-center ${
-              quiz.is_correct ? 'text-sroom-green' : 'text-sroom-red'
+              selectedAnswer.is_correct ? 'text-sroom-green' : 'text-sroom-red'
             }`}
           >
             <AnimatePresence>
               <motion.span
                 key={`quiz-${courseVideoId}-${questionNumber}-isCorrect`}
-                {...(quiz.is_correct ? correctAnimationConfig : wrongAnimationConfig)}
+                {...(selectedAnswer.is_correct ? correctAnimationConfig : wrongAnimationConfig)}
               >
-                {quiz.is_correct ? '정답' : '오답'}
+                {selectedAnswer.is_correct ? '정답' : '오답'}
               </motion.span>
               <motion.span
                 key={`quiz-${courseVideoId}-${questionNumber}-check`}
-                {...(quiz.is_correct ? correctAnimationConfig : wrongAnimationConfig)}
+                {...(selectedAnswer.is_correct ? correctAnimationConfig : wrongAnimationConfig)}
               >
-                {quiz.is_correct ? <CorrectCheckSVG /> : <WrongCheckSVG />}
+                {selectedAnswer.is_correct ? <CorrectCheckSVG /> : <WrongCheckSVG />}
               </motion.span>
             </AnimatePresence>
           </p>

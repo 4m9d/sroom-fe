@@ -2,24 +2,21 @@ import MultipleChoiceSVG from '@/public/icon/MultipleChoice';
 
 export default function MultipleChoice({
   quiz,
-  isSubmitted,
-  multipleChoiceHandler,
-  selectedAnswer
+  selectedAnswer,
+  multipleChoiceHandler
 }: {
   quiz: Quiz;
-  isSubmitted: boolean;
+  selectedAnswer: SelectedQuizAnswer;
   multipleChoiceHandler: (index: string) => void;
-  selectedAnswer: React.MutableRefObject<SelectedQuizAnswer>;
 }) {
   return (
     <div className='flex flex-col gap-5 px-5 py-3 border border-sroom-gray-500'>
       {quiz.options.map((option, index) => {
         const currIndex = (index + 1).toString();
+        const isSubmitted = selectedAnswer.is_submitted;
         const isAnswer = quiz.answer === currIndex;
-        const isWrong =
-          isSubmitted && selectedAnswer.current.is_correct === false;
-        const isSelected =
-          selectedAnswer.current.submitted_answer === currIndex;
+        const isWrong = isSubmitted && selectedAnswer.is_correct === false;
+        const isSelected = selectedAnswer.submitted_answer === currIndex;
 
         return (
           <div

@@ -53,9 +53,8 @@ export default function CourseMaterialQuizzes({
   function gradeSelectedQuizzes() {
     const gradedQuizzes = selectedAnswerList.map((selectedAnswer) => {
       const quiz = quizzes.find((quiz) => quiz.id === selectedAnswer.id);
-      if (!quiz) return;
 
-      const isCorrect = quiz.answer === selectedAnswer.submitted_answer;
+      const isCorrect = quiz?.answer === selectedAnswer.submitted_answer;
 
       return {
         ...selectedAnswer,
@@ -122,10 +121,8 @@ export default function CourseMaterialQuizzes({
               <QuizCard
                 selectedAnswerList={selectedAnswerList}
                 setSelectedAnswerList={setSelectedAnswerList}
-                isCorrect={selectedAnswer.is_correct}
-                isScrapped={selectedAnswer.is_scrapped}
-                isSubmitted={selectedAnswer.is_submitted}
                 quiz={quiz}
+                selectedAnswer={selectedAnswer}
                 questionNumber={idx + 1}
                 courseVideoId={courseVideoId}
               />
