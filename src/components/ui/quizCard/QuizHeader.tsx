@@ -32,7 +32,7 @@ export default function QuizHeader({
       delay: 0.2
     }
   };
-  const isSubmitted = selectedAnswer.is_submitted;
+  const isSubmitted = selectedAnswer?.is_submitted;
   return (
     <>
       <div className='flex items-end mb-4 font-bold'>

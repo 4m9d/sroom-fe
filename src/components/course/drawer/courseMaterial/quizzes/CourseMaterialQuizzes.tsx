@@ -10,27 +10,19 @@ import {
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 
 type Props = { quizzes: Quiz[]; courseVideoId: number };
+const DEBOUNCE_TIME = ONE_SECOND_IN_MS / 2;
 
 export default function CourseMaterialQuizzes({
   quizzes,
   courseVideoId
 }: Props) {
   const sessionStorageKey = `${SessionStorageKeys.QUIZZES_SELECTED_ANSWER}-${courseVideoId}`;
-  const previouslySelectedAnswerList =
-    sessionStorage.getItem(sessionStorageKey);
 
-  const [selectedAnswerList, setSelectedAnswerList] = useState<
-    SelectedQuizAnswer[]
-  >(
-    quizzes[0].is_submitted === false
-      ? quizzes
-      : previouslySelectedAnswerList
-      ? JSON.parse(previouslySelectedAnswerList)
-      : quizzes
-  );
+  const [selectedAnswerList, setSelectedAnswerList] =
+    useState<SelectedQuizAnswer[]>(quizzes);
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation(
@@ -47,8 +39,12 @@ export default function CourseMaterialQuizzes({
   );
 
   const isSubmitButtonDisabled =
-    selectedAnswerList.filter((selectedAnswer) => selectedAnswer.submitted_answer !== null)
-      .length !== quizzes.length || selectedAnswerList[0].is_submitted === true;
+    selectedAnswerList.filter(
+      (selectedAnswer) => selectedAnswer.submitted_answer !== null
+    ).length !== quizzes.length ||
+    selectedAnswerList.filter(
+      (selectedAnswer) => selectedAnswer.submitted_answer === null
+    ).length > 0;
 
   function gradeSelectedQuizzes() {
     const gradedQuizzes = selectedAnswerList.map((selectedAnswer) => {
@@ -94,19 +90,32 @@ export default function CourseMaterialQuizzes({
         sessionStorageKey,
         JSON.stringify(selectedAnswerList)
       );
-    }, ONE_SECOND_IN_MS);
+    }, DEBOUNCE_TIME);
 
     return () => {
       clearTimeout(debounceTimer);
+      sessionStorage.removeItem(sessionStorageKey);
     };
   }, [sessionStorageKey, selectedAnswerList, courseVideoId]);
 
+  useLayoutEffect(() => {
+    const previouslySelectedAnswerList =
+      sessionStorage.getItem(sessionStorageKey);
+
+    setSelectedAnswerList(() =>
+      quizzes[0].is_submitted === false
+        ? quizzes
+        : previouslySelectedAnswerList
+        ? JSON.parse(previouslySelectedAnswerList)
+        : quizzes
+    );
+  }, [quizzes, sessionStorageKey]);
   return (
     <AnimatePresence>
       <div
         className={`w-full my-10 flex flex-col justify-center items-between gap-10`}
       >
-        {quizzes.map((quiz, idx) => {
+        {quizzes?.map((quiz, idx) => {
           const selectedAnswer = selectedAnswerList.find(
             (answer) => answer.id === quiz.id
           ) as SelectedQuizAnswer;

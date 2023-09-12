@@ -13,10 +13,10 @@ export default function MultipleChoice({
     <div className='flex flex-col gap-5 px-5 py-3 border border-sroom-gray-500'>
       {quiz.options.map((option, index) => {
         const currIndex = (index + 1).toString();
-        const isSubmitted = selectedAnswer.is_submitted;
+        const isSubmitted = selectedAnswer?.is_submitted;
         const isAnswer = quiz.answer === currIndex;
         const isWrong = isSubmitted && selectedAnswer.is_correct === false;
-        const isSelected = selectedAnswer.submitted_answer === currIndex;
+        const isSelected = selectedAnswer?.submitted_answer === currIndex;
 
         return (
           <div

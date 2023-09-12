@@ -57,7 +57,7 @@ export default function QuizCard({
   const quizScrapHandler = () => {
     const updatedAnswer = {
       ...selectedAnswer,
-      is_scrapped: !quiz.is_scrapped
+      is_scrapped: !selectedAnswer.is_scrapped
     };
     updateSelectedAnswerList(updatedAnswer);
   };
@@ -94,11 +94,11 @@ export default function QuizCard({
           trueOrFalseHandler={trueOrFalseHandler}
         />
       )}
-      {selectedAnswer.is_submitted && (
+      {selectedAnswer?.is_submitted && (
         <Button
           onClick={() => quizScrapHandler()}
           className={`w-full mt-4 py-7 ${
-            selectedAnswer.is_scrapped
+            selectedAnswer?.is_scrapped
               ? 'text-sroom-black-200 bg-sroom-gray-300'
               : 'text-sroom-black-400 bg-sroom-white border border-sroom-black-400'
           }`}

@@ -9,7 +9,7 @@ export default function TrueOrFalse({
   selectedAnswer: SelectedQuizAnswer;
   trueOrFalseHandler: (inputtedAnswer: string) => void;
 }) {
-  const isSubmitted = quiz.is_submitted;
+  const isSubmitted = selectedAnswer?.is_submitted;
 
   return (
     <div className='flex items-center justify-between w-full h-20'>
@@ -29,7 +29,7 @@ export default function TrueOrFalse({
         <label
           htmlFor={`quiz-${id}-true`}
           className={`text-2xl font-bold cursor-pointer ${
-            selectedAnswer.submitted_answer === 'true'
+            selectedAnswer?.submitted_answer === 'true'
               ? 'text-sroom-black-400'
               : isSubmitted && quiz.answer === 'true'
               ? 'text-sroom-brand'
@@ -56,7 +56,7 @@ export default function TrueOrFalse({
         <label
           htmlFor={`quiz-${id}-false`}
           className={`text-2xl font-bold cursor-pointer ${
-            selectedAnswer.submitted_answer === 'false'
+            selectedAnswer?.submitted_answer === 'false'
               ? 'text-sroom-black-400'
               : isSubmitted && quiz.answer === 'false'
               ? 'text-sroom-brand'

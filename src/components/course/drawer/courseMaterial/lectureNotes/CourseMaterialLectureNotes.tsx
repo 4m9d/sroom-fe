@@ -3,7 +3,13 @@ import PencilSVG from '@/public/icon/Pencil';
 import Button from '@/src/components/ui/button/Button';
 import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState
+} from 'react';
 import { SimpleMdeReact } from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -12,6 +18,7 @@ import { updateCourseLectureNotes } from '@/src/api/materials/materials';
 import getRelativeTime from '@/src/util/time/getRelativeTime';
 import ClipboardSVG from '@/public/icon/Clipboard';
 import { SessionStorageKeys } from '@/src/constants/materials/materials';
+import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 
 const MarkdownPreview = dynamic(
   () => import('@uiw/react-markdown-preview').then((mod) => mod.default),
@@ -22,20 +29,22 @@ type Props = {
   lectureNotes: LectureNote;
   courseVideoId: number;
 };
+const DEBOUNCE_TIME = ONE_SECOND_IN_MS / 2;
 
 export default function CourseMaterialLectureNotes({
   lectureNotes,
   courseVideoId
 }: Props) {
+  const sessionStorageContentKey = `${SessionStorageKeys.LECTURE_NOTES}-${courseVideoId}`;
+  const sessionStorageIsEditModeKey = `${SessionStorageKeys.LECTURE_NOTES_IS_EDIT_MODE}-${courseVideoId}`;
+
   const [isEditMode, setIsEditMode] = useState(
-    sessionStorage.getItem(SessionStorageKeys.LECTURE_NOTES_IS_EDIT_MODE) === 'true'
+    sessionStorage.getItem(sessionStorageIsEditModeKey) === 'true'
       ? true
       : false
   );
   const [isCopied, setIsCopied] = useState(false);
-  const [content, setContent] = useState(
-    sessionStorage.getItem(SessionStorageKeys.LECTURE_NOTES) ?? lectureNotes.content
-  );
+  const [content, setContent] = useState(lectureNotes.content);
   const queryClient = useQueryClient();
 
   const onContentChange = useCallback((value: string) => {
@@ -79,12 +88,31 @@ export default function CourseMaterialLectureNotes({
   }, [isEditMode, mutate]);
 
   useEffect(() => {
-    sessionStorage.setItem(SessionStorageKeys.LECTURE_NOTES, content);
-    sessionStorage.setItem(
-      SessionStorageKeys.LECTURE_NOTES_IS_EDIT_MODE,
-      isEditMode.toString()
+    const debounceTimer = setTimeout(() => {
+      sessionStorage.setItem(sessionStorageContentKey, content);
+      sessionStorage.setItem(
+        sessionStorageIsEditModeKey,
+        isEditMode.toString()
+      );
+    }, DEBOUNCE_TIME);
+    return () => {
+      clearTimeout(debounceTimer);
+      sessionStorage.removeItem(sessionStorageContentKey);
+      sessionStorage.removeItem(sessionStorageIsEditModeKey);
+    };
+  }, [
+    isEditMode,
+    content,
+    sessionStorageContentKey,
+    sessionStorageIsEditModeKey
+  ]);
+
+  useLayoutEffect(() => {
+    setContent(
+      () =>
+        sessionStorage.getItem(sessionStorageContentKey) ?? lectureNotes.content
     );
-  }, [isEditMode, content]);
+  }, [lectureNotes.content, sessionStorageContentKey]);
 
   return (
     <AnimatePresence>

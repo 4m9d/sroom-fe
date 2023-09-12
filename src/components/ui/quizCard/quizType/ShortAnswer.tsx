@@ -7,7 +7,7 @@ export default function ShortAnswer({
   selectedAnswer: SelectedQuizAnswer;
   shortAnswerHandler: (inputtedAnswer: string) => void;
 }) {
-  const isSubmitted = selectedAnswer.is_submitted;
+  const isSubmitted = selectedAnswer?.is_submitted;
   return (
     <>
       <textarea
@@ -17,7 +17,7 @@ export default function ShortAnswer({
         onChange={(e) =>
           isSubmitted === false && shortAnswerHandler(e.target.value)
         }
-        defaultValue={selectedAnswer.submitted_answer ?? ''}
+        defaultValue={selectedAnswer?.submitted_answer ?? ''}
       />
       {isSubmitted && (
         <div>
