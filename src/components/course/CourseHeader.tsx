@@ -12,7 +12,7 @@ type Props = {
 export default function CourseHeader({ title, channel, is_completed }: Props) {
   return (
     <AnimatePresence>
-      <div className='flex justify-between max-w-screen-lg gap-5 px-5 mx-auto mt-12 mb-5 h-14 md:h-16 lg:h-20 text-sroom-black-400'>
+      <div className='flex justify-between max-w-screen-xl gap-5 px-5 mx-auto mt-12 mb-5 h-14 md:h-16 lg:h-20 text-sroom-black-400'>
         <div className='flex flex-col justify-between'>
           <div className='flex items-center gap-3'>
             <motion.h2

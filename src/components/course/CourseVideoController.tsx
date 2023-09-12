@@ -104,7 +104,7 @@ export default function CourseVideoController({
         onClick={() => controllerClickHandler('prev')}
         disabled={prevPlayingVideo === null}
         id='prev-controller'
-        className={`w-24 md:w-28 lg:w-32 xl:w-36 flex justify-between items-center font-bold text-lg lg:text-xl ${
+        className={`w-24 md:w-28 lg:w-32 xl:w-36 flex justify-between items-center font-bold text-base lg:text-lg ${
           prevPlayingVideo === null ? 'opacity-30' : ''
         }`}
       >
@@ -118,7 +118,7 @@ export default function CourseVideoController({
         onClick={mutate}
         disabled={isCompleted === true || status === 'loading'}
         id='completion-controller'
-        className={`w-24 md:w-28 lg:w-32 xl:w-36 flex justify-center items-center font-bold text-lg lg:text-xl ${
+        className={`w-24 md:w-28 lg:w-32 xl:w-36 flex justify-center items-center font-bold text-base lg:text-lg ${
           isCompleted === true ? 'opacity-30' : ''
         }`}
       >
@@ -129,7 +129,7 @@ export default function CourseVideoController({
         onClick={() => controllerClickHandler('next')}
         disabled={nextPlayingVideo === null}
         id='next-controller'
-        className={`w-24 md:w-28 lg:w-32 xl:w-36 flex justify-between items-center font-bold text-lg lg:text-xl ${
+        className={`w-24 md:w-28 lg:w-32 xl:w-36 flex justify-between items-center font-bold text-base lg:text-lg ${
           nextPlayingVideo === null ? 'opacity-30' : ''
         }`}
       >

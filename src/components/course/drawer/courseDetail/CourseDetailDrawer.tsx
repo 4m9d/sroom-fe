@@ -34,7 +34,7 @@ export default function CourseDetailDrawer({
     transition: { ease: 'easeInOut', duration: 0.25 },
     variants: {
       initial: { width: '0%' },
-      animate: { width: '40%', maxWidth: '19rem' },
+      animate: { width: '40%', maxWidth: '20rem' },
       exit: { width: '0%' }
     }
   };
