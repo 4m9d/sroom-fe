@@ -41,7 +41,7 @@ export default function QuizCard({
   const shortAnswerHandler = (inputtedAnswer: string) => {
     const updatedAnswer = {
       ...selectedAnswer,
-      submitted_answer: inputtedAnswer.trim()
+      submitted_answer: inputtedAnswer.trim().slice(0, 256)
     };
     updateSelectedAnswerList(updatedAnswer);
   };
