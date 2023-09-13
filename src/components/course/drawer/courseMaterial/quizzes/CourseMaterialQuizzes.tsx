@@ -54,7 +54,7 @@ export default function CourseMaterialQuizzes({
 
       return {
         ...selectedAnswer,
-        is_correct: isCorrect,
+        is_correct: quiz?.type === QuizType.SHORT_ANSWER ? true : isCorrect,
         is_submitted: true
       };
     });
