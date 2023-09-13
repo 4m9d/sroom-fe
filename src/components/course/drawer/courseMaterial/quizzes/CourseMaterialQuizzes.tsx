@@ -69,17 +69,13 @@ export default function CourseMaterialQuizzes({
   }
 
   async function updateCourseQuizGradeMutation() {
-    const gradeResult = selectedAnswerList
-      .filter((selectedAnswer) => {
-        return selectedAnswer.type !== QuizType.SHORT_ANSWER;
-      })
-      .map((selectedAnswer) => {
-        return {
-          id: selectedAnswer.id,
-          submitted_answer: selectedAnswer.submitted_answer,
-          is_correct: selectedAnswer.is_correct
-        };
-      }) as updateQuizGradeParams[];
+    const gradeResult = selectedAnswerList.map((selectedAnswer) => {
+      return {
+        id: selectedAnswer.id,
+        submitted_answer: selectedAnswer.submitted_answer,
+        is_correct: selectedAnswer.is_correct
+      };
+    }) as updateQuizGradeParams[];
     const result = await updateCourseQuizGrade(courseVideoId, gradeResult);
     return result;
   }
