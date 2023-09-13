@@ -27,28 +27,29 @@ export default function SchedulingSlider({
         min={min}
         max={max}
         value={value}
-        className={`${className} appearance-none bg-transparent w-full [&::-webkit-slider-runnable-track]:h-[4px] [&::-webkit-slider-runnable-track]:bg-sroom-gray-500 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[10px] [&::-webkit-slider-thumb]:w-[10px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:-mt-[3px] [&::-webkit-slider-thumb]:bg-transparent`}
+        className={`${className} mt-4 appearance-none bg-transparent w-full [&::-webkit-slider-runnable-track]:h-[4px] [&::-webkit-slider-runnable-track]:bg-sroom-gray-500 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[13px] [&::-webkit-slider-thumb]:w-[13px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:-mt-[4px] [&::-webkit-slider-thumb]:bg-transparent [&::-webkit-slider-thumb]:z-10`}
         step={step}
       />
-      <div className='absolute top-[10px] left-0 flex justify-between w-full pointer-events-none'>
+      <div className='absolute top-[10px] left-0 flex justify-between w-full pointer-events-none hover:cursor-pointer'>
         <div
           aria-hidden
           style={{
             width: `${((value - min) / (max - min)) * 100}%`,
             position: 'absolute',
-            top: '4px',
+            top: '5.5px',
             height: '4px',
             left: '0',
-            zIndex: '10',
             backgroundColor: 'var(--primary-color)'
           }}
         />
         {new Array(level + 1).fill(0).map((_, index) => (
-          <div
+          <button
+            type='button'
             aria-hidden
             data-tip={getFormattedTime(value)}
+            onClick={() => setValue(min + step * index)}
             key={index}
-            className={`w-[12px] h-[12px] border-2 z-20
+            className={`w-[15px] h-[15px] border-2 z-20 px-1 hover:cursor-pointer
              ${
                min + step * index > value
                  ? 'bg-sroom-gray-500 border-sroom-gray-500'
