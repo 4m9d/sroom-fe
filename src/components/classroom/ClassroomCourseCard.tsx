@@ -23,6 +23,7 @@ export default function ClassroomCourseCard({ course }: Props) {
       onClick={() => router.push(`/course/${course.course_id}`)}
     >
       <Button
+        onClick={() => setUndevelopedAlertToast('course-deletion')}
         hoverEffect={true}
         className='absolute top-0 right-0 text-xs font-normal md:text-sm text-sroom-black-100 !h-8'
       >
@@ -63,7 +64,7 @@ export default function ClassroomCourseCard({ course }: Props) {
         </div>
         <div className='flex items-center gap-2'>
           <Button
-            onClick={setUndevelopedAlertToast}
+            onClick={() => setUndevelopedAlertToast('scrap')}
             hoverEffect={true}
             className='!h-8 text-xs xl:text-sm'
           >
@@ -73,7 +74,7 @@ export default function ClassroomCourseCard({ course }: Props) {
             </span>
           </Button>
           <Button
-            onClick={setUndevelopedAlertToast}
+            onClick={() => setUndevelopedAlertToast('review')}
             hoverEffect={true}
             className='!h-8 text-xs xl:text-sm'
           >

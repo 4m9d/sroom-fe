@@ -19,7 +19,7 @@ export default function Toast({ toast }: { toast: CustomToast }) {
       <motion.div
         initial={{ y: 200 }}
         animate={{ y: 0 }}
-        exit={{ y: 200 }}
+        exit={{ y: 200, visibility: 'hidden' }}
         transition={{
           repeat: 1,
           repeatType: 'reverse',

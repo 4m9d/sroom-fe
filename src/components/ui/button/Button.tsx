@@ -2,7 +2,7 @@ type Props = {
   className?: string;
   id?: string;
   children?: React.ReactNode;
-  onClick?: () => void;
+  onClick: () => void;
   disabled?: boolean;
   hoverEffect?: boolean;
 };
@@ -19,7 +19,7 @@ export default function Button({
     <button
       id={id}
       disabled={disabled}
-      onClick={onClick}
+      onClick={() => onClick()}
       className={`${className} ${disabled ? '' : 'hover:opacity-90'} ${
         hoverEffect ? 'hover:bg-sroom-gray-300' : ''
       } text-sm font-bold h-12 py-1 px-2 md:px-4 flex active:focus:scale-95 transition-all items-center justify-center rounded-none break-keep`}

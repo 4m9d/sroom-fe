@@ -2,7 +2,7 @@ import toast from 'react-hot-toast';
 import Toast from '../../components/ui/Toast';
 import { TOAST_TIMEOUT } from '.';
 
-export default function setUndevelopedAlertToast() {
+export default function setUndevelopedAlertToast(id: string) {
   const undevelopedAlert: CustomToast = {
     type: 'undeveloped',
     title: '아직 개발 중이에요!',
@@ -11,9 +11,9 @@ export default function setUndevelopedAlertToast() {
   const param = {
     toast: undevelopedAlert
   };
-
+  
   toast.custom(() => Toast(param), {
-    id: 'undeveloped',
+    id: `undeveloped-${id}`,
     duration: TOAST_TIMEOUT,
     position: 'bottom-center',
     ariaProps: {
