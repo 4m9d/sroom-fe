@@ -1,3 +1,4 @@
+import setUndevelopedAlertToast from '@/src/util/toast/setUndevelopedAlertToast';
 import Button from '../ui/button/Button';
 
 type Props = {
@@ -11,7 +12,10 @@ export default function ClassroomHeader({
 }: Props) {
   return (
     <div className='flex items-center justify-between mb-7'>
-      <Button className='text-xs md:px-6 md:text-sm bg-sroom-brand text-sroom-white'>
+      <Button
+        onClick={setUndevelopedAlertToast}
+        className='text-xs md:px-6 md:text-sm bg-sroom-brand text-sroom-white'
+      >
         후기 / 평점 작성하기
       </Button>
       <div className='flex gap-1 font-bold'>
@@ -21,7 +25,8 @@ export default function ClassroomHeader({
         </p>
         <p className='text-base md:text-lg'>
           미수강 강의
-          <span className='pl-1 text-xl md:text-3xl'>{unfinished_course}</span>개
+          <span className='pl-1 text-xl md:text-3xl'>{unfinished_course}</span>
+          개
         </p>
       </div>
     </div>

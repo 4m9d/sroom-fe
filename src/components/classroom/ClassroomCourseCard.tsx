@@ -7,6 +7,7 @@ import ProgressBar from '../ui/progress/ProgressBar';
 import Button from '../ui/button/Button';
 import { useRouter } from 'next/navigation';
 import ArrowRightSVG from '@/public/icon/ArrowRight';
+import setUndevelopedAlertToast from '@/src/util/toast/setUndevelopedAlertToast';
 
 type Props = {
   course: Course;
@@ -61,13 +62,21 @@ export default function ClassroomCourseCard({ course }: Props) {
           </div>
         </div>
         <div className='flex items-center gap-2'>
-          <Button hoverEffect={true} className='!h-8 text-xs xl:text-sm'>
-            <p>강의 자료 보기</p>
+          <Button
+            onClick={setUndevelopedAlertToast}
+            hoverEffect={true}
+            className='!h-8 text-xs xl:text-sm'
+          >
+            <p>오답 노트 보기</p>
             <span className='w-3 ml-1 stroke-sroom-black-400'>
               <ArrowRightSVG />
             </span>
           </Button>
-          <Button hoverEffect={true} className='!h-8 text-xs xl:text-sm'>
+          <Button
+            onClick={setUndevelopedAlertToast}
+            hoverEffect={true}
+            className='!h-8 text-xs xl:text-sm'
+          >
             <p>후기 / 평점</p>
             <span className='w-3 ml-1 stroke-sroom-black-400'>
               <ArrowRightSVG />

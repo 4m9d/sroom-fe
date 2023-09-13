@@ -32,10 +32,10 @@ export default function RootLayout({ children, modal }: Props) {
               ]}
             />
             <ResolutionCheck>
+              <Toaster containerStyle={{ zIndex: 9999 }} />
               {children}
               {modal}
             </ResolutionCheck>
-            <Toaster containerStyle={{ zIndex: 9999 }} />
           </QueryProvider>
         </AuthSessionProvider>
       </body>

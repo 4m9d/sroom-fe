@@ -66,10 +66,10 @@ export default function CourseMaterialContent({
                 </div>
                 <div className='flex flex-col items-center justify-center'>
                   <p className='mb-1 text-lg font-semibold text-sroom-black-300'>
-                    강의 자료를 생성중이에요!
+                    강의 자료를 생성 중이에요!
                   </p>
                   <p className='font-normal text-sroom-black-100'>
-                    조금만 기다려주세요
+                    조금만 기다려 주세요
                   </p>
                 </div>
               </div>
@@ -100,7 +100,7 @@ export default function CourseMaterialContent({
                     정책상 강의 자료를 생성할 수 없어요!
                   </p>
                   <p className='font-normal text-sroom-black-100'>
-                    다른 강의에서 스룸의 AI 자동 생성 자료를 확인해보세요
+                    다른 강의에서 스룸의 AI 자동 생성 자료를 확인해 보세요
                   </p>
                 </div>
               </div>
