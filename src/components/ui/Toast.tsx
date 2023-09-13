@@ -5,7 +5,8 @@ import LectureSVG from '@/public/icon/Lecture';
 
 const Emoji: Emoji = {
   lecture_enrollment: '🤓',
-  error: '🚫'
+  error: '🚫',
+  undeveloped: '🚧'
 };
 
 const TOAST_DELAY = 4;
@@ -18,19 +19,15 @@ export default function Toast({ toast }: { toast: CustomToast }) {
       <motion.div
         initial={{ y: 200 }}
         animate={{ y: 0 }}
-        exit={{ y: 200 }}
+        exit={{ y: 200, visibility: 'hidden' }}
         transition={{
           repeat: 1,
           repeatType: 'reverse',
           repeatDelay: TOAST_DELAY - 0.25
         }}
         role='alert'
-        className={`fixed h-[5.5rem] z-50 flex w-[88%] lg:w-[60%] px-7 py-6 justify-between bottom-10 lg:bottom-14 left-[calc(6%)] lg:left-[20%] items-center gap-5 shadow-xl text-sroom-black-400 ${
-          type === 'error'
-            ? 'bg-red-400'
-            : type === 'lecture_enrollment'
-            ? 'bg-sroom-white'
-            : ''
+        className={`fixed h-[5.5rem] z-[99999] flex w-[88%] lg:w-[60%] px-7 py-6 justify-between bottom-10 lg:bottom-14 left-[calc(6%)] lg:left-[20%] items-center gap-5 shadow-xl text-sroom-black-400 ${
+          type === 'error' ? 'bg-red-400' : 'bg-sroom-white'
         }`}
       >
         <div className='flex items-center gap-7 shrink-0'>

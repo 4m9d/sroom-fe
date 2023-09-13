@@ -81,7 +81,7 @@ export default function LectureDetailCard({
               </div>
             </div>
             <LectureEnrollmentButton
-              disabled={isIndexListFetched}
+              disabled={isIndexListFetched === false}
               onEnrollSuccess={onClose}
               is_playlist={is_playlist}
               courses={courses}

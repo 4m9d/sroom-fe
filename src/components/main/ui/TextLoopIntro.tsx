@@ -34,7 +34,7 @@ const TextLoop = ({
         repeatDelay: repeatDelay,
         delay: type === 'back-up' ? delay : 0
       }}
-      className={`${className} pl-[100%] absolute flex h-full min-w-full gap-3 whitespace-nowrap text-[5px] sm:text-sm md:text-lg lg:text-xl xl:text-2xl opacity-90`}
+      className={`${className} pl-[100%] absolute flex h-full min-w-full gap-3 whitespace-nowrap text-[3px] leading-3 sm:text-sm md:text-lg lg:text-xl xl:text-2xl opacity-90`}
     >
       {children}
     </motion.div>

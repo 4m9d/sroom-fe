@@ -13,6 +13,7 @@ interface WeekRange {
 interface Emoji {
   lecture_enrollment: string;
   error: string;
+  undeveloped: string;
 }
 
 interface CustomToast {
