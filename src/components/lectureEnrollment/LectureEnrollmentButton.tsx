@@ -83,9 +83,9 @@ export default function LectureEnrollmentButton({
   const LIST__SUB__LI =
     'px-3 border-b cursor-pointer border-b-sroom-gray-500 last-of-type:border-b-0 hover:bg-sroom-brand peer';
   const LIST__DIV =
-    'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-sroom-black-100 stroke-sroom-black-100 hover:text-sroom-black-400 focus:text-sroom-black-400 hover:stroke-sroom-black-400 focus:stroke-sroom-black-400';
+    'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-sroom-black-100 stroke-sroom-black-100 hover:text-sroom-black-400 focus:text-sroom-black-400 hover:stroke-sroom-black-400 focus:stroke-sroom-black-400 cursor-pointer';
   const LIST__SUB__DIV =
-    'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-sroom-black-100 stroke-sroom-black-100 hover:text-sroom-white focus:text-sroom-white hover:stroke-sroom-white focus:stroke-sroom-white';
+    'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-sroom-black-100 stroke-sroom-black-100 hover:text-sroom-white focus:text-sroom-white hover:stroke-sroom-white focus:stroke-sroom-white cursor-pointer';
 
   const EnrolledCoursesList = ({
     courses,
