@@ -97,8 +97,9 @@ export default function CourseMaterialLectureNotes({
     }, DEBOUNCE_TIME);
     return () => {
       clearTimeout(debounceTimer);
-      sessionStorage.removeItem(sessionStorageContentKey);
-      sessionStorage.removeItem(sessionStorageIsEditModeKey);
+      if (!isEditMode) {
+        sessionStorage.removeItem(sessionStorageContentKey);
+      }
     };
   }, [
     isEditMode,

@@ -90,18 +90,22 @@ export default function CourseMaterialQuizzes({
 
     return () => {
       clearTimeout(debounceTimer);
-      sessionStorage.removeItem(sessionStorageKey);
+      if (
+        selectedAnswerList.filter(
+          (selectedAnswer) => selectedAnswer.is_submitted === true
+        ).length === quizzes.length
+      ) {
+        sessionStorage.removeItem(sessionStorageKey);
+      }
     };
-  }, [sessionStorageKey, selectedAnswerList, courseVideoId]);
+  }, [sessionStorageKey, selectedAnswerList, courseVideoId, quizzes.length]);
 
   useLayoutEffect(() => {
     const previouslySelectedAnswerList =
       sessionStorage.getItem(sessionStorageKey);
 
     setSelectedAnswerList(() =>
-      quizzes[0].is_submitted === false
-        ? quizzes
-        : previouslySelectedAnswerList
+      quizzes[0].is_submitted === false && previouslySelectedAnswerList
         ? JSON.parse(previouslySelectedAnswerList)
         : quizzes
     );
