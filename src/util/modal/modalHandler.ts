@@ -3,7 +3,7 @@ import { ModalIDs } from '@/src/constants/modal/modal';
 export const showModalHandler = (
   modalIDKey: keyof typeof ModalIDs,
   callback?: () => void
-) => {
+  ) => {
   const modal = document.getElementById(
     ModalIDs[modalIDKey]
   ) as HTMLDialogElement;

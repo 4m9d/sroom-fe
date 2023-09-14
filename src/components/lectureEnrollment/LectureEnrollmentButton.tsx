@@ -83,9 +83,9 @@ export default function LectureEnrollmentButton({
   const LIST__SUB__LI =
     'px-3 border-b cursor-pointer border-b-sroom-gray-500 last-of-type:border-b-0 hover:bg-sroom-brand peer';
   const LIST__DIV =
-    'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-sroom-black-100 stroke-sroom-black-100 hover:text-sroom-black-400 focus:text-sroom-black-400 hover:stroke-sroom-black-400 focus:stroke-sroom-black-400 cursor-pointer';
+    'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-sroom-black-100 stroke-sroom-black-100 hover:text-sroom-black-400 focus:text-sroom-black-400 hover:stroke-sroom-black-400 focus:stroke-sroom-black-400 cursor-pointer w-full';
   const LIST__SUB__DIV =
-    'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-sroom-black-100 stroke-sroom-black-100 hover:text-sroom-white focus:text-sroom-white hover:stroke-sroom-white focus:stroke-sroom-white cursor-pointer';
+    'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-sroom-black-100 stroke-sroom-black-100 hover:text-sroom-white focus:text-sroom-white hover:stroke-sroom-white focus:stroke-sroom-white cursor-pointer w-full';
 
   const EnrolledCoursesList = ({
     courses,
@@ -101,8 +101,8 @@ export default function LectureEnrollmentButton({
             className={`${isSubList ? LIST__SUB__LI : LIST__LI} w-full`}
             key={course.course_id}
           >
-            <div
-              role='button'
+            <button
+              type='button'
               onClick={() => mutate(course.course_id)}
               className={`${
                 isSubList ? LIST__SUB__DIV : LIST__DIV
@@ -119,7 +119,7 @@ export default function LectureEnrollmentButton({
                 </span>
                 <span className='text-xs'>{course.total_video_count}개</span>
               </div>
-            </div>
+            </button>
           </li>
         ))}
       </>
@@ -130,13 +130,13 @@ export default function LectureEnrollmentButton({
     return (
       <>
         <li className={LIST__LI}>
-          <div
-            role='button'
+          <button
+            type='button'
             onClick={() => showModalHandler('LECTURE_ENROLLMENT')}
             className={LIST__DIV}
           >
             새 강의 코스 등록하기
-          </div>
+          </button>
         </li>
         {courses.length > 0 && (
           <li className={`${LIST__LI} group`}>
@@ -170,8 +170,8 @@ export default function LectureEnrollmentButton({
             courses.length === 0 ? 'peer' : ''
           } hover:bg-sroom-brand`}
         >
-          <div
-            role='button'
+          <button
+            type='button'
             onClick={() => mutate(undefined)}
             className='flex items-center justify-center gap-2 hover:text-sroom-white'
           >
@@ -181,7 +181,7 @@ export default function LectureEnrollmentButton({
             <div className='flex items-center justify-center h-12 text-sm font-semibold rounded-none'>
               새로운 코스 생성하기
             </div>
-          </div>
+          </button>
         </li>
       </>
     );
