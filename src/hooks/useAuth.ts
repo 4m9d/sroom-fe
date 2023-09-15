@@ -1,6 +1,6 @@
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { fetchUserAuthWithRefreshToken } from '../api/members/login';
+import { fetchUserAuthWithRefreshToken } from '../api/members/members';
 import { useQuery } from '@tanstack/react-query';
 import { QueryKeys } from '../api/queryKeys';
 import { ErrorMessage } from '../api/ErrorMessage';

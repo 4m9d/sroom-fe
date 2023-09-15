@@ -1,4 +1,4 @@
-import { fetchUserAuthWithCredential } from '@/src/api/members/login';
+import { fetchUserAuthWithCredential } from '@/src/api/members/members';
 import { SESSION_AGE } from '@/src/constants/time/time';
 import NextAuth, { AuthOptions } from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
