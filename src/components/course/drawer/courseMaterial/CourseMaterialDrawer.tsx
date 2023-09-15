@@ -186,7 +186,7 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
           {isDrawerOpen && (
             <AnimatePresence>
               <motion.div
-                className='relative w-full'
+                className='relative w-full max-h-full'
                 style={{ height: bottomSheetHeight }}
                 {...bottomSheetContentAnimationConfig}
               >
