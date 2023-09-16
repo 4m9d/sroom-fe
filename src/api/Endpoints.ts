@@ -6,6 +6,7 @@ export const Endpoints = {
   LECTURES: `${API_URL}/lectures`,
   COURSES: `${API_URL}/courses`,
   MATERIALS: `${API_URL}/materials`,
+  REVIEWS: `${API_URL}/reviews`,
 } as const;
 
 type Endpoints = (typeof Endpoints)[keyof typeof Endpoints];

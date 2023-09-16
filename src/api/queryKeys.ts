@@ -11,6 +11,7 @@ export const QueryKeys = {
   COURSE_MATERIAL: 'courseMaterial',
   LECTURENOTE: 'lectureNote',
   QUiZ: 'quiz',
+  REVIEW: 'courseReview',
 } as const;
 
 type QueryKeys = (typeof QueryKeys)[keyof typeof QueryKeys];

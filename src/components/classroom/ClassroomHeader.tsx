@@ -1,5 +1,7 @@
 import setUndevelopedAlertToast from '@/src/util/toast/setUndevelopedAlertToast';
 import Button from '../ui/button/Button';
+import { showModalHandler } from '@/src/util/modal/modalHandler';
+import { ModalIDs } from '@/src/constants/modal/modal';
 
 type Props = {
   unfinished_course: number;
@@ -13,7 +15,7 @@ export default function ClassroomHeader({
   return (
     <div className='flex items-center justify-between mb-7'>
       <Button
-        onClick={() => setUndevelopedAlertToast('review')}
+        onClick={() => showModalHandler('LECTURE_REVIEW')}
         className='text-xs md:px-6 md:text-sm bg-sroom-brand text-sroom-white'
       >
         후기 / 평점 작성하기

@@ -4,6 +4,7 @@ type Props = {
   src: string;
   alt: string;
   children: React.ReactNode;
+  border?: boolean;
   onClick?: () => void;
   onMouseOver?: () => void;
 };
@@ -12,11 +13,16 @@ export default function HorizontalSmallLectureCard({
   src,
   alt,
   children,
+  border = true,
   onClick,
   onMouseOver
 }: Props) {
   return (
-    <div className='border-sroom-gray-400 border relative w-full h-[11rem] bg-sroom-white text-sroom-black-400 flex p-3 gap-4 overflow-hidden whitespace-normal'>
+    <div
+      className={`relative flex w-full gap-4 p-3 whitespace-normal h-min-[11rem] bg-sroom-white text-sroom-black-400 ${
+        border ? 'border border-sroom-gray-400' : ''
+      }`}
+    >
       <div className='w-full max-w-[15rem] flex items-center'>
         <div className='relative w-full h-0 pb-[56.25%]'>
           <div className='absolute top-0 left-0 object-cover w-full h-full overflow-hidden'>

@@ -14,6 +14,7 @@ export const ErrorMessage = {
   COURSE_MATERIALS: '강의 자료를 불러오지 못했어요',
   LECTURENOTES: '강의 노트를 업데이트하지 못했어요',
   QUIZZES: '퀴즈 채점 결과를 업데이트하지 못했어요',
+  REVIEWS: '강의 코스의 후기 정보를 불러오지 못했어요',
 } as const;
 
 type ErrorMessage = (typeof ErrorMessage)[keyof typeof ErrorMessage];

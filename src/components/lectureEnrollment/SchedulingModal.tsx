@@ -151,7 +151,7 @@ export default function SchedulingModal({
   return (
     <Modal
       id={ModalIDs.SCHEDULING}
-      className='rounded-none w-[85vw] max-w-2xl px-12 py-16'
+      className='max-w-2xl px-12 py-16 rounded-none'
       onClose={onClose}
     >
       <AnimatePresence>

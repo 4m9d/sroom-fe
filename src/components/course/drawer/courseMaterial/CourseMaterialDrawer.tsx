@@ -15,9 +15,9 @@ type Props = {
   courseVideoId: number;
 };
 
-const BOTTOM_SHEET_MAX_HEIGHT = 560;
+const BOTTOM_SHEET_MAX_HEIGHT = 660;
 const BOTTOM_SHEET_RESIZE_MIN = 100;
-const DRAWER_MAX_WIDTH = 480;
+const DRAWER_MAX_WIDTH = 580;
 const DRAWER_RESIZE_MIN = 250;
 
 export default function CourseMaterialDrawer({ courseVideoId }: Props) {
