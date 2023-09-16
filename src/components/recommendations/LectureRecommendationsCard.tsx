@@ -1,5 +1,4 @@
 import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
-import ThumbnailBadge from '../ui/badge/ThumbnailBadge';
 import VerticalSmallLectureCard from '../ui/lectureCard/VerticalSmallLectureCard';
 
 type Props = {
@@ -19,7 +18,11 @@ export default function LectureRecommendationsCard({ lecture }: Props) {
 
   return (
     <div className='transition-all hover:-translate-y-2 hover:cursor-pointer text-sroom-black-400'>
-      <VerticalSmallLectureCard src={thumbnail} alt={lecture_title}>
+      <VerticalSmallLectureCard
+        src={thumbnail}
+        alt={lecture_title}
+        isPlaylist={is_playlist}
+      >
         <div className='h-full'>
           <div className='mb-2'>
             <p className='text-lg font-bold whitespace-normal line-clamp-1'>
@@ -41,11 +44,6 @@ export default function LectureRecommendationsCard({ lecture }: Props) {
             review_count={review_count}
           />
         </div>
-        {is_playlist && (
-          <div className='absolute top-0 left-0'>
-            <ThumbnailBadge title='재생목록' className='bg-sroom-brand' />
-          </div>
-        )}
       </VerticalSmallLectureCard>
     </div>
   );

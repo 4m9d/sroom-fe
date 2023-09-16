@@ -2,7 +2,6 @@
 import getRelativeTime from '@/src/util/time/getRelativeTime';
 import HorizontalSmallLectureCard from '../ui/lectureCard/HorizontalSmallLectureCard';
 import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
-import ThumbnailBadge from '../ui/badge/ThumbnailBadge';
 import getCompactFormattedNumber from '@/src/util/number/getCompactFormattedNumber';
 
 export default async function SearchLectureCard({
@@ -26,7 +25,7 @@ export default async function SearchLectureCard({
   // TODO: 플레이리스트 여부, 등록 여부에 따른 UI 구현
 
   return (
-    <HorizontalSmallLectureCard src={thumbnail} alt={lecture_title}>
+    <HorizontalSmallLectureCard src={thumbnail} alt={lecture_title} isPlaylist={is_playlist} isEnrolled={is_enrolled}>
       <div className='flex flex-col justify-between h-full'>
         <div className='flex flex-col gap-1 mt-6 mb-1'>
           <p className='text-base font-bold whitespace-normal line-clamp-2'>
@@ -50,20 +49,7 @@ export default async function SearchLectureCard({
           review_count={review_count}
         />
       </div>
-      {is_enrolled && (
-        <div className='absolute top-3 left-3'>
-          <ThumbnailBadge title='수강 중' className='bg-sroom-black-400' />
-        </div>
-      )}
-      {is_playlist && (
-        <div
-          className={`absolute top-3 ${
-            is_enrolled ? 'left-[4.7rem]' : 'left-3'
-          }`}
-        >
-          <ThumbnailBadge title='재생목록' className='bg-sroom-brand' />
-        </div>
-      )}
+      
     </HorizontalSmallLectureCard>
   );
 }

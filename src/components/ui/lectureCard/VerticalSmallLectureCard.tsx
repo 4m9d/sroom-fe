@@ -1,15 +1,20 @@
 import Image from 'next/image';
+import ThumbnailBadge from '../badge/ThumbnailBadge';
 
 type Props = {
   src: string;
   alt: string;
   children: React.ReactNode;
+  isPlaylist?: boolean;
+  isEnrolled?: boolean;
 };
 
 export default function VerticalSmallLectureCard({
   src,
   alt,
-  children
+  children,
+  isPlaylist = false,
+  isEnrolled = false
 }: Props) {
   return (
     <div className='relative flex flex-col gap-4 text-sroom-black-400 w-96'>
@@ -17,6 +22,23 @@ export default function VerticalSmallLectureCard({
         <div className='relative w-full h-0 pb-[56.25%]'>
           <div className='absolute top-0 left-0 object-cover w-full h-full'>
             <Image fill={true} src={src} alt={alt} />
+            {isEnrolled && (
+              <div className='absolute top-0 left-0'>
+                <ThumbnailBadge
+                  title='수강 중'
+                  className='bg-sroom-black-400'
+                />
+              </div>
+            )}
+            {isPlaylist && (
+              <div
+                className={`absolute top-0 ${
+                  isEnrolled ? 'left-[4rem]' : 'left-0'
+                }`}
+              >
+                <ThumbnailBadge title='재생목록' className='bg-sroom-brand' />
+              </div>
+            )}
           </div>
         </div>
       </div>
