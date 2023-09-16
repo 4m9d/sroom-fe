@@ -406,3 +406,8 @@ interface ReviewableLecture {
 interface CourseReviewResponse {
   lectures: ReviewableLecture[];
 }
+
+interface UpdateLectureReviewParams {
+  submitted_rating: number;
+  review_content: string;
+}

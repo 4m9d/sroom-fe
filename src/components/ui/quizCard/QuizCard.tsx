@@ -5,6 +5,7 @@ import MultipleChoice from './quizType/MultipleChoice';
 import QuizHeader from './QuizHeader';
 import Button from '../button/Button';
 import { QuizType } from '@/src/constants/materials/materials';
+import { TEXT_MAX_LENGTH } from '@/src/constants/text/text';
 
 type Props = {
   setSelectedAnswerList: React.Dispatch<
@@ -41,7 +42,7 @@ export default function QuizCard({
   const shortAnswerHandler = (inputtedAnswer: string) => {
     const updatedAnswer = {
       ...selectedAnswer,
-      submitted_answer: inputtedAnswer.trim().slice(0, 256)
+      submitted_answer: inputtedAnswer.trim().slice(0, TEXT_MAX_LENGTH + 1)
     };
     updateSelectedAnswerList(updatedAnswer);
   };

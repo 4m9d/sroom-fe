@@ -257,7 +257,7 @@ export default function SchedulingModal({
             </p>
             <Button
               onClick={() => mutate()}
-              className='font-bold text-base w-[25rem] text-sroom-white bg-sroom-black-400'
+              className='w-[25rem] text-sroom-white bg-sroom-black-400'
               disabled={isLoading}
             >
               {isLoading ? (

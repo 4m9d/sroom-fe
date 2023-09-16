@@ -193,7 +193,7 @@ export default function LectureEnrollmentButton({
         <Button
           disabled={disabled}
           onClick={() => {}}
-          className={`w-full !h-[3rem] font-bold peer text-sroom-white bg-sroom-black-400 md:text-base ${
+          className={`w-full !h-[3rem] peer text-sroom-white bg-sroom-black-400 md:text-base ${
             disabled ? 'opacity-80' : ''
           }`}
         >

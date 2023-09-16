@@ -1,21 +1,22 @@
 import ClockSVG from '@/public/icon/Clock';
-import Button from '../../ui/button/Button';
-import HorizontalSmallLectureCard from '../../ui/lectureCard/HorizontalSmallLectureCard';
+import Button from '../../../ui/button/Button';
+import HorizontalSmallLectureCard from '../../../ui/lectureCard/HorizontalSmallLectureCard';
 import getFormattedTime from '@/src/util/time/getFormattedTime';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import LectureSVG from '@/public/icon/Lecture';
-import ProgressBar from '../../ui/progress/ProgressBar';
+import ProgressBar from '../../../ui/progress/ProgressBar';
 import PencilSVG from '@/public/icon/Pencil';
-import ThumbnailBadge from '../../ui/badge/ThumbnailBadge';
 
 type Props = {
   reviewableLecture: ReviewableLecture;
   mode: 'require' | 'done';
+  setEditingLectureId?: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
 export default function ReviewableLectureCard({
   reviewableLecture,
-  mode
+  mode,
+  setEditingLectureId
 }: Props) {
   const isDisabled =
     reviewableLecture.content === null &&
@@ -81,6 +82,10 @@ export default function ReviewableLectureCard({
             <div className='flex items-center justify-center flex-1 shrink-0 w-1/5 max-w-[10rem]'>
               <Button
                 disabled={reviewableLecture.is_review_allowed === false}
+                onClick={() =>
+                  setEditingLectureId &&
+                  setEditingLectureId(reviewableLecture.lecture_id)
+                }
                 className='!h-10 flex justify-between w-24 md:w-28 font-semibold text-sroom-black-400 bg-sroom-gray-400 shrink-0'
               >
                 <span className='w-3 stroke-sroom-black-400'>

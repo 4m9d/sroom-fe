@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ClassroomCourseCard from './ClassroomCourseCard';
-import CourseReviewableLectureModal from './review/CourseReviewableLectureModal';
+import CourseReviewModal from './review/CourseReviewModal';
 
 type Props = {
   courses: Course[];
@@ -32,7 +32,7 @@ export default function ClassroomCourseList({ courses }: Props) {
           </div>
         </div>
       )}
-      <CourseReviewableLectureModal courseId={selectedCourseId} />
+      <CourseReviewModal courseId={selectedCourseId} />
     </>
   );
 }
