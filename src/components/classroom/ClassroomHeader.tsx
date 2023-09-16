@@ -1,8 +1,3 @@
-import setUndevelopedAlertToast from '@/src/util/toast/setUndevelopedAlertToast';
-import Button from '../ui/button/Button';
-import { showModalHandler } from '@/src/util/modal/modalHandler';
-import { ModalIDs } from '@/src/constants/modal/modal';
-
 type Props = {
   unfinished_course: number;
   completion_rate: number;
@@ -13,21 +8,20 @@ export default function ClassroomHeader({
   completion_rate
 }: Props) {
   return (
-    <div className='flex items-center justify-between mb-7'>
-      <Button
-        onClick={() => showModalHandler('LECTURE_REVIEW')}
-        className='text-xs md:px-6 md:text-sm bg-sroom-brand text-sroom-white'
-      >
-        후기 / 평점 작성하기
-      </Button>
+    <div className='flex items-center justify-end mb-7'>
       <div className='flex gap-1 font-bold'>
-        <p className='text-base md:text-lg'>
+        <p className='text-base md:text-lg lg:text-xl'>
           완강률
-          <span className='pl-1 text-xl md:text-3xl'>{completion_rate}</span>%,
+          <span className='pl-1 text-xl md:text-3xl lg:text-4xl'>
+            {completion_rate}
+          </span>
+          %,
         </p>
-        <p className='text-base md:text-lg'>
+        <p className='text-base md:text-lg lg:text-xl'>
           미수강 강의
-          <span className='pl-1 text-xl md:text-3xl'>{unfinished_course}</span>
+          <span className='pl-1 text-xl md:text-3xl lg:text-4xl'>
+            {unfinished_course}
+          </span>
           개
         </p>
       </div>
