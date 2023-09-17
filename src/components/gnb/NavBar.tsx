@@ -26,7 +26,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
   const [name, setName] = useState(session?.name ?? '');
   const profile = session?.profile;
 
-  const navBarHidden = name ? '' : 'hidden';
+  const navBarHidden = session ? '' : 'hidden';
 
   const profileButtonClickHandler = async () => {
     if (isEditMode) {

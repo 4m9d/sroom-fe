@@ -40,7 +40,7 @@ export default function ProfileDropdown({
           defaultValue={name}
           disabled={isEditMode === false}
           spellCheck='false'
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value.trim())}
           maxLength={10}
           className={`hidden w-32 p-1 text-xs font-semibold leading-9 text-left resize-none sm:block md:text-sm lg:text-base disabled:bg-sroom-white ${
             isEditMode ? 'border-2 rounded-sm border-sroom-brand' : ''
