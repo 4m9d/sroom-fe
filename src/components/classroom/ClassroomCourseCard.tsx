@@ -1,3 +1,4 @@
+'use client';
 import ClockSVG from '@/public/icon/Clock';
 import HorizontalSmallLectureCard from '../ui/lectureCard/HorizontalSmallLectureCard';
 import getFormattedTime from '@/src/util/time/getFormattedTime';
@@ -12,14 +13,17 @@ import { showModalHandler } from '@/src/util/modal/modalHandler';
 
 type Props = {
   course: Course;
-  setSelectedCourseId: React.Dispatch<React.SetStateAction<number | null>>;
+  setReviewCourseId: React.Dispatch<React.SetStateAction<number | null>>;
+  setDeleteCourseId: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
 export default function ClassroomCourseCard({
   course,
-  setSelectedCourseId
+  setReviewCourseId,
+  setDeleteCourseId
 }: Props) {
   const router = useRouter();
+
   return (
     <HorizontalSmallLectureCard
       src={course.thumbnail}
@@ -28,7 +32,10 @@ export default function ClassroomCourseCard({
       onClick={() => router.push(`/course/${course.course_id}`)}
     >
       <Button
-        onClick={() => setUndevelopedAlertToast('course-deletion')}
+        onClick={() => {
+          setDeleteCourseId(() => course.course_id);
+          showModalHandler('COURSE_DELETE');
+        }}
         hoverEffect={true}
         className='absolute top-0 right-0 text-xs font-normal md:text-sm text-sroom-black-100 !h-8'
       >
@@ -80,7 +87,7 @@ export default function ClassroomCourseCard({
           </Button>
           <Button
             onClick={() => {
-              setSelectedCourseId(() => course.course_id);
+              setReviewCourseId(() => course.course_id);
               showModalHandler('LECTURE_REVIEW');
             }}
             hoverEffect={true}

@@ -1,5 +1,4 @@
 'use client';
-
 import CloseButton from "./button/CloseButton";
 
 type Props = {
