@@ -1,6 +1,6 @@
 import { fetchUserAuthWithCredential } from '@/src/api/members/members';
 import { SESSION_AGE } from '@/src/constants/time/time';
-import NextAuth, { AuthOptions } from 'next-auth';
+import NextAuth, { AuthOptions, Awaitable, User } from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
 
 export const authOptions: AuthOptions = {
@@ -22,7 +22,7 @@ export const authOptions: AuthOptions = {
           (res) => res
         );
 
-        return response as any;
+        return response as unknown as Awaitable<User | null>;
       }
     })
   ],
@@ -37,7 +37,7 @@ export const authOptions: AuthOptions = {
     },
     async session({ session, token }) {
       session = token.session;
-
+      
       return session;
     }
   },

@@ -5,6 +5,11 @@ import useAuth from '@/src/hooks/useAuth';
 import Button from '../ui/button/Button';
 import Image from 'next/image';
 import useWindowSize from '@/src/hooks/useWindowSize';
+import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { useMutation } from '@tanstack/react-query';
+import { updateUserProfile } from '@/src/api/members/members';
+import ProfileDropdown from './ProfileDropdown';
 
 type Props = {
   logo: string;
@@ -13,19 +18,41 @@ type Props = {
 const WIDTH_SM = 640;
 
 export default function NavBar({ logo, profileDropdown }: Props) {
-  const { session, logout } = useAuth();
-  const { width } = useWindowSize();
+  const { logout } = useAuth();
+  const { data: session, update } = useSession();
+  const { width: windowWidth } = useWindowSize();
+  const [isEditMode, setIsEditMode] = useState(false);
 
-  const name = session?.name;
-  const bio = session?.bio;
-  const hidden = name ? '' : 'hidden';
+  const [name, setName] = useState(session?.name ?? '');
+  const profile = session?.profile;
+
+  const navBarHidden = name ? '' : 'hidden';
+
+  const profileButtonClickHandler = async () => {
+    if (isEditMode) {
+      mutate();
+      await update({ ...session, name });
+    }
+    setIsEditMode(!isEditMode);
+  };
+
+  const { mutate } = useMutation(() => updateUserProfile(name), {
+    onSuccess: (data) => {
+      setIsEditMode(false);
+      setName(data.name);
+    }
+  });
+
+  useEffect(() => {
+    setName(() => session?.name ?? '');
+  }, [session?.name]);
 
   return (
-    <nav className='max-h-[4rem] navbar shadow-sm z-50'>
-      <div className='flex justify-between gap-4 lg:gap-8 px-4 lg:px-24 mx-auto max-h-[4rem] navbar max-w-screen-2xl'>
+    <nav className='h-12 shadow-sm z-[999] navbar'>
+      <div className='flex justify-between gap-4 px-4 mx-auto lg:gap-8 lg:px-24 navbar max-w-screen-2xl'>
         <h1 className='w-6 sm:w-20 lg:w-36 shrink-0'>
           <Link href='/' className='shrink-0 mr-14'>
-            {width && width < WIDTH_SM ? (
+            {windowWidth < WIDTH_SM ? (
               <Image
                 className='w-6'
                 src={'/logo/logo.svg'}
@@ -44,42 +71,29 @@ export default function NavBar({ logo, profileDropdown }: Props) {
             )}
           </Link>
         </h1>
-        <div className={`${hidden} flex-1`}>
+        <div className={`${navBarHidden} flex-1`}>
           <SearchInput />
         </div>
         <Button
           onClick={logout}
-          className={`${hidden} g_id_signout w-20 lg:w-24 bg-sroom-brand`}
+          className={`${navBarHidden} g_id_signout w-20 lg:w-24 bg-sroom-brand`}
         >
-          <p className='text-xs font-semibold lg:text-sm text-sroom-white'>
-            로그아웃
-          </p>
+          <p className='text-xs lg:text-sm text-sroom-white'>로그아웃</p>
         </Button>
         <button
           type='button'
-          className={`${hidden} dropdown dropdown-hover w-36 lg:w-52 text-sroom-black-400`}
+          className={`${navBarHidden} dropdown dropdown-end md:dropdown-hover text-sroom-black-400`}
         >
-          <div
-            tabIndex={0}
-            className='flex flex-col items-start justify-between h-full rounded-none w-36 lg:w-52 btn btn-ghost hover:bg-sroom-gray-300'
-          >
-            <p className='text-xs font-semibold text-left lg:text-sm'>{name}</p>
-            <p className='text-xs font-normal text-left whitespace-normal text-sroom-black-100 line-clamp-1'>
-              {bio}
-            </p>
-          </div>
-          <ul
-            tabIndex={0}
-            className='menu dropdown-content z-[1] p-1 w-36 lg:w-52 shadow rounded-none text-xs font-medium text-sroom-black-400 bg-sroom-white'
-          >
-            {profileDropdown?.map((menu) => {
-              return (
-                <li key={menu.id}>
-                  <Link href={menu.menuRoute}>{menu.menuTitle}</Link>
-                </li>
-              );
-            })}
-          </ul>
+          {profile && (
+            <ProfileDropdown
+              profile={profile}
+              name={name}
+              profileDropdown={profileDropdown}
+              isEditMode={isEditMode}
+              setName={setName}
+              profileButtonClickHandler={profileButtonClickHandler}
+            />
+          )}
         </button>
       </div>
     </nav>
