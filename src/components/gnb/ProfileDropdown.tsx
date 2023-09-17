@@ -1,8 +1,10 @@
+'use client';
 import ArrowTopRightSVG from '@/public/icon/ArrowTopRight';
 import PencilSVG from '@/public/icon/Pencil';
 import SaveSVG from '@/public/icon/Save';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
 
 type Props = {
   profile: string;
@@ -21,6 +23,13 @@ export default function ProfileDropdown({
   setName,
   profileButtonClickHandler
 }: Props) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isEditMode) {
+      inputRef.current?.focus();
+    }
+  }, [isEditMode]);
   return (
     <>
       <div
@@ -37,14 +46,14 @@ export default function ProfileDropdown({
           />
         )}
         <input
+          ref={inputRef}
+          type='text'
           defaultValue={name}
           disabled={isEditMode === false}
           spellCheck='false'
           onChange={(e) => setName(e.target.value.trim())}
           maxLength={10}
-          className={`hidden w-32 p-1 text-xs font-semibold leading-9 text-left resize-none sm:block md:text-sm lg:text-base disabled:bg-sroom-white ${
-            isEditMode ? 'border-2 rounded-sm border-sroom-brand' : ''
-          }`}
+          className='hidden w-32 p-1 text-xs font-semibold leading-9 text-left resize-none sm:block md:text-sm lg:text-base disabled:bg-sroom-white'
         />
       </div>
       <ul
