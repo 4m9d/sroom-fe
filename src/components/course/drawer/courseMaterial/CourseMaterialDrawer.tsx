@@ -178,7 +178,6 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
     } else {
       enableYoutubePlayerMouseEvent();
     }
-    return () => enableYoutubePlayerMouseEvent();
   }, [
     enableYoutubePlayerMouseEvent,
     disableYoutubePlayerMouseEvent,
@@ -219,13 +218,13 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
       <AnimatePresence>
         <motion.aside
           {...bottomSheetAnimationConfig}
-          className='absolute bottom-0 z-50 max-w-full min-w-full shadow-2xl bg-sroom-white shrink-0'
+          className='absolute bottom-0 z-50 w-full max-w-full min-w-full shadow-2xl bg-sroom-white shrink-0'
           style={{ height: bottomSheetHeight }}
         >
           {isDrawerOpen && (
             <AnimatePresence>
               <motion.div
-                className='relative w-full max-h-full'
+                className='relative w-full'
                 style={{ height: bottomSheetHeight }}
                 {...bottomSheetContentAnimationConfig}
               >
