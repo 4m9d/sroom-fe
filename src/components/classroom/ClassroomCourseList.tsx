@@ -1,16 +1,23 @@
+import { useState } from 'react';
 import ClassroomCourseCard from './ClassroomCourseCard';
+import CourseReviewModal from './review/CourseReviewModal';
 
 type Props = {
   courses: Course[];
 };
 
 export default function ClassroomCourseList({ courses }: Props) {
+  const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
+  
   return (
     <>
       <ul className='grid grid-cols-1 gap-5 lg:grid-cols-2 shrink-0'>
         {courses.map((course: Course) => (
           <li key={course.course_id}>
-            <ClassroomCourseCard course={course} />
+            <ClassroomCourseCard
+              course={course}
+              setSelectedCourseId={setSelectedCourseId}
+            />
           </li>
         ))}
       </ul>
@@ -25,6 +32,7 @@ export default function ClassroomCourseList({ courses }: Props) {
           </div>
         </div>
       )}
+      <CourseReviewModal courseId={selectedCourseId} />
     </>
   );
 }

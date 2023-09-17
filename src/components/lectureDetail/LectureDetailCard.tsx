@@ -2,7 +2,6 @@
 import getCompactFormattedDate from '@/src/util/day/getCompactFormattedDate';
 import HorizontalBigLectureCard from '../ui/lectureCard/HorizontalBigLectureCard';
 import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
-import ThumbnailBadge from '../ui/badge/ThumbnailBadge';
 import getCompactFormattedNumber from '@/src/util/number/getCompactFormattedNumber';
 import LectureEnrollmentButton from '../lectureEnrollment/LectureEnrollmentButton';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -34,7 +33,12 @@ export default function LectureDetailCard({
   } = lectureDetail;
 
   return (
-    <HorizontalBigLectureCard src={thumbnail} alt={lecture_title}>
+    <HorizontalBigLectureCard
+      src={thumbnail}
+      alt={lecture_title}
+      isPlaylist={is_playlist}
+      isEnrolled={is_enrolled}
+    >
       <AnimatePresence>
         <div className='w-full'>
           <div className='flex flex-col justify-between h-full'>
@@ -88,20 +92,6 @@ export default function LectureDetailCard({
               lecture_code={lecture_code}
             />
           </div>
-          {is_enrolled && (
-            <div className='absolute top-3 left-3'>
-              <ThumbnailBadge title='수강 중' className='bg-sroom-black-400' />
-            </div>
-          )}
-          {is_playlist && (
-            <div
-              className={`absolute top-3 ${
-                is_enrolled ? 'left-[4.7rem]' : 'left-3'
-              }`}
-            >
-              <ThumbnailBadge title='재생목록' className='bg-sroom-brand' />
-            </div>
-          )}
         </div>
       </AnimatePresence>
     </HorizontalBigLectureCard>

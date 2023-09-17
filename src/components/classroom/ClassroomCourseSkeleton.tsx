@@ -11,10 +11,7 @@ const ClassroomCourseSkeleton = ({ limit }: Props) => {
 
   const StyledHeaderSkeleton = () => {
     return (
-      <div className='flex items-center justify-between h-12 mb-7'>
-        <div className='h-full w-28'>
-          <Skeleton height='100%' width='100%' />
-        </div>
+      <div className='flex items-center justify-end h-12 mb-7'>
         <div className='h-full w-52'>
           <Skeleton height='100%' width='100%' />
         </div>

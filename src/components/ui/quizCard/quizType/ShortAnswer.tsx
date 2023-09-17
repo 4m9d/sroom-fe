@@ -1,3 +1,5 @@
+import { TEXT_MAX_LENGTH } from "@/src/constants/text/text";
+
 export default function ShortAnswer({
   quiz,
   selectedAnswer,
@@ -14,7 +16,7 @@ export default function ShortAnswer({
         className='w-full !h-40 p-3 leading-6 border rounded-none resize-none textarea border-sroom-gray-500'
         placeholder='정답을 입력해 주세요.'
         disabled={isSubmitted}
-        maxLength={255}
+        maxLength={TEXT_MAX_LENGTH}
         onChange={(e) =>
           isSubmitted === false && shortAnswerHandler(e.target.value)
         }

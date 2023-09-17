@@ -8,12 +8,17 @@ import Button from '../ui/button/Button';
 import { useRouter } from 'next/navigation';
 import ArrowRightSVG from '@/public/icon/ArrowRight';
 import setUndevelopedAlertToast from '@/src/util/toast/setUndevelopedAlertToast';
+import { showModalHandler } from '@/src/util/modal/modalHandler';
 
 type Props = {
   course: Course;
+  setSelectedCourseId: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
-export default function ClassroomCourseCard({ course }: Props) {
+export default function ClassroomCourseCard({
+  course,
+  setSelectedCourseId
+}: Props) {
   const router = useRouter();
   return (
     <HorizontalSmallLectureCard
@@ -74,7 +79,10 @@ export default function ClassroomCourseCard({ course }: Props) {
             </span>
           </Button>
           <Button
-            onClick={() => setUndevelopedAlertToast('review')}
+            onClick={() => {
+              setSelectedCourseId(() => course.course_id);
+              showModalHandler('LECTURE_REVIEW');
+            }}
             hoverEffect={true}
             className='!h-8 text-xs xl:text-sm'
           >

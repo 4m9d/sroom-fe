@@ -380,3 +380,34 @@ interface updateQuizGradeParams {
   submitted_answer: string;
   is_correct: boolean;
 }
+
+/////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////course-review/////////////////////////////
+
+interface ReviewableLecture {
+  index: number;
+  lecture_id: number;
+  title: string;
+  thumbnail: string;
+  channel: string;
+  view_duration: number;
+  lecture_duration: number;
+  completed_video_count: number;
+  total_video_count: number;
+  progress: number;
+  submitted_at: string;
+  content: string;
+  rating: number;
+  is_playlist: boolean;
+  is_review_allowed: boolean;
+}
+
+interface CourseReviewResponse {
+  lectures: ReviewableLecture[];
+}
+
+interface UpdateLectureReviewParams {
+  submitted_rating: number;
+  review_content: string;
+}

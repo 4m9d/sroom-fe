@@ -173,7 +173,7 @@ export default function LectureEnrollmentButton({
           <button
             type='button'
             onClick={() => mutate(undefined)}
-            className='flex items-center justify-center gap-2 hover:text-sroom-white'
+            className='flex items-center justify-center w-full gap-2 hover:text-sroom-white'
           >
             <div className='flex items-center justify-center w-5 h-5 rounded-full shrink-0 bg-sroom-black-400 text-sroom-white'>
               +
@@ -193,7 +193,7 @@ export default function LectureEnrollmentButton({
         <Button
           disabled={disabled}
           onClick={() => {}}
-          className={`w-full !h-[3rem] font-bold peer text-sroom-white bg-sroom-black-400 md:text-base ${
+          className={`w-full !h-[3rem] peer text-sroom-white bg-sroom-black-400 md:text-base ${
             disabled ? 'opacity-80' : ''
           }`}
         >

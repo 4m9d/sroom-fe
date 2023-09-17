@@ -44,8 +44,8 @@ export default function CourseMaterialContent({
     }
   );
   return (
-    <div className='w-full h-full max-h-full px-3 overflow-y-scroll'>
-      <div className='sticky top-0 z-[99999]'>
+    <div className='w-full h-full max-h-full min-h-full px-3 overflow-y-scroll'>
+      <div className='sticky top-0 z-10'>
         <CourseMaterialTopNav
           activeTab={activeTab}
           setActiveTab={setActiveTab}
@@ -75,7 +75,7 @@ export default function CourseMaterialContent({
               </div>
             )}
             {data && data.status === STATUS.SUCCESS && (
-              <>
+              <div>
                 {activeTab === 'lecture-notes' && (
                   <CourseMaterialLectureNotes
                     lectureNotes={data.summary_brief}
@@ -88,7 +88,7 @@ export default function CourseMaterialContent({
                     courseVideoId={courseVideoId}
                   />
                 )}
-              </>
+              </div>
             )}
             {data && data.status === STATUS.ERROR && (
               <div className='flex flex-col items-center justify-center h-[calc(100%-5rem)] gap-7'>
