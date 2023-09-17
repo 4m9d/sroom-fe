@@ -23,6 +23,7 @@ const DRAWER_RESIZE_MIN = 250;
 export default function CourseMaterialDrawer({ courseVideoId }: Props) {
   const controls = useAnimationControls();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const { width: windowWidth, height: windowHeight } = useWindowSize();
 
   const initialBottomSheetHeight =
@@ -34,6 +35,20 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
 
   const bottomSheetHeight = useMotionValue(initialBottomSheetHeight);
   const drawerWidth = useMotionValue(initialDrawerWidth);
+
+  const disableYoutubePlayerMouseEvent = useCallback(() => {
+    const youtubePlayer = document.getElementById(
+      'youtube-player'
+    ) as HTMLDivElement;
+    youtubePlayer.classList.add('pointer-events-none');
+  }, []);
+
+  const enableYoutubePlayerMouseEvent = useCallback(() => {
+    const youtubePlayer = document.getElementById(
+      'youtube-player'
+    ) as HTMLDivElement;
+    youtubePlayer.classList.remove('pointer-events-none');
+  }, []);
 
   const drawerAnimationConfig = {
     animate: controls,
@@ -59,9 +74,11 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
     },
     dragElastic: 0,
     dragMomentum: false,
+    onDragStart: () => {
+      setIsDragging(true);
+    },
     onDrag: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
       event.stopPropagation();
-
       drawerWidth.set(
         resizeRangeHandler(
           windowWidth - info.point.x,
@@ -69,6 +86,9 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
           DRAWER_MAX_WIDTH
         )
       );
+    },
+    onDragEnd: () => {
+      setIsDragging(false);
     }
   };
   const bottomSheetAnimationConfig = {
@@ -98,6 +118,9 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
     },
     dragElastic: 0,
     dragMomentum: false,
+    onDragStart: () => {
+      setIsDragging(true);
+    },
     onDrag: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
       event.stopPropagation();
 
@@ -108,6 +131,9 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
           BOTTOM_SHEET_MAX_HEIGHT
         )
       );
+    },
+    onDragEnd: () => {
+      setIsDragging(false);
     }
   };
 
@@ -145,6 +171,19 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
     controls.start('exit');
     setIsDrawerOpen(false);
   }, [windowWidth, controls]);
+
+  useEffect(() => {
+    if (isDragging) {
+      disableYoutubePlayerMouseEvent();
+    } else {
+      enableYoutubePlayerMouseEvent();
+    }
+    return () => enableYoutubePlayerMouseEvent();
+  }, [
+    enableYoutubePlayerMouseEvent,
+    disableYoutubePlayerMouseEvent,
+    isDragging
+  ]);
 
   if (windowWidth > COURSE_MATERIAL_BREAKPOINT) {
     return (

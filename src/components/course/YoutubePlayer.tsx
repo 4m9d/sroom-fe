@@ -121,6 +121,7 @@ const YoutubePlayer = ({
   return (
     <div className='max-w-screen-xl px-5 mx-auto mb-5 lg:mb-10'>
       <YouTube
+        id='youtube-player'
         opts={opts}
         key={videoId}
         videoId={videoId}
