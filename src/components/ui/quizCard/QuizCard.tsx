@@ -6,6 +6,7 @@ import QuizHeader from './QuizHeader';
 import Button from '../button/Button';
 import { QuizType } from '@/src/constants/materials/materials';
 import { TEXT_MAX_LENGTH } from '@/src/constants/text/text';
+import setUndevelopedAlertToast from '@/src/util/toast/setUndevelopedAlertToast';
 
 type Props = {
   setSelectedAnswerList: React.Dispatch<
@@ -56,11 +57,12 @@ export default function QuizCard({
   };
 
   const quizScrapHandler = () => {
-    const updatedAnswer = {
+    setUndevelopedAlertToast('quiz-scrap');
+    /*  const updatedAnswer = {
       ...selectedAnswer,
       is_scrapped: !selectedAnswer.is_scrapped
     };
-    updateSelectedAnswerList(updatedAnswer);
+    updateSelectedAnswerList(updatedAnswer); */
   };
 
   return (

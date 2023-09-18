@@ -41,7 +41,7 @@ interface ToastContextType {
 
 interface Profile {
   name: string;
-  bio: string;
+  profile: string;
 }
 
 interface ProfileDropdown {
@@ -68,6 +68,11 @@ interface LoginResponse extends Response, Profile {
   access_token: string;
   refresh_token: string;
   expires_at: number;
+}
+
+interface ProfileUpdateResponse extends Response {
+  member_id: number;
+  name: string;
 }
 
 /////////////////////////////////////////////////////////////////////////

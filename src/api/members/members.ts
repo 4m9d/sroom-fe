@@ -18,7 +18,7 @@ export async function fetchUserAuthWithCredential(
     } else {
       return Promise.reject(new Error(ErrorMessage.LOGIN));
     }
-  })
+  });
 }
 
 export async function fetchUserAuthWithRefreshToken(
@@ -35,6 +35,22 @@ export async function fetchUserAuthWithRefreshToken(
       return (await res.json()) as Promise<LoginResponse>;
     } else {
       return Promise.reject(new Error(ErrorMessage.REFRESH));
+    }
+  });
+}
+
+export async function updateUserProfile(name: string) {
+  const headers = await getAuthorizedHeaders();
+  const body = JSON.stringify({ name });
+  return await fetch(`${Endpoints.MEMBERS}/profile`, {
+    method: 'PUT',
+    headers,
+    body
+  }).then(async (res) => {
+    if (res.ok) {
+      return (await res.json()) as Promise<ProfileUpdateResponse>;
+    } else {
+      return Promise.reject(new Error(ErrorMessage.PROFILE_UPDATE));
     }
   });
 }

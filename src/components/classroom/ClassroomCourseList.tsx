@@ -1,24 +1,29 @@
+'use client';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import ClassroomCourseCard from './ClassroomCourseCard';
 import CourseReviewModal from './review/CourseReviewModal';
+import CourseDeleteModal from './delete/CourseDeleteModal';
 
 type Props = {
   courses: Course[];
 };
 
 export default function ClassroomCourseList({ courses }: Props) {
-  const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
-  
+  const [reviewCourseId, setReviewCourseId] = useState<number | null>(null);
+  const [deleteCourseId, setDeleteCourseId] = useState<number | null>(null);
+
   return (
     <>
       <ul className='grid grid-cols-1 gap-5 lg:grid-cols-2 shrink-0'>
         {courses.map((course: Course) => (
-          <li key={course.course_id}>
+          <motion.li layout key={course.course_id}>
             <ClassroomCourseCard
               course={course}
-              setSelectedCourseId={setSelectedCourseId}
+              setReviewCourseId={setReviewCourseId}
+              setDeleteCourseId={setDeleteCourseId}
             />
-          </li>
+          </motion.li>
         ))}
       </ul>
       {courses.length === 0 && (
@@ -32,7 +37,14 @@ export default function ClassroomCourseList({ courses }: Props) {
           </div>
         </div>
       )}
-      <CourseReviewModal courseId={selectedCourseId} />
+      <CourseReviewModal courseId={reviewCourseId} />
+      <CourseDeleteModal
+        courseId={deleteCourseId}
+        courseTitle={
+          courses.find((course) => course.course_id === deleteCourseId)
+            ?.course_title
+        }
+      />
     </>
   );
 }

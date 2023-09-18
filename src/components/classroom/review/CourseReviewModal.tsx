@@ -107,7 +107,7 @@ export default function CourseReviewModal({ courseId }: Props) {
           </p>
         </div>
         {fetchStatus === 'loading' ? (
-          <LoadingSpinner />
+          <LoadingSpinner className='text-sroom-brand' />
         ) : (
           <>
             {isEditMode === false && isDataExist && (

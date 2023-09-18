@@ -69,3 +69,17 @@ export async function fetchClassroom() {
     }
   });
 }
+
+export async function deleteCourse(course_id: number) {
+  const headers = await getAuthorizedHeaders();
+  return await fetch(getQueryURL(`${Endpoints.COURSES}/${course_id}`), {
+    method: 'DELETE',
+    headers
+  }).then(async (res) => {
+    if (res.ok) {
+      return (await res.json()) as Promise<ClassRoom>;
+    } else {
+      return Promise.reject(new Error(ErrorMessage.CLASSROOM));
+    }
+  });
+}
