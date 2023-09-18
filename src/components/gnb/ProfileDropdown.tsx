@@ -4,7 +4,7 @@ import PencilSVG from '@/public/icon/Pencil';
 import SaveSVG from '@/public/icon/Save';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 type Props = {
   profile: string;
@@ -25,11 +25,28 @@ export default function ProfileDropdown({
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const enterKeyDownHandler = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        profileButtonClickHandler();
+      }
+    },
+    [profileButtonClickHandler]
+  );
+
   useEffect(() => {
     if (isEditMode) {
       inputRef.current?.focus();
     }
   }, [isEditMode]);
+
+  useEffect(() => {
+    if (isEditMode) {
+      inputRef.current?.addEventListener('keydown', enterKeyDownHandler);
+    } else {
+      inputRef.current?.removeEventListener('keydown', enterKeyDownHandler);
+    }
+  }, [isEditMode, enterKeyDownHandler]);
   return (
     <>
       <div
