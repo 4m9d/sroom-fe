@@ -37,16 +37,12 @@ export default function ProfileDropdown({
   useEffect(() => {
     if (isEditMode) {
       inputRef.current?.focus();
-    }
-  }, [isEditMode]);
-
-  useEffect(() => {
-    if (isEditMode) {
       inputRef.current?.addEventListener('keydown', enterKeyDownHandler);
     } else {
       inputRef.current?.removeEventListener('keydown', enterKeyDownHandler);
     }
   }, [isEditMode, enterKeyDownHandler]);
+
   return (
     <>
       <div
