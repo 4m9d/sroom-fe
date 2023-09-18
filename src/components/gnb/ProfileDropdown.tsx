@@ -34,7 +34,7 @@ export default function ProfileDropdown({
     <>
       <div
         tabIndex={0}
-        className='flex items-center justify-between h-full gap-3 rounded-none btn btn-ghost hover:bg-sroom-gray-300'
+        className='z-20 flex items-center justify-between h-full gap-3 rounded-none btn btn-ghost hover:bg-sroom-gray-300'
       >
         {profile && (
           <Image
@@ -58,7 +58,7 @@ export default function ProfileDropdown({
       </div>
       <ul
         tabIndex={0}
-        className='w-40 p-2 text-sm font-medium rounded-none shadow sm:w-full menu dropdown-content text-sroom-black-400 bg-sroom-white'
+        className='z-20 w-40 p-2 text-sm font-medium rounded-none shadow sm:w-full menu dropdown-content text-sroom-black-400 bg-sroom-white'
       >
         <li className='flex justify-center border-b h-11 border-sroom-gray-400'>
           <div
