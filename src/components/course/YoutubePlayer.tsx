@@ -3,7 +3,7 @@ import { updateViewDuration } from '@/src/api/lectures/time';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React, { memo, useCallback, useEffect } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import YouTube, { YouTubeEvent } from 'react-youtube';
 import PlayerStates from 'youtube-player/dist/constants/PlayerStates';
 import { Options } from 'youtube-player/dist/types';
@@ -84,12 +84,13 @@ const YoutubePlayer = ({
   async function onPlayerStateChange(event: YouTubeEvent<number>) {
     const currentTime = Math.floor(await event.target.getCurrentTime());
     viewDuration.current = currentTime;
+    const playbackRate = await event.target.getPlaybackRate();
 
     if (event.data === PlayerStates.PLAYING) {
       clearIntervalID();
 
       const intervalID = setInterval(() => {
-        viewDuration.current += UPDATE_INTERVAL;
+        viewDuration.current += UPDATE_INTERVAL * playbackRate;
         mutate();
       }, UPDATE_INTERVAL_IN_MS);
       currentIntervalID.current = intervalID;
@@ -100,6 +101,20 @@ const YoutubePlayer = ({
       clearIntervalID();
       revalidateCourseDetail();
     }
+  }
+
+  async function onPlaybackRateChange(event: YouTubeEvent<number>) {
+    clearIntervalID();
+    const currentTime = Math.floor(await event.target.getCurrentTime());
+    viewDuration.current = currentTime;
+    const playbackRate = await event.target.getPlaybackRate();
+
+    const intervalID = setInterval(() => {
+      viewDuration.current += UPDATE_INTERVAL * playbackRate;
+      console.log(viewDuration.current);
+      mutate();
+    }, UPDATE_INTERVAL_IN_MS);
+    currentIntervalID.current = intervalID;
   }
 
   useEffect(() => {
@@ -129,6 +144,9 @@ const YoutubePlayer = ({
         iframeClassName='absolute top-0 left-0 w-full h-full'
         onStateChange={async (event) => {
           onPlayerStateChange(event);
+        }}
+        onPlaybackRateChange={async (event) => {
+          onPlaybackRateChange(event);
         }}
       />
     </div>
