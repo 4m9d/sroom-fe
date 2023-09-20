@@ -41,7 +41,8 @@ export default function CourseReviewModal({ courseId }: Props) {
     {
       staleTime: STALE_TIME,
       cacheTime: CACHE_TIME,
-      enabled: courseId !== null
+      refetchOnMount: 'always',
+      enabled: courseId !== null,
     }
   );
 

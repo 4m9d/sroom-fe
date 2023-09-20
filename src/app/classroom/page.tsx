@@ -12,7 +12,8 @@ import { useQuery } from '@tanstack/react-query';
 export default function Classroom({}) {
   const { data, status } = useQuery([QueryKeys.CLASSROOM], fetchClassroom, {
     staleTime: STALE_TIME,
-    cacheTime: CACHE_TIME
+    cacheTime: CACHE_TIME,
+    refetchOnMount: 'always'
   });
 
   return (
