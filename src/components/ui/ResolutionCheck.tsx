@@ -1,9 +1,9 @@
 'use client';
+import { BROWSER_MIN_WIDTH } from '@/src/constants/window/window';
 import useWindowSize from '@/src/hooks/useWindowSize';
 import { usePathname } from 'next/navigation';
 
 type Props = { children: React.ReactNode };
-const BROWSER_MIN_WIDTH = 500;
 
 export default function ResolutionCheck({ children }: Props) {
   const { width } = useWindowSize();

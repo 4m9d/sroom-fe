@@ -120,7 +120,7 @@ export default function CourseMaterialLectureNotes({
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className={`w-full my-10 flex flex-col justify-center items-center gap-10`}
+        className={`w-full my-10 flex flex-col justify-center items-center gap-10 overflow-x-scroll`}
       >
         <div>
           {isEditMode ? (

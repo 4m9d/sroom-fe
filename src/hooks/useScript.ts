@@ -1,4 +1,6 @@
+import useWindowSize from '@/src/hooks/useWindowSize';
 import { useEffect } from 'react';
+import { BROWSER_MIN_WIDTH } from '../constants/window/window';
 
 export default function useScript(
   id: string,
@@ -6,7 +8,10 @@ export default function useScript(
   onload: () => void,
   defer: boolean
 ) {
+  const { width: windowWidth } = useWindowSize();
+
   useEffect(() => {
+    if (windowWidth < BROWSER_MIN_WIDTH) return;
     const script = document.createElement('script');
 
     script.id = id;
@@ -19,5 +24,5 @@ export default function useScript(
     return () => {
       document.body.removeChild(script);
     };
-  }, [id, url, defer, onload]);
+  }, [id, url, defer, onload, windowWidth]);
 }
