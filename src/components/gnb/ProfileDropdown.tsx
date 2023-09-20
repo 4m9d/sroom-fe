@@ -50,13 +50,15 @@ export default function ProfileDropdown({
         className='z-20 flex items-center justify-between h-full gap-3 rounded-none btn btn-ghost hover:bg-sroom-gray-300'
       >
         {profile && (
-          <Image
-            className='rounded-full'
-            src={profile}
-            alt='프로필'
-            width={40}
-            height={40}
-          />
+          <div className='w-9 h-9 lg:w-10 lg:h-10'>
+            <Image
+              src={profile}
+              className='rounded-full'
+              alt='프로필'
+              width={40}
+              height={40}
+            />
+          </div>
         )}
         <input
           ref={inputRef}
@@ -71,35 +73,39 @@ export default function ProfileDropdown({
       </div>
       <ul
         tabIndex={0}
-        className='z-20 w-40 p-2 text-sm font-medium rounded-none shadow sm:w-full menu dropdown-content text-sroom-black-400 bg-sroom-white'
+        className='z-20 w-40 text-sm font-medium bg-transparent rounded-none sm:w-full menu dropdown-content text-sroom-black-400'
       >
-        <li className='flex justify-center border-b h-11 border-sroom-gray-400'>
-          <div
-            onClick={profileButtonClickHandler}
-            className='rounded-none active:!text-sroom-black-400 hover:bg-gray-100 active:!bg-sroom-gray-400 focus:!bg-sroom-gray-300 flex justify-between items-center'
-          >
-            {isEditMode ? '저장하기' : '프로필 수정'}
-            <span className='w-5 h-5 stroke-sroom-black-200'>
-              {isEditMode ? <SaveSVG /> : <PencilSVG />}
-            </span>
+        <div className='w-full h-full pt-3 bg-inherit'>
+          <div className='p-2 shadow bg-sroom-white'>
+            <li className='flex justify-center border-b h-11 border-sroom-gray-400'>
+              <div
+                onClick={profileButtonClickHandler}
+                className='rounded-none active:!text-sroom-black-400 hover:bg-gray-100 active:!bg-sroom-gray-400 focus:!bg-sroom-gray-300 flex justify-between items-center'
+              >
+                {isEditMode ? '저장하기' : '닉네임 수정'}
+                <span className='w-5 h-5 stroke-sroom-black-200'>
+                  {isEditMode ? <SaveSVG /> : <PencilSVG />}
+                </span>
+              </div>
+            </li>
+            {profileDropdown &&
+              profileDropdown.map((menu) => {
+                return (
+                  <li className='flex justify-center h-11' key={menu.id}>
+                    <Link
+                      className='flex justify-between items-center rounded-none active:!text-sroom-black-400 hover:bg-gray-100 active:!bg-sroom-gray-400 focus:!bg-sroom-gray-300'
+                      href={menu.menuRoute}
+                    >
+                      {menu.menuTitle}
+                      <span className='w-4 h-4 fill-sroom-black-200'>
+                        <ArrowTopRightSVG />
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
           </div>
-        </li>
-        {profileDropdown &&
-          profileDropdown.map((menu) => {
-            return (
-              <li className='flex justify-center h-11' key={menu.id}>
-                <Link
-                  className='flex justify-between items-center rounded-none active:!text-sroom-black-400 hover:bg-gray-100 active:!bg-sroom-gray-400 focus:!bg-sroom-gray-300'
-                  href={menu.menuRoute}
-                >
-                  {menu.menuTitle}
-                  <span className='w-4 h-4 fill-sroom-black-200'>
-                    <ArrowTopRightSVG />
-                  </span>
-                </Link>
-              </li>
-            );
-          })}
+        </div>
       </ul>
     </>
   );
