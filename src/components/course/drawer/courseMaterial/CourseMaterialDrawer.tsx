@@ -15,7 +15,7 @@ type Props = {
   courseVideoId: number;
 };
 
-const BOTTOM_SHEET_MAX_HEIGHT = 660;
+const BOTTOM_SHEET_MAX_HEIGHT = 700;
 const BOTTOM_SHEET_RESIZE_MIN = 100;
 const DRAWER_MAX_WIDTH = 580;
 const DRAWER_RESIZE_MIN = 250;
@@ -114,7 +114,9 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
     drag: 'y' as 'y',
     dragConstraints: {
       top: 0,
-      bottom: 0
+      bottom: 0,
+      left: 0,
+      right: 0
     },
     dragElastic: 0,
     dragMomentum: false,
@@ -228,10 +230,12 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
                 style={{ height: bottomSheetHeight }}
                 {...bottomSheetContentAnimationConfig}
               >
-                <motion.div
-                  {...bottomSheetDragResizingConfig}
-                  className='absolute top-0 z-20 w-full h-[3px] cursor-row-resize hover:bg-sroom-gray-300 active:bg-sroom-gray-500 active:blur-sm'
-                />
+                <div className='flex justify-center w-full'>
+                  <motion.div
+                    {...bottomSheetDragResizingConfig}
+                    className='z-20 w-40 h-2 mt-2 rounded-full cursor-row-resize bg-sroom-gray-500 active:bg-sroom-gray-500 active:blur-sm'
+                  />
+                </div>
                 <CourseMaterialContent
                   courseVideoId={courseVideoId}
                   drawerHandler={drawerHandler}

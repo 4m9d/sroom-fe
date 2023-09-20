@@ -80,7 +80,7 @@ export default function ClassroomCourseCard({
             hoverEffect={true}
             className='!h-8 text-xs xl:text-sm'
           >
-            <p>오답 노트 보기</p>
+            <p>오답 노트</p>
             <span className='w-3 ml-1 stroke-sroom-black-400'>
               <ArrowRightSVG />
             </span>

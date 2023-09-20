@@ -3,7 +3,7 @@ import { updateViewDuration } from '@/src/api/lectures/time';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import YouTube, { YouTubeEvent } from 'react-youtube';
 import PlayerStates from 'youtube-player/dist/constants/PlayerStates';
 import { Options } from 'youtube-player/dist/types';
