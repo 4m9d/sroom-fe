@@ -39,10 +39,12 @@ export default function LectureRecommendationsCard({ lecture }: Props) {
               {description}
             </p>
           </div>
-          <StarRatingWithReviewCount
-            rating={rating}
-            review_count={review_count}
-          />
+          {review_count > 0 && (
+            <StarRatingWithReviewCount
+              rating={rating}
+              review_count={review_count}
+            />
+          )}
         </div>
       </VerticalSmallLectureCard>
     </div>

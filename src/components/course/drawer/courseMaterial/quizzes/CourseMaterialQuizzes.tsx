@@ -105,7 +105,7 @@ export default function CourseMaterialQuizzes({
       sessionStorage.getItem(sessionStorageKey);
 
     setSelectedAnswerList(() =>
-      quizzes[0].is_submitted === false && previouslySelectedAnswerList
+      quizzes[0]?.is_submitted === false && previouslySelectedAnswerList
         ? JSON.parse(previouslySelectedAnswerList)
         : quizzes
     );

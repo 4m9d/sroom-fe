@@ -7,13 +7,13 @@ export default function GlobalError({
   reset
 }: {
   error: ErrorToast;
-  reset?: () => void;
+  reset: () => void;
 }) {
-
   useEffect(() => {
     console.error('에러', error);
     setErrorToast(error);
-  }, []);
+    reset();
+  }, [error, reset]);
 
   return null;
 }

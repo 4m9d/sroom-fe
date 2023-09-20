@@ -25,7 +25,12 @@ export default async function SearchLectureCard({
   // TODO: 플레이리스트 여부, 등록 여부에 따른 UI 구현
 
   return (
-    <HorizontalSmallLectureCard src={thumbnail} alt={lecture_title} isPlaylist={is_playlist} isEnrolled={is_enrolled}>
+    <HorizontalSmallLectureCard
+      src={thumbnail}
+      alt={lecture_title}
+      isPlaylist={is_playlist}
+      isEnrolled={is_enrolled}
+    >
       <div className='flex flex-col justify-between h-full'>
         <div className='flex flex-col gap-1 mt-6 mb-1'>
           <p className='text-base font-bold whitespace-normal line-clamp-2'>
@@ -41,15 +46,15 @@ export default async function SearchLectureCard({
             ･{getRelativeTime(published_at)}
           </p>
         </div>
-        
       </div>
       <div className='absolute right-3 top-3'>
-        <StarRatingWithReviewCount
-          rating={rating}
-          review_count={review_count}
-        />
+        {review_count > 0 && (
+          <StarRatingWithReviewCount
+            rating={rating}
+            review_count={review_count}
+          />
+        )}
       </div>
-      
     </HorizontalSmallLectureCard>
   );
 }

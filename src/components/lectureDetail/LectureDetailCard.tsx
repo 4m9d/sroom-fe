@@ -78,10 +78,12 @@ export default function LectureDetailCard({
                 </p>
               </div>
               <div className='lg:absolute lg:right-3 lg:top-3'>
-                <StarRatingWithReviewCount
-                  rating={rating}
-                  review_count={review_count}
-                />
+                {review_count > 0 && (
+                  <StarRatingWithReviewCount
+                    rating={rating}
+                    review_count={review_count}
+                  />
+                )}
               </div>
             </div>
             <LectureEnrollmentButton

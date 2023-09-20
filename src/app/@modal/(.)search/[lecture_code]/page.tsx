@@ -5,7 +5,7 @@ import LectureDetailModal from '@/src/components/lectureDetail/LectureDetailModa
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
 import { useQuery } from '@tanstack/react-query';
 
-export default async function LectureDetailModalIntercepter({
+export default function LectureDetailModalIntercepter({
   params: { lecture_code }
 }: LectureDetailModalParams) {
   const { data: lectureDetail } = useQuery(
@@ -14,7 +14,8 @@ export default async function LectureDetailModalIntercepter({
     {
       staleTime: STALE_TIME,
       cacheTime: CACHE_TIME,
-      suspense: true
+      suspense: true,
+      retry: false
     }
   );
 

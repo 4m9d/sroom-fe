@@ -8,7 +8,7 @@ export default function Error({
   reset
 }: {
   error: ErrorToast;
-  reset?: () => void;
+  reset: () => void;
 }) {
   const router = useRouter();
 
@@ -16,7 +16,7 @@ export default function Error({
     console.error('에러', error);
     setErrorToast(error);
     router.replace('/');
-  }, []);
+  }, [error, router]);
 
   return null;
 }

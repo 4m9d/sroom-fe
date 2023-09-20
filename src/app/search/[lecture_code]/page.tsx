@@ -10,7 +10,7 @@ const DynamicLectureDetailModal = dynamic(
   { ssr: false }
 );
 
-export default async function LectureDetail({
+export default function LectureDetail({
   params: { lecture_code }
 }: LectureDetailModalParams) {
   const { data: lectureDetail } = useQuery(
@@ -19,7 +19,8 @@ export default async function LectureDetail({
     {
       staleTime: STALE_TIME,
       cacheTime: CACHE_TIME,
-      suspense: true
+      suspense: true,
+      retry: false
     }
   );
 
