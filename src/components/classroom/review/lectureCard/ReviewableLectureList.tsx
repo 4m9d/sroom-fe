@@ -26,15 +26,26 @@ export default function ReviewableLectureList({
           requireReviewCount={requireReviewList.length}
           doneReviewCount={doneReviewList.length}
         />
-        {activeTab === 'require' &&
-          requireReviewList.map((reviewableLecture) => (
-            <ReviewableLectureCard
-              key={reviewableLecture.lecture_id}
-              reviewableLecture={reviewableLecture}
-              setEditingLectureId={setEditingLectureId}
-              mode='require'
-            />
-          ))}
+        {activeTab === 'require' ? (
+          requireReviewList.length > 0 ? (
+            requireReviewList.map((reviewableLecture) => (
+              <ReviewableLectureCard
+                key={reviewableLecture.lecture_id}
+                reviewableLecture={reviewableLecture}
+                setEditingLectureId={setEditingLectureId}
+                mode='require'
+              />
+            ))
+          ) : (
+            <div className='flex items-center justify-center w-full pb-6 border-b h-36 border-b-sroom-gray-500'>
+              <p className='text-base font-normal text-sroom-black-200'>
+                후기를 등록할 강의가 없어요
+              </p>
+            </div>
+          )
+        ) : (
+          <></>
+        )}
         {activeTab === 'done' ? (
           doneReviewList.length > 0 ? (
             doneReviewList.map((reviewableLecture) => (
@@ -45,7 +56,7 @@ export default function ReviewableLectureList({
             ))
           ) : (
             <div className='flex items-center justify-center w-full pb-6 border-b h-36 border-b-sroom-gray-500'>
-              <p className='text-base font-normal text-sroom-black-400'>
+              <p className='text-base font-normal text-sroom-black-200'>
                 아직 등록된 후기가 없어요
               </p>
             </div>

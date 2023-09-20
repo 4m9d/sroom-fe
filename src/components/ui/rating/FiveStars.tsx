@@ -1,7 +1,3 @@
-'use client';
-
-import { useState } from 'react';
-
 type Props = {
   className?: string;
   onChange?: (input: number) => void;
@@ -23,6 +19,7 @@ const UnfilledStar = ({ className }: { className?: string }) => {
 };
 
 export default function FiveStars({ className, onChange, rating }: Props) {
+  
   const ratingOnChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -52,7 +49,7 @@ export default function FiveStars({ className, onChange, rating }: Props) {
     );
   } else {
     return (
-      <div className='flex items-center'>
+      <div className='flex justify-start items-center h-full gap-[1px]'>
         {new Array(rating).fill(0).map((_, index) => {
           return <FilledStar key={'filled_' + index} className={className} />;
         })}
