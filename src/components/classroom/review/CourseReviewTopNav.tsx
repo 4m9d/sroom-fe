@@ -1,3 +1,7 @@
+'use client';
+
+import { useLayoutEffect } from 'react';
+
 type Props = {
   activeTab: 'require' | 'done';
   setActiveTab: React.Dispatch<React.SetStateAction<'require' | 'done'>>;
@@ -11,6 +15,11 @@ export default function CourseReviewTopNav({
   requireReviewCount,
   doneReviewCount
 }: Props) {
+
+  useLayoutEffect(() => {
+    setActiveTab('require');
+  }, [setActiveTab]);
+
   return (
     <div className='w-full h-[41px] border-b border-b-sroom-gray-500'>
       <button
@@ -21,7 +30,7 @@ export default function CourseReviewTopNav({
             : 'text-sroom-black-100'
         }`}
       >
-        {`작성 가능한 리뷰 (${requireReviewCount})`}
+        {`작성 가능한 후기 (${requireReviewCount})`}
       </button>
       <button
         onClick={() => setActiveTab('done')}
@@ -31,7 +40,7 @@ export default function CourseReviewTopNav({
             : 'text-sroom-black-100'
         }`}
       >
-        {`등록된 리뷰 (${doneReviewCount})`}
+        {`작성한 후기 (${doneReviewCount})`}
       </button>
     </div>
   );

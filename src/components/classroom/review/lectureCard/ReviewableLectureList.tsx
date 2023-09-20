@@ -29,12 +29,19 @@ export default function ReviewableLectureList({
         {activeTab === 'require' ? (
           requireReviewList.length > 0 ? (
             requireReviewList.map((reviewableLecture) => (
-              <ReviewableLectureCard
-                key={reviewableLecture.lecture_id}
-                reviewableLecture={reviewableLecture}
-                setEditingLectureId={setEditingLectureId}
-                mode='require'
-              />
+              <div className='w-full h-full' key={reviewableLecture.lecture_id}>
+                <ReviewableLectureCard
+                  reviewableLecture={reviewableLecture}
+                  setEditingLectureId={setEditingLectureId}
+                  mode='require'
+                />
+                {reviewableLecture.is_review_allowed === false &&
+                  reviewableLecture.submitted_at === null && (
+                    <p className='w-full px-1 mt-2 text-xs text-left text-sroom-brand'>
+                      {'강의를 70% 이상 수강하면 후기를 작성할 수 있어요!'}
+                    </p>
+                  )}
+              </div>
             ))
           ) : (
             <div className='flex items-center justify-center w-full pb-6 border-b h-36 border-b-sroom-gray-500'>
