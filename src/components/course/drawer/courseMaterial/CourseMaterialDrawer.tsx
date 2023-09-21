@@ -226,14 +226,14 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
           {isDrawerOpen && (
             <AnimatePresence>
               <motion.div
-                className='relative w-full'
+                className='relative w-full h-full max-h-full'
                 style={{ height: bottomSheetHeight }}
                 {...bottomSheetContentAnimationConfig}
               >
-                <div className='flex justify-center w-full'>
+                <div className='absolute flex justify-center w-full'>
                   <motion.div
                     {...bottomSheetDragResizingConfig}
-                    className='z-20 w-40 h-2 mt-2 rounded-full cursor-row-resize bg-sroom-gray-500 active:bg-sroom-gray-500 active:blur-sm'
+                    className='z-20 w-40 h-2 mt-2 rounded-full cursor-row-resize bg-sroom-gray-500 active:bg-sroom-gray-500'
                   />
                 </div>
                 <CourseMaterialContent

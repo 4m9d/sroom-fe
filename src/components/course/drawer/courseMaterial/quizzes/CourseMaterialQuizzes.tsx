@@ -137,7 +137,7 @@ export default function CourseMaterialQuizzes({
             </motion.section>
           );
         })}
-        {
+        {selectedAnswerList[0].is_submitted === false && (
           <Button
             onClick={quizSubmitHandler}
             disabled={isSubmitButtonDisabled}
@@ -147,7 +147,7 @@ export default function CourseMaterialQuizzes({
           >
             {'제출하기'}
           </Button>
-        }
+        )}
       </div>
     </AnimatePresence>
   );
