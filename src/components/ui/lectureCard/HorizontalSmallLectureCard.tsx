@@ -59,13 +59,16 @@ export default function HorizontalSmallLectureCard({
                 <ThumbnailBadge title='재생목록' className='bg-sroom-brand' />
               </div>
             )}
-            {isMembersOnly && (
+            {isPlaylist === false && isMembersOnly && (
               <div
                 className={`absolute top-0 ${
                   isEnrolled ? 'left-[4rem]' : 'left-0'
                 }`}
               >
-                <ThumbnailBadge title='회원 전용' className='bg-sroom-black-400' />
+                <ThumbnailBadge
+                  title='회원 전용'
+                  className='bg-sroom-black-400'
+                />
               </div>
             )}
           </div>
