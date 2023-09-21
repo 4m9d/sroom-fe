@@ -44,7 +44,7 @@ export default function HorizontalBigLectureCard({
                   isEnrolled ? 'left-[4rem]' : 'left-0'
                 }`}
               >
-                <ThumbnailBadge title='회원전용' className='bg-sroom-brand' />
+                <ThumbnailBadge title='회원 전용' className='bg-sroom-black-400' />
               </div>
             )}
           </div>
