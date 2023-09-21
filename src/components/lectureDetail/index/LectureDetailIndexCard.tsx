@@ -18,7 +18,9 @@ export default function LectureDetailIndexCard({
   return (
     <li
       className={`flex items-center justify-between h-[4.5rem] p-3 border bg-sroom-gray-200 relative ${
-        is_members_only ? 'border-sroom-brand border-2 rounded-sm' : 'border-sroom-gray-400'
+        is_members_only
+          ? 'border-sroom-brand border-2 rounded-sm'
+          : 'border-sroom-gray-400'
       }`}
     >
       <div className='flex items-center w-24'>
@@ -34,20 +36,22 @@ export default function LectureDetailIndexCard({
         </div>
       </div>
       <div className='flex items-center w-full gap-5 px-5'>
-        <div className='flex items-center justify-center rounded-full w-7 h-7 shrink-0 bg-sroom-black-300'>
-          <span className='text-sm font-semibold text-sroom-white'>
-            {indexNum}
-          </span>
+        <div className='flex items-center gap-2'>
+          <div className='flex items-center justify-center rounded-full w-7 h-7 shrink-0 bg-sroom-black-300'>
+            <span className='text-sm font-semibold text-sroom-white'>
+              {indexNum}
+            </span>
+          </div>
+          {is_members_only && (
+            <span className='p-[5px] rounded-full w-7 h-7 bg-sroom-brand stroke-sroom-white'>
+              <CrownSVG />
+            </span>
+          )}
         </div>
         <div className='text-sm font-semibold text-sroom-black-300 line-clamp-2'>
           <p>{lecture_title}</p>
         </div>
       </div>
-      {is_members_only && (
-        <span className='absolute w-6 -translate-y-1/2 -top-1 left-2'>
-          <CrownSVG />
-        </span>
-      )}
       <div className='text-xs text-sroom-black-200'>
         <p>{getCompactFormattedTime(duration)}</p>
       </div>

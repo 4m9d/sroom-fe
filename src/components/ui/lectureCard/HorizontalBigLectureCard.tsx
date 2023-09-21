@@ -7,6 +7,7 @@ type Props = {
   children: React.ReactNode;
   isPlaylist?: boolean;
   isEnrolled?: boolean;
+  isMembersOnly?: boolean;
 };
 
 export default function HorizontalBigLectureCard({
@@ -14,7 +15,8 @@ export default function HorizontalBigLectureCard({
   alt,
   children,
   isPlaylist = false,
-  isEnrolled = false
+  isEnrolled = false,
+  isMembersOnly = false
 }: Props) {
   return (
     <div className='relative flex flex-col w-full gap-5 p-3 whitespace-normal bg-sroom-white text-sroom-black-400 lg:gap-10 lg:flex-row'>
@@ -24,10 +26,7 @@ export default function HorizontalBigLectureCard({
             <Image fill={true} sizes='100%' src={src} alt={alt} />
             {isEnrolled && (
               <div className='absolute top-0 left-0'>
-                <ThumbnailBadge
-                  title='수강 중'
-                  className='bg-sroom-black-400'
-                />
+                <ThumbnailBadge title='수강 중' className='bg-sroom-green' />
               </div>
             )}
             {isPlaylist && (
@@ -37,6 +36,15 @@ export default function HorizontalBigLectureCard({
                 }`}
               >
                 <ThumbnailBadge title='재생목록' className='bg-sroom-brand' />
+              </div>
+            )}
+            {isMembersOnly && (
+              <div
+                className={`absolute top-0 ${
+                  isEnrolled ? 'left-[4rem]' : 'left-0'
+                }`}
+              >
+                <ThumbnailBadge title='회원전용' className='bg-sroom-brand' />
               </div>
             )}
           </div>

@@ -7,6 +7,7 @@ type Props = {
   children: React.ReactNode;
   isPlaylist?: boolean;
   isEnrolled?: boolean;
+  isMembersOnly?: boolean;
   border?: boolean;
   disabled?: boolean;
   onClick?: () => void;
@@ -19,6 +20,7 @@ export default function HorizontalSmallLectureCard({
   children,
   isPlaylist = false,
   isEnrolled = false,
+  isMembersOnly = false,
   border = true,
   disabled = false,
   onClick,
@@ -45,10 +47,7 @@ export default function HorizontalSmallLectureCard({
             />
             {isEnrolled && (
               <div className='absolute top-0 left-0'>
-                <ThumbnailBadge
-                  title='수강 중'
-                  className='bg-sroom-black-400'
-                />
+                <ThumbnailBadge title='수강 중' className='bg-sroom-green' />
               </div>
             )}
             {isPlaylist && (
@@ -58,6 +57,15 @@ export default function HorizontalSmallLectureCard({
                 }`}
               >
                 <ThumbnailBadge title='재생목록' className='bg-sroom-brand' />
+              </div>
+            )}
+            {isMembersOnly && (
+              <div
+                className={`absolute top-0 ${
+                  isEnrolled ? 'left-[4rem]' : 'left-0'
+                }`}
+              >
+                <ThumbnailBadge title='회원전용' className='bg-sroom-brand' />
               </div>
             )}
           </div>

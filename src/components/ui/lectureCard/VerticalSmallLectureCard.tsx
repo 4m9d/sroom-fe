@@ -7,6 +7,7 @@ type Props = {
   children: React.ReactNode;
   isPlaylist?: boolean;
   isEnrolled?: boolean;
+  isMembersOnly?: boolean;
 };
 
 export default function VerticalSmallLectureCard({
@@ -14,7 +15,8 @@ export default function VerticalSmallLectureCard({
   alt,
   children,
   isPlaylist = false,
-  isEnrolled = false
+  isEnrolled = false,
+  isMembersOnly = false
 }: Props) {
   return (
     <div className='relative flex flex-col gap-4 text-sroom-black-400 w-96'>
@@ -24,10 +26,7 @@ export default function VerticalSmallLectureCard({
             <Image fill={true} src={src} alt={alt} />
             {isEnrolled && (
               <div className='absolute top-0 left-0'>
-                <ThumbnailBadge
-                  title='수강 중'
-                  className='bg-sroom-black-400'
-                />
+                <ThumbnailBadge title='수강 중' className='bg-sroom-green' />
               </div>
             )}
             {isPlaylist && (
@@ -37,6 +36,15 @@ export default function VerticalSmallLectureCard({
                 }`}
               >
                 <ThumbnailBadge title='재생목록' className='bg-sroom-brand' />
+              </div>
+            )}
+            {isMembersOnly && (
+              <div
+                className={`absolute top-0 ${
+                  isEnrolled ? 'left-[4rem]' : 'left-0'
+                }`}
+              >
+                <ThumbnailBadge title='회원전용' className='bg-sroom-brand' />
               </div>
             )}
           </div>

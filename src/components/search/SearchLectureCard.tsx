@@ -30,6 +30,7 @@ export default async function SearchLectureCard({
       alt={lecture_title}
       isPlaylist={is_playlist}
       isEnrolled={is_enrolled}
+      isMembersOnly={view_count === -1}
     >
       <div className='flex flex-col justify-between h-full'>
         <div className='flex flex-col gap-1 mt-6 mb-1'>
