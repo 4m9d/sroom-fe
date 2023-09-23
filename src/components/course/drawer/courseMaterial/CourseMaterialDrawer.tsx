@@ -230,12 +230,12 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
                 style={{ height: bottomSheetHeight }}
                 {...bottomSheetContentAnimationConfig}
               >
-                <div className='absolute flex justify-center w-full'>
-                  <motion.div
-                    {...bottomSheetDragResizingConfig}
-                    className='z-20 w-40 h-2 mt-2 rounded-full cursor-row-resize bg-sroom-gray-500 active:bg-sroom-gray-500'
-                  />
-                </div>
+                <motion.div
+                  {...bottomSheetDragResizingConfig}
+                  className='absolute z-20 flex justify-center w-full h-5 cursor-row-resize'
+                >
+                  <div className='w-40 h-2 mt-2 rounded-full bg-sroom-gray-500 active:bg-sroom-gray-500' />
+                </motion.div>
                 <CourseMaterialContent
                   courseVideoId={courseVideoId}
                   drawerHandler={drawerHandler}
