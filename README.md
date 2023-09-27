@@ -84,6 +84,6 @@ npm run start
 
 ## 참고 자료
 
-Next.js에 대해 더 알아보고 싶다면? :
+Next.js에 대해 더 알아보고 싶다면 :
 
 - [Next.js Documentation](https://nextjs.org/docs) - Next.js 공식 문서
