@@ -7,6 +7,44 @@ interface WeekRange {
   startOfWeek: string;
   endOfWeek: string;
 }
+// for channelTalk
+interface IChannelIO {
+  c?: (...args: any) => void;
+  q?: [methodName: string, ...args: any[]][];
+  (...args: any): void;
+}
+interface BootOption {
+  appearance?: string;
+  customLauncherSelector?: string;
+  hideChannelButtonOnBoot?: boolean;
+  hidePopup?: boolean;
+  language?: string;
+  memberHash?: string;
+  memberId?: string;
+  pluginKey: string;
+  profile?: Profile;
+  trackDefaultEvent?: boolean;
+  trackUtmSource?: boolean;
+  unsubscribe?: boolean;
+  unsubscribeEmail?: boolean;
+  unsubscribeTexting?: boolean;
+  zIndex?: number;
+}
+interface CallbackUser {
+  alert: number;
+  avatarUrl: string;
+  id: string;
+  language: string;
+  memberId: string;
+  name?: string;
+  profile?: Profile | null;
+  tags?: string[] | null;
+  unsubscribeEmail: boolean;
+  unsubscribeTexting: boolean;
+}
+interface Callback {
+  (error: Error | null, user: CallbackUser | null): void;
+}
 
 //////////////////////////////////toast//////////////////////////////////
 
