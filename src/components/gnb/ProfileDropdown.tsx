@@ -80,7 +80,7 @@ export default function ProfileDropdown({
             <li className='flex justify-center border-b h-11 border-sroom-gray-400'>
               <div
                 onClick={profileButtonClickHandler}
-                className='rounded-none active:!text-sroom-black-400 hover:bg-gray-100 active:!bg-sroom-gray-400 focus:!bg-sroom-gray-300 flex justify-between items-center'
+                className='rounded-none active:!text-sroom-black-400 hover:bg-sroom-gray-300 active:!bg-sroom-gray-400 focus:!bg-sroom-gray-300 flex justify-between items-center'
               >
                 {isEditMode ? '저장하기' : '닉네임 수정'}
                 <span className='w-5 h-5 stroke-sroom-black-200'>
@@ -93,7 +93,7 @@ export default function ProfileDropdown({
                 return (
                   <li className='flex justify-center h-11' key={menu.id}>
                     <Link
-                      className='flex justify-between items-center rounded-none active:!text-sroom-black-400 hover:bg-gray-100 active:!bg-sroom-gray-400 focus:!bg-sroom-gray-300'
+                      className='flex justify-between items-center rounded-none active:!text-sroom-black-400 hover:bg-sroom-gray-300 active:!bg-sroom-gray-400 focus:!bg-sroom-gray-300'
                       href={menu.menuRoute}
                     >
                       {menu.menuTitle}
