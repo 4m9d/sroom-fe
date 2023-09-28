@@ -3,7 +3,12 @@ import { fetchCourseDetail } from '@/src/api/courses/courses';
 import { QueryKeys } from '@/src/api/queryKeys';
 import CourseTaking from '@/src/components/course/CourseTaking';
 import { STALE_TIME } from '@/src/constants/query/query';
+import {
+  hideChannelTalkButton,
+  showChannelTalkButton
+} from '@/src/util/channelTalk/channelTalk';
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 export default function CourseTakingPage({
   params,
@@ -17,6 +22,14 @@ export default function CourseTakingPage({
       staleTime: STALE_TIME
     }
   );
+
+  useEffect(() => {
+    hideChannelTalkButton();
+
+    return () => {
+      showChannelTalkButton();
+    };
+  }, []);
 
   return (
     <div className='min-h-[calc(100vh-4rem)] max-h-[calc(100vh-4rem)] bg-zinc-50 flex items-stretch'>

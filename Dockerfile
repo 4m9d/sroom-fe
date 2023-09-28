@@ -26,6 +26,7 @@ WORKDIR /app
 ENV NODE_ENV production
 ENV NEXTAUTH_SECRET default
 ENV NEXT_PUBLIC_GOOGLE_CLIENT_ID default
+ENV NEXT_PUBLIC_CHANNEL_TALK_PLUGIN_KEY default
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs

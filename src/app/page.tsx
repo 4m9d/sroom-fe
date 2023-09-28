@@ -9,7 +9,7 @@ export default function Main() {
   const { width: windowWidth } = useWindowSize();
 
   return (
-    <div className='px-4 pt-16 pb-20 mx-auto lg:px-24 max-w-screen-2xl'>
+    <div className='px-4 pt-16 mx-auto pb-72 lg:px-24 max-w-screen-2xl'>
       <GoogleOneTapPortal />
       <h2 className='mb-2 text-3xl font-bold md:mb-5 md:text-4xl xl:text-5xl text-sroom-black-400'>
         유튜브 강의를 쉽고 편하게.
