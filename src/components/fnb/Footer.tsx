@@ -14,7 +14,7 @@ export default function Footer({}) {
           <li>
             <Link
               href={
-                'https://faithful-mercury-e97.notion.site/bee31f906b9848078f1d4abe2a2a0812?pvs=4'
+                'https://sroom.notion.site/bee31f906b9848078f1d4abe2a2a0812?pvs=4'
               }
               target='_blank'
             >
@@ -24,7 +24,7 @@ export default function Footer({}) {
           <li className='font-bold'>
             <Link
               href={
-                'https://faithful-mercury-e97.notion.site/22eccf45d718426ba4e950f983b8b73a?pvs=4'
+                'https://sroom.notion.site/22eccf45d718426ba4e950f983b8b73a?pvs=4'
               }
               target='_blank'
             >
