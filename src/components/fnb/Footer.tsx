@@ -1,6 +1,6 @@
 'use client';
-
 import Image from 'next/image';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export default function Footer({}) {
@@ -8,15 +8,34 @@ export default function Footer({}) {
 
   if (currentRoute.startsWith('/course')) return null;
   return (
-    <footer className='pt-5 pb-16 border px-11 bg-sroom-gray-300 border-t-sroom-gray-400'>
-      <div
-        className='mx-auto max-w-7xlname: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1 # buildx 설정'
-      >
+    <footer className='pt-5 pb-16 border bg-sroom-gray-300 border-t-sroom-gray-400'>
+      <div className='px-4 mx-auto lg:px-24 max-w-screen-2xl'>
         <ul className='flex flex-wrap justify-center w-full gap-4 mb-12 text-sm text-sroom-black-400'>
-          <li>이용약관</li>
-          <li className='font-bold'>개인정보처리방침</li>
-          <li>문의하기</li>
+          <li>
+            <Link
+              href={
+                'https://faithful-mercury-e97.notion.site/bee31f906b9848078f1d4abe2a2a0812?pvs=4'
+              }
+              target='_blank'
+            >
+              이용약관
+            </Link>
+          </li>
+          <li className='font-bold'>
+            <Link
+              href={
+                'https://faithful-mercury-e97.notion.site/22eccf45d718426ba4e950f983b8b73a?pvs=4'
+              }
+              target='_blank'
+            >
+              개인정보처리방침
+            </Link>
+          </li>
+          <li>
+            <Link href={'https://sroom.channel.io/home'} target='_blank'>
+              문의하기
+            </Link>
+          </li>
           <li className='font-medium'>© 4M9D.</li>
         </ul>
         <div className='flex flex-col gap-3'>
