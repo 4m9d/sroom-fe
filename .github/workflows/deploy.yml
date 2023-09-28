@@ -1,11 +1,13 @@
-name: CI/CD
+name: Deploy to Amazon ECS
 on:
-  push:
+  pull_request: 
     branches:
-      - feat/#73/terms-n-policy(swm-335)
       - main
+    types:
+      - closed
 jobs:
-  build:
+  deploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: checkout
