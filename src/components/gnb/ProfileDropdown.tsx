@@ -35,13 +35,20 @@ export default function ProfileDropdown({
   );
 
   useEffect(() => {
+    if (inputRef.current === null) return;
+
     if (isEditMode) {
-      inputRef.current?.focus();
-      inputRef.current?.addEventListener('keydown', enterKeyDownHandler);
+      inputRef.current.focus();
+      inputRef.current.setSelectionRange(
+        inputRef.current.value.length,
+        inputRef.current.value.length
+      );
+      inputRef.current.value = name;
+      inputRef.current.addEventListener('keydown', enterKeyDownHandler);
     } else {
-      inputRef.current?.removeEventListener('keydown', enterKeyDownHandler);
+      inputRef.current.removeEventListener('keydown', enterKeyDownHandler);
     }
-  }, [isEditMode, enterKeyDownHandler]);
+  }, [name, isEditMode, enterKeyDownHandler]);
 
   return (
     <>
