@@ -13,7 +13,10 @@ import GoogleAnalytics from '../components/tools/GoogleAnalytics/GoogleAnalytics
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: '스룸',
+  title: {
+    template: '%s | 스룸',
+    default: '스룸'
+  },
   description: '나만을 위한 유튜브 강의 관리 플랫폼 스룸'
 };
 
