@@ -42,7 +42,7 @@ export default function CourseReviewModal({ courseId }: Props) {
       staleTime: STALE_TIME,
       cacheTime: CACHE_TIME,
       refetchOnMount: 'always',
-      enabled: courseId !== null,
+      enabled: courseId !== null
     }
   );
 
@@ -59,6 +59,7 @@ export default function CourseReviewModal({ courseId }: Props) {
           QueryKeys.LECTURE_REVIEW,
           courseId?.toString()
         ]);
+        queryClient.invalidateQueries([QueryKeys.DETAIL]);
       }
     }
   );
