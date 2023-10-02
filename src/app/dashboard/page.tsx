@@ -4,6 +4,10 @@ import LatestLearningCoursesList from '@/src/components/dashboard/latestLearning
 import MainDashboard from '@/src/components/dashboard/main/MainDashboard';
 import LectureRecommendationsList from '@/src/components/recommendations/LectureRecommendationsList';
 
+export const metadata = {
+  title: '대시보드',
+};
+
 export default async function Dashboard() {
   const dashboardInfo = await fetchDashboardInfo();
 

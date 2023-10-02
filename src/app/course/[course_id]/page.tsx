@@ -7,6 +7,7 @@ import {
   hideChannelTalkButton,
   showChannelTalkButton
 } from '@/src/util/channelTalk/channelTalk';
+import getPageTitle from '@/src/util/metadata/getPageTitle';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
@@ -34,14 +35,17 @@ export default function CourseTakingPage({
   return (
     <div className='min-h-[calc(100vh-4rem)] max-h-[calc(100vh-4rem)] bg-zinc-50 flex items-stretch'>
       {courseDetail && (
-        <CourseTaking
-          courseDetail={courseDetail}
-          currentCourseVideoId={
-            searchParams.courseVideoId
-              ? parseInt(searchParams.courseVideoId)
-              : courseDetail.last_view_video.course_video_id
-          }
-        />
+        <>
+          <title>{getPageTitle(`${courseDetail.course_title}`)}</title>
+          <CourseTaking
+            courseDetail={courseDetail}
+            currentCourseVideoId={
+              searchParams.courseVideoId
+                ? parseInt(searchParams.courseVideoId)
+                : courseDetail.last_view_video.course_video_id
+            }
+          />
+        </>
       )}
     </div>
   );
