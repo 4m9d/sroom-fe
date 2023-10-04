@@ -30,7 +30,6 @@ export default function NavBar({ logo, profileDropdown }: Props) {
 
   const profileButtonClickHandler = async () => {
     if (isEditMode) {
-      console.log('updateUserProfile')
       mutate();
       await update({ ...session, name });
     }

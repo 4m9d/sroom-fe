@@ -19,8 +19,6 @@ export default function useAuth() {
   const silentRefresh = async () => {
     const response = await fetchUserAuthWithRefreshToken(refreshToken)
       .then(async (res) => {
-        //TODO: 로그 추후 삭제
-        console.log('silent refresh! response: ', res);
         await update(res);
         return res;
       })
@@ -43,8 +41,6 @@ export default function useAuth() {
   });
 
   const login = async (googleResponse: GoogleLoginCredential) => {
-    //TODO: 로그 추후 삭제
-    console.log('구글 토큰', googleResponse);
     if (!googleResponse) return;
 
     await signIn('credentials', {
