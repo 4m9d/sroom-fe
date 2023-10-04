@@ -16,6 +16,8 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN NEXT_PUBLIC_CHANNEL_TALK_PLUGIN_KEY=APP_NEXT_PUBLIC_CHANNEL_TALK_PLUGIN_KEY
+RUN NEXT_PUBLIC_GOOGLE_CLIENT_ID=APP_NEXT_PUBLIC_GOOGLE_CLIENT_ID
 RUN npm run build
 
 # Run the source code
@@ -24,9 +26,6 @@ FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
-ENV NEXTAUTH_SECRET default
-ENV NEXT_PUBLIC_GOOGLE_CLIENT_ID default
-ENV NEXT_PUBLIC_CHANNEL_TALK_PLUGIN_KEY default
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -39,5 +38,9 @@ USER nextjs
 
 EXPOSE 3000
 ENV PORT 3000
+
+RUN npx next telemetry disable
+
+ENTRYPOINT ["/app/entrypoint.sh"]
 
 CMD ["node", "server.js"]
