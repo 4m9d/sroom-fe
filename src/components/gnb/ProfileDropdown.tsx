@@ -12,7 +12,7 @@ type Props = {
   isEditMode: boolean;
   profileDropdown?: ProfileDropdown[];
   setName: React.Dispatch<React.SetStateAction<string>>;
-  profileButtonClickHandler: () => void;
+  profileButtonClickHandler: () => Promise<void>;
 };
 
 export default function ProfileDropdown({
@@ -26,9 +26,9 @@ export default function ProfileDropdown({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const enterKeyDownHandler = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
-        profileButtonClickHandler();
+    async (e: string) => {
+      if (e === 'Enter') {
+        await profileButtonClickHandler();
       }
     },
     [profileButtonClickHandler]
@@ -44,11 +44,8 @@ export default function ProfileDropdown({
         inputRef.current.value.length
       );
       inputRef.current.value = name;
-      inputRef.current.addEventListener('keydown', enterKeyDownHandler);
-    } else {
-      inputRef.current.removeEventListener('keydown', enterKeyDownHandler);
     }
-  }, [name, isEditMode, enterKeyDownHandler]);
+  }, [name, isEditMode]);
 
   return (
     <>
@@ -74,6 +71,7 @@ export default function ProfileDropdown({
           disabled={isEditMode === false}
           spellCheck='false'
           onChange={(e) => setName(e.target.value.trim())}
+          onKeyDown={(e) => enterKeyDownHandler(e.key)}
           maxLength={10}
           className='hidden w-32 p-1 text-xs font-semibold leading-9 text-left resize-none sm:block md:text-sm lg:text-base disabled:bg-sroom-white'
         />
