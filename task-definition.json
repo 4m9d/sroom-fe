@@ -32,15 +32,15 @@
       "workingDirectory": null,
       "secrets": [
         {
-          "valueFrom": "/sroom/fe/NEXT_PUBLIC_GOOGLE_CLIENT_ID",
+          "valueFrom": "arn:aws:ssm:ap-northeast-2:224066583965:parameter/sroom/fe/NEXT_PUBLIC_GOOGLE_CLIENT_ID",
           "name": "NEXT_PUBLIC_GOOGLE_CLIENT_ID"
         },
         {
-          "valueFrom": "/sroom/fe/NEXT_PUBLIC_CHANNEL_TALK_PLUGIN_KEY",
+          "valueFrom": "arn:aws:ssm:ap-northeast-2:224066583965:parameter/sroom/fe/NEXT_PUBLIC_CHANNEL_TALK_PLUGIN_KEY",
           "name": "NEXT_PUBLIC_CHANNEL_TALK_PLUGIN_KEY"
         },
         {
-          "valueFrom": "/sroom/fe/NEXTAUTH_SECRET",
+          "valueFrom": "arn:aws:ssm:ap-northeast-2:224066583965:parameter/sroom/fe/NEXTAUTH_SECRET",
           "name": "NEXTAUTH_SECRET"
         }
       ],
