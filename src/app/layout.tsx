@@ -28,6 +28,10 @@ type Props = {
 export default function RootLayout({ children, modal }: Props) {
   return (
     <html lang='ko'>
+      <meta
+        http-equiv='Content-Security-Policy'
+        content='upgrade-insecure-requests'
+      />
       <body className={inter.className}>
         <GoogleAnalytics />
         <ChannelTalk />
