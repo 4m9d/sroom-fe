@@ -32,12 +32,8 @@ export default function useAuth() {
 
   useQuery([QueryKeys.REFRESH], silentRefresh, {
     enabled: !!session,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: true,
-    retry: 2,
     refetchInterval: REFRESH_PERIOD,
-    refetchIntervalInBackground: true
+    refetchIntervalInBackground: true,
   });
 
   const login = async (googleResponse: GoogleLoginCredential) => {
