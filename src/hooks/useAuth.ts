@@ -17,15 +17,12 @@ export default function useAuth() {
   const refreshToken = { refresh_token: session?.refresh_token ?? '' };
 
   const silentRefresh = async () => {
-    const response = await fetchUserAuthWithRefreshToken(refreshToken)
-      .then(async (res) => {
+    const response = await fetchUserAuthWithRefreshToken(refreshToken).then(
+      async (res) => {
         await update(res);
         return res;
-      })
-      .catch(async () => {
-        setErrorToast(new Error(ErrorMessage.REFRESH));
-        await logout();
-      });
+      }
+    );
 
     return response;
   };
@@ -34,6 +31,9 @@ export default function useAuth() {
     enabled: !!session,
     refetchInterval: REFRESH_PERIOD,
     refetchIntervalInBackground: true,
+    onError: (err) => {
+      console.log(err);
+    }
   });
 
   const login = async (googleResponse: GoogleLoginCredential) => {
