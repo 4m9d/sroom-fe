@@ -30,7 +30,7 @@ export default function useAuth() {
     return response;
   };
 
-  useQuery([QueryKeys.REFRESH], silentRefresh, {
+  useQuery([QueryKeys.REFRESH], () => silentRefresh(), {
     enabled: !!session,
     refetchInterval: REFRESH_PERIOD,
     refetchIntervalInBackground: true,
