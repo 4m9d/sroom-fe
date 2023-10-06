@@ -24,22 +24,21 @@ export default function NavBar({ logo, profileDropdown }: Props) {
   const [isEditMode, setIsEditMode] = useState(false);
 
   const [name, setName] = useState(session?.name ?? '');
-  const profile = session?.profile;
+  const profileImage = session?.profile;
 
   const navBarHidden = session ? '' : 'hidden';
 
-  const profileButtonClickHandler = async () => {
-    if (isEditMode) {
-      mutate();
-      await update({ ...session, name });
-    }
+  const profileButtonClickHandler = async (name: string) => {
     setIsEditMode((prev) => !prev);
+
+    mutate();
+    await update({ ...session, name });
   };
 
   const { mutate } = useMutation(() => updateUserProfile(name), {
     onSuccess: (data) => {
       setIsEditMode(false);
-      setName(data.name);
+      setName(() => data.name);
     }
   });
 
@@ -84,13 +83,13 @@ export default function NavBar({ logo, profileDropdown }: Props) {
           type='button'
           className={`${navBarHidden} dropdown dropdown-end md:dropdown-hover text-sroom-black-400`}
         >
-          {profile && (
+          {profileImage && (
             <ProfileDropdown
-              profile={profile}
+              profileImage={profileImage}
               name={name}
               profileDropdown={profileDropdown}
               isEditMode={isEditMode}
-              setName={setName}
+              setIsEditMode={setIsEditMode}
               profileButtonClickHandler={profileButtonClickHandler}
             />
           )}
