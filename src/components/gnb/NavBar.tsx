@@ -51,7 +51,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
     <nav className='z-20 h-12 shadow-sm navbar'>
       <div className='flex justify-between gap-4 px-4 mx-auto lg:gap-8 lg:px-24 navbar max-w-screen-2xl'>
         <h1 className='w-10 sm:w-28 lg:w-36 shrink-0'>
-          <Link href='/' className='shrink-0 mr-14'>
+          <Link href='/dashboard' className='shrink-0 mr-14'>
             {windowWidth < WIDTH_SM ? (
               <Image
                 className='w-10 h-10'
