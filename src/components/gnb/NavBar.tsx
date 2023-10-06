@@ -24,22 +24,21 @@ export default function NavBar({ logo, profileDropdown }: Props) {
   const [isEditMode, setIsEditMode] = useState(false);
 
   const [name, setName] = useState(session?.name ?? '');
-  const profile = session?.profile;
+  const profileImage = session?.profile;
 
   const navBarHidden = session ? '' : 'hidden';
 
-  const profileButtonClickHandler = async () => {
-    if (isEditMode) {
-      mutate();
-      await update({ ...session, name });
-    }
+  const profileButtonClickHandler = async (name: string) => {
     setIsEditMode((prev) => !prev);
+
+    mutate();
+    await update({ ...session, name });
   };
 
   const { mutate } = useMutation(() => updateUserProfile(name), {
     onSuccess: (data) => {
       setIsEditMode(false);
-      setName(data.name);
+      setName(() => data.name);
     }
   });
 
@@ -51,7 +50,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
     <nav className='z-20 h-12 shadow-sm navbar'>
       <div className='flex justify-between gap-4 px-4 mx-auto lg:gap-8 lg:px-24 navbar max-w-screen-2xl'>
         <h1 className='w-10 sm:w-28 lg:w-36 shrink-0'>
-          <Link href='/' className='shrink-0 mr-14'>
+          <Link href='/dashboard' className='shrink-0 mr-14'>
             {windowWidth < WIDTH_SM ? (
               <Image
                 className='w-10 h-10'
@@ -84,13 +83,13 @@ export default function NavBar({ logo, profileDropdown }: Props) {
           type='button'
           className={`${navBarHidden} dropdown dropdown-end md:dropdown-hover text-sroom-black-400`}
         >
-          {profile && (
+          {profileImage && (
             <ProfileDropdown
-              profile={profile}
+              profileImage={profileImage}
               name={name}
               profileDropdown={profileDropdown}
               isEditMode={isEditMode}
-              setName={setName}
+              setIsEditMode={setIsEditMode}
               profileButtonClickHandler={profileButtonClickHandler}
             />
           )}
