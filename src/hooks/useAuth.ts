@@ -47,11 +47,12 @@ export default function useAuth() {
         if (res?.error) {
           throw new Error(ErrorMessage.LOGIN);
         }
-        router.replace('/dashboard');
+        router.push('/dashboard');
       })
       .catch((err) => {
         setErrorToast(err);
       });
+      router.refresh();
   };
 
   const logout = async () => {
