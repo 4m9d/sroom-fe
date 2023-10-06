@@ -9,7 +9,7 @@ export default function EnrollmentIntro({}) {
         </p>
       </div>
       <div className='absolute bottom-0 right-0 w-[82%]'>
-        <div className='pb-[91.15%] relative object-cover'>
+        <div className='pb-[91.08%] relative object-cover'>
           <Image
             src={'/image/main/enrollment.webp'}
             alt='강의 등록'
