@@ -28,9 +28,9 @@ type Props = {
 export default function RootLayout({ children, modal }: Props) {
   return (
     <html lang='ko'>
+      <GoogleAnalytics />
+      <ChannelTalk />
       <body className={inter.className}>
-        <GoogleAnalytics />
-        <ChannelTalk />
         <AuthSessionProvider>
           <QueryProvider>
             <NavBar
