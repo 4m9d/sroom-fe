@@ -23,8 +23,8 @@ export default function useAuth() {
         return res;
       })
       .catch(async () => {
-        setErrorToast(new Error(ErrorMessage.REFRESH));
         await logout();
+        setErrorToast(new Error(ErrorMessage.REFRESH));
       });
 
     return response;
@@ -33,7 +33,9 @@ export default function useAuth() {
   useQuery([QueryKeys.REFRESH], () => silentRefresh(), {
     enabled: !!session,
     refetchInterval: REFRESH_PERIOD,
-    refetchIntervalInBackground: true
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchIntervalInBackground: true,
   });
 
   const login = async (googleResponse: GoogleLoginCredential) => {
