@@ -30,7 +30,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
 
   const profileButtonClickHandler = async (name: string) => {
     setIsEditMode((prev) => !prev);
-
+    setName(() => name);
     mutate();
     await update({ ...session, name });
   };
