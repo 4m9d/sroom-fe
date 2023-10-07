@@ -34,10 +34,10 @@ export default async function SearchLectureCard({
     >
       <div className='flex flex-col justify-between h-full'>
         <div className='flex flex-col gap-1 mt-6 mb-1'>
-          <p className='text-base font-bold whitespace-normal line-clamp-2'>
+          <p className='text-base font-bold break-all whitespace-normal line-clamp-2'>
             {lecture_title}
           </p>
-          <p className='mb-1 text-sm whitespace-normal text-sroom-black-300 line-clamp-1'>
+          <p className='mb-1 text-sm break-all whitespace-normal text-sroom-black-300 line-clamp-1'>
             {channel}
           </p>
           <p className='text-xs text-sroom-black-100'>

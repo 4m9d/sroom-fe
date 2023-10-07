@@ -48,7 +48,7 @@ export default function LectureDetailIndexCard({
             </span>
           )}
         </div>
-        <div className='text-sm font-semibold text-sroom-black-300 line-clamp-2'>
+        <div className='text-sm font-semibold break-all text-sroom-black-300 line-clamp-2'>
           <p>{lecture_title}</p>
         </div>
       </div>

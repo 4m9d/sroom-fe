@@ -86,7 +86,7 @@ export default function SchedulingModal({
   const DEFAULT_CONTENT =
     'flex items-center gap-1 h-8 text-lg text-sroom-black-200';
   const MUTABLE_CONTENT =
-    'align-middle px-3 py-1 font-semibold bg-sroom-white border border-sroom-gray-400 text-sroom-black-400  whitespace-normal line-clamp-1';
+    'align-middle px-3 py-1 font-semibold bg-sroom-white border border-sroom-gray-400 text-sroom-black-400  whitespace-normal line-clamp-1 break-all';
 
   const animationConfig = {
     initial: { opacity: 0, y: '10%' },

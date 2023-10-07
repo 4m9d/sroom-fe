@@ -71,7 +71,7 @@ export default function SectionAccordion({
         }`}
       >
         <h3 className='flex flex-col pr-1'>
-          <p className='text-sm font-bold whitespace-normal line-clamp-1'>
+          <p className='text-sm font-bold break-all whitespace-normal line-clamp-1'>
             {use_schedule ? `${index}주차` : `${course_title}`}
           </p>
           <div className='flex h-[17px] items-center gap-2'>
@@ -108,8 +108,10 @@ export default function SectionAccordion({
                 className='flex items-center justify-between h-[17px] px-3 py-3 hover:bg-sroom-gray-200 hover:opacity-80 rounded-sm hover:scale-105 transition-all'
               >
                 <p
-                  className={`w-5/6 text-start text-xs md:text-sm whitespace-normal line-clamp-1 before:w-[2px] before:h-[2px] before:mr-1 before:inline-block before:align-middle ${
-                    video.is_completed === true ? 'text-sroom-black-200' : 'text-sroom-black-400'
+                  className={`w-5/6 text-start text-xs md:text-sm whitespace-normal line-clamp-1 break-all before:w-[2px] before:h-[2px] before:mr-1 before:inline-block before:align-middle ${
+                    video.is_completed === true
+                      ? 'text-sroom-black-200'
+                      : 'text-sroom-black-400'
                   } ${
                     currentPlayingVideo.course_video_id ===
                     video.course_video_id

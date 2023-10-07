@@ -109,7 +109,7 @@ export default function LectureEnrollmentButton({
               } px-2 justify-between gap-2`}
             >
               <div className='flex items-center justify-center flex-1'>
-                <span className='max-w-[70%] whitespace-normal line-clamp-1'>
+                <span className='max-w-[70%] whitespace-normal line-clamp-1 break-all'>
                   {course.course_title}
                 </span>
               </div>

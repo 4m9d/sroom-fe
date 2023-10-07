@@ -48,7 +48,7 @@ export default function LectureDetailCard({
                   initial={{ y: '10%', opacity: 0 }}
                   animate={{ y: '0%', opacity: 1 }}
                   transition={{ delay: 0.1 }}
-                  className='text-lg font-bold whitespace-normal md:text-xl line-clamp-3 lg:line-clamp-1 xl:line-clamp-2'
+                  className='text-lg font-bold break-all whitespace-normal md:text-xl line-clamp-3 lg:line-clamp-1 xl:line-clamp-2'
                 >
                   {lecture_title}
                 </motion.h2>
@@ -56,7 +56,7 @@ export default function LectureDetailCard({
                   initial={{ y: '10%', opacity: 0 }}
                   animate={{ y: '0%', opacity: 1 }}
                   transition={{ delay: 0.2 }}
-                  className='text-sm font-medium whitespace-normal md:text-base text-sroom-black-300 line-clamp-1'
+                  className='text-sm font-medium break-all whitespace-normal md:text-base text-sroom-black-300 line-clamp-1'
                 >
                   {channel}
                 </motion.p>
@@ -73,7 +73,7 @@ export default function LectureDetailCard({
                 </p>
               </div>
               <div className='h-full whitespace-pre-wrap'>
-                <p className='text-xs md:text-sm text-sroom-black-200 line-clamp-2 md:line-clamp-3 lg:line-clamp-4 xl:line-clamp-5'>
+                <p className='text-xs break-all md:text-sm text-sroom-black-200 line-clamp-2 md:line-clamp-3 lg:line-clamp-4 xl:line-clamp-5'>
                   {description}
                 </p>
               </div>

@@ -32,10 +32,10 @@ export default function ReviewableLectureCard({
     >
       <div className='flex flex-col justify-around h-full text-sroom-black-400'>
         <div className='mt-1'>
-          <p className='text-lg font-bold whitespace-normal line-clamp-2'>
+          <p className='text-lg font-bold break-all whitespace-normal line-clamp-2'>
             {reviewableLecture.title}
           </p>
-          <p className='mt-2 text-sm whitespace-normal text-sroom-black-300 line-clamp-1'>
+          <p className='mt-2 text-sm break-all whitespace-normal text-sroom-black-300 line-clamp-1'>
             {reviewableLecture.channel}
           </p>
         </div>
