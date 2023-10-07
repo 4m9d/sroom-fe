@@ -38,7 +38,7 @@ export default function LectureDetailModal({
   const onCloseHandler = useCallback(() => {
     return navigationType === 'soft'
       ? router.back()
-      : router.replace('/dashboard');
+      : router.push('/dashboard');
   }, [navigationType, router]);
 
   const isTheOnlyModalInPage = () => {
