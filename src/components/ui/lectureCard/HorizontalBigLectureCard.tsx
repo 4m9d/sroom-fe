@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import ThumbnailBadge from '../badge/ThumbnailBadge';
+import { getThumbnailSrc } from '@/src/util/thumbnail/getThumbnailSrc';
 
 type Props = {
   src: string;
@@ -23,7 +24,12 @@ export default function HorizontalBigLectureCard({
       <div className='w-full max-w-[40rem] lg:max-w-[27.5rem] flex items-center'>
         <div className='relative w-full h-0 pb-[56.25%]'>
           <div className='absolute top-0 left-0 object-cover w-full h-full'>
-            <Image fill={true} sizes='100%' src={src} alt={alt} />
+            <Image
+              fill={true}
+              sizes='100%'
+              src={getThumbnailSrc(src)}
+              alt={alt}
+            />
             {isEnrolled && (
               <div className='absolute top-0 left-0'>
                 <ThumbnailBadge title='수강 중' className='bg-sroom-green' />
