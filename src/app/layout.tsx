@@ -19,7 +19,7 @@ export const metadata = {
   },
   description: '나만을 위한 유튜브 강의 관리 플랫폼 스룸',
   openGraph: {
-    images: '/opengraph/opengraph.jpg',
+    images: '/image/opengraph/opengraph.jpg',
   }
 };
 
