@@ -19,7 +19,7 @@ export const metadata = {
   },
   description: '나만을 위한 유튜브 강의 관리 플랫폼 스룸',
   openGraph: {
-    images: '/image/opengraph/opengraph-image.jpg',
+    images: '/image/opengraph/opengraph-image.jpg'
   }
 };
 
@@ -39,8 +39,7 @@ export default function RootLayout({ children, modal }: Props) {
             <NavBar
               logo='스룸'
               profileDropdown={[
-                { id: 1, menuTitle: '내 강의실', menuRoute: '/classroom' },
-                { id: 2, menuTitle: '강의 자료', menuRoute: '/' }
+                { id: 1, menuTitle: '내 강의실', menuRoute: '/classroom' }
               ]}
             />
             <ChannelTalkManager>
