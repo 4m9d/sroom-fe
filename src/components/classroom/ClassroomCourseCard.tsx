@@ -43,10 +43,10 @@ export default function ClassroomCourseCard({
       </Button>
       <div className='flex flex-col justify-between h-full text-sroom-black-400'>
         <div className='mt-1 max-w-[calc(100%-5rem)]'>
-          <p className='text-lg font-bold whitespace-normal line-clamp-1'>
+          <p className='text-lg font-bold break-all whitespace-normal line-clamp-1'>
             {course.course_title}
           </p>
-          <p className='mt-2 text-sm whitespace-normal text-sroom-black-300 line-clamp-1'>
+          <p className='mt-2 text-sm break-all whitespace-normal text-sroom-black-300 line-clamp-1'>
             {course.channels}
           </p>
         </div>

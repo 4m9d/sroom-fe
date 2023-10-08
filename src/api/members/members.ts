@@ -1,6 +1,6 @@
 import getHeaders from '@/src/util/http/getHeaders';
 import { Endpoints } from '../Endpoints';
-import { ErrorMessage } from '../ErrorMessage';
+import { API_FETCH_ERROR, ErrorMessage } from '../ErrorMessage';
 import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
 
 export async function fetchUserAuthWithCredential(
@@ -16,7 +16,9 @@ export async function fetchUserAuthWithCredential(
     if (res.ok) {
       return (await res.json()) as Promise<LoginResponse>;
     } else {
-      return Promise.reject(new Error(ErrorMessage.LOGIN));
+      return Promise.reject(
+        new Error(ErrorMessage.LOGIN, { cause: API_FETCH_ERROR })
+      );
     }
   });
 }
@@ -34,7 +36,9 @@ export async function fetchUserAuthWithRefreshToken(
     if (res.ok) {
       return (await res.json()) as Promise<LoginResponse>;
     } else {
-      return Promise.reject(new Error(ErrorMessage.REFRESH));
+      return Promise.reject(
+        new Error(ErrorMessage.REFRESH, { cause: API_FETCH_ERROR })
+      );
     }
   });
 }
@@ -50,7 +54,9 @@ export async function updateUserProfile(name: string) {
     if (res.ok) {
       return (await res.json()) as Promise<ProfileUpdateResponse>;
     } else {
-      return Promise.reject(new Error(ErrorMessage.PROFILE_UPDATE));
+      return Promise.reject(
+        new Error(ErrorMessage.PROFILE_UPDATE, { cause: API_FETCH_ERROR })
+      );
     }
   });
 }

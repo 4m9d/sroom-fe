@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import ThumbnailBadge from '../badge/ThumbnailBadge';
+import { getThumbnailSrc } from '@/src/util/thumbnail/getThumbnailSrc';
 
 type Props = {
   src: string;
@@ -42,7 +43,7 @@ export default function HorizontalSmallLectureCard({
               onClick={onClick}
               onMouseOver={onMouseOver}
               fill={true}
-              src={src}
+              src={getThumbnailSrc(src)}
               alt={alt}
             />
             {isEnrolled && (

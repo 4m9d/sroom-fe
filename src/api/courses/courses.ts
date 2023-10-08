@@ -1,6 +1,6 @@
 import getQueryURL from '@/src/util/http/getQueryURL';
 import { Endpoints } from '../Endpoints';
-import { ErrorMessage } from '../ErrorMessage';
+import { API_FETCH_ERROR, ErrorMessage } from '../ErrorMessage';
 import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
 import { QueryKeys } from '../queryKeys';
 
@@ -17,7 +17,9 @@ export async function enrollLectureInNewCourse(
     if (res.ok) {
       return (await res.json()) as Promise<EnrollLectureResponse>;
     } else {
-      return Promise.reject(new Error(ErrorMessage.ENROLLMENT));
+      return Promise.reject(
+        new Error(ErrorMessage.ENROLLMENT, { cause: API_FETCH_ERROR })
+      );
     }
   });
 }
@@ -36,7 +38,9 @@ export async function enrollLectureInExistingCourse(
     if (res.ok) {
       return (await res.json()) as Promise<EnrollLectureResponse>;
     } else {
-      return Promise.reject(new Error(ErrorMessage.ENROLLMENT));
+      return Promise.reject(
+        new Error(ErrorMessage.ENROLLMENT, { cause: API_FETCH_ERROR })
+      );
     }
   });
 }
@@ -51,7 +55,9 @@ export async function fetchCourseDetail(course_id: number) {
     if (res.ok) {
       return (await res.json()) as Promise<CourseDetail>;
     } else {
-      return Promise.reject(new Error(ErrorMessage.DETAIL_COURSE));
+      return Promise.reject(
+        new Error(ErrorMessage.DETAIL_COURSE, { cause: API_FETCH_ERROR })
+      );
     }
   });
 }
@@ -65,7 +71,9 @@ export async function fetchClassroom() {
     if (res.ok) {
       return (await res.json()) as Promise<ClassRoom>;
     } else {
-      return Promise.reject(new Error(ErrorMessage.CLASSROOM));
+      return Promise.reject(
+        new Error(ErrorMessage.CLASSROOM, { cause: API_FETCH_ERROR })
+      );
     }
   });
 }
@@ -79,7 +87,9 @@ export async function deleteCourse(course_id: number) {
     if (res.ok) {
       return (await res.json()) as Promise<ClassRoom>;
     } else {
-      return Promise.reject(new Error(ErrorMessage.CLASSROOM));
+      return Promise.reject(
+        new Error(ErrorMessage.CLASSROOM, { cause: API_FETCH_ERROR })
+      );
     }
   });
 }

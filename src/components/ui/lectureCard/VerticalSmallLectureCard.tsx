@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import ThumbnailBadge from '../badge/ThumbnailBadge';
+import { getThumbnailSrc } from '@/src/util/thumbnail/getThumbnailSrc';
 
 type Props = {
   src: string;
@@ -23,7 +24,7 @@ export default function VerticalSmallLectureCard({
       <div className='flex items-center w-full '>
         <div className='relative w-full h-0 pb-[56.25%]'>
           <div className='absolute top-0 left-0 object-cover w-full h-full'>
-            <Image fill={true} src={src} alt={alt} />
+            <Image fill={true} src={getThumbnailSrc(src)} alt={alt} />
             {isEnrolled && (
               <div className='absolute top-0 left-0'>
                 <ThumbnailBadge title='수강 중' className='bg-sroom-green' />

@@ -39,7 +39,7 @@ export default function CourseDeleteModal({ courseId, courseTitle }: Props) {
           </p>
         </div>
         <div className='flex items-center justify-center w-full h-12 p-3 bg-sroom-gray-200'>
-          <p className='text-sm font-medium whitespace-normal text-sroom-black-300 line-clamp-1'>
+          <p className='text-sm font-medium break-all whitespace-normal text-sroom-black-300 line-clamp-1'>
             {courseTitle}
           </p>
         </div>

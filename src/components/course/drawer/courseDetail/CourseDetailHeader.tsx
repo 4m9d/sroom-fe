@@ -29,10 +29,10 @@ export default function CourseDetailHeader({
           <Image fill={true} sizes='100%' src={thumbnail} alt={course_title} />
         </div>
       </div>
-      <h2 className='text-base font-bold whitespace-normal md:text-lg line-clamp-1'>
+      <h2 className='text-base font-bold break-all whitespace-normal md:text-lg line-clamp-1'>
         {course_title}
       </h2>
-      <h3 className='text-xs font-normal whitespace-normal md:text-sm text-sroom-black-300 line-clamp-1'>
+      <h3 className='text-xs font-normal break-all whitespace-normal md:text-sm text-sroom-black-300 line-clamp-1'>
         {channels}
       </h3>
       <h4 className='flex flex-wrap text-xs font-normal md:text-sm text-sroom-black-200'>

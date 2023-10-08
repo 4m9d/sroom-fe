@@ -1,4 +1,5 @@
 export const ErrorMessage = {
+  DEFAULT: '오류가 발생했어요',
   LOGIN: '로그인에 실패했어요',
   PROFILE_UPDATE: '프로필을 업데이트하지 못했어요',
   REFRESH: '세션 업데이트에 실패했어요',
@@ -18,5 +19,7 @@ export const ErrorMessage = {
   REVIEW_LIST: '후기 정보를 불러오지 못했어요',
   REVIEW_UPDATE: '후기를 등록하지 못했어요',
 } as const;
+
+export const API_FETCH_ERROR = 'API_FETCH_ERROR'
 
 type ErrorMessage = (typeof ErrorMessage)[keyof typeof ErrorMessage];

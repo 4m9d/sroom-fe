@@ -8,8 +8,9 @@ export default function SearchInput() {
   const router = useRouter();
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setKeyword(e.target.value);
+    setKeyword(() => e.target.value);
   };
+  
   const submitHandler = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -30,6 +31,7 @@ export default function SearchInput() {
         value={keyword}
         onChange={changeHandler}
         placeholder='강의 검색'
+        maxLength={100}
         className='w-full pr-8 text-xs rounded-none lg:text-base bg-sroom-gray-400 form-control input'
       />
       <button

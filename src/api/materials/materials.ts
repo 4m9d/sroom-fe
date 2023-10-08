@@ -1,5 +1,5 @@
 import { Endpoints } from '../Endpoints';
-import { ErrorMessage } from '../ErrorMessage';
+import { API_FETCH_ERROR, ErrorMessage } from '../ErrorMessage';
 import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
 
 export async function fetchCourseMaterials(course_video_id: number) {
@@ -11,7 +11,9 @@ export async function fetchCourseMaterials(course_video_id: number) {
     if (res.ok) {
       return (await res.json()) as Promise<CourseMaterials>;
     } else {
-      return Promise.reject(new Error(ErrorMessage.COURSE_MATERIALS));
+      return Promise.reject(
+        new Error(ErrorMessage.COURSE_MATERIALS, { cause: API_FETCH_ERROR })
+      );
     }
   });
 }
@@ -30,7 +32,9 @@ export async function updateCourseLectureNotes(
     if (res.ok) {
       return (await res.json()) as Promise<Response>;
     } else {
-      return Promise.reject(new Error(ErrorMessage.LECTURENOTES));
+      return Promise.reject(
+        new Error(ErrorMessage.LECTURENOTES, { cause: API_FETCH_ERROR })
+      );
     }
   });
 }
@@ -49,7 +53,9 @@ export async function updateCourseQuizGrade(
     if (res.ok) {
       return (await res.json()) as Promise<Response>;
     } else {
-      return Promise.reject(new Error(ErrorMessage.QUIZZES));
+      return Promise.reject(
+        new Error(ErrorMessage.QUIZZES, { cause: API_FETCH_ERROR })
+      );
     }
   });
 }

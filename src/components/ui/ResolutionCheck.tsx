@@ -14,7 +14,7 @@ export default function ResolutionCheck({ children }: Props) {
 
   if (isSmallerThanBrowser && isInnerRoute) {
     return (
-      <div className='px-4 mt-20 text-sroom-black-400 break-keep'>
+      <div className='h-screen px-4 pt-20 text-sroom-black-400 break-keep'>
         <h2 className='w-full text-xl font-bold'>
           <div className='flex'>
             <span className='mr-1'>{'스룸은'}</span>
