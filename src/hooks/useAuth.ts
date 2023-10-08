@@ -13,7 +13,7 @@ export default function useAuth() {
   const refreshToken = { refresh_token: session?.refresh_token ?? '' };
 
   const calculateRefreshPeriod = (expiresAt: number) => {
-    const NOW = Math.floor(Date.now() / 1000);
+    const NOW = Math.floor(new Date().getTime() / 1000);
     return expiresAt - NOW - ONE_MINUTE_IN_MS;
   };
 
