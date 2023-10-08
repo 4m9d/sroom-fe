@@ -15,25 +15,25 @@ export default function useAuth() {
   const refreshToken = { refresh_token: session?.refresh_token ?? '' };
 
   const silentRefresh = async () => {
-    const response = await fetchUserAuthWithRefreshToken(refreshToken)
-      .then(async (res) => {
-        await update(res);
-        return res;
-      })
-      .catch(async () => {
+    const response = await fetchUserAuthWithRefreshToken(refreshToken).catch(
+      async () => {
         await logout();
         setErrorToast(new Error(ErrorMessage.REFRESH));
-      });
-
+        return null;
+      }
+    );
     return response;
   };
 
-  useQuery([QueryKeys.REFRESH], () => silentRefresh(), {
+  useQuery([QueryKeys.REFRESH], silentRefresh, {
     enabled: !!session,
     refetchInterval: refreshInterval,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
-    refetchIntervalInBackground: true
+    refetchIntervalInBackground: true,
+    onSuccess: async (data) => {
+      await update(data);
+    }
   });
 
   const login = async (googleResponse: GoogleLoginCredential) => {
