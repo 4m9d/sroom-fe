@@ -10,11 +10,12 @@ import setErrorToast from '../util/toast/setErrorToast';
 export default function useAuth() {
   const router = useRouter();
   const { data: session, status, update } = useSession();
-  const NOW = Math.floor(Date.now() / 1000);
-  const REFRESH_PERIOD = session
-    ? session.expires_at - NOW - ONE_MINUTE_IN_MS
-    : 0;
   const refreshToken = { refresh_token: session?.refresh_token ?? '' };
+
+  const calculateRefreshPeriod = (expiresAt: number) => {
+    const NOW = Math.floor(Date.now() / 1000);
+    return expiresAt - NOW - ONE_MINUTE_IN_MS;
+  };
 
   const silentRefresh = async () => {
     const response = await fetchUserAuthWithRefreshToken(refreshToken)
@@ -32,10 +33,13 @@ export default function useAuth() {
 
   useQuery([QueryKeys.REFRESH], () => silentRefresh(), {
     enabled: !!session,
-    refetchInterval: REFRESH_PERIOD,
+    refetchInterval: (data) => {
+      if (!data?.expires_at) return false;
+      return calculateRefreshPeriod(data.expires_at);
+    },
     refetchOnMount: false,
     refetchOnWindowFocus: false,
-    refetchIntervalInBackground: true,
+    refetchIntervalInBackground: true
   });
 
   const login = async (googleResponse: GoogleLoginCredential) => {
@@ -54,7 +58,7 @@ export default function useAuth() {
       .catch((err) => {
         setErrorToast(err);
       });
-      router.refresh();
+    router.refresh();
   };
 
   const logout = async () => {
