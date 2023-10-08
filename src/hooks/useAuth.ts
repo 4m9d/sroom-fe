@@ -7,15 +7,12 @@ import { ErrorMessage } from '../api/ErrorMessage';
 import { ONE_MINUTE_IN_MS } from '../constants/time/time';
 import setErrorToast from '../util/toast/setErrorToast';
 
+const refreshInterval = ONE_MINUTE_IN_MS * 29;
+
 export default function useAuth() {
   const router = useRouter();
   const { data: session, status, update } = useSession();
   const refreshToken = { refresh_token: session?.refresh_token ?? '' };
-
-  const calculateRefreshPeriod = (expiresAt: number) => {
-    const NOW = Math.floor(new Date().getTime() / 1000);
-    return expiresAt - NOW - ONE_MINUTE_IN_MS;
-  };
 
   const silentRefresh = async () => {
     const response = await fetchUserAuthWithRefreshToken(refreshToken)
@@ -33,10 +30,7 @@ export default function useAuth() {
 
   useQuery([QueryKeys.REFRESH], () => silentRefresh(), {
     enabled: !!session,
-    refetchInterval: (data) => {
-      if (!data?.expires_at) return false;
-      return calculateRefreshPeriod(data.expires_at);
-    },
+    refetchInterval: refreshInterval,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchIntervalInBackground: true
