@@ -19,7 +19,17 @@ export const metadata = {
   },
   description: '나만을 위한 유튜브 강의 관리 플랫폼 스룸',
   openGraph: {
-    images: '/image/opengraph/opengraph-image.jpg'
+    title: '스룸',
+    description: '나만을 위한 유튜브 강의 관리 플랫폼 스룸',
+    type: 'website',
+    locale: 'ko_KR',
+    url: 'https://sroom.kr',
+    images: {
+      url: 'https://sroom.kr/image/opengraph/opengraph-image.jpg',
+      width: 1200,
+      height: 630,
+      alt: '나만을 위한 유튜브 강의 관리 플랫폼, 스룸'
+    }
   }
 };
 
