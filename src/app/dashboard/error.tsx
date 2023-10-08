@@ -1,19 +1,26 @@
 'use client';
+import { API_FETCH_ERROR, ErrorMessage } from '@/src/api/ErrorMessage';
+import setErrorToast from '@/src/util/toast/setErrorToast';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import setErrorToast from '../../util/toast/setErrorToast';
 
-export default function Error({
+export default function ErrorHandler({
   error,
   reset
 }: {
-  error: ErrorToast;
-  reset?: () => void;
+  error: Error;
+  reset: () => void;
 }) {
+  const router = useRouter();
 
   useEffect(() => {
-    console.error('에러', error);
-    setErrorToast(error);
-  }, []);
+    if (error.cause === API_FETCH_ERROR) {
+      setErrorToast(error);
+    } else {
+      setErrorToast(new Error(ErrorMessage.DEFAULT));
+    }
+    return () => router.refresh();
+  }, [error, router]);
 
   return null;
 }
