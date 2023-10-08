@@ -1,8 +1,8 @@
 import EnrollmentIntro from './enrollment/EnrollmentIntro';
 import SchedulingIntro from './scheduling/SchedulingIntro';
 import CourseMaterialIntro from './courseMaterial/CourseMaterialIntro';
-import TextLoopIntro from './ui/TextLoopIntro';
-import EmojiIntro from './ui/EmojiIntro';
+import TextLoopIntro from './ui/textLoop/TextLoopIntro';
+import EmojiIntro from './ui/emoji/EmojiIntro';
 
 type Props = {};
 
