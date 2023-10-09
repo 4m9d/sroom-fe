@@ -3,6 +3,7 @@ export const ErrorMessage = {
   LOGIN: '로그인에 실패했어요',
   PROFILE_UPDATE: '프로필을 업데이트하지 못했어요',
   REFRESH: '세션 업데이트에 실패했어요',
+  UNAUTHORIZED: '로그인이 필요해요',
   DASHBOARDS: '대시보드 정보를 불러오지 못했어요',
   CLASSROOM: '강의실 정보를 불러오지 못했어요',
   SEARCH: '검색 결과를 불러오지 못했어요',
@@ -21,5 +22,6 @@ export const ErrorMessage = {
 } as const;
 
 export const API_FETCH_ERROR = 'API_FETCH_ERROR'
+export const SESSION_ERROR = 'SESSION_ERROR'
 
 type ErrorMessage = (typeof ErrorMessage)[keyof typeof ErrorMessage];

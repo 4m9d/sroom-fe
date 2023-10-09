@@ -1,7 +1,8 @@
 import getQueryURL from '@/src/util/http/getQueryURL';
 import { Endpoints } from '../Endpoints';
-import { API_FETCH_ERROR, ErrorMessage } from '../ErrorMessage';
+import { ErrorMessage } from '../ErrorMessage';
 import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
+import { fetchErrorHandling } from '@/src/util/http/fetchErrorHandling';
 
 export async function fetchLecturesByKeyword(params: SearchLectureParams) {
   const headers = await getAuthorizedHeaders();
@@ -12,9 +13,7 @@ export async function fetchLecturesByKeyword(params: SearchLectureParams) {
     if (res.ok) {
       return (await res.json()) as Promise<SearchResultsList>;
     } else {
-      return Promise.reject(
-        new Error(ErrorMessage.SEARCH, { cause: API_FETCH_ERROR })
-      );
+      return fetchErrorHandling(res, ErrorMessage.SEARCH);
     }
   });
 }
@@ -34,9 +33,7 @@ export async function fetchLectureDetail(
     if (res.ok) {
       return (await res.json()) as Promise<LectureDetail>;
     } else {
-      return Promise.reject(
-        new Error(ErrorMessage.DETAIL, { cause: API_FETCH_ERROR })
-      );
+      return fetchErrorHandling(res, ErrorMessage.DETAIL);
     }
   });
 }
@@ -56,9 +53,7 @@ export async function fetchLectureDetailIndex(
     if (res.ok) {
       return (await res.json()) as Promise<LectureIndexList>;
     } else {
-      return Promise.reject(
-        new Error(ErrorMessage.DETAIL_INDEX, { cause: API_FETCH_ERROR })
-      );
+      return fetchErrorHandling(res, ErrorMessage.DETAIL_INDEX);
     }
   });
 }
@@ -78,9 +73,7 @@ export async function fetchLectureDetailReview(
     if (res.ok) {
       return (await res.json()) as Promise<LectureReviewList>;
     } else {
-      return Promise.reject(
-        new Error(ErrorMessage.DETAIL_REVIEW, { cause: API_FETCH_ERROR })
-      );
+      return fetchErrorHandling(res, ErrorMessage.DETAIL_REVIEW);
     }
   });
 }
@@ -94,9 +87,7 @@ export async function fetchLectureRecommendations() {
     if (res.ok) {
       return (await res.json()) as Promise<LectureRecommendations>;
     } else {
-      return Promise.reject(
-        new Error(ErrorMessage.RECOMMENDATIONS, { cause: API_FETCH_ERROR })
-      );
+      return fetchErrorHandling(res, ErrorMessage.RECOMMENDATIONS);
     }
   });
 }

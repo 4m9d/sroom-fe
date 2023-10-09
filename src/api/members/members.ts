@@ -2,6 +2,7 @@ import getHeaders from '@/src/util/http/getHeaders';
 import { Endpoints } from '../Endpoints';
 import { API_FETCH_ERROR, ErrorMessage } from '../ErrorMessage';
 import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
+import { fetchErrorHandling } from '@/src/util/http/fetchErrorHandling';
 
 export async function fetchUserAuthWithCredential(
   credential: GoogleLoginCredential
@@ -36,9 +37,7 @@ export async function fetchUserAuthWithRefreshToken(
     if (res.ok) {
       return (await res.json()) as Promise<LoginResponse>;
     } else {
-      return Promise.reject(
-        new Error(ErrorMessage.REFRESH, { cause: API_FETCH_ERROR })
-      );
+      return fetchErrorHandling(res, ErrorMessage.REFRESH);
     }
   });
 }
@@ -54,9 +53,7 @@ export async function updateUserProfile(name: string) {
     if (res.ok) {
       return (await res.json()) as Promise<ProfileUpdateResponse>;
     } else {
-      return Promise.reject(
-        new Error(ErrorMessage.PROFILE_UPDATE, { cause: API_FETCH_ERROR })
-      );
+      fetchErrorHandling(res, ErrorMessage.PROFILE_UPDATE);
     }
   });
 }

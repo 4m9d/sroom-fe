@@ -1,7 +1,8 @@
 import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
 import { Endpoints } from '../Endpoints';
-import { API_FETCH_ERROR, ErrorMessage } from '../ErrorMessage';
+import { ErrorMessage } from '../ErrorMessage';
 import getQueryURL from '@/src/util/http/getQueryURL';
+import { fetchErrorHandling } from '@/src/util/http/fetchErrorHandling';
 
 export async function updateViewDuration(
   params: CourseTakingParams,
@@ -25,9 +26,7 @@ export async function updateViewDuration(
     if (res.ok) {
       return (await res.json()) as Promise<CourseTakingInfo>;
     } else {
-      return Promise.reject(
-        new Error(ErrorMessage.COURSE_TAKING, { cause: API_FETCH_ERROR })
-      );
+      return fetchErrorHandling(res, ErrorMessage.COURSE_TAKING);
     }
   });
 }

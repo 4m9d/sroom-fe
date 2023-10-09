@@ -1,8 +1,9 @@
 import getQueryURL from '@/src/util/http/getQueryURL';
 import { Endpoints } from '../Endpoints';
-import { API_FETCH_ERROR, ErrorMessage } from '../ErrorMessage';
+import { ErrorMessage } from '../ErrorMessage';
 import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
 import { QueryKeys } from '../queryKeys';
+import { fetchErrorHandling } from '@/src/util/http/fetchErrorHandling';
 
 export async function enrollLectureInNewCourse(
   params: EnrollLectureInNewCourseParams
@@ -17,9 +18,7 @@ export async function enrollLectureInNewCourse(
     if (res.ok) {
       return (await res.json()) as Promise<EnrollLectureResponse>;
     } else {
-      return Promise.reject(
-        new Error(ErrorMessage.ENROLLMENT, { cause: API_FETCH_ERROR })
-      );
+      return fetchErrorHandling(res, ErrorMessage.ENROLLMENT);
     }
   });
 }
@@ -38,9 +37,7 @@ export async function enrollLectureInExistingCourse(
     if (res.ok) {
       return (await res.json()) as Promise<EnrollLectureResponse>;
     } else {
-      return Promise.reject(
-        new Error(ErrorMessage.ENROLLMENT, { cause: API_FETCH_ERROR })
-      );
+      return fetchErrorHandling(res, ErrorMessage.ENROLLMENT);
     }
   });
 }
@@ -55,9 +52,7 @@ export async function fetchCourseDetail(course_id: number) {
     if (res.ok) {
       return (await res.json()) as Promise<CourseDetail>;
     } else {
-      return Promise.reject(
-        new Error(ErrorMessage.DETAIL_COURSE, { cause: API_FETCH_ERROR })
-      );
+      return fetchErrorHandling(res, ErrorMessage.DETAIL_COURSE);
     }
   });
 }
@@ -71,9 +66,7 @@ export async function fetchClassroom() {
     if (res.ok) {
       return (await res.json()) as Promise<ClassRoom>;
     } else {
-      return Promise.reject(
-        new Error(ErrorMessage.CLASSROOM, { cause: API_FETCH_ERROR })
-      );
+      return fetchErrorHandling(res, ErrorMessage.CLASSROOM);
     }
   });
 }
@@ -87,9 +80,7 @@ export async function deleteCourse(course_id: number) {
     if (res.ok) {
       return (await res.json()) as Promise<ClassRoom>;
     } else {
-      return Promise.reject(
-        new Error(ErrorMessage.CLASSROOM, { cause: API_FETCH_ERROR })
-      );
+      return fetchErrorHandling(res, ErrorMessage.CLASSROOM);
     }
   });
 }

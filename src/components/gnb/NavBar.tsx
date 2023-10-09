@@ -38,6 +38,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
   const { mutate } = useMutation(() => updateUserProfile(name), {
     onSuccess: (data) => {
       setIsEditMode(false);
+      if (!data) return;
       setName(() => data.name);
     }
   });

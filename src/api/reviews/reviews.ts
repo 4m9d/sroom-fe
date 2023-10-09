@@ -1,6 +1,7 @@
 import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
 import { Endpoints } from '../Endpoints';
-import { API_FETCH_ERROR, ErrorMessage } from '../ErrorMessage';
+import { ErrorMessage } from '../ErrorMessage';
+import { fetchErrorHandling } from '@/src/util/http/fetchErrorHandling';
 
 export async function fetchReviewListByCourse(courseId: number) {
   const headers = await getAuthorizedHeaders();
@@ -11,9 +12,7 @@ export async function fetchReviewListByCourse(courseId: number) {
     if (res.ok) {
       return (await res.json()) as Promise<CourseReviewResponse>;
     } else {
-      return Promise.reject(
-        new Error(ErrorMessage.REVIEW_LIST, { cause: API_FETCH_ERROR })
-      );
+      return fetchErrorHandling(res, ErrorMessage.REVIEW_LIST);
     }
   });
 }
@@ -32,9 +31,7 @@ export async function updateLectureReview(
     if (res.ok) {
       return (await res.json()) as Promise<Response>;
     } else {
-      return Promise.reject(
-        new Error(ErrorMessage.REVIEW_UPDATE, { cause: API_FETCH_ERROR })
-      );
+      return fetchErrorHandling(res, ErrorMessage.REVIEW_UPDATE);
     }
   });
 }
