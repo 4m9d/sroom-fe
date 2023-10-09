@@ -40,7 +40,13 @@ export default function useAuth() {
   };
 
   const silentRefresh = async () => {
-    const response = await fetchUserAuthWithRefreshToken(refreshToken);
+    const response = await fetchUserAuthWithRefreshToken(refreshToken).catch(
+      async () => {
+        await logout();
+        setErrorToast(new Error(ErrorMessage.REFRESH));
+        return null;
+      }
+    );
 
     return response;
   };
