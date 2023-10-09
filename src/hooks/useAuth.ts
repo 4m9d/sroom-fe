@@ -4,14 +4,26 @@ import { fetchUserAuthWithRefreshToken } from '../api/members/members';
 import { useQuery } from '@tanstack/react-query';
 import { QueryKeys } from '../api/queryKeys';
 import { ErrorMessage } from '../api/ErrorMessage';
-import { ONE_MINUTE_IN_MS } from '../constants/time/time';
+import { ONE_MINUTE_IN_MS, ONE_SECOND_IN_MS } from '../constants/time/time';
 import setErrorToast from '../util/toast/setErrorToast';
+
+const THIRTY_MINUTES_IN_SEC = 60 * 30;
 
 export default function useAuth() {
   const router = useRouter();
   const { data: session, status, update } = useSession();
 
   const refreshToken = { refresh_token: session?.refresh_token ?? '' };
+
+  const refreshEnableHandler = () => {
+    return (
+      !!session &&
+      Math.floor(Date.now() / 1000) +
+        THIRTY_MINUTES_IN_SEC -
+        session.expires_at >
+        5
+    );
+  };
 
   const calculateRefreshInterval = () => {
     if (!session) return 0;
@@ -28,22 +40,19 @@ export default function useAuth() {
   };
 
   const silentRefresh = async () => {
-    const response = await fetchUserAuthWithRefreshToken(refreshToken).catch(
-      async () => {
-        await logout();
-        setErrorToast(new Error(ErrorMessage.REFRESH));
-        return null;
-      }
-    );
+    const response = await fetchUserAuthWithRefreshToken(refreshToken);
+
     return response;
   };
 
   useQuery([QueryKeys.REFRESH], silentRefresh, {
-    enabled: !!session,
+    enabled: refreshEnableHandler(),
     refetchInterval: calculateRefreshInterval,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
     refetchIntervalInBackground: true,
+    staleTime: ONE_SECOND_IN_MS,
     onSuccess: async (data) => {
       await update(data);
     }
