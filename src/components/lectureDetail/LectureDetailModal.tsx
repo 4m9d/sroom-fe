@@ -7,10 +7,7 @@ import LectureDetailIndexList from './index/LectureDetailIndexList';
 import LectureDetailReviewList from './review/LectureDetailReviewList';
 import LectureDetailCard from './LectureDetailCard';
 import LectureDetailIndexSkeleton from './index/LectureDetailIndexSkeleton';
-import {
-  INDEX_LIMIT,
-  REVIEW_LIMIT
-} from '@/src/constants/skeleton/skeleton';
+import { INDEX_LIMIT, REVIEW_LIMIT } from '@/src/constants/skeleton/skeleton';
 import LectureDetailHeading from './LectureDetailHeading';
 import LectureDetailReviewSkeleton from './review/LectureDetailReviewSkeleton';
 import OneStar from '../ui/rating/OneStar';
@@ -36,9 +33,14 @@ export default function LectureDetailModal({
   const [isIndexListFetched, setIsIndexListFetched] = useState<boolean>(false);
 
   const onCloseHandler = useCallback(() => {
-    return navigationType === 'soft'
-      ? router.back()
-      : router.push('/dashboard');
+    if (navigationType === 'soft') {
+      return closeModalHandler('LECTURE_DETAIL', router.back);
+    } else {
+      return closeModalHandler('LECTURE_DETAIL', () => {
+        router.replace('/dashboard');
+        router.refresh();
+      });
+    }
   }, [navigationType, router]);
 
   const isTheOnlyModalInPage = () => {
