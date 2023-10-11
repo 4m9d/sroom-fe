@@ -1,11 +1,16 @@
 'use client';
-import { memo, useRef } from 'react';
+import { useRef } from 'react';
 import useAuth from '@/src/hooks/useAuth';
 import Script from 'next/script';
 import useWindowSize from '@/src/hooks/useWindowSize';
 import { BROWSER_MIN_WIDTH } from '@/src/constants/window/window';
 
-function LoginButton() {
+type Props = {
+  className?: string;
+  buttonWidth?: number;
+};
+
+export default function LoginButton({ className, buttonWidth: width = 100 }: Props) {
   const loginButton = useRef<HTMLDivElement>(null);
   const { login, status } = useAuth();
   const { width: windowWidth } = useWindowSize();
@@ -24,7 +29,7 @@ function LoginButton() {
 
     window.google.accounts.id.renderButton(loginButton.current, {
       theme: 'outline',
-      width: 100
+      width: width
     });
   };
 
@@ -39,7 +44,7 @@ function LoginButton() {
             defer
           />
           <div
-            className='inline-block h-10 mt-2 align-middle md:mt-5'
+            className={`${className} inline-block h-10 mt-2 align-middle md:mt-5`}
             id='google-login-button'
             ref={loginButton}
           />
@@ -48,5 +53,3 @@ function LoginButton() {
     </>
   );
 }
-
-export default memo(LoginButton);

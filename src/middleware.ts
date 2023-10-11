@@ -7,6 +7,9 @@ const secret = process.env.NEXTAUTH_SECRET;
 function redirectToMain(req: NextRequest) {
   return NextResponse.redirect(new URL('/', req.url));
 }
+function redirectToSignin(req: NextRequest) {
+  return NextResponse.rewrite(new URL('/auth/signin', req.url));
+}
 function redirectToDashboard(req: NextRequest) {
   return NextResponse.redirect(new URL('/dashboard', req.url));
 }
@@ -25,14 +28,14 @@ export async function middleware(req: NextRequest) {
     if (pathname === '/') {
       return redirectToDashboard(req);
     }
-    //NOTE: 로그인 상태에서 로그인 페이지로 접근하면 메인 페이지로 리다이렉트F
+    //NOTE: 로그인 상태에서 로그인 페이지로 접근하면 메인 페이지로 리다이렉트
     if (pathname === '/auth/signin') {
       return redirectToMain(req);
     }
   } else if (authenticated === false) {
-    //NOTE: 로그아웃 상태에서는 메인 페이지만 접근 가능
+    //NOTE: 로그아웃 상태에서는 로그인 페이지로 리다이렉트
     if (tryToAccessProtectedRoute(pathname)) {
-      return redirectToMain(req);
+      return redirectToSignin(req);
     }
     //NOTE: 로그아웃 상태에서 로그아웃 페이지로 접근하면 메인 페이지로 리다이렉트
     if (pathname === '/auth/signout') {
