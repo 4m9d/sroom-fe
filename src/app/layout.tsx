@@ -9,6 +9,7 @@ import Footer from '../components/fnb/Footer';
 import ChannelTalk from '../components/tools/ChannelTalk/ChannelTalk';
 import ChannelTalkManager from '../components/tools/ChannelTalk/ChannelTalkManager';
 import GoogleAnalytics from '../components/tools/GoogleAnalytics/GoogleAnalytics';
+import NaverAnalytics from '../components/tools/NaverAnalytics/NaverAnalytics';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -42,6 +43,7 @@ export default function RootLayout({ children, modal }: Props) {
   return (
     <html lang='ko'>
       <GoogleAnalytics />
+      <NaverAnalytics />
       <ChannelTalk />
       <body className={inter.className}>
         <AuthSessionProvider>
