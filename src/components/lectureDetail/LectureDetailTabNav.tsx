@@ -14,11 +14,14 @@ export default function LectureDetailTabNav({ is_playlist }: Props) {
   );
   const [observe, unobserve] = useIntersectionObserver(
     setActiveId,
-    document.getElementById('modal')
+    document.querySelector('#lecture-detail-container')
   );
 
   useEffect(() => {
-    const entries = document.querySelectorAll('section');
+    const entries = document.querySelectorAll(
+      'dialog section'
+    ) as NodeListOf<HTMLElement>;
+
     entries.forEach((entry) => observe(entry));
 
     return () => entries.forEach((entry) => unobserve(entry));

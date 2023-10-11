@@ -1,12 +1,12 @@
 import { useCallback, useRef } from 'react';
 
 export default function useIntersectionObserver(
-  setId: (id: string) => void,
+  setId: React.Dispatch<React.SetStateAction<string>>,
   root: HTMLElement | null,
   rootMargin?: string
 ) {
   const option = {
-    threshold: [0.1, 0.9],
+    threshold: [0.1, 0.5, 0.9],
     root,
     rootMargin
   };
