@@ -27,9 +27,9 @@ export default async function LectureDetailReviewList({
     lastPage: LectureReviewList | null,
     allPages: (LectureReviewList | null)[]
   ) => {
-    return lastPage && lastPage.length > 0
-      ? allPages.length * lastPage.length
-      : 0;
+    if (lastPage === null || lastPage.length === 0) return undefined;
+    
+    return allPages.length * lastPage.length;
   };
 
   const fetchLectureReviewList = async ({ pageParam: offset = 0 }) => {

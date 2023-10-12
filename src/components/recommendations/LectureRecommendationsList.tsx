@@ -61,7 +61,7 @@ export default function LectureRecommendationsList() {
   return (
     <>
       {recommendations.length > 0 && (
-        <section className='px-4 mx-auto my-20 lg:px-24 max-w-screen-2xl'>
+        <section className='px-4 mx-auto my-20 lg:px-24 max-w-screen-2xl min-h-12'>
           <SectionHeading title='이런 강의는 어때요?' />
           <div className='relative'>
             <Swiper

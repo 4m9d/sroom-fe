@@ -7,10 +7,7 @@ import LectureDetailIndexList from './index/LectureDetailIndexList';
 import LectureDetailReviewList from './review/LectureDetailReviewList';
 import LectureDetailCard from './LectureDetailCard';
 import LectureDetailIndexSkeleton from './index/LectureDetailIndexSkeleton';
-import {
-  INDEX_LIMIT,
-  REVIEW_LIMIT
-} from '@/src/constants/skeleton/skeleton';
+import { INDEX_LIMIT, REVIEW_LIMIT } from '@/src/constants/skeleton/skeleton';
 import LectureDetailHeading from './LectureDetailHeading';
 import LectureDetailReviewSkeleton from './review/LectureDetailReviewSkeleton';
 import OneStar from '../ui/rating/OneStar';
@@ -36,9 +33,14 @@ export default function LectureDetailModal({
   const [isIndexListFetched, setIsIndexListFetched] = useState<boolean>(false);
 
   const onCloseHandler = useCallback(() => {
-    return navigationType === 'soft'
-      ? router.back()
-      : router.push('/dashboard');
+    if (navigationType === 'soft') {
+      return closeModalHandler('LECTURE_DETAIL', router.back);
+    } else {
+      return closeModalHandler('LECTURE_DETAIL', () => {
+        router.replace('/dashboard');
+        router.refresh();
+      });
+    }
   }, [navigationType, router]);
 
   const isTheOnlyModalInPage = () => {
@@ -80,63 +82,65 @@ export default function LectureDetailModal({
           isIndexListFetched={isIndexListFetched}
         />
         <LectureDetailTabNav is_playlist={is_playlist} />
-        <section id='indexes'>
-          <LectureDetailHeading title={'목차'} />
-          {is_playlist ? (
-            <>
-              <Suspense
-                fallback={<LectureDetailIndexSkeleton limit={INDEX_LIMIT} />}
-              >
-                <LectureDetailIndexList
-                  lectureCode={lecture_code}
-                  setIsFetched={setIsIndexListFetched}
-                />
-              </Suspense>
-            </>
-          ) : (
-            indexes && (
+        <div id='lecture-detail-conatiner'>
+          <section id='indexes'>
+            <LectureDetailHeading title={'목차'} />
+            {is_playlist ? (
               <>
-                <LectureIndexNotice
-                  duration={lectureDetail.duration as number}
-                  lecture_count={1}
-                  hasMembersOnly={lectureDetail.is_members_only as boolean}
-                />
-                <LectureDetailIndexCard
-                  lectureIndex={indexes.index_list[0]}
-                  indexNum={1}
-                />
+                <Suspense
+                  fallback={<LectureDetailIndexSkeleton limit={INDEX_LIMIT} />}
+                >
+                  <LectureDetailIndexList
+                    lectureCode={lecture_code}
+                    setIsFetched={setIsIndexListFetched}
+                  />
+                </Suspense>
               </>
-            )
-          )}
-        </section>
-        <section id='reviews'>
-          <LectureDetailHeading title={'후기'}>
-            <div className='flex items-center justify-center gap-1 ml-1'>
-              <p>{`(${lectureDetail.review_count})`}</p>
-              {lectureDetail.review_count > 0 && (
+            ) : (
+              indexes && (
                 <>
-                  <OneStar className='w-4 h-4' />
-                  <p className='text-base font-medium text-sroom-brand'>
-                    {rating}
-                  </p>
+                  <LectureIndexNotice
+                    duration={lectureDetail.duration as number}
+                    lecture_count={1}
+                    hasMembersOnly={lectureDetail.is_members_only as boolean}
+                  />
+                  <LectureDetailIndexCard
+                    lectureIndex={indexes.index_list[0]}
+                    indexNum={1}
+                  />
                 </>
-              )}
-            </div>
-          </LectureDetailHeading>
-          <Suspense
-            fallback={
-              <LectureDetailReviewSkeleton
+              )
+            )}
+          </section>
+          <section id='reviews'>
+            <LectureDetailHeading title={'후기'}>
+              <div className='flex items-center justify-center gap-1 ml-1'>
+                <p>{`(${lectureDetail.review_count})`}</p>
+                {lectureDetail.review_count > 0 && (
+                  <>
+                    <OneStar className='w-5 h-5' />
+                    <p className='text-base font-medium text-sroom-brand'>
+                      {rating}
+                    </p>
+                  </>
+                )}
+              </div>
+            </LectureDetailHeading>
+            <Suspense
+              fallback={
+                <LectureDetailReviewSkeleton
+                  reviewPageRef={reviewPageRef}
+                  limit={REVIEW_LIMIT}
+                />
+              }
+            >
+              <LectureDetailReviewList
                 reviewPageRef={reviewPageRef}
-                limit={REVIEW_LIMIT}
+                lectureCode={lecture_code}
               />
-            }
-          >
-            <LectureDetailReviewList
-              reviewPageRef={reviewPageRef}
-              lectureCode={lecture_code}
-            />
-          </Suspense>
-        </section>
+            </Suspense>
+          </section>
+        </div>
       </Modal>
       {is_playlist && isIndexListFetched === true && (
         <>

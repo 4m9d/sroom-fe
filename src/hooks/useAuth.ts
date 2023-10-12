@@ -72,20 +72,19 @@ export default function useAuth() {
       redirect: false
     })
       .then((res) => {
+        router.refresh();
         if (res?.error) {
           throw new Error(ErrorMessage.LOGIN);
         }
-        router.push('/dashboard');
       })
       .catch((err) => {
         setErrorToast(err);
       });
-    router.refresh();
   };
 
   const logout = async () => {
     await signOut().then(() => {
-      router.push('/');
+      router.refresh();
     });
   };
 
