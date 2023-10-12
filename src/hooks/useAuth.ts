@@ -84,6 +84,7 @@ export default function useAuth() {
 
   const logout = async () => {
     await signOut().then(() => {
+      router.replace('/');
       router.refresh();
     });
   };
