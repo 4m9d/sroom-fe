@@ -44,7 +44,7 @@ export default function CourseMaterialContent({
     }
   );
   return (
-    <div className='w-full h-full max-h-full px-3 overflow-y-scroll'>
+    <div className='h-full max-w-full max-h-full min-w-full px-3 overflow-y-scroll'>
       <div className='sticky top-0 z-10'>
         <CourseMaterialTopNav
           activeTab={activeTab}
