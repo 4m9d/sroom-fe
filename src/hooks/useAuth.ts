@@ -6,16 +6,18 @@ import { QueryKeys } from '../api/queryKeys';
 import { ErrorMessage } from '../api/ErrorMessage';
 import { ONE_MINUTE_IN_MS, ONE_SECOND_IN_MS } from '../constants/time/time';
 import setErrorToast from '../util/toast/setErrorToast';
+import { useCallback, useEffect, useState } from 'react';
 
 const THIRTY_MINUTES_IN_SEC = 60 * 30;
 
 export default function useAuth() {
   const router = useRouter();
   const { data: session, status, update } = useSession();
+  const [isRefreshEnable, setIsRefreshEnable] = useState(!!session);
 
   const refreshToken = { refresh_token: session?.refresh_token ?? '' };
 
-  const refreshEnableHandler = () => {
+  const refreshEnableHandler = useCallback(() => {
     return (
       !!session &&
       Math.floor(Date.now() / 1000) +
@@ -23,7 +25,7 @@ export default function useAuth() {
         session.expires_at >
         5
     );
-  };
+  }, [session]);
 
   const calculateRefreshInterval = () => {
     if (!session) return 0;
@@ -31,7 +33,7 @@ export default function useAuth() {
     const NOW = Date.now();
     const EXPIRES_AT = session.expires_at * 1000;
 
-    const REFRESH_INTERVAL = EXPIRES_AT - NOW - ONE_MINUTE_IN_MS;
+    const REFRESH_INTERVAL = EXPIRES_AT - NOW - ONE_MINUTE_IN_MS * 5;
 
     if (REFRESH_INTERVAL <= 0) {
       return 0;
@@ -51,8 +53,12 @@ export default function useAuth() {
     return response;
   };
 
+  useEffect(() => {
+    setIsRefreshEnable(() => refreshEnableHandler());
+  }, [refreshEnableHandler]);
+
   useQuery([QueryKeys.REFRESH], silentRefresh, {
-    enabled: refreshEnableHandler(),
+    enabled: isRefreshEnable,
     refetchInterval: calculateRefreshInterval,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
@@ -72,7 +78,6 @@ export default function useAuth() {
       redirect: false
     })
       .then((res) => {
-        router.refresh();
         if (res?.error) {
           throw new Error(ErrorMessage.LOGIN);
         }
@@ -80,6 +85,8 @@ export default function useAuth() {
       .catch((err) => {
         setErrorToast(err);
       });
+
+    router.refresh();
   };
 
   const logout = async () => {
