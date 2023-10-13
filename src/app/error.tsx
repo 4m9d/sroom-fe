@@ -22,7 +22,6 @@ export default function ErrorHandler({
     setErrorToast(error);
     router.back();
   } else if (error.cause === SESSION_ERROR) {
-    setErrorToast(error);
     logout();
   } else {
     setErrorToast(new Error(ErrorMessage.DEFAULT));

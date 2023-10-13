@@ -23,7 +23,6 @@ export default function ErrorHandler({
     router.replace('/');
     router.refresh();
   } else if (error.cause === SESSION_ERROR) {
-    setErrorToast(error);
     logout();
   } else {
     setErrorToast(new Error(ErrorMessage.DEFAULT));

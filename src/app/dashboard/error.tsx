@@ -21,7 +21,6 @@ export default function ErrorHandler({
   if (error.cause === API_FETCH_ERROR) {
     setErrorToast(error);
   } else if (error.cause === SESSION_ERROR) {
-    setErrorToast(error);
     logout();
   } else {
     setErrorToast(new Error(ErrorMessage.DEFAULT));
