@@ -27,48 +27,42 @@ export default function useAuth() {
     );
   }, [session]);
 
-  const calculateRefreshInterval = () => {
-    if (!session) return 0;
+  const calculateRefetchInterval = (expiresAt: number) => {
+    const now = Date.now();
+    const expires = expiresAt * ONE_SECOND_IN_MS;
+    const diff = expires - now;
+    const refetchInterval = diff - 5 * ONE_MINUTE_IN_MS;
 
-    const NOW = Date.now();
-    const EXPIRES_AT = session.expires_at * 1000;
-
-    const REFRESH_INTERVAL = EXPIRES_AT - NOW - ONE_MINUTE_IN_MS * 5;
-
-    if (REFRESH_INTERVAL <= 0) {
-      return 0;
-    }
-    return REFRESH_INTERVAL;
-  };
-
-  const silentRefresh = async () => {
-    const response = await fetchUserAuthWithRefreshToken(refreshToken).catch(
-      async () => {
-        await logout();
-        setErrorToast(new Error(ErrorMessage.REFRESH));
-        return null;
-      }
-    );
-
-    return response;
+    return refetchInterval > 0 ? refetchInterval : ONE_MINUTE_IN_MS;
   };
 
   useEffect(() => {
     setIsRefreshEnable(() => refreshEnableHandler());
   }, [refreshEnableHandler]);
 
-  useQuery([QueryKeys.REFRESH], silentRefresh, {
-    enabled: isRefreshEnable,
-    refetchInterval: calculateRefreshInterval,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    refetchIntervalInBackground: true,
-    staleTime: ONE_SECOND_IN_MS,
-    onSuccess: async (data) => {
-      await update(data);
+  useEffect(() => {
+    if(session?.error === 'RefreshAccessTokenError') {
+      signOut();
     }
-  });
+  },[session])
+
+  useQuery(
+    [QueryKeys.REFRESH],
+    () => fetchUserAuthWithRefreshToken(refreshToken),
+    {
+      enabled: isRefreshEnable,
+      refetchInterval: (data) => {
+        if (!data) return false;
+        return calculateRefetchInterval(data.expires_at);
+      },
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchIntervalInBackground: true,
+      onSuccess: async (data) => {
+        await update(data);
+      }
+    }
+  );
 
   const login = async (googleResponse: GoogleLoginCredential) => {
     if (!googleResponse) return;
@@ -96,5 +90,5 @@ export default function useAuth() {
     });
   };
 
-  return { session, status, login, logout, silentRefresh };
+  return { session, status, login, logout };
 }

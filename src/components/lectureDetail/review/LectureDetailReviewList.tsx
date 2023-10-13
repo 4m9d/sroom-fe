@@ -9,7 +9,7 @@ import { REVIEW_LIMIT } from '@/src/constants/skeleton/skeleton';
 import LectureDetailReviewCard from './LectureDetailReviewCard';
 import setErrorToast from '@/src/util/toast/setErrorToast';
 
-export default async function LectureDetailReviewList({
+export default function LectureDetailReviewList({
   lectureCode,
   reviewPageRef
 }: {
@@ -28,7 +28,7 @@ export default async function LectureDetailReviewList({
     allPages: (LectureReviewList | null)[]
   ) => {
     if (lastPage === null || lastPage.length === 0) return undefined;
-    
+
     return allPages.length * lastPage.length;
   };
 
@@ -41,10 +41,14 @@ export default async function LectureDetailReviewList({
 
     updateReviewPageRef(offset);
 
-    return await fetchLectureDetailReview(lectureCode, params).catch(() => {
+    const lectureDetailReview = await fetchLectureDetailReview(
+      lectureCode,
+      params
+    ).catch(() => {
       setErrorToast(new Error(ErrorMessage.DETAIL_REVIEW));
       return null;
     });
+    return lectureDetailReview;
   };
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(

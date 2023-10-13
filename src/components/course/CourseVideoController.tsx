@@ -48,7 +48,7 @@ export default function CourseVideoController({
     updateIsCompletedManually,
     {
       onSuccess: (data) => {
-        setIsCompleted(data.is_completed);
+        data && setIsCompleted(data.is_completed);
 
         if (currentIntervalID.current !== null) {
           clearInterval(currentIntervalID.current);

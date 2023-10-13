@@ -1,6 +1,5 @@
 import { fetchDashboardInfo } from '@/src/api/dashboards/dashboards';
 import DashboardHeader from '@/src/components/dashboard/header/DashboardHeader';
-import ServiceGuideModal from '@/src/components/dashboard/header/ServiceGuideModal';
 import LatestLearningCoursesList from '@/src/components/dashboard/latestLearning/LatestLearningCoursesList';
 import MainDashboard from '@/src/components/dashboard/main/MainDashboard';
 import LectureRecommendationsList from '@/src/components/recommendations/LectureRecommendationsList';
@@ -14,12 +13,18 @@ export const metadata = {
 
 export default async function Dashboard() {
   const notion = new NotionAPI();
+  
+  const dashboardInfo = await fetchDashboardInfo().catch((error) => {
+    return null;
+  }
+  );
   const recordMapList: ExtendedRecordMap[] = await Promise.all(
     SERVICE_GUIDE.map((service) => notion.getPage(service.key))
   );
-  const dashboardInfo = await fetchDashboardInfo();
-  const latestLearningCourses = dashboardInfo.latest_lectures;
-  const isExistingUser = latestLearningCourses.length > 0;
+  
+  const latestLearningCourses = dashboardInfo?.latest_lectures;
+  const isExistingUser =
+    (latestLearningCourses && latestLearningCourses.length > 0) ?? false;
 
   return (
     <div className='w-full'>
@@ -27,8 +32,8 @@ export default async function Dashboard() {
         isExistingUser={isExistingUser}
         recordMapList={recordMapList}
       />
-      <MainDashboard dashboardInfo={dashboardInfo} />
-      {isExistingUser && (
+      {dashboardInfo && <MainDashboard dashboardInfo={dashboardInfo} />}
+      {isExistingUser && latestLearningCourses && (
         <LatestLearningCoursesList
           latestLearningCourses={latestLearningCourses}
         />

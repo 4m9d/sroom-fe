@@ -61,7 +61,7 @@ const YoutubePlayer = ({
     silentUpdateViewDuration,
     {
       onSuccess: (data) => {
-        if (data.is_completed === true && isCompleted === false) {
+        if (data && data.is_completed === true && isCompleted === false) {
           isCompleted = true;
           revalidateCourseDetail();
         }
@@ -111,7 +111,6 @@ const YoutubePlayer = ({
 
     const intervalID = setInterval(() => {
       viewDuration.current += UPDATE_INTERVAL * playbackRate;
-      console.log(viewDuration.current);
       mutate();
     }, UPDATE_INTERVAL_IN_MS);
     currentIntervalID.current = intervalID;

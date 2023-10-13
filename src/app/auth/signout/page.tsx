@@ -1,11 +1,10 @@
 'use client';
 import Button from '@/src/components/ui/button/Button';
-import useAuth from '@/src/hooks/useAuth';
+import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 export default function Signout({}) {
   const router = useRouter();
-  const { logout } = useAuth();
 
   return (
     <div className='flex bg-sroom-gray-200'>
@@ -25,7 +24,7 @@ export default function Signout({}) {
         </Button>
         <Button
           className='w-full border text-sroom-black-400 bg-sroom-white border-sroom-gray-500'
-          onClick={logout}
+          onClick={signOut}
         >
           로그아웃 하기
         </Button>

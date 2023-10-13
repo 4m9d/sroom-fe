@@ -10,7 +10,7 @@ export default function LoadMoreButton({ title, onClick }: Props) {
   return (
     <Button
       onClick={onClick}
-      className='gap-2 mx-auto font-medium btn-md btn-wide text-sroom-black-200'
+      className='gap-2 mx-auto font-semibold btn-md btn-wide text-sroom-black-200'
     >
       {title}
       <span className='w-3 rotate-90 md:w-4 stroke-sroom-black-200'>
