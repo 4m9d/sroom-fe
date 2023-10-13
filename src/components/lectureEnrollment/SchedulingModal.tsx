@@ -157,7 +157,7 @@ export default function SchedulingModal({
       <AnimatePresence>
         <div className='flex flex-col items-center justify-between w-full h-full gap-10'>
           <div className='flex flex-col items-center justify-center h-16 gap-4'>
-            <p className='text-xl font-bold'>강의 일정관리 설정</p>
+            <p className='text-xl font-bold'>강의 일정 관리 설정</p>
             <p className='text-base font-medium'>
               매 주차별로 강의를 묶어 제공해 드려요
             </p>

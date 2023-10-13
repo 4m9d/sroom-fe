@@ -8,6 +8,9 @@ function redirectToMain(req: NextRequest) {
   return NextResponse.redirect(new URL('/', req.url));
 }
 function redirectToSignin(req: NextRequest) {
+  if (req.nextUrl.pathname === '/auth/signout') {
+    return NextResponse.redirect(new URL('/auth/signin', req.url));
+  }
   return NextResponse.rewrite(new URL('/auth/signin', req.url));
 }
 function redirectToDashboard(req: NextRequest) {

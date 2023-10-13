@@ -8,7 +8,7 @@ import {
 } from '../api/ErrorMessage';
 import useAuth from '../hooks/useAuth';
 
-export default async function ErrorHandler({
+export default function ErrorHandler({
   error,
   reset
 }: {
@@ -23,7 +23,7 @@ export default async function ErrorHandler({
     router.back();
   } else if (error.cause === SESSION_ERROR) {
     setErrorToast(error);
-    await logout();
+    logout();
   } else {
     setErrorToast(new Error(ErrorMessage.DEFAULT));
   }

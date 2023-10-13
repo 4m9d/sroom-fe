@@ -113,7 +113,7 @@ export default function CourseMaterialQuizzes({
   return (
     <AnimatePresence>
       <div
-        className={`w-full my-10 flex flex-col justify-center items-between gap-10`}
+        className={`min-w-full max-w-full my-10 flex flex-col justify-center items-between gap-10`}
       >
         {quizzes?.map((quiz, idx) => {
           const selectedAnswer = selectedAnswerList.find(

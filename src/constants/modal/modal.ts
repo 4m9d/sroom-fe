@@ -1,9 +1,10 @@
 export const ModalIDs = {
-  LECTURE_DETAIL: 'lecture_detail_modal',
-  LECTURE_ENROLLMENT: 'lecture_enrollment_modal',
-  LECTURE_REVIEW: 'lecture_review_modal',
-  SCHEDULING: 'scheduling_modal',
-  COURSE_DELETE: 'course_delete_modal',
+  SERVICE_GUIDE: 'service-guide-modal',
+  LECTURE_DETAIL: 'lecture-detail-modal',
+  LECTURE_ENROLLMENT: 'lecture-enrollment-modal',
+  LECTURE_REVIEW: 'lecture-review-modal',
+  SCHEDULING: 'scheduling-modal',
+  COURSE_DELETE: 'course-delete-modal',
 } as const;
 
 type ModalIDs = (typeof ModalIDs)[keyof typeof ModalIDs];
