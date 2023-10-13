@@ -14,6 +14,7 @@ import NaverAnalytics from '../components/tools/NaverAnalytics/NaverAnalytics';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
+  metadataBase: new URL('https://sroom.kr'),
   title: {
     template: '%s | 스룸',
     default: '스룸'
@@ -23,10 +24,8 @@ export const metadata = {
     title: '스룸',
     description: '나만을 위한 유튜브 강의 관리 플랫폼 스룸',
     type: 'website',
-    locale: 'ko_KR',
-    url: 'https://sroom.kr',
     images: {
-      url: 'https://sroom.kr/image/opengraph/opengraph-image.jpg',
+      url: '/image/opengraph/opengraph-image.jpg',
       width: 1200,
       height: 630,
       alt: '나만을 위한 유튜브 강의 관리 플랫폼, 스룸'

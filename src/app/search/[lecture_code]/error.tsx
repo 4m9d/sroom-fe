@@ -8,7 +8,7 @@ import useAuth from '@/src/hooks/useAuth';
 import setErrorToast from '@/src/util/toast/setErrorToast';
 import { useRouter } from 'next/navigation';
 
-export default async function ErrorHandler({
+export default function ErrorHandler({
   error,
   reset
 }: {
@@ -24,7 +24,7 @@ export default async function ErrorHandler({
     router.refresh();
   } else if (error.cause === SESSION_ERROR) {
     setErrorToast(error);
-    await logout();
+    logout();
   } else {
     setErrorToast(new Error(ErrorMessage.DEFAULT));
   }
