@@ -6,6 +6,7 @@ import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { updateViewDuration } from '@/src/api/lectures/time';
+import setVideoCompleteToast from '@/src/util/toast/setVideoCompleteToast';
 
 type Props = {
   course_id: number;
@@ -48,6 +49,7 @@ export default function CourseVideoController({
     updateIsCompletedManually,
     {
       onSuccess: (data) => {
+        setVideoCompleteToast();
         data && setIsCompleted(data.is_completed);
 
         if (currentIntervalID.current !== null) {
@@ -98,7 +100,7 @@ export default function CourseVideoController({
   }, [course_video_id, is_completed]);
 
   return (
-    <div className='flex flex-wrap justify-center max-w-screen-lg gap-1 mx-auto my-2 md:gap-3 lg:my-5 lg:px-28 shrink-0'>
+    <div className='flex flex-col items-center justify-center max-w-screen-lg gap-1 mx-auto my-2 md:flex-row md:gap-3 lg:my-5 lg:px-10 shrink-0'>
       <Button
         hoverEffect={true}
         onClick={() => controllerClickHandler('prev')}

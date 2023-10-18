@@ -6,7 +6,8 @@ import LectureSVG from '@/public/icon/Lecture';
 const Emoji: Emoji = {
   lecture_enrollment: '🤓',
   error: '🚫',
-  undeveloped: '🚧'
+  undeveloped: '🚧',
+  video_complete: '✅'
 };
 
 const TOAST_DELAY = 4;

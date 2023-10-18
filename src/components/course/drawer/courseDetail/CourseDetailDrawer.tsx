@@ -1,6 +1,6 @@
 'use client';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import SectionList from './SectionList';
 import CourseDetailHeader from './CourseDetailHeader';
 import DrawerMenuButtons from './DrawerMenuButtons';
@@ -31,7 +31,7 @@ export default function CourseDetailDrawer({
   } = courseDetail;
   const animationConfig = {
     animate: controls,
-    transition: { ease: 'easeInOut', duration: 0.25 },
+    transition: { ease: 'easeInOut', duration: 0.3 },
     variants: {
       initial: { width: '0%' },
       animate: { width: '40%', maxWidth: '20rem' },
@@ -49,6 +49,13 @@ export default function CourseDetailDrawer({
     }
   }, [controls, isDrawerOpen]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      controls.start('animate');
+      setIsDrawerOpen(true);
+    }, 200);
+  }, [controls]);
+
   return (
     <AnimatePresence>
       <motion.aside
@@ -62,7 +69,7 @@ export default function CourseDetailDrawer({
               initial={{ opacity: 0, translateX: '-100%' }}
               animate={{ opacity: 1, translateX: '0%' }}
               exit={{ opacity: 0, translateX: '-100%' }}
-              transition={{ ease: 'easeInOut', duration: 0.25 }}
+              transition={{ ease: 'easeInOut', duration: 0.3 }}
               className='absolute top-0 left-0 flex flex-col justify-between w-full h-full'
             >
               <div className='flex-1 overflow-y-scroll'>

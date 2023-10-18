@@ -66,7 +66,7 @@ export default function QuizHeader({
             </AnimatePresence>
           </p>
         )}
-        <div className='flex items-start min-h-[3.5rem] h-full'>
+        <div className='flex items-start h-full'>
           <p className='mr-2 text-lg'>{`Q.${questionNumber}`}</p>
           <p className='text-lg'>{question}</p>
         </div>

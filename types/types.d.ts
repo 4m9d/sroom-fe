@@ -52,6 +52,7 @@ interface Emoji {
   lecture_enrollment: string;
   error: string;
   undeveloped: string;
+  video_complete: string;
 }
 
 interface CustomToast {

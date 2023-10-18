@@ -18,18 +18,18 @@ export default function LatestLearningCourseCard({ course }: Props) {
       src={course.thumbnail}
       alt={course.course_title}
     >
-      <div className='flex flex-col justify-between h-full text-sroom-black-400'>
+      <div className='flex flex-col justify-between h-[7.5rem] text-sroom-black-400'>
         <div className='mt-1'>
-          <p className='font-bold break-all whitespace-normal h-11 text-md line-clamp-2'>
+          <p className='text-base font-bold break-all whitespace-normal line-clamp-1'>
             {course.course_title}
           </p>
           <p className='w-3/4 mt-1 text-sm break-all whitespace-normal text-sroom-black-300 line-clamp-1'>
             {course.channels}
           </p>
         </div>
-        <div className='flex justify-between gap-5 mb-1 min-h-10 shrink-0'>
-          <div className='flex-col justify-between flex-1 hidden gap-1 py-1 sm:flex shrink-0'>
-            <p className='flex text-xs text-sroom-black-100 shrink-0'>
+        <div className='flex flex-col shrink-0'>
+          <div className='flex items-center flex-1 gap-1 shrink-0'>
+            <p className='flex mb-2 text-xs break-keep text-sroom-black-100 shrink-0'>
               <span className='w-3 mr-1 stroke-sroom-black-100'>
                 <ClockSVG />
               </span>
@@ -39,9 +39,11 @@ export default function LatestLearningCourseCard({ course }: Props) {
                 <LectureSVG />
               </span>
               {course.completed_video_count.toLocaleString()}개<span>/</span>
-              {course.total_video_count.toLocaleString()}개 완료
+              {course.total_video_count.toLocaleString()}개
             </p>
-            <div className='flex items-center shrink-0'>
+          </div>
+          <div className='flex w-full gap-5'>
+            <div className='flex items-center flex-1 shrink-0'>
               <ProgressBar
                 className='w-full h-[4px] !bg-sroom-gray-300'
                 value={course.progress}
@@ -51,15 +53,15 @@ export default function LatestLearningCourseCard({ course }: Props) {
                 <span className='font-normal'>%</span>
               </p>
             </div>
+            <Link href={`/course/${course.course_id}`}>
+              <Button className='!h-9 px-3 flex justify-around w-26 text-xs font-semibold text-sroom-white bg-sroom-black-400 shrink-0 gap-3'>
+                <p>바로 학습</p>
+                <span className='w-3 stroke-sroom-white'>
+                  <ArrowRightSVG />
+                </span>
+              </Button>
+            </Link>
           </div>
-          <Link href={`/course/${course.course_id}`}>
-            <Button className='!h-9 px-3 flex justify-around w-26 text-xs font-semibold text-sroom-white bg-sroom-black-400 shrink-0 gap-3'>
-              <p>바로 학습</p>
-              <span className='w-3 stroke-sroom-white'>
-                <ArrowRightSVG />
-              </span>
-            </Button>
-          </Link>
         </div>
       </div>
     </HorizontalSmallLectureCard>

@@ -31,7 +31,7 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
       ? windowHeight * 0.6
       : BOTTOM_SHEET_MAX_HEIGHT;
   const initialDrawerWidth =
-    windowWidth * 0.4 < DRAWER_MAX_WIDTH ? windowWidth * 0.4 : DRAWER_MAX_WIDTH;
+    windowWidth * 0.3 < DRAWER_MAX_WIDTH ? windowWidth * 0.3 : DRAWER_MAX_WIDTH;
 
   const bottomSheetHeight = useMotionValue(initialBottomSheetHeight);
   const drawerWidth = useMotionValue(initialDrawerWidth);
@@ -52,10 +52,10 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
 
   const drawerAnimationConfig = {
     animate: controls,
-    transition: { ease: 'easeInOut', duration: 0.25 },
+    transition: { ease: 'easeInOut', duration: 0.3 },
     variants: {
       initial: { width: 0 },
-      animate: { width: windowWidth * 0.4, maxWidth: DRAWER_MAX_WIDTH },
+      animate: { width: windowWidth * 0.3, maxWidth: DRAWER_MAX_WIDTH },
       exit: { width: 0 }
     }
   };
@@ -63,7 +63,7 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
     initial: { opacity: 0, translateX: '100%' },
     animate: { opacity: 1, translateX: '0%' },
     exit: { opacity: 0, translateX: '100%' },
-    transition: { ease: 'easeInOut', duration: 0.2 }
+    transition: { ease: 'easeInOut', duration: 0.3 }
   };
 
   const drawerDragResizingConfig = {
@@ -93,7 +93,7 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
   };
   const bottomSheetAnimationConfig = {
     animate: controls,
-    transition: { ease: 'easeInOut', duration: 0.25 },
+    transition: { ease: 'easeInOut', duration: 0.3 },
     variants: {
       initial: { height: 0 },
       animate: {
@@ -107,7 +107,7 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
     initial: { opacity: 0, translateY: '100%' },
     animate: { opacity: 1, translateY: '0%' },
     exit: { opacity: 0, translateY: '100%' },
-    transition: { ease: 'easeInOut', duration: 0.25 }
+    transition: { ease: 'easeInOut', duration: 0.3 }
   };
 
   const bottomSheetDragResizingConfig = {

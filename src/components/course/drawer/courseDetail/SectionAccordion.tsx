@@ -108,7 +108,7 @@ export default function SectionAccordion({
                 className='flex items-center justify-between h-[17px] px-3 py-3 hover:bg-sroom-gray-200 hover:opacity-80 rounded-sm hover:scale-105 transition-all'
               >
                 <p
-                  className={`w-5/6 text-start text-xs md:text-sm whitespace-normal line-clamp-1 break-all before:w-[2px] before:h-[2px] before:mr-1 before:inline-block before:align-middle ${
+                  className={`w-5/6 text-start font-medium text-xs whitespace-normal line-clamp-1 break-all before:w-[2px] before:h-[2px] before:mr-1 before:inline-block before:align-middle ${
                     video.is_completed === true
                       ? 'text-sroom-black-200'
                       : 'text-sroom-black-400'
