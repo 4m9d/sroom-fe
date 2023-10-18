@@ -26,7 +26,7 @@ export default function DashboardHeader({
 
   if (isExistingUser) {
     return (
-      <section className='px-4 mx-auto lg:px-24 pt-14 text-sroom-black-400 max-w-screen-2xl'>
+      <section className='max-w-screen-xl px-4 mx-auto lg:px-24 pt-14 text-sroom-black-400'>
         <h2 className='text-2xl font-bold md:text-3xl lg:text-4xl md:mb-2 lg:mb-3'>
           안녕하세요!
         </h2>

@@ -28,7 +28,7 @@ export default async function SearchResults({ searchParams }: Props) {
     <>
     <title>{getPageTitle(`'${searchParams.keyword}' 검색 결과`)}</title>
       <div className='py-20 bg-sroom-gray-200'>
-        <section className='px-4 mx-auto lg:px-24 max-w-screen-2xl'>
+        <section className='max-w-screen-xl px-4 mx-auto lg:px-24'>
           <SearchResultsHeading keyword={requestParam.keyword} />
           <Suspense
             fallback={

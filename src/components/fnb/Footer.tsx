@@ -9,7 +9,7 @@ export default function Footer({}) {
   if (currentRoute.startsWith('/course')) return null;
   return (
     <footer className='pt-5 pb-16 border bg-sroom-gray-300 border-t-sroom-gray-400'>
-      <div className='px-4 mx-auto lg:px-24 max-w-screen-2xl'>
+      <div className='max-w-screen-xl px-4 mx-auto lg:px-24'>
         <ul className='flex flex-wrap justify-center w-full gap-4 mb-12 text-sm text-sroom-black-400'>
           <li>
             <Link

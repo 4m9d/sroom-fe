@@ -13,7 +13,7 @@ export default function LatestLearningCoursesList({
 }: Props) {
   return (
     <div className='bg-sroom-gray-200'>
-      <section className='px-4 py-20 mx-auto mt-20 lg:px-24 max-w-screen-2xl'>
+      <section className='max-w-screen-xl px-4 py-20 mx-auto mt-20 lg:px-24'>
         <SectionHeading title='시작해 볼까요?'>
           <Link href={'/classroom'}>
             <Button hoverEffect={true} className='gap-2'>

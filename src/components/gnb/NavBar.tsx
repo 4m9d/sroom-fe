@@ -1,7 +1,6 @@
 'use client';
 import Link from 'next/link';
 import SearchInput from './SearchInput';
-import useAuth from '@/src/hooks/useAuth';
 import Button from '../ui/button/Button';
 import Image from 'next/image';
 import useWindowSize from '@/src/hooks/useWindowSize';
@@ -50,7 +49,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
 
   return (
     <nav className='z-20 h-12 shadow-sm navbar'>
-      <div className='flex justify-between gap-4 px-4 mx-auto lg:gap-8 lg:px-24 navbar max-w-screen-2xl'>
+      <div className='flex justify-between max-w-screen-xl gap-4 px-4 mx-auto lg:gap-8 lg:px-24 navbar'>
         <h1 className='w-10 sm:w-28 lg:w-36 shrink-0'>
           <Link href='/' className='shrink-0 mr-14'>
             {windowWidth < WIDTH_SM ? (
