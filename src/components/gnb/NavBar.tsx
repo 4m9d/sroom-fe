@@ -1,7 +1,6 @@
 'use client';
 import Link from 'next/link';
 import SearchInput from './SearchInput';
-import Button from '../ui/button/Button';
 import Image from 'next/image';
 import useWindowSize from '@/src/hooks/useWindowSize';
 import { useEffect, useState } from 'react';
@@ -9,7 +8,6 @@ import { useSession } from 'next-auth/react';
 import { useMutation } from '@tanstack/react-query';
 import { updateUserProfile } from '@/src/api/members/members';
 import ProfileDropdown from './ProfileDropdown';
-import { useRouter } from 'next/navigation';
 
 type Props = {
   logo: string;
@@ -18,7 +16,6 @@ type Props = {
 const WIDTH_SM = 640;
 
 export default function NavBar({ logo, profileDropdown }: Props) {
-  const router = useRouter();
   const { data: session, update } = useSession();
   const { width: windowWidth } = useWindowSize();
   const [isEditMode, setIsEditMode] = useState(false);
@@ -74,12 +71,6 @@ export default function NavBar({ logo, profileDropdown }: Props) {
         <div className={`${navBarHidden} flex-1`}>
           <SearchInput />
         </div>
-        <Button
-          onClick={() => router.push('/auth/signout')}
-          className={`${navBarHidden} g_id_signout w-20 lg:w-24 bg-sroom-brand`}
-        >
-          <p className='text-xs lg:text-sm text-sroom-white'>로그아웃</p>
-        </Button>
         <button
           type='button'
           className={`${navBarHidden} dropdown dropdown-end md:dropdown-hover text-sroom-black-400`}

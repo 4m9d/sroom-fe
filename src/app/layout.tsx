@@ -50,7 +50,12 @@ export default function RootLayout({ children, modal }: Props) {
             <NavBar
               logo='스룸'
               profileDropdown={[
-                { id: 1, menuTitle: '내 강의실', menuRoute: '/classroom' }
+                { id: 1, menuTitle: '내 강의실', menuRoute: '/classroom' },
+                {
+                  id: 2,
+                  menuTitle: '로그아웃',
+                  menuRoute: '/auth/signout'
+                }
               ]}
             />
             <ChannelTalkManager>
