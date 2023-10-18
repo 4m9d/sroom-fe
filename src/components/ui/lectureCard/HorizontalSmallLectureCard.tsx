@@ -29,11 +29,11 @@ export default function HorizontalSmallLectureCard({
 }: Props) {
   return (
     <div
-      className={`relative flex w-full gap-4 p-3 whitespace-normal h-[11rem] text-sroom-black-400 ${
+      className={`relative flex w-full gap-4 p-3 whitespace-normal h-36 text-sroom-black-400 ${
         disabled ? 'bg-sroom-gray-200' : 'bg-sroom-white'
       } ${border ? 'border border-sroom-gray-400' : ''}`}
     >
-      <div className='w-full max-w-[15rem] flex items-center'>
+      <div className='w-full max-w-[12rem] flex items-center'>
         <div className='relative w-full h-0 pb-[56.25%]'>
           <div className='absolute top-0 left-0 object-cover w-full h-full overflow-hidden'>
             <Image

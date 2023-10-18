@@ -16,7 +16,7 @@ export default function Modal({ id, className, children, onClose }: Props) {
         'modal overflow-x-hidden overflow-y-scroll text-sroom-black-400'
       }
     >
-      <div className={`modal-box ${className}`}>
+      <div className={`modal-box ${className} max-h-[90vh]`}>
         <form method='dialog'>
           <CloseButton onClick={onClose}/>
         </form>

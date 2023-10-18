@@ -23,6 +23,7 @@ export default function RadialProgress({
         className={`${className} radial-progress radial-square`}
         style={style}
         animate={animateStyle}
+        transition={{ duration: 0.5, delay: 0.2 }}
       >
         <p className={`${innerTextClassName}`}>{value}%</p>
       </motion.div>

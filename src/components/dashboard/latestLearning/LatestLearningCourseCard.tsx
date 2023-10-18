@@ -20,10 +20,10 @@ export default function LatestLearningCourseCard({ course }: Props) {
     >
       <div className='flex flex-col justify-between h-full text-sroom-black-400'>
         <div className='mt-1'>
-          <p className='text-lg font-bold break-all whitespace-normal line-clamp-2'>
+          <p className='font-bold break-all whitespace-normal h-11 text-md line-clamp-2'>
             {course.course_title}
           </p>
-          <p className='mt-2 text-sm break-all whitespace-normal text-sroom-black-300 line-clamp-1'>
+          <p className='w-3/4 mt-1 text-sm break-all whitespace-normal text-sroom-black-300 line-clamp-1'>
             {course.channels}
           </p>
         </div>
@@ -53,7 +53,7 @@ export default function LatestLearningCourseCard({ course }: Props) {
             </div>
           </div>
           <Link href={`/course/${course.course_id}`}>
-            <Button className='!h-10 flex justify-between w-28 text-sm font-semibold text-sroom-white bg-sroom-black-400 shrink-0 gap-3'>
+            <Button className='!h-9 px-3 flex justify-around w-26 text-xs font-semibold text-sroom-white bg-sroom-black-400 shrink-0 gap-3'>
               <p>바로 학습</p>
               <span className='w-3 stroke-sroom-white'>
                 <ArrowRightSVG />

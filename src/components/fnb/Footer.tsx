@@ -36,7 +36,7 @@ export default function Footer({}) {
               문의하기
             </Link>
           </li>
-          <li className='font-medium'>© 4M9D.</li>
+          <li className='font-medium'>© SROOM.</li>
         </ul>
         <div className='flex flex-col gap-3'>
           <Image
@@ -47,6 +47,9 @@ export default function Footer({}) {
             height={30}
           />
           <address className='flex flex-col gap-1 text-xs text-sroom-black-100'>
+            <div>
+              4M9D
+            </div>
             <div>
               서울특별시 강남구 테헤란로 311 아남타워빌딩 7층 (우편번호 : 06151)
             </div>

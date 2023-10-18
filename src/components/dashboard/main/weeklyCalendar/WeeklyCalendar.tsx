@@ -73,11 +73,19 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
     setSelectedWeek(findLearningHistory(startOfWeek));
   }, [findLearningHistory]);
 
+  useLayoutEffect(() => {
+    const element = document.getElementById('dashboard-section');
+
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
   return (
     <div className='flex flex-col items-center justify-center col-start-3 col-end-4 row-start-1 row-end-4 bg-sroom-gray-300 text-sroom-black-400'>
       <div className='flex items-center justify-center py-2 sm:py-3 md:py-4 xl:py-7'>
         <p className='text-xs font-semibold md:text-base xl:text-lg'>
-          <span className='px-2 py-[2px] mr-1 font-bold bg-sroom-white rounded-sm text-sroom-black-300'>
+          <span className='px-1 md:px-2 py-[2px] mr-1 font-bold bg-sroom-white rounded-sm text-sroom-black-300'>
             {selectedMonth === 'Invalid Date' ? '' : selectedMonth}
           </span>
           월 주간 수강 캘린더
@@ -93,7 +101,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
             〈
           </button>
         </div>
-        <div className='flex flex-col px-2 grow bg-sroom-white'>
+        <div className='flex flex-col px-1 grow bg-sroom-white'>
           <div className='flex items-center justify-center flex-1 border-b border-sroom-gray-400'>
             <CalendarForOneWeek
               selectedDay={selectedDay}
@@ -123,7 +131,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
                 />
               </>
             ) : (
-              <p className='text-xs font-medium break-keep md:text-sm lg:text-base xl:text-lg text-sroom-black-200'>
+              <p className='text-xs break-keep md:text-sm lg:text-base xl:text-lg text-sroom-black-200'>
                 수강 이력이 없어요
               </p>
             )}
