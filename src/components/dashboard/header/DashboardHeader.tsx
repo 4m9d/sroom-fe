@@ -34,7 +34,7 @@ export default function DashboardHeader({
             </h2>
             <h3 className='flex flex-col items-center text-base font-normal md:text-lg text-sroom-black-200'>
               <p>유튜브에 저장만 해놨던 강의, 듣다가 중간에 포기해버린 강의</p>
-              <p>이젠 스룸과 함께 체계적으로 학습을 시작해 보세요!</p>
+              <p>이젠 스룸과 함께 체계적으로 학습을 시작해 보세요</p>
               <p className='mt-3 text-xs md:mt-4 lg:mt-7 md:text-sm text-sroom-black-100'>
                 아래 섹션을 클릭하면 스룸의 서비스 이용 가이드를 볼 수 있어요
               </p>

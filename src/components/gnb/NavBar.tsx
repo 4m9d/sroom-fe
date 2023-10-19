@@ -69,7 +69,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
           </Link>
         </h1>
         <div className={`${navBarHidden} flex-1`}>
-          <SearchInput />
+          <SearchInput className='pr-8 text-xs rounded-none lg:text-sm bg-sroom-gray-400' />
         </div>
         <button
           type='button'

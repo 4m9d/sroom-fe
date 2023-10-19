@@ -4,14 +4,14 @@ import SearchResultsHeading from '@/src/components/search/SearchResultsHeading';
 import SearchResultsList from '@/src/components/search/SearchResultsList';
 import SearchResultsSkeleton from '@/src/components/search/SearchResultsSkeleton';
 import getPageTitle from '@/src/util/metadata/getPageTitle';
-import { Suspense, useRef } from 'react';
+import { Suspense, useLayoutEffect, useRef } from 'react';
 
 type Props = {
   searchParams: SearchLectureParams;
 };
 const LIMIT_PER_FETCH = 20;
 
-export default async function SearchResults({ searchParams }: Props) {
+export default function SearchResults({ searchParams }: Props) {
   const searchResultPageRef = useRef<number>(0);
 
   const requestParam: SearchLectureParams = {
@@ -23,6 +23,10 @@ export default async function SearchResults({ searchParams }: Props) {
     next_page_token: '',
     filter: searchParams.filter ? searchParams.filter : 'all'
   };
+
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0 });
+  },[])
 
   return (
     <>

@@ -2,6 +2,7 @@ import { fetchDashboardInfo } from '@/src/api/dashboards/dashboards';
 import DashboardHeader from '@/src/components/dashboard/header/DashboardHeader';
 import LatestLearningCoursesList from '@/src/components/dashboard/latestLearning/LatestLearningCoursesList';
 import MainDashboard from '@/src/components/dashboard/main/MainDashboard';
+import MainSearchInput from '@/src/components/dashboard/searchInput/MainSearchInput';
 import LectureRecommendationsList from '@/src/components/recommendations/LectureRecommendationsList';
 import { SERVICE_GUIDE } from '@/src/constants/serviceGuides/serviceGuides';
 import { NotionAPI } from 'notion-client';
@@ -33,6 +34,7 @@ export default async function Dashboard() {
         recordMapList={recordMapList}
       />
       {dashboardInfo && <MainDashboard dashboardInfo={dashboardInfo} />}
+      <MainSearchInput/>
       {isExistingUser && latestLearningCourses && (
         <LatestLearningCoursesList
           latestLearningCourses={latestLearningCourses}
