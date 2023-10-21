@@ -83,9 +83,9 @@ export default function LectureEnrollmentButton({
   const LIST__SUB__LI =
     'px-3 border-b cursor-pointer border-b-sroom-gray-500 last-of-type:border-b-0 hover:bg-sroom-brand peer';
   const LIST__DIV =
-    'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-sroom-black-100 stroke-sroom-black-100 hover:text-sroom-black-400 focus:text-sroom-black-400 hover:stroke-sroom-black-400 focus:stroke-sroom-black-400 cursor-pointer w-full';
+    'flex items-center justify-center h-10 text-sm font-semibold rounded-none text-sroom-black-100 stroke-sroom-black-100 hover:text-sroom-black-400 focus:text-sroom-black-400 hover:stroke-sroom-black-400 focus:stroke-sroom-black-400 cursor-pointer w-full';
   const LIST__SUB__DIV =
-    'flex items-center justify-center h-12 text-sm font-semibold rounded-none text-sroom-black-100 stroke-sroom-black-100 hover:text-sroom-white focus:text-sroom-white hover:stroke-sroom-white focus:stroke-sroom-white cursor-pointer w-full';
+    'flex items-center justify-center h-10 text-sm font-semibold rounded-none text-sroom-black-100 stroke-sroom-black-100 hover:text-sroom-white focus:text-sroom-white hover:stroke-sroom-white focus:stroke-sroom-white cursor-pointer w-full';
 
   const EnrolledCoursesList = ({
     courses,
@@ -109,7 +109,7 @@ export default function LectureEnrollmentButton({
               } px-2 justify-between gap-2`}
             >
               <div className='flex items-center justify-center flex-1'>
-                <span className='max-w-[70%] whitespace-normal line-clamp-1 break-all'>
+                <span className='max-w-[70%] !text-xs whitespace-normal line-clamp-1 break-all'>
                   {course.course_title}
                 </span>
               </div>
@@ -117,7 +117,7 @@ export default function LectureEnrollmentButton({
                 <span className='w-3 mr-1'>
                   <LectureSVG />
                 </span>
-                <span className='text-xs'>{course.total_video_count}개</span>
+                <span className='!text-xs'>{course.total_video_count}개</span>
               </div>
             </button>
           </li>
@@ -193,7 +193,7 @@ export default function LectureEnrollmentButton({
         <Button
           disabled={disabled}
           onClick={() => {}}
-          className={`w-full !h-[3rem] peer text-sroom-white bg-sroom-black-400 md:text-base ${
+          className={`w-full peer text-sroom-white bg-sroom-black-400 md:text-base ${
             disabled ? 'opacity-80' : ''
           }`}
         >

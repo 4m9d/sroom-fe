@@ -51,7 +51,7 @@ export default function HorizontalBigLectureCard({
                 }`}
               >
                 <ThumbnailBadge
-                  title='회원 전용'
+                  title='채널 회원'
                   className='bg-sroom-black-400'
                 />
               </div>

@@ -3,6 +3,7 @@ import CrownSVG from '@/public/icon/Crown';
 import getCompactFormattedTime from '@/src/util/time/getCompactFormattedTime';
 import Image from 'next/image';
 import React from 'react';
+import ThumbnailBadge from '../../ui/badge/ThumbnailBadge';
 
 type Props = {
   lectureIndex: LectureIndex;
@@ -19,7 +20,7 @@ export default function LectureDetailIndexCard({
     <li
       className={`flex items-center justify-between h-[4.5rem] p-3 border bg-sroom-gray-200 relative ${
         is_members_only
-          ? 'border-sroom-brand border-2 rounded-sm'
+          ? 'border-sroom-black-300 border-2 rounded-sm'
           : 'border-sroom-gray-400'
       }`}
     >
@@ -43,9 +44,7 @@ export default function LectureDetailIndexCard({
             </span>
           </div>
           {is_members_only && (
-            <span className='p-[5px] rounded-full w-7 h-7 bg-sroom-brand stroke-sroom-white'>
-              <CrownSVG />
-            </span>
+            <ThumbnailBadge title='채널 회원' className='bg-sroom-black-400' />
           )}
         </div>
         <div className='text-sm font-semibold break-all text-sroom-black-300 line-clamp-2'>
