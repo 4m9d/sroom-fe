@@ -47,7 +47,8 @@ export default function SectionAccordion({
   useEffect(() => {
     if (
       currentPlayingVideoTabRef.current &&
-      currentPlayingVideo.course_video_id.toString() === currentPlayingVideoTabRef.current.id
+      currentPlayingVideo.course_video_id.toString() ===
+        currentPlayingVideoTabRef.current.id
     ) {
       currentPlayingVideoTabRef.current.scrollIntoView({
         behavior: 'smooth',
@@ -77,9 +78,11 @@ export default function SectionAccordion({
           <div className='flex h-[17px] items-center gap-2'>
             <p className='text-xs font-normal text-sroom-black-200'>
               {`${getFormattedTime(
-                convertSecondsToMinutes(current_week_duration)
+                convertSecondsToMinutes(current_week_duration),
+                true
               )} / ${getFormattedTime(
-                convertSecondsToMinutes(week_duration)
+                convertSecondsToMinutes(week_duration),
+                true
               )}`}{' '}
             </p>
             {is_completed && <VideoCompletionBadge />}

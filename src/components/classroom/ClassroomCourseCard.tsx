@@ -55,7 +55,7 @@ export default function ClassroomCourseCard({
             <span className='w-3 mr-1 stroke-sroom-black-100'>
               <ClockSVG />
             </span>
-            {getFormattedTime(convertSecondsToMinutes(course.duration))}
+            {getFormattedTime(convertSecondsToMinutes(course.duration), true)}
             <span className='after:w-[1px] after:h-[10px] after:bg-sroom-black-100 after:mx-2 after:inline-block after:text-center after:align-middle'></span>
             <span className='w-3 mr-1 align-middle stroke-sroom-black-100'>
               <LectureSVG />

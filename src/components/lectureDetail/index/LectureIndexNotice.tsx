@@ -21,7 +21,7 @@ export default function LectureIndexNotice({
           <div>
             •
             <span className='pl-2 pr-1 text-base font-semibold md:text-lg text-sroom-white'>
-              {getFormattedTime(convertSecondsToMinutes(duration))}
+              {getFormattedTime(convertSecondsToMinutes(duration), true)}
             </span>
             분량
           </div>

@@ -118,7 +118,8 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
                     convertSecondsToMinutes(
                       selectedWeek[selectedDay].learningHistory
                         ?.learning_time ?? 0
-                    )
+                    ),
+                    true
                   )}
                 />
                 <LearningHistoryItem
