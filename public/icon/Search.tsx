@@ -8,8 +8,8 @@ export default function SearchSVG() {
       xmlns='http://www.w3.org/2000/svg'
     >
       <path
-        fill-rule='evenodd'
-        clip-rule='evenodd'
+        fillRule='evenodd'
+        clipRule='evenodd'
         d='M17.4801 19.7075C15.6939 21.0297 21.2482 15.3498 19.6677 17.5089C19.7072 17.5058 19.6339 17.6255 19.3881 17.9255C19.3881 17.9255 23.6093 22.1182 25.6813 24.2519C26.4007 25.0298 25.1028 26.5824 24.221 25.7718C22.3446 23.9513 17.9046 19.427 17.8978 19.4196L17.4801 19.7075Z'
         fill='current'
       />
