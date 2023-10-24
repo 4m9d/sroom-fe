@@ -42,7 +42,6 @@ export default function RootLayout({ children, modal }: Props) {
   return (
     <html lang='ko'>
       <GoogleAnalytics />
-      <NaverAnalytics />
       <ChannelTalk />
       <body className={inter.className}>
         <AuthSessionProvider>
@@ -68,6 +67,7 @@ export default function RootLayout({ children, modal }: Props) {
             </ChannelTalkManager>
           </QueryProvider>
         </AuthSessionProvider>
+        <NaverAnalytics />
       </body>
     </html>
   );

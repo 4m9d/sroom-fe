@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import ThumbnailBadge from '../badge/ThumbnailBadge';
 import { getThumbnailSrc } from '@/src/util/thumbnail/getThumbnailSrc';
+import { BadgeType } from '@/src/constants/badge/badge';
 
 type Props = {
   src: string;
@@ -32,7 +33,10 @@ export default function HorizontalBigLectureCard({
             />
             {isEnrolled && (
               <div className='absolute top-0 left-0'>
-                <ThumbnailBadge title='수강 중' className='bg-sroom-green' />
+                <ThumbnailBadge
+                  title={BadgeType.ENROLLED}
+                  className='bg-sroom-green'
+                />
               </div>
             )}
             {isPlaylist && (
@@ -41,7 +45,10 @@ export default function HorizontalBigLectureCard({
                   isEnrolled ? 'left-[4rem]' : 'left-0'
                 }`}
               >
-                <ThumbnailBadge title='재생목록' className='bg-sroom-brand' />
+                <ThumbnailBadge
+                  title={BadgeType.PLAYLIST}
+                  className='bg-sroom-brand'
+                />
               </div>
             )}
             {isPlaylist === false && isMembersOnly && (
@@ -51,7 +58,7 @@ export default function HorizontalBigLectureCard({
                 }`}
               >
                 <ThumbnailBadge
-                  title='채널 회원'
+                  title={BadgeType.MEMBERS_ONLY}
                   className='bg-sroom-black-400'
                 />
               </div>

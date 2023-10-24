@@ -4,6 +4,7 @@ import getCompactFormattedTime from '@/src/util/time/getCompactFormattedTime';
 import Image from 'next/image';
 import React from 'react';
 import ThumbnailBadge from '../../ui/badge/ThumbnailBadge';
+import { BadgeType } from '@/src/constants/badge/badge';
 
 type Props = {
   lectureIndex: LectureIndex;
@@ -44,7 +45,10 @@ export default function LectureDetailIndexCard({
             </span>
           </div>
           {is_members_only && (
-            <ThumbnailBadge title='채널 회원' className='bg-sroom-black-400' />
+            <ThumbnailBadge
+              title={BadgeType.MEMBERS_ONLY}
+              className='bg-sroom-black-400'
+            />
           )}
         </div>
         <div className='text-sm font-semibold break-all text-sroom-black-300 line-clamp-2'>
