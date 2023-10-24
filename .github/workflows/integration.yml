@@ -40,7 +40,7 @@ jobs:
           ECR_REPOSITORY: fe-repo
           IMAGE_TAG: test
         run: |
-          echo "NEXT_PUBLIC_API_URL=https://test.api.sroom.kr" >> .env.local
+          echo "NEXT_PUBLIC_API_URL=https://test.api.sroom.kr" > .env.local
           echo "NEXTAUTH_URL=https://test.sroom.kr" >> .env.local
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
