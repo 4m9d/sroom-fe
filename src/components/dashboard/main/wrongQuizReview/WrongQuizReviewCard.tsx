@@ -15,9 +15,9 @@ export default function WrongQuizReviewCard({ wrongQuiz }: Props) {
   };
 
   return (
-    <div className='flex flex-col min-h-[2rem]'>
+    <div className='flex flex-col'>
       {mode === 'question' ? (
-        <div>
+        <>
           <div className='items-center justify-between hidden border-b-2 sm:flex border-b-sroom-white'>
             <p className='text-xs text-sroom-gray-100'>
               {wrongQuiz.video_title}
@@ -30,12 +30,12 @@ export default function WrongQuizReviewCard({ wrongQuiz }: Props) {
               정답보기
             </Button>
           </div>
-          <p className='w-full text-xs font-medium whitespace-normal break-keep md:text-sm xl:text-base text-sroom-white line-clamp-1'>
+          <p className='w-full text-xs font-medium whitespace-normal break-keep md:text-sm xl:text-base text-sroom-white line-clamp-1 md:line-clamp-none'>
             {`Q. ${wrongQuiz.quiz_question}`}
           </p>
-        </div>
+        </>
       ) : mode === 'answer' ? (
-        <div>
+        <>
           <div className='items-center justify-between hidden border-b-2 sm:flex border-b-sroom-white'>
             <p className='text-xs text-sroom-gray-100'>
               {getRelativeTime(wrongQuiz.submitted_at)}
@@ -48,10 +48,10 @@ export default function WrongQuizReviewCard({ wrongQuiz }: Props) {
               문제보기
             </Button>
           </div>
-          <p className='text-xs font-medium whitespace-normal break-keep md:text-sm xl:text-base text-sroom-white line-clamp-1'>
+          <p className='text-xs font-medium whitespace-normal break-keep md:text-sm xl:text-base text-sroom-white line-clamp-1 md:line-clamp-none'>
             {`A. ${wrongQuiz.quiz_answer}`}
           </p>
-        </div>
+        </>
       ) : (
         <></>
       )}

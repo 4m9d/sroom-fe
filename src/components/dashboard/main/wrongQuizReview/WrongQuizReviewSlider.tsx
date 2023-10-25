@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
 import 'swiper/css';
-import 'swiper/css/mousewheel';
 import SwiperNavigationButton from '@/src/components/ui/button/SwiperNavigationButton';
 import WrongQuizReviewCard from './WrongQuizReviewCard';
 
@@ -40,8 +39,10 @@ export default function WrongQuizReviewSlider({ wrongQuizzes }: Props) {
       {wrongQuizzes.length > 0 && (
         <>
           <Swiper
-            className='!py-2 max-h-[2rem] sm:max-h-full'
+            className='!py-1 md:!py-2'
             slidesPerView={1}
+            preventClicks={false}
+            preventClicksPropagation={false}
             navigation={{
               prevEl: prevRef.current,
               nextEl: nextRef.current
@@ -54,20 +55,20 @@ export default function WrongQuizReviewSlider({ wrongQuizzes }: Props) {
             }}
           >
             {wrongQuizzes.map((wrongQuiz, idx) => (
-              <SwiperSlide key={idx} className='px-5 md:px-8 lg:px-10'>
+              <SwiperSlide key={idx} className='px-5 whitespace-normal md:px-8 lg:px-10'>
                 <WrongQuizReviewCard wrongQuiz={wrongQuiz} />
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className='absolute left-0 z-20 flex items-center justify-between w-full -translate-y-1/2 md:px-2 top-1/2 md:h-12'>
+          <div className='absolute left-0 z-20 flex items-center justify-between w-full -translate-y-1/2 md:px-2 top-1/2'>
             <SwiperNavigationButton
-              className='text-sroom-white'
+              className='rounded-full text-sroom-white'
               onClick={() => swiper?.slidePrev()}
               disabled={isFirstSlide}
               navigation='prev'
             />
             <SwiperNavigationButton
-              className='text-sroom-white'
+              className='rounded-full text-sroom-white'
               onClick={() => swiper?.slideNext()}
               disabled={isLastSlide}
               navigation='next'
