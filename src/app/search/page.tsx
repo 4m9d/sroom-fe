@@ -22,14 +22,13 @@ export default function SearchResults({ searchParams }: Props) {
   ]) as LectureRecommendations;
 
   const requestParam: SearchLectureParams = {
-    keyword:
-      searchParams.keyword === undefined
-        ? ''
-        : decodeURIComponent(searchParams.keyword),
+    keyword: searchParams.keyword ?? '',
     limit: searchParams.limit ? Number(searchParams.limit) : LIMIT_PER_FETCH,
     next_page_token: '',
     filter: searchParams.filter ? searchParams.filter : 'all'
   };
+
+  const decodedKeyword = decodeURIComponent(requestParam.keyword);
 
   useLayoutEffect(() => {
     window.scrollTo({ top: 0 });
@@ -37,10 +36,10 @@ export default function SearchResults({ searchParams }: Props) {
 
   return (
     <>
-      <title>{getPageTitle(`'${searchParams.keyword}' 검색 결과`)}</title>
+      <title>{getPageTitle(`'${decodedKeyword}' 검색 결과`)}</title>
       <div className='py-20 bg-sroom-gray-200'>
         <section className='max-w-screen-xl px-4 mx-auto lg:px-24'>
-          <SearchResultsHeading keyword={requestParam.keyword} />
+          <SearchResultsHeading keyword={decodedKeyword} />
           <Suspense
             fallback={
               <SearchResultsSkeleton
