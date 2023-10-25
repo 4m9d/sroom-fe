@@ -5,10 +5,12 @@ import SaveSVG from '@/public/icon/Save';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef } from 'react';
+import FeedbackMessage from '../ui/feedback/FeedbackMessage';
 
 type Props = {
   profileImage: string;
   isEditMode: boolean;
+  isNameModified: boolean;
   setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   profileDropdown?: ProfileDropdown[];
   name: string;
@@ -18,6 +20,7 @@ type Props = {
 export default function ProfileDropdown({
   profileImage,
   isEditMode,
+  isNameModified,
   setIsEditMode,
   profileDropdown,
   name,
@@ -86,16 +89,21 @@ export default function ProfileDropdown({
             />
           </div>
         )}
-        <input
-          ref={inputRef}
-          type='text'
-          defaultValue={name}
-          disabled={isEditMode === false}
-          spellCheck='false'
-          onKeyDown={(e) => enterKeyDownHandler(e.key)}
-          maxLength={10}
-          className='hidden w-32 p-1 text-xs font-semibold text-left resize-none h- sm:block md:text-sm disabled:bg-sroom-white'
-        />
+        <div className='flex flex-col'>
+          <input
+            ref={inputRef}
+            type='text'
+            defaultValue={name}
+            disabled={isEditMode === false}
+            spellCheck='false'
+            onKeyDown={(e) => enterKeyDownHandler(e.key)}
+            maxLength={10}
+            className='hidden w-32 p-1 text-xs font-semibold text-left resize-none h- sm:block md:text-sm disabled:bg-sroom-white'
+          />
+          {isNameModified && (
+            <FeedbackMessage type='success' message='닉네임이 변경되었어요!' />
+          )}
+        </div>
       </div>
       <ul
         tabIndex={0}

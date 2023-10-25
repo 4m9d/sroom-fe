@@ -3,7 +3,7 @@ import Link from 'next/link';
 import SearchInput from './SearchInput';
 import Image from 'next/image';
 import useWindowSize from '@/src/hooks/useWindowSize';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useMutation } from '@tanstack/react-query';
 import { updateUserProfile } from '@/src/api/members/members';
@@ -19,6 +19,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
   const { data: session, update } = useSession();
   const { width: windowWidth } = useWindowSize();
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isNameModified, setIsNameModified] = useState(false);
 
   const [name, setName] = useState(session?.name ?? '');
   const profileImage = session?.profile;
@@ -32,11 +33,20 @@ export default function NavBar({ logo, profileDropdown }: Props) {
     await update({ ...session, name });
   };
 
+  const nameModificationHandler = useCallback(() => {
+    setIsNameModified(() => true);
+
+    setTimeout(() => {
+      setIsNameModified(() => false);
+    }, 2000);
+  }, []);
+
   const { mutate } = useMutation(() => updateUserProfile(name), {
     onSuccess: (data) => {
       setIsEditMode(false);
       if (!data) return;
       setName(() => data.name);
+      nameModificationHandler();
     }
   });
 
@@ -79,6 +89,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
             <ProfileDropdown
               profileImage={profileImage}
               name={name}
+              isNameModified={isNameModified}
               profileDropdown={profileDropdown}
               isEditMode={isEditMode}
               setIsEditMode={setIsEditMode}

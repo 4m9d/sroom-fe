@@ -83,7 +83,7 @@ export default function WeeklyCalendar({ learning_histories }: Props) {
 
   return (
     <div className='flex flex-col items-center justify-center col-start-3 col-end-4 row-start-1 row-end-4 bg-sroom-gray-300 text-sroom-black-400'>
-      <div className='flex items-center justify-center py-2 sm:py-3 md:py-4 xl:py-7'>
+      <div className='flex items-center justify-center py-2 sm:py-3 md:py-4 xl:py-5'>
         <p className='text-xs font-semibold md:text-base xl:text-lg'>
           <span className='px-1 md:px-2 py-[2px] mr-1 font-bold bg-sroom-white rounded-sm text-sroom-black-300'>
             {selectedMonth === 'Invalid Date' ? '' : selectedMonth}
