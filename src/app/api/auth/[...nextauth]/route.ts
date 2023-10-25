@@ -5,17 +5,14 @@ import {
   ONE_SECOND_IN_MS,
   SESSION_AGE
 } from '@/src/constants/time/time';
+import getHeaders from '@/src/util/http/getHeaders';
 import NextAuth, { AuthOptions, Awaitable, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import CredentialProvider from 'next-auth/providers/credentials';
 
 async function refreshAccessToken(token: JWT) {
   try {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', '*/*');
-    headers.append('Authorization', token.session.access_token)
-
+    const headers = getHeaders();
     const body = JSON.stringify({
       refresh_token: token.session.refresh_token
     });

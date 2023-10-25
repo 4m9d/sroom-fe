@@ -27,8 +27,9 @@ export async function fetchUserAuthWithCredential(
 export async function fetchUserAuthWithRefreshToken(
   refreshToken: RefreshToken
 ) {
-  const headers = await getAuthorizedHeaders();
+  const headers = getHeaders();
   const body = JSON.stringify(refreshToken);
+  
   return await fetch(`${Endpoints.MEMBERS}/refresh`, {
     method: 'POST',
     headers,
