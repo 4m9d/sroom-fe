@@ -22,11 +22,11 @@ export default async function MainDashboard({ dashboardInfo }: Props) {
   return (
     <section
       id='dashboard-section'
-      className='px-4 lg:px-24 mx-auto mt-10 pt-10 max-w-screen-xl h-[32.90%]'
+      className='px-4 lg:px-24 mx-auto mt-10 pt-10 max-w-screen-xl h-[40%] sm:h-[33%]'
     >
       <SectionHeading title='대시보드' />
       <div className='w-full'>
-        <div className='relative pb-[32.90%] w-full'>
+        <div className='relative pb-[40%] sm:pb-[33%] w-full'>
           <div className='absolute w-full h-full'>
             <div className='grid gap-2 grid-cols-3 grid-rows-[1fr_repeat(2,_minmax(0,_1.5fr))] w-full h-full'>
               <WrongQuizReviewSlider wrongQuizzes={wrong_quizzes} />

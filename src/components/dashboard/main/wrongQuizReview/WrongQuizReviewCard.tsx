@@ -15,17 +15,17 @@ export default function WrongQuizReviewCard({ wrongQuiz }: Props) {
   };
 
   return (
-    <div className='flex flex-col gap-2'>
+    <div className='flex flex-col min-h-[2rem]'>
       {mode === 'question' ? (
-        <>
-          <div className='flex items-center justify-between border-b-2 border-b-sroom-white'>
+        <div>
+          <div className='items-center justify-between hidden border-b-2 sm:flex border-b-sroom-white'>
             <p className='text-xs text-sroom-gray-100'>
               {wrongQuiz.video_title}
             </p>
             <Button
               onClick={toggleModeHandler}
               className='h-5 border !rounded-full w-16 bg-sroom-white text-sroom-brand
-               mb-1'
+               mb-1 text-xs'
             >
               정답보기
             </Button>
@@ -33,17 +33,17 @@ export default function WrongQuizReviewCard({ wrongQuiz }: Props) {
           <p className='flex items-center text-xs font-medium break-keep md:text-sm xl:text-base text-sroom-white'>
             {`Q. ${wrongQuiz.quiz_question}`}
           </p>
-        </>
+        </div>
       ) : mode === 'answer' ? (
-        <>
-          <div className='flex items-center justify-between border-b-2 border-b-sroom-white'>
+        <div>
+          <div className='items-center justify-between hidden border-b-2 sm:flex border-b-sroom-white'>
             <p className='text-xs text-sroom-gray-100'>
               {getRelativeTime(wrongQuiz.submitted_at)}
             </p>
             <Button
               onClick={toggleModeHandler}
               className='h-5 border !rounded-full w-16 bg-sroom-white text-sroom-brand
-               mb-1'
+               mb-1 text-xs'
             >
               문제보기
             </Button>
@@ -51,7 +51,7 @@ export default function WrongQuizReviewCard({ wrongQuiz }: Props) {
           <p className='flex items-center text-xs font-medium break-keep md:text-sm xl:text-base text-sroom-white'>
             {`A. ${wrongQuiz.quiz_answer}`}
           </p>
-        </>
+        </div>
       ) : (
         <></>
       )}

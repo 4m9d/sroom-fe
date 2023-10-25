@@ -36,40 +36,49 @@ export default function WrongQuizReviewSlider({ wrongQuizzes }: Props) {
 
   return (
     <div className='flex items-center col-start-1 col-end-3 row-start-1 row-end-2 px-[5%] rounded-full bg-sroom-brand relative'>
-      <Swiper
-        className='!py-2 h-full'
-        slidesPerView={1}
-        navigation={{
-          prevEl: prevRef.current,
-          nextEl: nextRef.current
-        }}
-        onBeforeInit={(swiper) => {
-          setSwiper(swiper);
-        }}
-        onSlideChange={(swiper) => {
-          setCurrPageIdx(() => swiper.activeIndex + 1);
-        }}
-      >
-        {wrongQuizzes.map((wrongQuiz, idx) => (
-          <SwiperSlide key={idx} className='px-10'>
-            <WrongQuizReviewCard wrongQuiz={wrongQuiz} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <div className='absolute left-0 z-20 flex items-center justify-between w-full px-5 -translate-y-1/2 top-1/2'>
-        <SwiperNavigationButton
-          className='rounded-full text-sroom-white'
-          onClick={() => swiper?.slidePrev()}
-          disabled={isFirstSlide}
-          navigation='prev'
-        />
-        <SwiperNavigationButton
-          className='rounded-full text-sroom-white'
-          onClick={() => swiper?.slideNext()}
-          disabled={isLastSlide}
-          navigation='next'
-        />
-      </div>
+      {wrongQuizzes.length > 0 && (
+        <>
+          <Swiper
+            className='!py-2 h-full'
+            slidesPerView={1}
+            navigation={{
+              prevEl: prevRef.current,
+              nextEl: nextRef.current
+            }}
+            onBeforeInit={(swiper) => {
+              setSwiper(swiper);
+            }}
+            onSlideChange={(swiper) => {
+              setCurrPageIdx(() => swiper.activeIndex + 1);
+            }}
+          >
+            {wrongQuizzes.map((wrongQuiz, idx) => (
+              <SwiperSlide key={idx} className='px-5 md:px-8 lg:px-10'>
+                <WrongQuizReviewCard wrongQuiz={wrongQuiz} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div className='absolute left-0 z-20 flex items-center justify-between w-full -translate-y-1/2 md:px-2 top-1/2'>
+            <SwiperNavigationButton
+              className='rounded-full text-sroom-white'
+              onClick={() => swiper?.slidePrev()}
+              disabled={isFirstSlide}
+              navigation='prev'
+            />
+            <SwiperNavigationButton
+              className='rounded-full text-sroom-white'
+              onClick={() => swiper?.slideNext()}
+              disabled={isLastSlide}
+              navigation='next'
+            />
+          </div>
+        </>
+      )}
+      {wrongQuizzes.length === 0 && (
+        <p className='flex items-center text-xs font-medium break-keep md:text-sm xl:text-base text-sroom-white'>
+          {'틀린 퀴즈가 생기면, 여기서 복습할 수 있어요 :)'}
+        </p>
+      )}
     </div>
   );
 }
