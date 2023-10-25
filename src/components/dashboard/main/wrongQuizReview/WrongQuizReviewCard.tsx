@@ -30,7 +30,7 @@ export default function WrongQuizReviewCard({ wrongQuiz }: Props) {
               정답보기
             </Button>
           </div>
-          <p className='flex items-center text-xs font-medium break-keep md:text-sm xl:text-base text-sroom-white'>
+          <p className='w-full text-xs font-medium whitespace-normal break-keep md:text-sm xl:text-base text-sroom-white line-clamp-1'>
             {`Q. ${wrongQuiz.quiz_question}`}
           </p>
         </div>
@@ -48,7 +48,7 @@ export default function WrongQuizReviewCard({ wrongQuiz }: Props) {
               문제보기
             </Button>
           </div>
-          <p className='flex items-center text-xs font-medium break-keep md:text-sm xl:text-base text-sroom-white'>
+          <p className='text-xs font-medium whitespace-normal break-keep md:text-sm xl:text-base text-sroom-white line-clamp-1'>
             {`A. ${wrongQuiz.quiz_answer}`}
           </p>
         </div>
