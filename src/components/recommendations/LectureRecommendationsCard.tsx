@@ -34,11 +34,6 @@ export default function LectureRecommendationsCard({ lecture }: Props) {
               {channel}
             </p>
           </div>
-          <div className='mb-2 min-h-[3.5rem]'>
-            <p className='text-sm break-all whitespace-normal text-sroom-black-200 line-clamp-3'>
-              {description}
-            </p>
-          </div>
           {review_count > 0 && (
             <StarRatingWithReviewCount
               rating={rating}
