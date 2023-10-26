@@ -3,7 +3,7 @@ on:
   pull_request:
     branches:
       - main
-    types: [opened, edited, reopened, synchronize]
+    types: [opened, reopened, synchronize]
 jobs:
   deploy-to-test:
     runs-on: ubuntu-latest

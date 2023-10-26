@@ -15,7 +15,7 @@ export default function WrongQuizReviewCard({ wrongQuiz }: Props) {
   };
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col justify-between h-full'>
       {mode === 'question' ? (
         <>
           <div className='items-center justify-between hidden border-b-2 sm:flex border-b-sroom-white'>

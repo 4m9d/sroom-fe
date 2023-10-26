@@ -60,7 +60,7 @@ export default function WrongQuizReviewSlider({ wrongQuizzes }: Props) {
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className='absolute left-0 z-20 flex items-center justify-between w-full -translate-y-1/2 md:px-2 top-1/2'>
+          <div className='absolute left-0 flex items-center justify-between w-full -translate-y-1/2 md:px-2 top-1/2'>
             <SwiperNavigationButton
               className='rounded-full text-sroom-white'
               onClick={() => swiper?.slidePrev()}
