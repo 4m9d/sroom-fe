@@ -24,7 +24,7 @@ export default function LectureRecommendationsCard({ lecture }: Props) {
         isPlaylist={is_playlist}
       >
         <div className='h-full'>
-          <div className='mb-2'>
+          <div className='mb-2 h-14'>
             <p className='text-lg font-bold break-all whitespace-normal line-clamp-2'>
               {lecture_title}
             </p>
