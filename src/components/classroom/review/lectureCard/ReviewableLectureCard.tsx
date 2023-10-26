@@ -57,11 +57,11 @@ export default function ReviewableLectureCard({
                     <ClockSVG />
                   </span>
                   {getFormattedTime(
-                    convertSecondsToMinutes(reviewableLecture.view_duration)
+                    convertSecondsToMinutes(reviewableLecture.view_duration), true
                   )}
                   <span>/</span>
                   {getFormattedTime(
-                    convertSecondsToMinutes(reviewableLecture.lecture_duration)
+                    convertSecondsToMinutes(reviewableLecture.lecture_duration), true
                   )}
                   <span className='ml-1'>수강 완료</span>
                 </>

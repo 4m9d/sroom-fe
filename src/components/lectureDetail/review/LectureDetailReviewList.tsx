@@ -87,7 +87,7 @@ export default function LectureDetailReviewList({
               ))}
           </ul>
           <div className='flex justify-center my-10 mb-20'>
-            {hasNextPage ? (
+            {hasNextPage ? review_list.length >= REVIEW_LIMIT && (
               <LoadMoreButton title='후기 더보기' onClick={fetchNextPage} />
             ) : null}
           </div>

@@ -30,17 +30,17 @@ export default function ReviewableLectureList({
           requireReviewList.length > 0 ? (
             requireReviewList.map((reviewableLecture) => (
               <div className='w-full h-full' key={reviewableLecture.lecture_id}>
+                {reviewableLecture.is_review_allowed === false &&
+                  reviewableLecture.submitted_at === null && (
+                    <p className='w-full px-1 mb-2 text-xs text-left text-sroom-brand'>
+                      {'강의를 50% 이상 수강하면 후기를 작성할 수 있어요!'}
+                    </p>
+                  )}
                 <ReviewableLectureCard
                   reviewableLecture={reviewableLecture}
                   setEditingLectureId={setEditingLectureId}
                   mode='require'
                 />
-                {reviewableLecture.is_review_allowed === false &&
-                  reviewableLecture.submitted_at === null && (
-                    <p className='w-full px-1 mt-2 text-xs text-left text-sroom-brand'>
-                      {'강의를 70% 이상 수강하면 후기를 작성할 수 있어요!'}
-                    </p>
-                  )}
               </div>
             ))
           ) : (

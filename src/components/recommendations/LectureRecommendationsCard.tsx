@@ -24,19 +24,14 @@ export default function LectureRecommendationsCard({ lecture }: Props) {
         isPlaylist={is_playlist}
       >
         <div className='h-full'>
-          <div className='mb-2'>
-            <p className='text-lg font-bold break-all whitespace-normal line-clamp-1'>
+          <div className='mb-2 h-14'>
+            <p className='text-lg font-bold break-all whitespace-normal line-clamp-2'>
               {lecture_title}
             </p>
           </div>
           <div className='mb-2'>
             <p className='text-sm break-all whitespace-normal text-sroom-black-300 line-clamp-1'>
               {channel}
-            </p>
-          </div>
-          <div className='mb-2 min-h-[3.5rem]'>
-            <p className='text-sm break-all whitespace-normal text-sroom-black-200 line-clamp-3'>
-              {description}
             </p>
           </div>
           {review_count > 0 && (

@@ -17,7 +17,7 @@ export default function Classroom({}) {
   });
 
   return (
-    <section className='px-4 py-20 mx-auto lg:px-24 pt-14 text-sroom-black-400 max-w-screen-2xl'>
+    <section className='max-w-screen-xl px-4 py-20 mx-auto lg:px-24 pt-14 text-sroom-black-400'>
       <SectionHeading title='내 강의실' />
       {status === 'loading' && (
         <ClassroomCourseSkeleton limit={CLASSROOM_LIMIT} />

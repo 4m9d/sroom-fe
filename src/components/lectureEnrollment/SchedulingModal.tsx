@@ -84,7 +84,7 @@ export default function SchedulingModal({
     THIRTY_MINUTES
   );
   const DEFAULT_CONTENT =
-    'flex items-center gap-1 h-8 text-lg text-sroom-black-200';
+    'flex items-center gap-1 h-8 text-base text-sroom-black-200';
   const MUTABLE_CONTENT =
     'align-middle px-3 py-1 font-semibold bg-sroom-white border border-sroom-gray-400 text-sroom-black-400  whitespace-normal line-clamp-1 break-all';
 
@@ -119,24 +119,28 @@ export default function SchedulingModal({
         currWeekVideoCount++;
         currWeekDurationSum += videoDuration;
       } else {
-        if (
-          currWeekVideoCount === 0 ||
-          videoDuration < (weeklyStudyTime - currWeekDurationSum) * 2
-        ) {
+        if (videoDuration < (weeklyStudyTime - currWeekDurationSum) * 2) {
           currWeekVideoCount++;
-          currWeekDurationSum += videoDuration;
 
           schedulingList.push(currWeekVideoCount);
           currWeekVideoCount = 0;
           currWeekDurationSum = 0;
         } else {
-          schedulingList.push(currWeekVideoCount);
-          currWeekVideoCount = 1;
-          currWeekDurationSum = videoDuration;
+          if (currWeekVideoCount === 0) {
+            currWeekVideoCount++;
+            
+            schedulingList.push(currWeekVideoCount);
+            currWeekVideoCount = 0;
+            currWeekDurationSum = 0;
+          } else {
+            schedulingList.push(currWeekVideoCount);
+            currWeekVideoCount = 1;
+            currWeekDurationSum = videoDuration;
+          }
         }
       }
 
-      if (index === index_list.length - 1) {
+      if (index === index_list.length - 1 && currWeekVideoCount !== 0) {
         schedulingList.push(currWeekVideoCount);
       }
     });
@@ -155,14 +159,14 @@ export default function SchedulingModal({
       onClose={onClose}
     >
       <AnimatePresence>
-        <div className='flex flex-col items-center justify-between w-full h-full gap-10'>
+        <div className='flex flex-col items-center justify-between w-full h-full gap-8'>
           <div className='flex flex-col items-center justify-center h-16 gap-4'>
             <p className='text-xl font-bold'>강의 일정 관리 설정</p>
             <p className='text-base font-medium'>
               매 주차별로 강의를 묶어 제공해 드려요
             </p>
           </div>
-          <div className='bg-sroom-gray-200 border border-sroom-gray-500 w-[37rem] h-96 px-16 py-10 flex flex-col gap-12'>
+          <div className='bg-sroom-gray-200 border border-sroom-gray-500 w-[37rem] h-[23rem] px-14 py-10 flex flex-col gap-10'>
             <p>일평균 목표 학습 시간을 입력해 주세요</p>
             <SchedulingSlider
               min={THIRTY_MINUTES}
@@ -252,7 +256,7 @@ export default function SchedulingModal({
             <p className='flex gap-1'>
               총 재생 시간 :
               <span className='text-sroom-brand'>
-                {getFormattedTime(convertSecondsToMinutes(duration as number))}
+                {getFormattedTime(convertSecondsToMinutes(duration as number), true)}
               </span>
             </p>
             <Button
@@ -263,7 +267,7 @@ export default function SchedulingModal({
               {isLoading ? (
                 <LoadingSpinner className='text-sroom-brand loading-sm' />
               ) : (
-                '완료'
+                '코스 생성하기'
               )}
             </Button>
           </div>

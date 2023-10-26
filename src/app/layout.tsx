@@ -42,7 +42,6 @@ export default function RootLayout({ children, modal }: Props) {
   return (
     <html lang='ko'>
       <GoogleAnalytics />
-      <NaverAnalytics />
       <ChannelTalk />
       <body className={inter.className}>
         <AuthSessionProvider>
@@ -50,7 +49,12 @@ export default function RootLayout({ children, modal }: Props) {
             <NavBar
               logo='스룸'
               profileDropdown={[
-                { id: 1, menuTitle: '내 강의실', menuRoute: '/classroom' }
+                { id: 1, menuTitle: '내 강의실', menuRoute: '/classroom' },
+                {
+                  id: 2,
+                  menuTitle: '로그아웃',
+                  menuRoute: '/auth/signout'
+                }
               ]}
             />
             <ChannelTalkManager>
@@ -63,6 +67,7 @@ export default function RootLayout({ children, modal }: Props) {
             </ChannelTalkManager>
           </QueryProvider>
         </AuthSessionProvider>
+        <NaverAnalytics />
       </body>
     </html>
   );

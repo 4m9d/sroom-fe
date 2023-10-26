@@ -37,9 +37,9 @@ export default function CourseDetailHeader({
       </h3>
       <h4 className='flex flex-wrap text-xs font-normal md:text-sm text-sroom-black-200'>
         <span className='after:w-[1px] after:h-[9px] after:bg-sroom-black-100 after:mx-2 after:inline-block after:text-center after:align-middle'>
-          {`총 재생 시간 : ${getFormattedTime(
-            convertSecondsToMinutes(course_duration)
-          )}`}
+          {`총 재생 시간 : ${
+            (getFormattedTime(convertSecondsToMinutes(course_duration), true))
+          }`}
         </span>
         <span>{`영상 ${total_video_count}개`}</span>
       </h4>
@@ -47,7 +47,8 @@ export default function CourseDetailHeader({
       <h5 className='flex flex-wrap gap-1 text-xs font-normal text-sroom-black-100'>
         <span>
           {`수강 시간 : ${getFormattedTime(
-            convertSecondsToMinutes(current_duration)
+            convertSecondsToMinutes(current_duration),
+            true
           )}`}
         </span>
         <span>{`(진도율 : ${progress}%)`}</span>

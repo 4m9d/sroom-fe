@@ -12,11 +12,12 @@ export default function SwiperNavigationButton({
   onClick
 }: Props) {
   return (
+
     <button
       type='button'
       onClick={onClick}
       disabled={disabled}
-      className={`${className} flex justify-center items-center w-12 h-12 text-xl font-bold text-sroom-black-300 btn-ghost ${disabled ? 'btn-disabled' : 'btn'} hover:opacity-50`}
+      className={`${className} flex rounded-full justify-center w-8 h-8 md:w-12 md:h-12 items-center text-sm md:text-xl font-bold text-sroom-black-300 btn-ghost btn-sm md:btn-md ${disabled ? 'btn-disabled opacity-20' : 'btn'} hover:opacity-50`}
     >
       {navigation === 'prev' ? '〈' : '〉'}
     </button>

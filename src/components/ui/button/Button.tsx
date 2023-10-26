@@ -22,7 +22,7 @@ export default function Button({
       onClick={onClick}
       className={`${className} ${disabled ? '' : 'hover:opacity-90'} ${
         hoverEffect ? 'hover:bg-sroom-gray-300' : ''
-      } text-sm font-bold h-12 py-1 px-2 md:px-4 flex active:focus:scale-95 transition-all items-center justify-center rounded-none break-keep`}
+      } text-sm font-bold h-10 py-1 px-2 md:px-4 flex active:focus:scale-95 transition-all items-center justify-center rounded-none break-keep`}
     >
       {children}
     </button>

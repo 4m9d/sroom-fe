@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import ThumbnailBadge from '../badge/ThumbnailBadge';
 import { getThumbnailSrc } from '@/src/util/thumbnail/getThumbnailSrc';
+import { BadgeType } from '@/src/constants/badge/badge';
 
 type Props = {
   src: string;
@@ -20,14 +21,17 @@ export default function VerticalSmallLectureCard({
   isMembersOnly = false
 }: Props) {
   return (
-    <div className='relative flex flex-col gap-4 text-sroom-black-400 w-96'>
+    <div className='relative flex flex-col gap-4 text-sroom-black-400 w-80'>
       <div className='flex items-center w-full '>
         <div className='relative w-full h-0 pb-[56.25%]'>
           <div className='absolute top-0 left-0 object-cover w-full h-full'>
             <Image fill={true} src={getThumbnailSrc(src)} alt={alt} />
             {isEnrolled && (
               <div className='absolute top-0 left-0'>
-                <ThumbnailBadge title='수강 중' className='bg-sroom-green' />
+                <ThumbnailBadge
+                  title={BadgeType.ENROLLED}
+                  className='bg-sroom-green'
+                />
               </div>
             )}
             {isPlaylist && (
@@ -36,7 +40,10 @@ export default function VerticalSmallLectureCard({
                   isEnrolled ? 'left-[4rem]' : 'left-0'
                 }`}
               >
-                <ThumbnailBadge title='재생목록' className='bg-sroom-brand' />
+                <ThumbnailBadge
+                  title={BadgeType.PLAYLIST}
+                  className='bg-sroom-brand'
+                />
               </div>
             )}
             {isPlaylist === false && isMembersOnly && (
@@ -46,7 +53,7 @@ export default function VerticalSmallLectureCard({
                 }`}
               >
                 <ThumbnailBadge
-                  title='회원 전용'
+                  title={BadgeType.MEMBERS_ONLY}
                   className='bg-sroom-black-400'
                 />
               </div>

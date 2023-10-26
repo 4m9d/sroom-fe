@@ -6,6 +6,8 @@ export const SESSION_AGE = ONE_DAY * 3 - ONE_HOUR;
 
 //silent refresh
 export const ONE_MINUTE_IN_MS = 60 * ONE_SECOND_IN_MS;
+export const THIRTY_MINUTES_IN_MS = 30 * ONE_MINUTE_IN_MS;
+export const THIRTY_MINUTES_IN_SEC = 30 * 60;
 
 //scheduling
 export const FOUR_HOURS_IN_MINUTES = 240;

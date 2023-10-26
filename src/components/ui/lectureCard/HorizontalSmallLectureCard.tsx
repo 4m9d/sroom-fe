@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import ThumbnailBadge from '../badge/ThumbnailBadge';
 import { getThumbnailSrc } from '@/src/util/thumbnail/getThumbnailSrc';
+import { BadgeType } from '@/src/constants/badge/badge';
 
 type Props = {
   src: string;
@@ -29,11 +30,11 @@ export default function HorizontalSmallLectureCard({
 }: Props) {
   return (
     <div
-      className={`relative flex w-full gap-4 p-3 whitespace-normal h-[11rem] text-sroom-black-400 ${
-        disabled ? 'bg-sroom-gray-200' : 'bg-sroom-white'
+      className={`relative flex w-full gap-4 p-3 whitespace-normal min-h-[9.5rem] text-sroom-black-400 ${
+        disabled ? 'bg-sroom-gray-400 opacity-60' : 'bg-sroom-white'
       } ${border ? 'border border-sroom-gray-400' : ''}`}
     >
-      <div className='w-full max-w-[15rem] flex items-center'>
+      <div className='w-full max-w-[12.5rem] flex items-center'>
         <div className='relative w-full h-0 pb-[56.25%]'>
           <div className='absolute top-0 left-0 object-cover w-full h-full overflow-hidden'>
             <Image
@@ -48,7 +49,10 @@ export default function HorizontalSmallLectureCard({
             />
             {isEnrolled && (
               <div className='absolute top-0 left-0'>
-                <ThumbnailBadge title='수강 중' className='bg-sroom-green' />
+                <ThumbnailBadge
+                  title={BadgeType.ENROLLED}
+                  className='bg-sroom-green'
+                />
               </div>
             )}
             {isPlaylist && (
@@ -57,7 +61,10 @@ export default function HorizontalSmallLectureCard({
                   isEnrolled ? 'left-[4rem]' : 'left-0'
                 }`}
               >
-                <ThumbnailBadge title='재생목록' className='bg-sroom-brand' />
+                <ThumbnailBadge
+                  title={BadgeType.PLAYLIST}
+                  className='bg-sroom-brand'
+                />
               </div>
             )}
             {isPlaylist === false && isMembersOnly && (
@@ -67,7 +74,7 @@ export default function HorizontalSmallLectureCard({
                 }`}
               >
                 <ThumbnailBadge
-                  title='회원 전용'
+                  title={BadgeType.MEMBERS_ONLY}
                   className='bg-sroom-black-400'
                 />
               </div>

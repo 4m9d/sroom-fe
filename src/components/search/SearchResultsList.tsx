@@ -32,6 +32,7 @@ export default async function SearchResultsList({
   const fetchSearchResults = async ({ pageParam: next_page_token = '' }) => {
     const params: SearchLectureParams = {
       ...requestParam,
+      keyword: encodeURIComponent(requestParam.keyword),
       next_page_token,
       filter
     };

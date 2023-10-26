@@ -19,6 +19,7 @@ import getRelativeTime from '@/src/util/time/getRelativeTime';
 import ClipboardSVG from '@/public/icon/Clipboard';
 import { SessionStorageKeys } from '@/src/constants/materials/materials';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
+import FeedbackMessage from '@/src/components/ui/feedback/FeedbackMessage';
 
 const MarkdownPreview = dynamic(
   () => import('@uiw/react-markdown-preview').then((mod) => mod.default),
@@ -156,18 +157,12 @@ export default function CourseMaterialLectureNotes({
             </span>
             복사하기
           </Button>
-          <AnimatePresence>
-            {isCopied && (
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className='text-xs font-medium text-sroom-green'
-              >
-                클립보드에 복사되었어요!
-              </motion.span>
-            )}
-          </AnimatePresence>
+          {isCopied && (
+            <FeedbackMessage
+              type='success'
+              message='클립보드에 복사되었어요!'
+            />
+          )}
           <Button
             onClick={toggleButtonClickHandler}
             className='w-full mt-2 border py-7 border-sroom-black-400 bg-sroom-white'

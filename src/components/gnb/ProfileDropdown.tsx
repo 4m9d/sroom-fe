@@ -5,10 +5,12 @@ import SaveSVG from '@/public/icon/Save';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef } from 'react';
+import FeedbackMessage from '../ui/feedback/FeedbackMessage';
 
 type Props = {
   profileImage: string;
   isEditMode: boolean;
+  isNameModified: boolean;
   setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   profileDropdown?: ProfileDropdown[];
   name: string;
@@ -18,6 +20,7 @@ type Props = {
 export default function ProfileDropdown({
   profileImage,
   isEditMode,
+  isNameModified,
   setIsEditMode,
   profileDropdown,
   name,
@@ -86,30 +89,35 @@ export default function ProfileDropdown({
             />
           </div>
         )}
-        <input
-          ref={inputRef}
-          type='text'
-          defaultValue={name}
-          disabled={isEditMode === false}
-          spellCheck='false'
-          onKeyDown={(e) => enterKeyDownHandler(e.key)}
-          maxLength={10}
-          className='hidden w-32 p-1 text-xs font-semibold leading-9 text-left resize-none sm:block md:text-sm lg:text-base disabled:bg-sroom-white'
-        />
+        <div className='flex flex-col'>
+          <input
+            ref={inputRef}
+            type='text'
+            defaultValue={name}
+            disabled={isEditMode === false}
+            spellCheck='false'
+            onKeyDown={(e) => enterKeyDownHandler(e.key)}
+            maxLength={10}
+            className='hidden w-32 p-1 text-xs font-semibold text-left resize-none h- sm:block md:text-sm disabled:bg-sroom-white'
+          />
+          {isNameModified && (
+            <FeedbackMessage type='success' message='닉네임이 변경되었어요!' />
+          )}
+        </div>
       </div>
       <ul
         tabIndex={0}
-        className='z-20 w-40 text-sm font-medium bg-transparent rounded-none sm:w-full menu dropdown-content text-sroom-black-400'
+        className='z-20 w-40 text-xs font-medium bg-transparent rounded-none sm:text-sm sm:w-full menu dropdown-content text-sroom-black-400'
       >
         <div className='w-full h-full pt-3 bg-inherit'>
           <div className='p-2 shadow bg-sroom-white'>
-            <li className='flex justify-center border-b h-11 border-sroom-gray-400'>
+            <li className='flex justify-center mb-2 border-b border-sroom-gray-400'>
               <div
                 onClick={saveProfileButtonClickHandler}
                 className='rounded-none active:!text-sroom-black-400 hover:bg-sroom-gray-300 active:!bg-sroom-gray-400 focus:!bg-sroom-gray-300 flex justify-between items-center'
               >
                 {isEditMode ? '저장하기' : '닉네임 수정'}
-                <span className='w-5 h-5 stroke-sroom-black-200'>
+                <span className='flex items-center w-4 h-4 sm:w-5 sm:h-5 stroke-sroom-black-200'>
                   {isEditMode ? <SaveSVG /> : <PencilSVG />}
                 </span>
               </div>
@@ -117,13 +125,13 @@ export default function ProfileDropdown({
             {profileDropdown &&
               profileDropdown.map((menu) => {
                 return (
-                  <li className='flex justify-center h-11' key={menu.id}>
+                  <li className='flex justify-center' key={menu.id}>
                     <Link
                       className='flex justify-between items-center rounded-none active:!text-sroom-black-400 hover:bg-sroom-gray-300 active:!bg-sroom-gray-400 focus:!bg-sroom-gray-300'
                       href={menu.menuRoute}
                     >
                       {menu.menuTitle}
-                      <span className='w-4 h-4 fill-sroom-black-200'>
+                      <span className='flex items-center w-3 h-3 sm:w-4 sm:h-4 fill-sroom-black-200'>
                         <ArrowTopRightSVG />
                       </span>
                     </Link>

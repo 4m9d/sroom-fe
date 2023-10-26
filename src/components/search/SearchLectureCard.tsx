@@ -33,7 +33,7 @@ export default async function SearchLectureCard({
       isMembersOnly={view_count === -1}
     >
       <div className='flex flex-col justify-between h-full'>
-        <div className='flex flex-col gap-1 mt-6 mb-1'>
+        <div className='flex flex-col gap-1 mt-2 mb-1'>
           <p className='text-base font-bold break-all whitespace-normal line-clamp-2'>
             {lecture_title}
           </p>
@@ -48,7 +48,7 @@ export default async function SearchLectureCard({
           </p>
         </div>
       </div>
-      <div className='absolute right-3 top-3'>
+      <div className='absolute right-2 top-2'>
         {review_count > 0 && (
           <StarRatingWithReviewCount
             rating={rating}

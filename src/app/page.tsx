@@ -9,12 +9,12 @@ export default function Main() {
   const { width: windowWidth } = useWindowSize();
 
   return (
-    <div className='px-4 pt-16 mx-auto pb-72 lg:px-24 max-w-screen-2xl'>
+    <div className='max-w-screen-xl px-4 pt-16 mx-auto pb-72 lg:px-24'>
       <GoogleOneTapPortal />
-      <h2 className='mb-2 text-3xl font-bold md:mb-5 md:text-4xl xl:text-5xl text-sroom-black-400'>
+      <h2 className='mb-2 text-3xl font-bold md:mb-5 md:text-4xl text-sroom-black-400'>
         유튜브 강의를 쉽고 편하게.
       </h2>
-      <div className='text-lg md:text-2xl xl:text-3xl text-sroom-black-300'>
+      <div className='text-lg md:text-2xl text-sroom-black-300'>
         <h3 className='font-normal'>나만을 위한 유튜브 강의</h3>
         <h3 className='font-bold'>
           관리 플랫폼

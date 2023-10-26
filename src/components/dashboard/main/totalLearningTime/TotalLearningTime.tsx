@@ -25,9 +25,9 @@ export default function TotalLearningTime({ time }: Props) {
   );
 
   return (
-    <div className='flex flex-col justify-between col-start-1 col-end-2 row-start-2 row-end-4 px-[10.4%] py-[13%] bg-sroom-gray-300 text-sroom-black-400'>
+    <div className='flex flex-col justify-between col-start-1 col-end-2 row-start-2 row-end-4 px-[10%] py-[8%] bg-sroom-gray-300 text-sroom-black-400'>
       <p className='text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl'>누적 수강 시간</p>
-      <p className='text-lg font-bold sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl'>
+      <p className='text-lg font-bold sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl'>
         {timeInString}
         <span className='text-sm sm:text-lg md:text-xl lg:text-2xl xl:text-3xl'>{timeUnit}</span>
       </p>

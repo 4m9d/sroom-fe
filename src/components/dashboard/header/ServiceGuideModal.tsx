@@ -14,7 +14,7 @@ export default function ServiceGuideModal({ recordMap }: Props) {
   return (
     <Modal
       id={ModalIDs.SERVICE_GUIDE}
-      className='min-w-[60vw]'
+      className='min-w-[80vw] rounded-none'
       onClose={() => closeModalHandler('SERVICE_GUIDE', () => {})}
     >
         <NotionRenderer

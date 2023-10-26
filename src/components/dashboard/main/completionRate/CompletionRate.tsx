@@ -1,4 +1,5 @@
 'use client';
+import { COMPLETION_RATE_BREAKPOINT_LG, COMPLETION_RATE_BREAKPOINT_SM } from '@/src/constants/window/window';
 import RadialProgress from '../../../ui/progress/RadialProgress';
 import useWindowSize from '@/src/hooks/useWindowSize';
 
@@ -17,9 +18,9 @@ export default function CompletionRate({ value }: Props) {
       <div className='h-[65.7%] w-[22.8%] flex justify-center items-center'>
         <RadialProgress
           className='w-full h-full text-sroom-white'
-          innerTextClassName='text-sroom-black-400 text-xs sm:text-sm md:text-md lg:text-xl xl:text-3xl font-bold'
+          innerTextClassName='text-sroom-black-400 text-xs sm:text-sm md:text-md lg:text-xl xl:text-2xl font-bold'
           value={value}
-          size={width < 768 ? '2rem' : width < 1024 ? '4rem' : '5rem'}
+          size={width < COMPLETION_RATE_BREAKPOINT_SM ?  '3rem' : width < COMPLETION_RATE_BREAKPOINT_LG ? '4rem' : '5rem'}
         />
       </div>
     </div>

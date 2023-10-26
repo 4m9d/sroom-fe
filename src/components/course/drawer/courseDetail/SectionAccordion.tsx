@@ -47,7 +47,8 @@ export default function SectionAccordion({
   useEffect(() => {
     if (
       currentPlayingVideoTabRef.current &&
-      currentPlayingVideo.course_video_id.toString() === currentPlayingVideoTabRef.current.id
+      currentPlayingVideo.course_video_id.toString() ===
+        currentPlayingVideoTabRef.current.id
     ) {
       currentPlayingVideoTabRef.current.scrollIntoView({
         behavior: 'smooth',
@@ -77,9 +78,11 @@ export default function SectionAccordion({
           <div className='flex h-[17px] items-center gap-2'>
             <p className='text-xs font-normal text-sroom-black-200'>
               {`${getFormattedTime(
-                convertSecondsToMinutes(current_week_duration)
+                convertSecondsToMinutes(current_week_duration),
+                true
               )} / ${getFormattedTime(
-                convertSecondsToMinutes(week_duration)
+                convertSecondsToMinutes(week_duration),
+                true
               )}`}{' '}
             </p>
             {is_completed && <VideoCompletionBadge />}
@@ -108,7 +111,7 @@ export default function SectionAccordion({
                 className='flex items-center justify-between h-[17px] px-3 py-3 hover:bg-sroom-gray-200 hover:opacity-80 rounded-sm hover:scale-105 transition-all'
               >
                 <p
-                  className={`w-5/6 text-start text-xs md:text-sm whitespace-normal line-clamp-1 break-all before:w-[2px] before:h-[2px] before:mr-1 before:inline-block before:align-middle ${
+                  className={`w-5/6 text-start font-medium text-xs whitespace-normal line-clamp-1 break-all before:w-[2px] before:h-[2px] before:mr-1 before:inline-block before:align-middle ${
                     video.is_completed === true
                       ? 'text-sroom-black-200'
                       : 'text-sroom-black-400'

@@ -52,6 +52,7 @@ interface Emoji {
   lecture_enrollment: string;
   error: string;
   undeveloped: string;
+  video_complete: string;
 }
 
 interface CustomToast {
@@ -136,6 +137,13 @@ interface LearningHistory {
   lecture_count: number;
 }
 
+interface WrongQuiz {
+  quiz_question: string;
+  quiz_answer: string;
+  video_title: string;
+  submitted_at: string;
+}
+
 interface DashboardInfo {
   correctness_rate: number;
   completion_rate: number;
@@ -143,6 +151,7 @@ interface DashboardInfo {
   motivation: string;
   latest_lectures: Course[];
   learning_histories: LearningHistory[];
+  wrong_quizzes: WrongQuiz[];
 }
 
 interface WeekInfo {
@@ -267,7 +276,8 @@ interface LectureReviewParams extends Record<string, number | boolean> {
 interface LectureDeatilParams extends LectureIndexParams, LectureReviewParams {}
 
 interface LectureRecommendations {
-  recommendations: PersonalizedLecture[];
+  general_recommendations: PersonalizedLecture[];
+  channel_recommendations: PersonalizedLecture[];
 }
 
 /////////////////////////////////////////////////////////////////////////

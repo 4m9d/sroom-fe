@@ -1,41 +1,31 @@
 import { Endpoints } from '@/src/api/Endpoints';
-import { fetchUserAuthWithCredential } from '@/src/api/members/members';
+import {
+  fetchUserAuthWithCredential,
+  fetchUserAuthWithRefreshToken
+} from '@/src/api/members/members';
 import {
   ONE_MINUTE_IN_MS,
   ONE_SECOND_IN_MS,
   SESSION_AGE
 } from '@/src/constants/time/time';
+import getHeaders from '@/src/util/http/getHeaders';
 import NextAuth, { AuthOptions, Awaitable, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import CredentialProvider from 'next-auth/providers/credentials';
 
 async function refreshAccessToken(token: JWT) {
   try {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', '*/*');
-    headers.append('Authorization', token.session.access_token)
-
-    const body = JSON.stringify({
+    const refreshedToken = await fetchUserAuthWithRefreshToken({
       refresh_token: token.session.refresh_token
     });
-
-    const response = await fetch(`${Endpoints.MEMBERS}/refresh`, {
-      method: 'POST',
-      headers,
-      body
-    });
-    const refreshedToken = await response.json();
-
-    if (!response.ok) throw refreshedToken;
 
     const newToken = {
       ...token,
       session: {
         ...token.session,
-        access_token: refreshedToken.access_token,
-        expires_at: refreshedToken.expires_at,
-        refresh_token: refreshedToken.refresh_token
+        access_token: refreshedToken?.access_token,
+        expires_at: refreshedToken?.expires_at,
+        refresh_token: refreshedToken?.refresh_token
       }
     };
     return newToken;
@@ -82,7 +72,7 @@ export const authOptions: AuthOptions = {
       if (expireTime - now > 10 * ONE_MINUTE_IN_MS) {
         return token;
       } else {
-        return await refreshAccessToken(token);
+        return refreshAccessToken(token);
       }
     },
     async session({ session, token }) {

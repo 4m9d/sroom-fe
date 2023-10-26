@@ -37,25 +37,25 @@ export default function ClassroomCourseCard({
           showModalHandler('COURSE_DELETE');
         }}
         hoverEffect={true}
-        className='absolute top-0 right-0 text-xs font-normal md:text-sm text-sroom-black-100 !h-8'
+        className='absolute top-0 right-0 text-xs font-normal text-sroom-black-100 !h-8'
       >
         ✕ 삭제
       </Button>
-      <div className='flex flex-col justify-between h-full text-sroom-black-400'>
+      <div className='flex flex-col justify-between h-full mt-1 text-sroom-black-400'>
         <div className='mt-1 max-w-[calc(100%-5rem)]'>
-          <p className='text-lg font-bold break-all whitespace-normal line-clamp-1'>
+          <p className='text-sm font-bold break-all whitespace-normal line-clamp-1'>
             {course.course_title}
           </p>
-          <p className='mt-2 text-sm break-all whitespace-normal text-sroom-black-300 line-clamp-1'>
+          <p className='mt-1 text-xs break-all whitespace-normal text-sroom-black-300 line-clamp-1'>
             {course.channels}
           </p>
         </div>
-        <div className='flex flex-col justify-center flex-1 gap-2 py-1 shrink-0'>
+        <div className='flex flex-col justify-center flex-1 gap-1 shrink-0'>
           <p className='flex mt-1 text-xs text-sroom-black-100 shrink-0'>
             <span className='w-3 mr-1 stroke-sroom-black-100'>
               <ClockSVG />
             </span>
-            {getFormattedTime(convertSecondsToMinutes(course.duration))}
+            {getFormattedTime(convertSecondsToMinutes(course.duration), true)}
             <span className='after:w-[1px] after:h-[10px] after:bg-sroom-black-100 after:mx-2 after:inline-block after:text-center after:align-middle'></span>
             <span className='w-3 mr-1 align-middle stroke-sroom-black-100'>
               <LectureSVG />
@@ -65,7 +65,7 @@ export default function ClassroomCourseCard({
           </p>
           <div className='flex items-center shrink-0'>
             <ProgressBar
-              className='w-full h-[4px] !bg-sroom-gray-300'
+              className='w-full h-[3.5px] !bg-sroom-gray-300'
               value={course.progress}
             />
             <p className='ml-2 text-xs font-semibold text-sroom-brand shrink-0'>
@@ -74,11 +74,11 @@ export default function ClassroomCourseCard({
             </p>
           </div>
         </div>
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center justify-around gap-1'>
           <Button
             onClick={() => setUndevelopedAlertToast('scrap')}
             hoverEffect={true}
-            className='!h-8 text-xs xl:text-sm'
+            className='!h-8 text-xs !px-[5px]'
           >
             <p>오답 노트</p>
             <span className='w-3 ml-1 stroke-sroom-black-400'>
@@ -91,7 +91,7 @@ export default function ClassroomCourseCard({
               showModalHandler('LECTURE_REVIEW');
             }}
             hoverEffect={true}
-            className='!h-8 text-xs xl:text-sm'
+            className='!h-8 text-xs !px-[5px]'
           >
             <p>후기 / 평점</p>
             <span className='w-3 ml-1 stroke-sroom-black-400'>

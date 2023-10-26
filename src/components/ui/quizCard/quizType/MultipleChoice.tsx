@@ -10,7 +10,7 @@ export default function MultipleChoice({
   multipleChoiceHandler: (index: string) => void;
 }) {
   return (
-    <div className='flex flex-col gap-5 px-5 py-3 border border-sroom-gray-500'>
+    <div className='flex flex-col gap-2 px-5 py-2 border border-sroom-gray-500'>
       {quiz.options.map((option, index) => {
         const currIndex = (index + 1).toString();
         const isSubmitted = selectedAnswer?.is_submitted;

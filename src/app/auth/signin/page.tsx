@@ -21,6 +21,7 @@ export default function Signin({}) {
           className='w-full text-sroom-white bg-sroom-brand'
           onClick={() => {
             router.replace('/');
+            router.refresh();
           }}
         >
           홈으로 가기

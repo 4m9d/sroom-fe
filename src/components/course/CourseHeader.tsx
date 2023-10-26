@@ -19,7 +19,7 @@ export default function CourseHeader({ title, channel, is_completed }: Props) {
               key={title + channel}
               initial={{ y: 10, opacity: 0 }}
               animate={{ y: 0, opacity: 100 }}
-              className='text-xl font-bold break-all whitespace-normal md:text-2xl lg:text-3xl line-clamp-1'
+              className='text-lg font-bold break-all whitespace-normal md:text-xl lg:text-2xl line-clamp-1'
             >
               {title}
             </motion.h2>

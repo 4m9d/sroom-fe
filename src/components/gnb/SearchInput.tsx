@@ -1,20 +1,22 @@
 'use client';
 import getQueryURL from '@/src/util/http/getQueryURL';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-export default function SearchInput() {
+type Props = {
+  className?: string;
+  submitButtonId?: string;
+};
+export default function SearchInput({ className, submitButtonId }: Props) {
   const [keyword, setKeyword] = useState<string>('');
   const router = useRouter();
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(() => e.target.value);
   };
-  
-  const submitHandler = (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
 
-    const encodedQuery = encodeURI(keyword.trim().replaceAll(' ', '+'));
+  const navigateToSearchPage = useCallback(() => {
+    const encodedQuery = encodeURIComponent(keyword.trim().replaceAll(' ', '+'));
 
     if (encodedQuery === '') {
       return;
@@ -22,7 +24,26 @@ export default function SearchInput() {
       const url = getQueryURL('/search', { keyword: encodedQuery });
       router.push(url);
     }
+  }, [keyword, router]);
+
+  const submitHandler = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    navigateToSearchPage();
   };
+
+  useEffect(() => {
+    if (submitButtonId) {
+      const submitButton = document.getElementById(submitButtonId);
+      submitButton?.addEventListener('click', navigateToSearchPage);
+    }
+    return () => {
+      if (submitButtonId) {
+        const submitButton = document.getElementById(submitButtonId);
+        submitButton?.removeEventListener('click', navigateToSearchPage);
+      }
+    };
+  }, [submitButtonId, navigateToSearchPage]);
 
   return (
     <form className='relative w-full' onSubmit={submitHandler}>
@@ -30,14 +51,14 @@ export default function SearchInput() {
         type='text'
         value={keyword}
         onChange={changeHandler}
-        placeholder='강의 검색'
+        placeholder='듣고 싶은 강의를 검색해보세요!'
         maxLength={100}
-        className='w-full pr-8 text-xs rounded-none lg:text-base bg-sroom-gray-400 form-control input'
+        className={`${className} w-full form-control input`}
       />
       <button
         type='button'
         onClick={() => setKeyword('')}
-        className={`absolute rounded-none justify-center items-center p-2 h-6 shrink-0 text-xs right-2 top-3 hidden opacity-0 ${
+        className={`absolute rounded-none justify-center items-center shrink-0 text-xs right-[5%] top-1/2 -translate-y-1/2 hidden opacity-0 ${
           keyword.length > 0 ? '!inline-flex !opacity-100 transition-all' : ''
         }`}
       >

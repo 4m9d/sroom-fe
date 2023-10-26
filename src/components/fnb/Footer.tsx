@@ -9,7 +9,7 @@ export default function Footer({}) {
   if (currentRoute.startsWith('/course')) return null;
   return (
     <footer className='pt-5 pb-16 border bg-sroom-gray-300 border-t-sroom-gray-400'>
-      <div className='px-4 mx-auto lg:px-24 max-w-screen-2xl'>
+      <div className='max-w-screen-xl px-4 mx-auto lg:px-24'>
         <ul className='flex flex-wrap justify-center w-full gap-4 mb-12 text-sm text-sroom-black-400'>
           <li>
             <Link
@@ -36,7 +36,7 @@ export default function Footer({}) {
               문의하기
             </Link>
           </li>
-          <li className='font-medium'>© 4M9D.</li>
+          <li className='font-medium'>© SROOM.</li>
         </ul>
         <div className='flex flex-col gap-3'>
           <Image
@@ -47,7 +47,9 @@ export default function Footer({}) {
             height={30}
           />
           <address className='flex flex-col gap-1 text-xs text-sroom-black-100'>
-            <div>대표자 이종준</div>
+            <div>
+              4M9D
+            </div>
             <div>
               서울특별시 강남구 테헤란로 311 아남타워빌딩 7층 (우편번호 : 06151)
             </div>

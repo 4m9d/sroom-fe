@@ -106,7 +106,7 @@ export default function CourseTaking({
         courseDetail={courseDetail}
         currentPlayingVideo={currentPlayingVideo}
       />
-      <div id='background' className='flex-1 overflow-scroll'>
+      <div id='background' className='flex-1 px-8 overflow-scroll'>
         <CourseHeader
           title={currentPlayingVideo.video_title}
           channel={currentPlayingVideo.channel}
