@@ -1,4 +1,3 @@
-import { Endpoints } from '@/src/api/Endpoints';
 import {
   fetchUserAuthWithCredential,
   fetchUserAuthWithRefreshToken
@@ -8,7 +7,6 @@ import {
   ONE_SECOND_IN_MS,
   SESSION_AGE
 } from '@/src/constants/time/time';
-import getHeaders from '@/src/util/http/getHeaders';
 import NextAuth, { AuthOptions, Awaitable, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import CredentialProvider from 'next-auth/providers/credentials';
@@ -67,12 +65,16 @@ export const authOptions: AuthOptions = {
       } else if (user) {
         token.session = user;
       }
+
       const now = Math.floor(Date.now());
       const expireTime = token.session.expires_at * ONE_SECOND_IN_MS;
+
       if (expireTime - now > 10 * ONE_MINUTE_IN_MS) {
         return token;
       } else {
-        return refreshAccessToken(token);
+        const refreshedToken = await refreshAccessToken(token);
+
+        return refreshedToken;
       }
     },
     async session({ session, token }) {
