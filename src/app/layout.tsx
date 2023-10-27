@@ -63,11 +63,11 @@ export default function RootLayout({ children, modal }: Props) {
                 {children}
                 {modal}
               </ResolutionCheck>
-              <Footer />
             </ChannelTalkManager>
           </QueryProvider>
         </AuthSessionProvider>
         <NaverAnalytics />
+        <Footer />
       </body>
     </html>
   );

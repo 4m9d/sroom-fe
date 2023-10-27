@@ -72,9 +72,7 @@ export const authOptions: AuthOptions = {
       if (expireTime - now > 10 * ONE_MINUTE_IN_MS) {
         return token;
       } else {
-        const refreshedToken = await refreshAccessToken(token);
-
-        return refreshedToken;
+        return refreshAccessToken(token);
       }
     },
     async session({ session, token }) {
