@@ -1,5 +1,10 @@
 #!/bin/sh
 
+echo "Check that we have NEXTAUTH_SECRET"
+test -n "$NEXTAUTH_SECRET"
+
+find /app/.next \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i "s#APP_NEXTAUTH_SECRET#$NEXTAUTH_SECRET#g"
+
 echo "Check that we have NEXT_PUBLIC_GOOGLE_CLIENT_ID"
 test -n "$NEXT_PUBLIC_GOOGLE_CLIENT_ID"
 
