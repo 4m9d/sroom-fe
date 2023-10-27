@@ -16,7 +16,7 @@ export default function SearchInput({ className, submitButtonId }: Props) {
   };
 
   const navigateToSearchPage = useCallback(() => {
-    const encodedQuery = encodeURIComponent(keyword.trim().replaceAll(' ', '+'));
+    const encodedQuery = encodeURIComponent(keyword.trim());
 
     if (encodedQuery === '') {
       return;
