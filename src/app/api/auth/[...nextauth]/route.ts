@@ -18,23 +18,24 @@ const refreshingMutex = new Mutex();
 let refreshingPromise: Promise<JWT> | null = null;
 
 async function checkTokenExpiration(token: JWT) {
-  const now = Math.floor(Date.now());
-  const expireTime = token.session.access_expires_at * ONE_SECOND_IN_MS;
+  const now = Math.floor(Date.now() / ONE_SECOND_IN_MS);
+  const expireTime = token.session.access_expires_at;
 
-  if (expireTime - now > 10 * ONE_MINUTE_IN_MS) {
+  if (expireTime - now > 10 * 60) {
     return token;
   }
 
+  if (refreshingPromise) {
+    return await refreshingPromise;
+  }
+
   return await refreshingMutex.runExclusive(async () => {
-    if (refreshingPromise) {
-      token = (await refreshingPromise) as JWT;
-    } else {
+    if (!refreshingPromise) {
       refreshingPromise = refreshAccessToken(token).finally(() => {
         refreshingPromise = null;
       });
-      token = await refreshingPromise;
     }
-    return token;
+    return refreshingPromise;
   });
 }
 
@@ -88,8 +89,9 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user, trigger, session }) {
+      console.log(user);
       if (trigger === 'update' && session) {
-        token.session = { ...session, expires_at: getSessionExpiresAt() };
+        token.session = session;
       } else if (user) {
         token.session = {
           ...user,
@@ -107,7 +109,9 @@ export const authOptions: AuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      session = token.session;
+      session = {...session, ...token.session};
+      console.log('session', session);
+
       return session;
     }
   },

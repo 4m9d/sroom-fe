@@ -40,7 +40,8 @@ export default function CourseMaterialContent({
       staleTime: STALE_TIME,
       refetchInterval(data) {
         return data?.status === STATUS.PENDING ? REFETCH_INTERVAL : false;
-      }
+      },
+      refetchIntervalInBackground: true
     }
   );
   return (

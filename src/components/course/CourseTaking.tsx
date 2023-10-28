@@ -5,6 +5,7 @@ import YoutubePlayer from './YoutubePlayer';
 import CourseDetailDrawer from './drawer/courseDetail/CourseDetailDrawer';
 import CourseMaterialDrawer from './drawer/courseMaterial/CourseMaterialDrawer';
 import CourseVideoController from './CourseVideoController';
+import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
 
 type Props = {
   courseDetail: CourseDetail;
@@ -22,7 +23,13 @@ export default function CourseTaking({
     useState<LastViewVideo | null>(last_view_video);
   const [nextPlayingVideo, setNextPlayingVideo] =
     useState<LastViewVideo | null>(last_view_video);
-  const viewDuration = useRef<number>(0);
+  const viewDuration = useRef<number>(
+    parseInt(
+      sessionStorage.getItem(
+        `${SessionStorageKeys.VIEW_DURATION}-${currentPlayingVideo.course_video_id}`
+      ) ?? '0'
+    )
+  );
   const currentIntervalID = useRef<NodeJS.Timer | null>(null);
 
   function findVideoById() {
@@ -135,9 +142,7 @@ export default function CourseTaking({
           />
         </div>
       </div>
-      <CourseMaterialDrawer
-        courseVideoId={currentCourseVideoId}
-      />
+      <CourseMaterialDrawer courseVideoId={currentCourseVideoId} />
     </div>
   );
 }

@@ -17,7 +17,7 @@ import { QueryKeys } from '@/src/api/queryKeys';
 import { updateCourseLectureNotes } from '@/src/api/materials/materials';
 import getRelativeTime from '@/src/util/time/getRelativeTime';
 import ClipboardSVG from '@/public/icon/Clipboard';
-import { SessionStorageKeys } from '@/src/constants/materials/materials';
+import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import FeedbackMessage from '@/src/components/ui/feedback/FeedbackMessage';
 
