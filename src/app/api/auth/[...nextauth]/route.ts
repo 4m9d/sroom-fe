@@ -12,6 +12,7 @@ import NextAuth, { AuthOptions, Awaitable, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import CredentialProvider from 'next-auth/providers/credentials';
 import { Mutex } from 'async-mutex';
+import { ErrorMessage } from '@/src/api/ErrorMessage';
 
 const refreshingMutex = new Mutex();
 let refreshingPromise: Promise<JWT> | null = null;
@@ -53,9 +54,6 @@ async function refreshAccessToken(token: JWT) {
         expires_at: getSessionExpiresAt()
       }
     };
-
-    console.log('새로운 토큰:', newToken);
-
     return newToken;
   } catch (err) {
     return {
@@ -103,14 +101,13 @@ export const authOptions: AuthOptions = {
         try {
           token = await checkTokenExpiration(token);
         } catch (error) {
-          console.error('Error refreshing the access token:', error);
+          throw new Error(ErrorMessage.REFRESH);
         }
       }
       return token;
     },
     async session({ session, token }) {
       session = token.session;
-      console.log(session);
       return session;
     }
   },
