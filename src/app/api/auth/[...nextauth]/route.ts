@@ -12,16 +12,17 @@ import NodeCache from 'node-cache';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 
 const refreshingMutex = new Mutex();
+const tokenMutex = new Mutex();
 const cache = new NodeCache();
 
 let refreshingPromise: Promise<JWT> | null = null;
 
-async function getCachedToken(profile: string): Promise<JWT | null> {
+function getCachedToken(profile: string): JWT | null {
   const cachedToken = cache.get(`token_${profile}`) as JWT;
   return cachedToken || null;
 }
 
-async function setCachedToken(profile: string, token: JWT) {
+function setCachedToken(profile: string, token: JWT) {
   cache.set(`token_${profile}`, token, 5);
 }
 
@@ -92,30 +93,34 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user, trigger, session }) {
-      if (trigger === 'update' && session) {
-        token.session = session;
-      } else if (user) {
-        const cached = await getCachedToken(user.profile);
-        if (cached) {
-          return cached;
-        }
-        token.session = {
-          ...user,
-          expires_at: getSessionExpiresAt()
-        };
-      }
-
-      if (token.session.access_expires_at) {
-        try {
-          token = await checkTokenExpiration(token);
-          if (user) {
-            await setCachedToken(token.session.profile, token.session);
+      return await tokenMutex.runExclusive(async () => {
+        if (token?.session?.access_expires_at) {
+          const cachedSession = getCachedToken(token.session.profile);
+          if (cachedSession) {
+            token.session = cachedSession;
+            return token;
           }
-        } catch (error) {
-          throw new Error(ErrorMessage.REFRESH);
         }
-      }
-      return token;
+
+        if (trigger === 'update' && session) {
+          token.session = session;
+        } else if (user) {
+          token.session = {
+            ...user,
+            expires_at: getSessionExpiresAt()
+          };
+        }
+
+        if (token?.session?.access_expires_at) {
+          try {
+            token = await checkTokenExpiration(token);
+            setCachedToken(token.session.profile, token.session);
+          } catch (error) {
+            throw new Error(ErrorMessage.REFRESH);
+          }
+        }
+        return token;
+      });
     },
     async session({ session, token }) {
       session = { ...session, ...token.session };
