@@ -8,22 +8,22 @@ import NextAuth, { AuthOptions, Awaitable, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import CredentialProvider from 'next-auth/providers/credentials';
 import { Mutex } from 'async-mutex';
-import Redis from 'ioredis';
+import NodeCache from 'node-cache';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 
 const refreshingMutex = new Mutex();
 const tokenMutex = new Mutex();
-const redis = new Redis();
+const cache = new NodeCache();
 
 let refreshingPromise: Promise<JWT> | null = null;
 
 async function getCachedToken(profile: string): Promise<JWT | null> {
-  const cachedTokenStr = await redis.get(`token_${profile}`);
-  return cachedTokenStr ? JSON.parse(cachedTokenStr) : null;
+  const cachedToken = cache.get(`token_${profile}`) as JWT;
+  return cachedToken || null;
 }
 
 async function setCachedToken(profile: string, token: JWT) {
-  await redis.set(`token_${profile}`, JSON.stringify(token), 'EX', 1);
+  cache.set(`token_${profile}`, token, 1);
 }
 
 async function checkTokenExpiration(token: JWT): Promise<JWT> {
