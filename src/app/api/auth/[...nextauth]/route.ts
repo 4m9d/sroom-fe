@@ -2,11 +2,7 @@ import {
   fetchUserAuthWithCredential,
   fetchUserAuthWithRefreshToken
 } from '@/src/api/members/members';
-import {
-  ONE_MINUTE_IN_MS,
-  ONE_SECOND_IN_MS,
-  SESSION_AGE
-} from '@/src/constants/time/time';
+import { ONE_SECOND_IN_MS, SESSION_AGE } from '@/src/constants/time/time';
 import getSessionExpiresAt from '@/src/util/day/getSessionExpiresAt';
 import NextAuth, { AuthOptions, Awaitable, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
@@ -15,43 +11,40 @@ import { Mutex } from 'async-mutex';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 
 const refreshingMutex = new Mutex();
+const tokenMutex = new Mutex();
+
 let refreshingPromise: Promise<JWT> | null = null;
 
-async function checkTokenExpiration(token: JWT) {
-  const now = Math.floor(Date.now() / ONE_SECOND_IN_MS);
-  const expireTime = token.session.access_expires_at;
-
-  if (expireTime - now > 10 * 60) {
-    return token;
-  }
-
-  if (refreshingPromise) {
-    return await refreshingPromise;
-  }
-
+async function checkTokenExpiration(token: JWT): Promise<JWT> {
   return await refreshingMutex.runExclusive(async () => {
-    if (!refreshingPromise) {
-      refreshingPromise = refreshAccessToken(token).finally(() => {
-        refreshingPromise = null;
-      });
+    const now = Math.floor(Date.now() / ONE_SECOND_IN_MS);
+    if (token && token.session.access_expires_at > now + 10 * 60) {
+      return token; // 이미 유효한 토큰이면 현재 토큰 반환
     }
-    return refreshingPromise;
+
+    if (!refreshingPromise) {
+      refreshingPromise = refreshAccessToken(token);
+    }
+
+    const refreshedToken = await refreshingPromise;
+
+    return refreshedToken;
   });
 }
 
-async function refreshAccessToken(token: JWT) {
+async function refreshAccessToken(token: JWT): Promise<JWT> {
   try {
-    const refreshedToken = await fetchUserAuthWithRefreshToken({
+    const refreshedTokenData = await fetchUserAuthWithRefreshToken({
       refresh_token: token.session.refresh_token
     });
 
-    const newToken = {
+    const newToken: JWT = {
       ...token,
       session: {
         ...token.session,
-        access_token: refreshedToken?.access_token,
-        refresh_token: refreshedToken?.refresh_token,
-        access_expires_at: refreshedToken?.access_expires_at,
+        access_token: refreshedTokenData?.access_token,
+        refresh_token: refreshedTokenData?.refresh_token,
+        access_expires_at: refreshedTokenData?.access_expires_at,
         expires_at: getSessionExpiresAt()
       }
     };
@@ -61,6 +54,8 @@ async function refreshAccessToken(token: JWT) {
       ...token,
       error: 'RefreshAccessTokenError'
     };
+  } finally {
+    refreshingPromise = null; // 갱신 작업 완료 후 null로 초기화
   }
 }
 
@@ -89,27 +84,28 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user, trigger, session }) {
-      console.log(user);
-      if (trigger === 'update' && session) {
-        token.session = session;
-      } else if (user) {
-        token.session = {
-          ...user,
-          expires_at: getSessionExpiresAt()
-        };
-      }
-
-      if (token?.session?.access_expires_at) {
-        try {
-          token = await checkTokenExpiration(token);
-        } catch (error) {
-          throw new Error(ErrorMessage.REFRESH);
+      return await tokenMutex.runExclusive(async () => {
+        if (trigger === 'update' && session) {
+          token.session = session;
+        } else if (user) {
+          token.session = {
+            ...user,
+            expires_at: getSessionExpiresAt()
+          };
         }
-      }
-      return token;
+
+        if (token?.session?.access_expires_at) {
+          try {
+            token = await checkTokenExpiration(token);
+          } catch (error) {
+            throw new Error(ErrorMessage.REFRESH);
+          }
+        }
+        return token;
+      });
     },
     async session({ session, token }) {
-      session = {...session, ...token.session};
+      session = { ...session, ...token.session };
       console.log('session', session);
 
       return session;
