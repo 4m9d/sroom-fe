@@ -15,11 +15,33 @@ const tokenMutex = new Mutex();
 
 let refreshingPromise: Promise<JWT> | null = null;
 
+let cachedToken: JWT | null = null;
+let cacheTimestamp: number | null = null;
+const CACHE_DURATION_MS = 2 * ONE_SECOND_IN_MS;
+
+function setCachedToken(token: JWT) {
+  cachedToken = token;
+  cacheTimestamp = Date.now();
+}
+
+function getCachedToken(): JWT | null {
+  if (
+    cachedToken &&
+    cacheTimestamp &&
+    Date.now() - cacheTimestamp <= CACHE_DURATION_MS
+  ) {
+    return cachedToken;
+  }
+  cachedToken = null;
+  cacheTimestamp = null;
+  return null;
+}
+
 async function checkTokenExpiration(token: JWT): Promise<JWT> {
   return await refreshingMutex.runExclusive(async () => {
     const now = Math.floor(Date.now() / ONE_SECOND_IN_MS);
     if (token && token.session.access_expires_at > now + 10 * 60) {
-      return token; // 이미 유효한 토큰이면 현재 토큰 반환
+      return token;
     }
 
     if (!refreshingPromise) {
@@ -55,7 +77,7 @@ async function refreshAccessToken(token: JWT): Promise<JWT> {
       error: 'RefreshAccessTokenError'
     };
   } finally {
-    refreshingPromise = null; // 갱신 작업 완료 후 null로 초기화
+    refreshingPromise = null;
   }
 }
 
@@ -77,7 +99,6 @@ export const authOptions: AuthOptions = {
         const response = await fetchUserAuthWithCredential(credential).then(
           (res) => res
         );
-
         return response as unknown as Awaitable<User | null>;
       }
     })
@@ -85,6 +106,11 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async jwt({ token, user, trigger, session }) {
       return await tokenMutex.runExclusive(async () => {
+        const cached = getCachedToken();
+        if (cached) {
+          return cached;
+        }
+
         if (trigger === 'update' && session) {
           token.session = session;
         } else if (user) {
@@ -97,6 +123,7 @@ export const authOptions: AuthOptions = {
         if (token?.session?.access_expires_at) {
           try {
             token = await checkTokenExpiration(token);
+            setCachedToken(token);
           } catch (error) {
             throw new Error(ErrorMessage.REFRESH);
           }
@@ -106,7 +133,6 @@ export const authOptions: AuthOptions = {
     },
     async session({ session, token }) {
       session = { ...session, ...token.session };
-
       return session;
     }
   },
