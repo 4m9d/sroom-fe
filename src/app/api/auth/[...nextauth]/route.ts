@@ -12,7 +12,6 @@ import NodeCache from 'node-cache';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 
 const refreshingMutex = new Mutex();
-const tokenMutex = new Mutex();
 const cache = new NodeCache();
 
 let refreshingPromise: Promise<JWT> | null = null;
@@ -23,7 +22,7 @@ async function getCachedToken(profile: string): Promise<JWT | null> {
 }
 
 async function setCachedToken(profile: string, token: JWT) {
-  cache.set(`token_${profile}`, token, 1);
+  cache.set(`token_${profile}`, token, 5);
 }
 
 async function checkTokenExpiration(token: JWT): Promise<JWT> {
@@ -93,35 +92,30 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user, trigger, session }) {
-      return await tokenMutex.runExclusive(async () => {
-        if (user) {
-          const cached = await getCachedToken(user.id);
-          if (cached) {
-            return cached;
-          }
+      if (trigger === 'update' && session) {
+        token.session = session;
+      } else if (user) {
+        const cached = await getCachedToken(user.profile);
+        if (cached) {
+          return cached;
         }
+        token.session = {
+          ...user,
+          expires_at: getSessionExpiresAt()
+        };
+      }
 
-        if (trigger === 'update' && session) {
-          token.session = session;
-        } else if (user) {
-          token.session = {
-            ...user,
-            expires_at: getSessionExpiresAt()
-          };
-        }
-
-        if (token?.session?.access_expires_at) {
-          try {
-            token = await checkTokenExpiration(token);
-            if (user) {
-              await setCachedToken(user.id, token);
-            }
-          } catch (error) {
-            throw new Error(ErrorMessage.REFRESH);
+      if (token.session.access_expires_at) {
+        try {
+          token = await checkTokenExpiration(token);
+          if (user) {
+            await setCachedToken(token.session.profile, token.session);
           }
+        } catch (error) {
+          throw new Error(ErrorMessage.REFRESH);
         }
-        return token;
-      });
+      }
+      return token;
     },
     async session({ session, token }) {
       session = { ...session, ...token.session };
