@@ -8,33 +8,22 @@ import NextAuth, { AuthOptions, Awaitable, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import CredentialProvider from 'next-auth/providers/credentials';
 import { Mutex } from 'async-mutex';
+import Redis from 'ioredis';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 
 const refreshingMutex = new Mutex();
 const tokenMutex = new Mutex();
+const redis = new Redis();
 
 let refreshingPromise: Promise<JWT> | null = null;
 
-let cachedToken: JWT | null = null;
-let cacheTimestamp: number | null = null;
-const CACHE_DURATION_MS = 2 * ONE_SECOND_IN_MS;
-
-function setCachedToken(token: JWT) {
-  cachedToken = token;
-  cacheTimestamp = Date.now();
+async function getCachedToken(profile: string): Promise<JWT | null> {
+  const cachedTokenStr = await redis.get(`token_${profile}`);
+  return cachedTokenStr ? JSON.parse(cachedTokenStr) : null;
 }
 
-function getCachedToken(): JWT | null {
-  if (
-    cachedToken &&
-    cacheTimestamp &&
-    Date.now() - cacheTimestamp <= CACHE_DURATION_MS
-  ) {
-    return cachedToken;
-  }
-  cachedToken = null;
-  cacheTimestamp = null;
-  return null;
+async function setCachedToken(profile: string, token: JWT) {
+  await redis.set(`token_${profile}`, JSON.stringify(token), 'EX', 1);
 }
 
 async function checkTokenExpiration(token: JWT): Promise<JWT> {
@@ -49,7 +38,6 @@ async function checkTokenExpiration(token: JWT): Promise<JWT> {
     }
 
     const refreshedToken = await refreshingPromise;
-
     return refreshedToken;
   });
 }
@@ -106,9 +94,11 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async jwt({ token, user, trigger, session }) {
       return await tokenMutex.runExclusive(async () => {
-        const cached = getCachedToken();
-        if (cached) {
-          return cached;
+        if (user) {
+          const cached = await getCachedToken(user.id);
+          if (cached) {
+            return cached;
+          }
         }
 
         if (trigger === 'update' && session) {
@@ -123,7 +113,9 @@ export const authOptions: AuthOptions = {
         if (token?.session?.access_expires_at) {
           try {
             token = await checkTokenExpiration(token);
-            setCachedToken(token);
+            if (user) {
+              await setCachedToken(user.id, token);
+            }
           } catch (error) {
             throw new Error(ErrorMessage.REFRESH);
           }
