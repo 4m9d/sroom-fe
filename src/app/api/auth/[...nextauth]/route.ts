@@ -12,7 +12,6 @@ import NodeCache from 'node-cache';
 import { ErrorMessage } from '@/src/api/ErrorMessage';
 
 const refreshingMutex = new Mutex();
-const tokenMutex = new Mutex();
 const cache = new NodeCache();
 
 let refreshingPromise: Promise<JWT> | null = null;
@@ -93,34 +92,32 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user, trigger, session }) {
-      return await tokenMutex.runExclusive(async () => {
-        if (token?.session?.access_expires_at) {
-          const cachedSession = getCachedToken(token.session.profile);
-          if (cachedSession) {
-            token.session = cachedSession;
-            return token;
-          }
+      if (token?.session?.access_expires_at) {
+        const cached = getCachedToken(token.session.profile);
+        if (cached) {
+          token.session = cached;
+          return token;
         }
+      }
 
-        if (trigger === 'update' && session) {
-          token.session = session;
-        } else if (user) {
-          token.session = {
-            ...user,
-            expires_at: getSessionExpiresAt()
-          };
-        }
+      if (trigger === 'update' && session) {
+        token.session = session;
+      } else if (user) {
+        token.session = {
+          ...user,
+          expires_at: getSessionExpiresAt()
+        };
+      }
 
-        if (token?.session?.access_expires_at) {
-          try {
-            token = await checkTokenExpiration(token);
-            setCachedToken(token.session.profile, token.session);
-          } catch (error) {
-            throw new Error(ErrorMessage.REFRESH);
-          }
+      if (token?.session?.access_expires_at) {
+        try {
+          token = await checkTokenExpiration(token);
+          setCachedToken(token.session.profile, token.session);
+        } catch (error) {
+          throw new Error(ErrorMessage.REFRESH);
         }
-        return token;
-      });
+      }
+      return token;
     },
     async session({ session, token }) {
       session = { ...session, ...token.session };
