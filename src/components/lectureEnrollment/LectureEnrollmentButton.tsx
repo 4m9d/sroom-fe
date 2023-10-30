@@ -190,29 +190,34 @@ export default function LectureEnrollmentButton({
   return (
     <>
       <div className='w-full dropdown dropdown-hover !z-[60]'>
-        <Button
-          disabled={disabled}
-          onClick={() => {}}
-          className={`w-full peer text-sroom-white bg-sroom-black-400 md:text-base ${
-            disabled ? 'opacity-80' : ''
-          }`}
-        >
-          {isLoading ? (
+        {is_playlist && disabled ? (
+          <div className='flex items-center justify-center w-full h-11 bg-sroom-black-400'>
             <LoadingSpinner className='text-sroom-brand loading-sm' />
-          ) : (
-            buttonTitle
-          )}
-        </Button>
-        <div className='w-full pt-5 dropdown-content'>
-          <ul className='relative border bg-sroom-white border-sroom-gray-500'>
-            {is_playlist ? (
-              <PlaylistEnrollment courses={courses} />
-            ) : (
-              <VideoEnrollment courses={courses} />
-            )}
-            <span className='absolute -top-[0.3px] w-3 h-3 rotate-45 -translate-x-1/2 -translate-y-1/2 border-t bg-sroom-white border-l left-10 border-l-gray-200 border-t-sroom-gray-500 peer-first-of-type:peer-hover:bg-sroom-brand' />
-          </ul>
-        </div>
+          </div>
+        ) : (
+          <>
+            <Button
+              onClick={() => {}}
+              className='w-full h-11 peer text-sroom-white bg-sroom-black-400 md:text-base'
+            >
+              {isLoading ? (
+                <LoadingSpinner className='text-sroom-brand loading-sm' />
+              ) : (
+                buttonTitle
+              )}
+            </Button>
+            <div className='w-full pt-5 dropdown-content'>
+              <ul className='relative border bg-sroom-white border-sroom-gray-500'>
+                {is_playlist ? (
+                  <PlaylistEnrollment courses={courses} />
+                ) : (
+                  <VideoEnrollment courses={courses} />
+                )}
+                <span className='absolute -top-[0.3px] w-3 h-3 rotate-45 -translate-x-1/2 -translate-y-1/2 border-t bg-sroom-white border-l left-10 border-l-gray-200 border-t-sroom-gray-500 peer-first-of-type:peer-hover:bg-sroom-brand' />
+              </ul>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

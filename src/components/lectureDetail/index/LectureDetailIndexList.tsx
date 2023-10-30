@@ -37,7 +37,7 @@ export default async function LectureDetailIndexList({
         return null;
       });
   };
-  const { data, isFetched } = useQuery(
+  const { data, status } = useQuery(
     [QueryKeys.LECTURE_INDEX, lectureCode],
     fetchLectureIndexList,
     {
@@ -49,16 +49,16 @@ export default async function LectureDetailIndexList({
   );
 
   useEffect(() => {
-    if (isFetched) {
-      setIsFetched(true);
+    if (status === 'success') {
+      setIsFetched(() => true);
       setHasMembersOnly(() => {
         if (!data) return false;
         return data.index_list.some((index) => index.is_members_only === true);
       });
     }
-  }, [isFetched, setIsFetched, data]);
+  }, [status, setIsFetched, data]);
 
-  if (isFetched === false) {
+  if (status === 'loading') {
     return <LectureDetailIndexSkeleton limit={5} />;
   }
 
