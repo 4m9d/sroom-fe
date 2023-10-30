@@ -4,7 +4,7 @@ import {
 } from '@/src/api/members/members';
 import { ONE_SECOND_IN_MS, SESSION_AGE } from '@/src/constants/time/time';
 import getSessionExpiresAt from '@/src/util/day/getSessionExpiresAt';
-import NextAuth, { AuthOptions, Awaitable, User } from 'next-auth';
+import NextAuth, { AuthOptions, Awaitable, Session, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import CredentialProvider from 'next-auth/providers/credentials';
 import { Mutex } from 'async-mutex';
@@ -14,22 +14,22 @@ import { ErrorMessage } from '@/src/api/ErrorMessage';
 const refreshingMutex = new Mutex();
 const cache = new NodeCache();
 
-let refreshingPromise: Promise<JWT> | null = null;
+let refreshingPromise: Promise<Session> | null = null;
 
-function getCachedToken(profile: string): JWT | null {
-  const cachedToken = cache.get(`token_${profile}`) as JWT;
+function getCachedToken(profile: string): Session | null {
+  const cachedToken = cache.get(`token_${profile}`) as Session;
   return cachedToken || null;
 }
 
-function setCachedToken(profile: string, token: JWT) {
+function setCachedToken(profile: string, token: Session) {
   cache.set(`token_${profile}`, token, 5);
 }
 
-async function checkTokenExpiration(token: JWT): Promise<JWT> {
+async function checkTokenExpiration(token: JWT): Promise<Session> {
   return await refreshingMutex.runExclusive(async () => {
     const now = Math.floor(Date.now() / ONE_SECOND_IN_MS);
     if (token && token.session.access_expires_at > now + 10 * 60) {
-      return token;
+      return token.session;
     }
 
     if (!refreshingPromise) {
@@ -41,26 +41,26 @@ async function checkTokenExpiration(token: JWT): Promise<JWT> {
   });
 }
 
-async function refreshAccessToken(token: JWT): Promise<JWT> {
+async function refreshAccessToken(token: JWT): Promise<Session> {
   try {
     const refreshedTokenData = await fetchUserAuthWithRefreshToken({
       refresh_token: token.session.refresh_token
     });
 
-    const newToken: JWT = {
-      ...token,
-      session: {
-        ...token.session,
-        access_token: refreshedTokenData?.access_token,
-        refresh_token: refreshedTokenData?.refresh_token,
-        access_expires_at: refreshedTokenData?.access_expires_at,
-        expires_at: getSessionExpiresAt()
-      }
+    const newToken: Session = {
+      ...token.session,
+      access_token: refreshedTokenData?.access_token,
+      refresh_token: refreshedTokenData?.refresh_token,
+      access_expires_at: refreshedTokenData?.access_expires_at,
+      profile: refreshedTokenData?.profile,
+      expires_at: getSessionExpiresAt()
     };
+    setCachedToken(newToken.profile, newToken);
+
     return newToken;
   } catch (err) {
     return {
-      ...token,
+      ...token.session,
       error: 'RefreshAccessTokenError'
     };
   } finally {
@@ -101,7 +101,7 @@ export const authOptions: AuthOptions = {
       }
 
       if (trigger === 'update' && session) {
-        token.session = session;
+        token.session.name = session.name;
       } else if (user) {
         token.session = {
           ...user,
@@ -111,8 +111,7 @@ export const authOptions: AuthOptions = {
 
       if (token?.session?.access_expires_at) {
         try {
-          token = await checkTokenExpiration(token);
-          setCachedToken(token.session.profile, token.session);
+          token.session = await checkTokenExpiration(token);
         } catch (error) {
           throw new Error(ErrorMessage.REFRESH);
         }

@@ -18,6 +18,7 @@ export default function LatestLearningCoursesList({
       <section className='max-w-screen-xl px-4 py-20 mx-auto mt-20 lg:px-24'>
         <SectionHeading
           title='시작해 볼까요?'
+          onMouseOver={() => router.prefetch('/classroom')}
           onClick={() => router.push('/classroom')}
         >
           <Link href={'/classroom'}></Link>
