@@ -106,7 +106,7 @@ interface RefreshToken {
 interface LoginResponse extends Response, Profile {
   access_token: string;
   refresh_token: string;
-  expires_at: number;
+  access_expires_at: number;
 }
 
 interface ProfileUpdateResponse extends Response {

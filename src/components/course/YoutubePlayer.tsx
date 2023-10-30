@@ -1,6 +1,7 @@
 'use client';
 import { updateViewDuration } from '@/src/api/lectures/time';
 import { QueryKeys } from '@/src/api/queryKeys';
+import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { memo, useCallback, useEffect } from 'react';
@@ -61,9 +62,15 @@ const YoutubePlayer = ({
     silentUpdateViewDuration,
     {
       onSuccess: (data) => {
-        if (data && data.is_completed === true && isCompleted === false) {
-          isCompleted = true;
-          revalidateCourseDetail();
+        if (data) {
+          sessionStorage.setItem(
+            `${SessionStorageKeys.VIEW_DURATION}-${course_video_id}`,
+            `${data.view_duration}`
+          );
+          if (data.is_completed === true && isCompleted === false) {
+            isCompleted = true;
+            revalidateCourseDetail();
+          }
         }
       }
     }

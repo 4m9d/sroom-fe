@@ -9,7 +9,7 @@ export async function getAuthorizedHeaders() {
   if (session === null) {
     session = await getServerSession(authOptions);
   }
-  
+
   const header = getHeaders();
   header.set('Authorization', session?.access_token ?? '');
 

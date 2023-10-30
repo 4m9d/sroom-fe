@@ -6,7 +6,7 @@ import QuizCard from '@/src/components/ui/quizCard/QuizCard';
 import {
   QuizType,
   SessionStorageKeys
-} from '@/src/constants/materials/materials';
+} from '@/src/constants/courseTaking/courseTaking';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AnimatePresence, motion } from 'framer-motion';

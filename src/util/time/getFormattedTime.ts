@@ -7,10 +7,14 @@ export default function getFormattedTime(
   let hourFormat = [];
 
   if (hour === 0 && minute === 0) {
-    if (atLeastOneMinute) {
-      hourFormat.push('1분');
-    } else {
+    if (time === 0) {
       hourFormat.push('0분');
+    } else {
+      if (atLeastOneMinute) {
+        hourFormat.push('1분');
+      } else {
+        hourFormat.push('0분');
+      }
     }
   }
   if (hour > 0) {
