@@ -2,6 +2,7 @@
 import PolygonSVG from '@/public/icon/Polygon';
 import VideoCompletionBadge from '@/src/components/ui/badge/VideoCompletionBadge';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
+import getCompactFormattedDuration from '@/src/util/time/getCompactFormattedTime';
 import getFormattedTime from '@/src/util/time/getFormattedTime';
 import Link from 'next/link';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
@@ -108,22 +109,29 @@ export default function SectionAccordion({
                   query: { courseVideoId: video.course_video_id }
                 }}
                 key={video.course_video_id}
-                className='flex items-center justify-between h-[17px] px-3 py-3 hover:bg-sroom-gray-200 hover:opacity-80 rounded-sm hover:scale-105 transition-all'
+                className='flex items-center justify-between h-[17px] px-3 py-3 hover:bg-sroom-gray-200 hover:opacity-80 rounded-sm hover:scale-105 transition-all gap-1'
               >
-                <p
-                  className={`w-5/6 text-start font-medium text-xs whitespace-normal line-clamp-1 break-all before:w-[2px] before:h-[2px] before:mr-1 before:inline-block before:align-middle ${
-                    video.is_completed === true
-                      ? 'text-sroom-black-200'
-                      : 'text-sroom-black-400'
-                  } ${
+                <div
+                  className={`flex items-center justify-between w-full gap-1 ${
                     currentPlayingVideo.course_video_id ===
                     video.course_video_id
                       ? 'text-sroom-brand before:bg-sroom-brand font-medium'
                       : 'before:bg-sroom-black-200'
-                  } `}
+                  } ${
+                    video.is_completed === true
+                      ? 'text-sroom-black-200'
+                      : 'text-sroom-black-400'
+                  }`}
                 >
-                  {video.video_title}
-                </p>
+                  <p
+                    className={`w-5/6 text-start font-medium text-xs whitespace-normal line-clamp-1 break-all before:w-[2px] before:h-[2px] before:mr-1 before:inline-block before:align-middle`}
+                  >
+                    {video.video_title}
+                  </p>
+                  <p className='w-1/6 text-xs font-normal text-center shrink-0'>
+                    {getCompactFormattedDuration(video.video_duration)}
+                  </p>
+                </div>
                 {video.is_completed === true && <VideoCompletionBadge />}
               </Link>
             ))}

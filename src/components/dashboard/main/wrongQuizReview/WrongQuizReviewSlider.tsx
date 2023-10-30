@@ -39,7 +39,7 @@ export default function WrongQuizReviewSlider({ wrongQuizzes }: Props) {
       {wrongQuizzes.length > 0 && (
         <>
           <Swiper
-            className='!py-1 md:!py-2'
+            className='w-11/12'
             slidesPerView={1}
             preventClicks={false}
             preventClicksPropagation={false}
@@ -55,7 +55,7 @@ export default function WrongQuizReviewSlider({ wrongQuizzes }: Props) {
             }}
           >
             {wrongQuizzes.map((wrongQuiz, idx) => (
-              <SwiperSlide key={idx} className='px-5 whitespace-normal md:px-8 lg:px-10'>
+              <SwiperSlide key={idx} className='self-center h-full p-1 whitespace-normal'>
                 <WrongQuizReviewCard wrongQuiz={wrongQuiz} />
               </SwiperSlide>
             ))}

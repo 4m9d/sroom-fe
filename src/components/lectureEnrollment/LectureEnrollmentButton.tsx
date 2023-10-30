@@ -108,8 +108,8 @@ export default function LectureEnrollmentButton({
                 isSubList ? LIST__SUB__DIV : LIST__DIV
               } px-2 justify-between gap-2`}
             >
-              <div className='flex items-center justify-center flex-1'>
-                <span className='max-w-[70%] !text-xs whitespace-normal line-clamp-1 break-all'>
+              <div className='flex items-center justify-start flex-1'>
+                <span className='!text-xs whitespace-normal line-clamp-1 break-all'>
                   {course.course_title}
                 </span>
               </div>
