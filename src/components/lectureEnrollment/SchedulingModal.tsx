@@ -9,6 +9,7 @@ import getFormattedTime from '@/src/util/time/getFormattedTime';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import {
   FOUR_HOURS_IN_MINUTES,
+  ONE_SECOND_IN_MS,
   THIRTY_MINUTES
 } from '@/src/constants/time/time';
 import getCurrentDate from '@/src/util/day/getCurrentDate';
@@ -22,6 +23,7 @@ import getCompactDateFormat from '@/src/util/day/getCompactFormattedDate';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
 import { useRouter } from 'next/navigation';
 import { QueryKeys } from '@/src/api/queryKeys';
+import toast from 'react-hot-toast';
 
 type Props = {
   lectureDetail: LectureDetail;
@@ -60,10 +62,15 @@ export default function SchedulingModal({
   const { mutate, isLoading } = useMutation(enrollLecture, {
     onSuccess: (response) => {
       onEnrollSuccess();
-      response &&
-        setLectureEnrollToast(() =>
-          router.push(`/course/${response.course_id}`)
-        );
+      if (response) {
+        const navigateToCourseTaking = setTimeout(() => {
+          router.push(`/course/${response.course_id}`);
+        }, 5 * ONE_SECOND_IN_MS);
+        setLectureEnrollToast(() => {
+          clearTimeout(navigateToCourseTaking);
+          toast.remove('lecture_enrollment');
+        });
+      }
       queryClient.invalidateQueries([
         QueryKeys.DETAIL,
         lectureDetail.lecture_code
@@ -128,7 +135,7 @@ export default function SchedulingModal({
         } else {
           if (currWeekVideoCount === 0) {
             currWeekVideoCount++;
-            
+
             schedulingList.push(currWeekVideoCount);
             currWeekVideoCount = 0;
             currWeekDurationSum = 0;
@@ -256,7 +263,10 @@ export default function SchedulingModal({
             <p className='flex gap-1'>
               총 재생 시간 :
               <span className='text-sroom-brand'>
-                {getFormattedTime(convertSecondsToMinutes(duration as number), true)}
+                {getFormattedTime(
+                  convertSecondsToMinutes(duration as number),
+                  true
+                )}
               </span>
             </p>
             <Button

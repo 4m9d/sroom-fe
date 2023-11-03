@@ -1,7 +1,6 @@
 'use client';
 import { AnimatePresence, motion } from 'framer-motion';
 import Button from './button/Button';
-import LectureSVG from '@/public/icon/Lecture';
 
 const Emoji: Emoji = {
   lecture_enrollment: '🤓',
@@ -56,11 +55,6 @@ export default function Toast({ toast }: { toast: CustomToast }) {
               onClick={buttonOnClick}
               className='flex items-center justify-center w-full h-full bg-sroom-brand'
             >
-              {type === 'lecture_enrollment' && (
-                <span className='w-3 mr-3 align-middle md:w-5 stroke-sroom-white fill-sroom-white'>
-                  <LectureSVG />
-                </span>
-              )}
               <span className='text-xs font-bold md:text-sm'>
                 {buttonLabel}
               </span>
