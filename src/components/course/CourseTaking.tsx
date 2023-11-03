@@ -6,6 +6,8 @@ import CourseDetailDrawer from './drawer/courseDetail/CourseDetailDrawer';
 import CourseMaterialDrawer from './drawer/courseMaterial/CourseMaterialDrawer';
 import CourseVideoController from './CourseVideoController';
 import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
+import CourseReviewModal from '../classroom/review/CourseReviewModal';
+import { showModalHandler } from '@/src/util/modal/modalHandler';
 
 type Props = {
   courseDetail: CourseDetail;
@@ -18,6 +20,10 @@ export default function CourseTaking({
 }: Props) {
   const last_view_video = findVideoById() as LastViewVideo;
   const currentPlayingVideo = last_view_video;
+  const lastVideoInCourse =
+    courseDetail.sections[courseDetail.sections.length - 1].videos[
+      courseDetail.sections[courseDetail.sections.length - 1].videos.length - 1
+    ];
 
   const [prevPlayingVideo, setPrevPlayingVideo] =
     useState<LastViewVideo | null>(last_view_video);
@@ -107,6 +113,15 @@ export default function CourseTaking({
     searchNextVideo();
   }, [searchPrevVideo, searchNextVideo]);
 
+  useEffect(() => {
+    if (
+      currentCourseVideoId === lastVideoInCourse.course_video_id &&
+      currentPlayingVideo.is_completed === true
+    ) {
+      showModalHandler('LECTURE_REVIEW');
+    }
+  });
+
   return (
     <div className='flex items-stretch flex-1 h-[calc(100vh-4rem)] bg-sroom-gray-200'>
       <CourseDetailDrawer
@@ -143,6 +158,7 @@ export default function CourseTaking({
         </div>
       </div>
       <CourseMaterialDrawer courseVideoId={currentCourseVideoId} />
+      <CourseReviewModal courseId={courseDetail.course_id} />
     </div>
   );
 }
