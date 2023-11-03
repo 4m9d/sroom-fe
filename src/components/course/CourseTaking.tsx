@@ -120,7 +120,11 @@ export default function CourseTaking({
     ) {
       showModalHandler('LECTURE_REVIEW');
     }
-  });
+  }, [
+    currentCourseVideoId,
+    currentPlayingVideo.is_completed,
+    lastVideoInCourse.course_video_id
+  ]);
 
   return (
     <div className='flex items-stretch flex-1 h-[calc(100vh-4rem)] bg-sroom-gray-200'>
