@@ -46,14 +46,14 @@ export default function CourseDeleteModal({ courseId, courseTitle }: Props) {
         <div className='flex items-center justify-between w-full gap-5 mt-8'>
           <Button
             onClick={() => closeModalHandler('COURSE_DELETE')}
-            className='w-1/2 text-sroom-white bg-sroom-black-400'
+            className='w-1/2 text-sroom-white bg-sroom-brand'
           >
-            뒤로가기
+            취소하기
           </Button>
           <Button
             disabled={isDisabled}
             onClick={mutate}
-            className='w-1/2 text-sroom-white bg-sroom-brand'
+            className='w-1/2 text-sroom-white bg-sroom-black-400'
           >
             {isDisabled ? (
               <LoadingSpinner className='text-sroom-white loading-sm' />

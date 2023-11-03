@@ -150,12 +150,14 @@ export default function CourseReviewModal({ courseId }: Props) {
                     onClick={stateInitHandler}
                     className='w-1/2 text-sroom-black-400 bg-sroom-gray-400'
                   >
-                    뒤로가기
+                    목록보기
                   </Button>
                   <Button
                     disabled={isDisabled}
                     onClick={mutate}
-                    className='w-1/2 text-sroom-white bg-sroom-black-400'
+                    className={`w-1/2 text-sroom-white bg-sroom-black-400 ${
+                      isDisabled ? 'opacity-60' : ''
+                    }`}
                   >
                     {mutateStatus === 'loading' ? (
                       <LoadingSpinner className='text-sroom-brand loading-sm' />
