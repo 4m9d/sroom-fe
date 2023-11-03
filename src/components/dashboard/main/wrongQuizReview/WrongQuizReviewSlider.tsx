@@ -18,6 +18,7 @@ export default function WrongQuizReviewSlider({ wrongQuizzes }: Props) {
   const [isFirstSlide, setIsFirstSlide] = useState<boolean>(true);
   const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
   const [currPageIdx, setCurrPageIdx] = useState(1);
+  const [mode, setMode] = useState<'question' | 'answer'>('question');
 
   const totalPage = wrongQuizzes.length;
 
@@ -35,7 +36,15 @@ export default function WrongQuizReviewSlider({ wrongQuizzes }: Props) {
   }, [totalPage, currPageIdx]);
 
   return (
-    <div className='flex items-center col-start-1 col-end-3 row-start-1 row-end-2 px-[5%] rounded-full bg-sroom-brand relative'>
+    <div
+      className={`flex items-center col-start-1 col-end-3 row-start-1 row-end-2 px-[5%] rounded-full relative ${
+        mode === 'question'
+          ? 'bg-sroom-brand'
+          : 'answer'
+          ? 'bg-sroom-black-200'
+          : ''
+      }`}
+    >
       {wrongQuizzes.length > 0 && (
         <>
           <Swiper
@@ -55,8 +64,15 @@ export default function WrongQuizReviewSlider({ wrongQuizzes }: Props) {
             }}
           >
             {wrongQuizzes.map((wrongQuiz, idx) => (
-              <SwiperSlide key={idx} className='self-center h-full p-1 whitespace-normal'>
-                <WrongQuizReviewCard wrongQuiz={wrongQuiz} />
+              <SwiperSlide
+                key={idx}
+                className='self-center h-full p-1 whitespace-normal'
+              >
+                <WrongQuizReviewCard
+                  wrongQuiz={wrongQuiz}
+                  mode={mode}
+                  setMode={setMode}
+                />
               </SwiperSlide>
             ))}
           </Swiper>

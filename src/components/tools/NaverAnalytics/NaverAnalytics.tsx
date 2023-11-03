@@ -3,7 +3,7 @@ import Script from 'next/script';
 export default function NaverAnalytics({}) {
   return (
     <>
-      <Script type='text/javascript' src='//wcs.naver.net/wcslog.js'></Script>
+      <Script async type='text/javascript' src='//wcs.naver.net/wcslog.js'></Script>
       <Script
         id='naver-analytics-init'
         type='text/javascript'
