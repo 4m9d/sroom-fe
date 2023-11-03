@@ -79,13 +79,19 @@ export default function WrongQuizReviewSlider({ wrongQuizzes }: Props) {
           <div className='absolute left-0 flex items-center justify-between w-full -translate-y-1/2 md:px-2 top-1/2'>
             <SwiperNavigationButton
               className='rounded-full text-sroom-white'
-              onClick={() => swiper?.slidePrev()}
+              onClick={() => {
+                swiper?.slidePrev();
+                setMode('question');
+              }}
               disabled={isFirstSlide}
               navigation='prev'
             />
             <SwiperNavigationButton
               className='rounded-full text-sroom-white'
-              onClick={() => swiper?.slideNext()}
+              onClick={() => {
+                swiper?.slideNext();
+                setMode('question');
+              }}
               disabled={isLastSlide}
               navigation='next'
             />

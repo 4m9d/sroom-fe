@@ -8,6 +8,9 @@ import CourseVideoController from './CourseVideoController';
 import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
 import CourseReviewModal from '../classroom/review/CourseReviewModal';
 import { showModalHandler } from '@/src/util/modal/modalHandler';
+import { useQueryClient } from '@tanstack/react-query';
+import { QueryKeys } from '@/src/api/queryKeys';
+import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 
 type Props = {
   courseDetail: CourseDetail;
@@ -18,6 +21,8 @@ export default function CourseTaking({
   courseDetail,
   currentCourseVideoId
 }: Props) {
+  const queryClient = useQueryClient();
+
   const last_view_video = findVideoById() as LastViewVideo;
   const currentPlayingVideo = last_view_video;
   const lastVideoInCourse =
@@ -118,12 +123,30 @@ export default function CourseTaking({
       currentCourseVideoId === lastVideoInCourse.course_video_id &&
       currentPlayingVideo.is_completed === true
     ) {
-      showModalHandler('LECTURE_REVIEW');
+      queryClient.invalidateQueries([
+        QueryKeys.LECTURE_REVIEW,
+        courseDetail.course_id.toString()
+      ]);
+      setTimeout(() => {
+        const reviewableList = queryClient.getQueryData([
+          QueryKeys.LECTURE_REVIEW,
+          courseDetail.course_id.toString()
+        ]) as CourseReviewResponse;
+        if (
+          reviewableList.lectures.find(
+            (lecture) => lecture.is_review_allowed === true
+          )
+        ) {
+          showModalHandler('LECTURE_REVIEW');
+        }
+      }, 1 * ONE_SECOND_IN_MS);
     }
   }, [
     currentCourseVideoId,
+    courseDetail.course_id,
     currentPlayingVideo.is_completed,
-    lastVideoInCourse.course_video_id
+    lastVideoInCourse.course_video_id,
+    queryClient
   ]);
 
   return (
