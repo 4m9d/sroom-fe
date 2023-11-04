@@ -99,7 +99,7 @@ export default function WrongQuizReviewSlider({ wrongQuizzes }: Props) {
         </>
       )}
       {wrongQuizzes.length === 0 && (
-        <p className='flex items-center text-xs font-medium break-keep md:text-sm xl:text-base text-sroom-white'>
+        <p className='flex items-center text-xs font-medium break-keep md:text-sm xl:text-base text-sroom-white animate-pulse'>
           {'틀린 퀴즈가 생기면, 여기서 복습할 수 있어요 :)'}
         </p>
       )}
