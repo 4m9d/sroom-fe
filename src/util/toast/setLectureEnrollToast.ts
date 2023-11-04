@@ -7,7 +7,7 @@ export default function setLectureEnrollToast(buttonOnClick: () => void) {
     type: 'lecture_enrollment',
     title: '강의가 등록됐어요!',
     description: '5초 후에 수강 페이지로 이동해요!',
-    buttonLabel: '좀 더 둘러볼래요',
+    buttonLabel: '👀 좀 더 둘러볼래요',
     buttonOnClick
   };
   const param = {
