@@ -4,6 +4,7 @@ import useAuth from '@/src/hooks/useAuth';
 import Script from 'next/script';
 import useWindowSize from '@/src/hooks/useWindowSize';
 import { BROWSER_MIN_WIDTH } from '@/src/constants/window/window';
+import LoadingSpinner from '../ui/LoadingSpinner';
 
 type Props = {
   className?: string;
@@ -12,7 +13,7 @@ type Props = {
 
 export default function LoginButton({ className, buttonWidth: width = 100 }: Props) {
   const loginButton = useRef<HTMLDivElement>(null);
-  const { login, status } = useAuth();
+  const { login, status, isLoading } = useAuth();
   const { width: windowWidth } = useWindowSize();
 
   const onload = async () => {
@@ -48,6 +49,11 @@ export default function LoginButton({ className, buttonWidth: width = 100 }: Pro
             id='google-login-button'
             ref={loginButton}
           />
+          {
+            isLoading && (
+             <LoadingSpinner className='absolute -translate-x-1/2 left-1/2 top-1/2 loading-lg text-sroom-brand'/>
+            )
+          }
         </>
       )}
     </>
