@@ -150,12 +150,18 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
   };
 
   const drawerHandler = useCallback(() => {
+    const buttonElement = document.getElementById(
+      'course-material-drawer'
+    ) as HTMLButtonElement;
+
     if (isDrawerOpen) {
       controls.start('exit');
       setIsDrawerOpen(false);
+      buttonElement.classList.add('animate-pulse');
     } else {
       controls.start('animate');
       setIsDrawerOpen(true);
+      buttonElement.classList.remove('animate-pulse');
     }
   }, [controls, isDrawerOpen]);
 
