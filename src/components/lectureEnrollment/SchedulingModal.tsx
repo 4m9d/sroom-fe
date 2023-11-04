@@ -66,7 +66,7 @@ export default function SchedulingModal({
         const navigateToCourseTaking = setTimeout(() => {
           router.push(`/course/${response.course_id}`);
         }, 5 * ONE_SECOND_IN_MS);
-        setLectureEnrollToast(() => {
+        setLectureEnrollToast(lecture_code, () => {
           clearTimeout(navigateToCourseTaking);
           toast.remove('lecture_enrollment');
         });

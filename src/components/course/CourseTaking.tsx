@@ -119,10 +119,7 @@ export default function CourseTaking({
   }, [searchPrevVideo, searchNextVideo]);
 
   useEffect(() => {
-    if (
-      currentCourseVideoId === lastVideoInCourse.course_video_id &&
-      currentPlayingVideo.is_completed === true
-    ) {
+    if (courseDetail.progress === 100) {
       queryClient.invalidateQueries([
         QueryKeys.LECTURE_REVIEW,
         courseDetail.course_id.toString()
@@ -135,19 +132,15 @@ export default function CourseTaking({
         if (
           reviewableList.lectures.find(
             (lecture) => lecture.is_review_allowed === true
-          ) &&
-          courseDetail.progress >= 50
+          )
         ) {
           showModalHandler('LECTURE_REVIEW');
         }
       }, 1 * ONE_SECOND_IN_MS);
     }
   }, [
-    currentCourseVideoId,
     courseDetail.course_id,
     courseDetail.progress,
-    currentPlayingVideo.is_completed,
-    lastVideoInCourse.course_video_id,
     queryClient
   ]);
 
