@@ -135,7 +135,8 @@ export default function CourseTaking({
         if (
           reviewableList.lectures.find(
             (lecture) => lecture.is_review_allowed === true
-          )
+          ) &&
+          courseDetail.progress >= 50
         ) {
           showModalHandler('LECTURE_REVIEW');
         }
@@ -144,6 +145,7 @@ export default function CourseTaking({
   }, [
     currentCourseVideoId,
     courseDetail.course_id,
+    courseDetail.progress,
     currentPlayingVideo.is_completed,
     lastVideoInCourse.course_video_id,
     queryClient
