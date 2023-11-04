@@ -12,7 +12,7 @@ export default function StarRatingWithReviewCount({rating, review_count}: Props)
         <OneStar className='w-3 h-3' />
         <p className='text-xs font-medium text-sroom-brand'>{rating}</p>
       </div>
-      <p className='text-xs font-medium underline text-sroom-brand'>
+      <p className='text-xs font-medium text-sroom-brand'>
         후기 {review_count.toLocaleString()}개
       </p>
     </div>
