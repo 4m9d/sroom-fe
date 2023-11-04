@@ -2,9 +2,9 @@
 import { updateViewDuration } from '@/src/api/lectures/time';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
-import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
+import { ONE_MINUTE_IN_MS, ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { memo, useCallback, useEffect } from 'react';
+import { memo, useCallback, useEffect, useRef } from 'react';
 import YouTube, { YouTubeEvent } from 'react-youtube';
 import PlayerStates from 'youtube-player/dist/constants/PlayerStates';
 import { Options } from 'youtube-player/dist/types';
@@ -40,6 +40,7 @@ const YoutubePlayer = ({
 }: Props) => {
   const queryClient = useQueryClient();
   isCompleted = is_completed;
+  const currentRevalidateID = useRef<NodeJS.Timer | null>(null);
 
   const silentUpdateViewDuration = async () => {
     const response = await updateViewDuration({
@@ -83,6 +84,13 @@ const YoutubePlayer = ({
     }
   }, [currentIntervalID]);
 
+  const clearRevalidateID = useCallback(() => {
+    if (currentRevalidateID.current !== null) {
+      clearInterval(currentRevalidateID.current);
+      currentRevalidateID.current = null;
+    }
+  }, [currentRevalidateID]);
+
   function updateViewDurationOnlyOnce(currentTime: number) {
     viewDuration.current = currentTime;
     silentUpdateViewDuration();
@@ -100,12 +108,20 @@ const YoutubePlayer = ({
         viewDuration.current += UPDATE_INTERVAL * playbackRate;
         mutate();
       }, UPDATE_INTERVAL_IN_MS);
+
+      const revalidateID = setInterval(() => {
+        revalidateCourseDetail();
+      }, 2 * ONE_MINUTE_IN_MS);
+
       currentIntervalID.current = intervalID;
+      currentRevalidateID.current = revalidateID;
     } else if (event.data === PlayerStates.PAUSED) {
       clearIntervalID();
+      clearRevalidateID();
     } else if (event.data === PlayerStates.ENDED) {
       updateViewDurationOnlyOnce(currentTime);
       clearIntervalID();
+      clearRevalidateID();
       revalidateCourseDetail();
     }
   }

@@ -1,5 +1,5 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Modal from '../ui/Modal';
 import LectureDetailTabNav from './LectureDetailTabNav';
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
@@ -29,19 +29,24 @@ export default function LectureDetailModal({
 }: Props) {
   const { is_playlist, lecture_code, rating, indexes } = lectureDetail;
   const router = useRouter();
+  const pathname = usePathname();
   const reviewPageRef = useRef<number>(0);
   const [isIndexListFetched, setIsIndexListFetched] = useState<boolean>(false);
 
   const onCloseHandler = useCallback(() => {
     if (navigationType === 'soft') {
-      return closeModalHandler('LECTURE_DETAIL', router.back);
+      if (pathname.includes('search')) {
+        return closeModalHandler('LECTURE_DETAIL', router.back);
+      } else {
+        return closeModalHandler('LECTURE_DETAIL');
+      }
     } else {
       return closeModalHandler('LECTURE_DETAIL', () => {
         router.replace('/dashboard');
         router.refresh();
       });
     }
-  }, [navigationType, router]);
+  }, [navigationType, router, pathname]);
 
   const isTheOnlyModalInPage = () => {
     return document.querySelectorAll('dialog[open]').length === 1;

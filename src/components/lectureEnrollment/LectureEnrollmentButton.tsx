@@ -14,6 +14,8 @@ import LoadingSpinner from '../ui/LoadingSpinner';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
 import { useRouter } from 'next/navigation';
 import { QueryKeys } from '@/src/api/queryKeys';
+import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
+import toast from 'react-hot-toast';
 
 type Props = {
   is_playlist: boolean;
@@ -68,10 +70,15 @@ export default function LectureEnrollmentButton({
   const { mutate, isLoading } = useMutation(enrollLecture, {
     onSuccess: (response) => {
       onEnrollSuccess();
-      response &&
-        setLectureEnrollToast(() =>
-          router.push(`/course/${response.course_id}`)
-        );
+      if (response) {
+        const navigateToCourseTaking = setTimeout(() => {
+          router.push(`/course/${response.course_id}`);
+        }, 5 * ONE_SECOND_IN_MS);
+        setLectureEnrollToast(lecture_code, () => {
+          clearTimeout(navigateToCourseTaking);
+          toast.remove('lecture_enrollment');
+        });
+      }
       queryClient.invalidateQueries([QueryKeys.DETAIL, lecture_code]);
     }
   });

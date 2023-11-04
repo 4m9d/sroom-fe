@@ -38,7 +38,7 @@ export default function CourseHeader({ title, channel, is_completed }: Props) {
         <div className='flex flex-col justify-end shrink-0'>
           <Button
             id='course-material-drawer'
-            className='text-xs md:text-sm px-4 md:!px-8 font-bold text-sroom-white bg-sroom-black-400'
+            className='text-xs md:text-sm px-4 md:!px-8 font-bold text-sroom-white bg-sroom-black-400 animate-pulse'
           >
             {'강의 자료 보기'}
           </Button>

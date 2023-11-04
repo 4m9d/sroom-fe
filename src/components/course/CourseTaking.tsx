@@ -6,6 +6,11 @@ import CourseDetailDrawer from './drawer/courseDetail/CourseDetailDrawer';
 import CourseMaterialDrawer from './drawer/courseMaterial/CourseMaterialDrawer';
 import CourseVideoController from './CourseVideoController';
 import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
+import CourseReviewModal from '../classroom/review/CourseReviewModal';
+import { showModalHandler } from '@/src/util/modal/modalHandler';
+import { useQueryClient } from '@tanstack/react-query';
+import { QueryKeys } from '@/src/api/queryKeys';
+import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 
 type Props = {
   courseDetail: CourseDetail;
@@ -16,8 +21,14 @@ export default function CourseTaking({
   courseDetail,
   currentCourseVideoId
 }: Props) {
+  const queryClient = useQueryClient();
+
   const last_view_video = findVideoById() as LastViewVideo;
   const currentPlayingVideo = last_view_video;
+  const lastVideoInCourse =
+    courseDetail.sections[courseDetail.sections.length - 1].videos[
+      courseDetail.sections[courseDetail.sections.length - 1].videos.length - 1
+    ];
 
   const [prevPlayingVideo, setPrevPlayingVideo] =
     useState<LastViewVideo | null>(last_view_video);
@@ -107,6 +118,32 @@ export default function CourseTaking({
     searchNextVideo();
   }, [searchPrevVideo, searchNextVideo]);
 
+  useEffect(() => {
+    if (courseDetail.progress === 100) {
+      queryClient.invalidateQueries([
+        QueryKeys.LECTURE_REVIEW,
+        courseDetail.course_id.toString()
+      ]);
+      setTimeout(() => {
+        const reviewableList = queryClient.getQueryData([
+          QueryKeys.LECTURE_REVIEW,
+          courseDetail.course_id.toString()
+        ]) as CourseReviewResponse;
+        if (
+          reviewableList.lectures.find(
+            (lecture) => lecture.is_review_allowed === true
+          )
+        ) {
+          showModalHandler('LECTURE_REVIEW');
+        }
+      }, 1 * ONE_SECOND_IN_MS);
+    }
+  }, [
+    courseDetail.course_id,
+    courseDetail.progress,
+    queryClient
+  ]);
+
   return (
     <div className='flex items-stretch flex-1 h-[calc(100vh-4rem)] bg-sroom-gray-200'>
       <CourseDetailDrawer
@@ -143,6 +180,7 @@ export default function CourseTaking({
         </div>
       </div>
       <CourseMaterialDrawer courseVideoId={currentCourseVideoId} />
+      <CourseReviewModal courseId={courseDetail.course_id} />
     </div>
   );
 }

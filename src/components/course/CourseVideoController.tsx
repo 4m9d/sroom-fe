@@ -49,7 +49,7 @@ export default function CourseVideoController({
     updateIsCompletedManually,
     {
       onSuccess: (data) => {
-        setVideoCompleteToast();
+        setVideoCompleteToast(course_video_id);
         data && setIsCompleted(data.is_completed);
 
         if (currentIntervalID.current !== null) {

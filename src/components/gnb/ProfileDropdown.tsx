@@ -43,6 +43,13 @@ export default function ProfileDropdown({
     [profileButtonClickHandler]
   );
 
+  const onBlurHandler = useCallback(() => {
+    setIsEditMode(false);
+    if (inputRef.current) {
+      inputRef.current.value = name;
+    }
+  }, [setIsEditMode, name]);
+
   const saveProfileButtonClickHandler = useCallback(async () => {
     if (inputRef.current && isEditMode) {
       inputRef.current.value = inputRef.current.value.trim().slice(0, 10) ?? '';
@@ -93,6 +100,7 @@ export default function ProfileDropdown({
           <input
             ref={inputRef}
             type='text'
+            onBlur={onBlurHandler}
             defaultValue={name}
             disabled={isEditMode === false}
             spellCheck='false'

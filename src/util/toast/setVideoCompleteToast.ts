@@ -2,7 +2,7 @@ import toast from 'react-hot-toast';
 import Toast from '../../components/ui/Toast';
 import { TOAST_TIMEOUT } from '.';
 
-export default function setVideoCompleteToast() {
+export default function setVideoCompleteToast(courseVideoId: number) {
   const videoCompleteToast: CustomToast = {
     type: 'video_complete',
     title: '수강이 완료됐어요!',
@@ -13,7 +13,7 @@ export default function setVideoCompleteToast() {
   };
 
   toast.custom(() => Toast(param), {
-    id: 'video_complete',
+    id: `video_complete_${courseVideoId}`,
     duration: TOAST_TIMEOUT,
     position: 'bottom-center',
     ariaProps: {
