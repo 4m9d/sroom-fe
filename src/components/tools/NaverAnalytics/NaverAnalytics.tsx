@@ -3,10 +3,13 @@ import Script from 'next/script';
 export default function NaverAnalytics({}) {
   return (
     <>
-      <Script async type='text/javascript' src='//wcs.naver.net/wcslog.js'></Script>
+      <Script
+        type='text/javascript'
+        src='//wcs.naver.net/wcslog.js'
+      ></Script>
       <Script
         id='naver-analytics-init'
-        type='text/javascript'
+        strategy='lazyOnload'
         dangerouslySetInnerHTML={{
           __html: `
           if(!wcs_add) var wcs_add = {};
