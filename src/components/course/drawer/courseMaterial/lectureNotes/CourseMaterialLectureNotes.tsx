@@ -74,14 +74,20 @@ export default function CourseMaterialLectureNotes({
     }
   );
 
+  const copyTextExcludingButtons = useCallback(() => {
+    const buttonRegex = /<button[^>]*class="timestamp"[^>]*>.*?<\/button>/g;
+
+    navigator.clipboard.writeText(content.replace(buttonRegex, ''));
+  }, [content]);
+
   const copyButtonClickHandler = useCallback(() => {
     setIsCopied(() => true);
-    navigator.clipboard.writeText(content);
+    copyTextExcludingButtons();
 
     setTimeout(() => {
       setIsCopied(() => false);
     }, 2000);
-  }, [content]);
+  }, [copyTextExcludingButtons]);
 
   const toggleButtonClickHandler = useCallback(() => {
     if (isEditMode) {
