@@ -13,6 +13,7 @@ import { COURSE_MATERIAL_BREAKPOINT } from '@/src/constants/window/window';
 
 type Props = {
   courseVideoId: number;
+  handleTimestampClick: (formattedTimestamp: string) => void;
 };
 
 const BOTTOM_SHEET_MAX_HEIGHT = 700;
@@ -20,7 +21,10 @@ const BOTTOM_SHEET_RESIZE_MIN = 100;
 const DRAWER_MAX_WIDTH = 580;
 const DRAWER_RESIZE_MIN = 250;
 
-export default function CourseMaterialDrawer({ courseVideoId }: Props) {
+export default function CourseMaterialDrawer({
+  courseVideoId,
+  handleTimestampClick
+}: Props) {
   const controls = useAnimationControls();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -214,6 +218,7 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
                 <CourseMaterialContent
                   courseVideoId={courseVideoId}
                   drawerHandler={drawerHandler}
+                  handleTimestampClick={handleTimestampClick}
                 />
               </motion.div>
             </AnimatePresence>
@@ -245,6 +250,7 @@ export default function CourseMaterialDrawer({ courseVideoId }: Props) {
                 <CourseMaterialContent
                   courseVideoId={courseVideoId}
                   drawerHandler={drawerHandler}
+                  handleTimestampClick={handleTimestampClick}
                 />
               </motion.div>
             </AnimatePresence>

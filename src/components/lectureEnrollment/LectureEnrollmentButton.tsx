@@ -76,7 +76,7 @@ export default function LectureEnrollmentButton({
         }, 5 * ONE_SECOND_IN_MS);
         setLectureEnrollToast(lecture_code, () => {
           clearTimeout(navigateToCourseTaking);
-          toast.remove('lecture_enrollment');
+          toast.remove(`lecture_enrollment_${lecture_code}`);
         });
       }
       queryClient.invalidateQueries([QueryKeys.DETAIL, lecture_code]);

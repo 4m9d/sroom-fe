@@ -16,6 +16,7 @@ import LoadingSpinner from '@/src/components/ui/LoadingSpinner';
 type Props = {
   courseVideoId: number;
   drawerHandler: () => void;
+  handleTimestampClick: (formattedTimestamp: string) => void;
 };
 
 const STATUS = {
@@ -28,7 +29,8 @@ const REFETCH_INTERVAL = 10 * ONE_SECOND_IN_MS;
 
 export default function CourseMaterialContent({
   courseVideoId,
-  drawerHandler
+  drawerHandler,
+  handleTimestampClick
 }: Props) {
   const [activeTab, setActiveTab] =
     useState<CourseMaterialType>('lecture-notes');
@@ -81,6 +83,7 @@ export default function CourseMaterialContent({
                   <CourseMaterialLectureNotes
                     lectureNotes={data.summary_brief}
                     courseVideoId={courseVideoId}
+                    handleTimestampClick={handleTimestampClick}
                   />
                 )}
                 {activeTab === 'quizzes' && (

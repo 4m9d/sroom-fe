@@ -11,6 +11,8 @@ import { showModalHandler } from '@/src/util/modal/modalHandler';
 import { useQueryClient } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
+import convertCompactFormattedTimeToSeconds from '@/src/util/time/convertCompactFormattedTimeToSeconds';
+import { YouTubePlayer } from 'react-youtube';
 
 type Props = {
   courseDetail: CourseDetail;
@@ -25,15 +27,12 @@ export default function CourseTaking({
 
   const last_view_video = findVideoById() as LastViewVideo;
   const currentPlayingVideo = last_view_video;
-  const lastVideoInCourse =
-    courseDetail.sections[courseDetail.sections.length - 1].videos[
-      courseDetail.sections[courseDetail.sections.length - 1].videos.length - 1
-    ];
 
   const [prevPlayingVideo, setPrevPlayingVideo] =
     useState<LastViewVideo | null>(last_view_video);
   const [nextPlayingVideo, setNextPlayingVideo] =
     useState<LastViewVideo | null>(last_view_video);
+
   const viewDuration = useRef<number>(
     parseInt(
       sessionStorage.getItem(
@@ -42,6 +41,7 @@ export default function CourseTaking({
     )
   );
   const currentIntervalID = useRef<NodeJS.Timer | null>(null);
+  const playerRef = useRef<YouTubePlayer | null>(null);
 
   function findVideoById() {
     const videos = courseDetail.sections.flatMap((section) => section.videos);
@@ -138,11 +138,12 @@ export default function CourseTaking({
         }
       }, 1 * ONE_SECOND_IN_MS);
     }
-  }, [
-    courseDetail.course_id,
-    courseDetail.progress,
-    queryClient
-  ]);
+  }, [courseDetail.course_id, courseDetail.progress, queryClient]);
+  
+  const handleTimestampClick = (formattedTimestamp: string) => {
+    const timestamp = convertCompactFormattedTimeToSeconds(formattedTimestamp);
+    playerRef.current?.seekTo(timestamp, true);
+  };
 
   return (
     <div className='flex items-stretch flex-1 h-[calc(100vh-4rem)] bg-sroom-gray-200'>
@@ -166,6 +167,7 @@ export default function CourseTaking({
           viewDuration={viewDuration}
           is_completed={currentPlayingVideo.is_completed}
           currentIntervalID={currentIntervalID}
+          playerRef={playerRef}
         />
         <div id='controller'>
           <CourseVideoController
@@ -179,7 +181,7 @@ export default function CourseTaking({
           />
         </div>
       </div>
-      <CourseMaterialDrawer courseVideoId={currentCourseVideoId} />
+      <CourseMaterialDrawer courseVideoId={currentCourseVideoId} handleTimestampClick={handleTimestampClick} />
       <CourseReviewModal courseId={courseDetail.course_id} />
     </div>
   );

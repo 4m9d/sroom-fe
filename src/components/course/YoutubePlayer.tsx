@@ -4,10 +4,11 @@ import { QueryKeys } from '@/src/api/queryKeys';
 import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
 import { ONE_MINUTE_IN_MS, ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { memo, useCallback, useEffect, useRef } from 'react';
 import YouTube, { YouTubeEvent } from 'react-youtube';
 import PlayerStates from 'youtube-player/dist/constants/PlayerStates';
-import { Options } from 'youtube-player/dist/types';
+import { Options, YouTubePlayer } from 'youtube-player/dist/types';
 
 type Props = {
   width: number | string;
@@ -20,6 +21,7 @@ type Props = {
   viewDuration: React.MutableRefObject<number>;
   is_completed: boolean;
   currentIntervalID: React.MutableRefObject<NodeJS.Timer | null>;
+  playerRef: React.MutableRefObject<YouTubePlayer | null>;
 };
 
 const UPDATE_INTERVAL = 10;
@@ -36,9 +38,12 @@ const YoutubePlayer = ({
   end,
   viewDuration,
   is_completed,
-  currentIntervalID
+  currentIntervalID,
+  playerRef
 }: Props) => {
   const queryClient = useQueryClient();
+  const router = useRouter();
+
   isCompleted = is_completed;
   const currentRevalidateID = useRef<NodeJS.Timer | null>(null);
 
@@ -164,6 +169,9 @@ const YoutubePlayer = ({
         videoId={videoId}
         className='relative pb-[56.25%] pt-0 h-0 w-full'
         iframeClassName='absolute top-0 left-0 w-full h-full'
+        onReady={(event) => {
+          playerRef.current = event.target;
+        }}
         onStateChange={async (event) => {
           onPlayerStateChange(event);
         }}
