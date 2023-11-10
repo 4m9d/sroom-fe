@@ -5,7 +5,7 @@ export const QueryKeys = {
   DETAIL: 'lectureDetail',
   LECTURE_INDEX: 'lectureIndex',
   LECTURE_REVIEW: 'lectureReview',
-  RECCOMENDATION: 'reccomendation',
+  RECOMMENDATION: 'recommendation',
   COURSE_TAKING: 'courseTaking',
   COURSE_DETAIL: 'courseDetail',
   COURSE_MATERIAL: 'courseMaterial',

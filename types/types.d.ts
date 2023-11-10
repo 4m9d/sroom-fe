@@ -278,6 +278,10 @@ interface LectureDeatilParams extends LectureIndexParams, LectureReviewParams {}
 interface LectureRecommendations {
   general_recommendations: PersonalizedLecture[];
   channel_recommendations: PersonalizedLecture[];
+  society_recommendations: PersonalizedLecture[];
+  economic_recommendations: PersonalizedLecture[];
+  tech_recommendations: PersonalizedLecture[];
+  science_recommendations: PersonalizedLecture[];
 }
 
 /////////////////////////////////////////////////////////////////////////

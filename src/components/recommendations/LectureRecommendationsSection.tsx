@@ -3,21 +3,26 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
 import 'swiper/css';
 import 'swiper/css/mousewheel';
-import SectionHeading from '../../ui/SectionHeading';
-import LectureRecommendationsCard from './../LectureRecommendationsCard';
+import SectionHeading from '../ui/SectionHeading';
+import LectureRecommendationsCard from './LectureRecommendationsCard';
 import useWindowSize from '@/src/hooks/useWindowSize';
-import SwiperNavigationButton from '../../ui/button/SwiperNavigationButton';
+import SwiperNavigationButton from '../ui/button/SwiperNavigationButton';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   RECOMMENDATION_BREAKPOINT_LG,
   RECOMMENDATION_BREAKPOINT_SM
 } from '@/src/constants/window/window';
+import { RecommendationSectionHeading } from '@/src/constants/recommendation/recommendation';
 
 type Props = {
   recommendations: PersonalizedLecture[];
+  heading: RecommendationSectionHeading;
 };
-export default function GeneralRecommendationsList({ recommendations }: Props) {
+export default function LectureRecommendationsSection({
+  recommendations,
+  heading
+}: Props) {
   const windowSize = useWindowSize();
   const router = useRouter();
   const prevRef = useRef<HTMLButtonElement>(null);
@@ -56,7 +61,7 @@ export default function GeneralRecommendationsList({ recommendations }: Props) {
     <>
       {recommendations.length > 0 && (
         <section className='max-w-screen-xl px-4 mx-auto my-20 lg:px-24 min-h-12'>
-          <SectionHeading title='스룸에서 인기 폭발한🔥 강의를 만나보세요!' />
+          <SectionHeading title={heading} />
           <div className='relative'>
             <Swiper
               className='!py-2'

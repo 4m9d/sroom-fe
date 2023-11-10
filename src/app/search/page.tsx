@@ -1,9 +1,10 @@
 'use client';
 import { QueryKeys } from '@/src/api/queryKeys';
-import ChannelRecommendationsList from '@/src/components/recommendations/channel/ChannelRecommendationsList';
+import LectureRecommendationsSection from '@/src/components/recommendations/LectureRecommendationsSection';
 import SearchResultsHeading from '@/src/components/search/SearchResultsHeading';
 import SearchResultsList from '@/src/components/search/SearchResultsList';
 import SearchResultsSkeleton from '@/src/components/search/SearchResultsSkeleton';
+import { RecommendationSectionHeading } from '@/src/constants/recommendation/recommendation';
 import getPageTitle from '@/src/util/metadata/getPageTitle';
 import { useQueryClient } from '@tanstack/react-query';
 import { Suspense, useLayoutEffect, useRef } from 'react';
@@ -18,7 +19,7 @@ export default function SearchResults({ searchParams }: Props) {
   const queryClient = useQueryClient();
 
   const recommendations = queryClient.getQueryData([
-    QueryKeys.RECCOMENDATION
+    QueryKeys.RECOMMENDATION
   ]) as LectureRecommendations;
 
   const requestParam: SearchLectureParams = {
@@ -54,9 +55,16 @@ export default function SearchResults({ searchParams }: Props) {
         </section>
       </div>
       {recommendations && (
-        <ChannelRecommendationsList
-          recommendations={recommendations.channel_recommendations}
-        />
+        <>
+          <LectureRecommendationsSection
+            recommendations={recommendations.channel_recommendations}
+            heading={RecommendationSectionHeading.CHANNEL}
+          />
+          <LectureRecommendationsSection
+            recommendations={recommendations.general_recommendations}
+            heading={RecommendationSectionHeading.GENERAL}
+          />
+        </>
       )}
     </>
   );
