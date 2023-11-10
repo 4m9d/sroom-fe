@@ -5,6 +5,8 @@ export default function convertCompactFormattedTimeToSeconds(
 ) {
   const len = formattedTime.length;
 
+  if (len < 2 || Number.isNaN(parseInt(formattedTime))) throw new Error();
+
   const seconds = parseInt(formattedTime.substring(len - 2));
   const minutes = parseInt(formattedTime.substring(len - 4, len - 2));
 

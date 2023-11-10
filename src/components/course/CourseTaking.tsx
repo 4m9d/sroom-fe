@@ -13,6 +13,8 @@ import { QueryKeys } from '@/src/api/queryKeys';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import convertCompactFormattedTimeToSeconds from '@/src/util/time/convertCompactFormattedTimeToSeconds';
 import { YouTubePlayer } from 'react-youtube';
+import setErrorToast from '@/src/util/toast/setErrorToast';
+import { ErrorMessage } from '@/src/api/ErrorMessage';
 
 type Props = {
   courseDetail: CourseDetail;
@@ -139,10 +141,15 @@ export default function CourseTaking({
       }, 1 * ONE_SECOND_IN_MS);
     }
   }, [courseDetail.course_id, courseDetail.progress, queryClient]);
-  
+
   const handleTimestampClick = (formattedTimestamp: string) => {
-    const timestamp = convertCompactFormattedTimeToSeconds(formattedTimestamp);
-    playerRef.current?.seekTo(timestamp, true);
+    try {
+      const timestamp =
+        convertCompactFormattedTimeToSeconds(formattedTimestamp);
+      playerRef.current?.seekTo(timestamp, true);
+    } catch (e) {
+      setErrorToast(new Error(ErrorMessage.TIMESTAMP));
+    }
   };
 
   return (
@@ -181,7 +188,10 @@ export default function CourseTaking({
           />
         </div>
       </div>
-      <CourseMaterialDrawer courseVideoId={currentCourseVideoId} handleTimestampClick={handleTimestampClick} />
+      <CourseMaterialDrawer
+        courseVideoId={currentCourseVideoId}
+        handleTimestampClick={handleTimestampClick}
+      />
       <CourseReviewModal courseId={courseDetail.course_id} />
     </div>
   );
