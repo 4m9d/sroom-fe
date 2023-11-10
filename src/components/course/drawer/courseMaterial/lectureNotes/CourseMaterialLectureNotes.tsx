@@ -124,10 +124,10 @@ export default function CourseMaterialLectureNotes({
       const timestampButtons = document.querySelectorAll('button.timestamp');
       timestampButtons.forEach((timestampButton) => {
         const clickHandler = () => {
-          handleTimestampClick(timestampButton.id);
+          handleTimestampClick(timestampButton.innerHTML);
         };
 
-        listeners[timestampButton.id] = clickHandler;
+        listeners[timestampButton.innerHTML] = clickHandler;
 
         timestampButton.addEventListener('click', clickHandler);
       });

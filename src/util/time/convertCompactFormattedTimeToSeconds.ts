@@ -5,12 +5,14 @@ export default function convertCompactFormattedTimeToSeconds(
 ) {
   const len = formattedTime.length;
 
-  if (len < 2 || Number.isNaN(parseInt(formattedTime))) throw new Error();
+  if (len < 2 || Number.isNaN(parseInt(formattedTime.replaceAll(':', ''))))
+    throw new Error();
 
-  const seconds = parseInt(formattedTime.substring(len - 2));
-  const minutes = parseInt(formattedTime.substring(len - 4, len - 2));
+  const [hours, minutes, seconds] = formattedTime.split(':');
 
-  const hours = len > 4 ? parseInt(formattedTime.substring(0, len - 4)) : 0;
-
-  return hours * ONE_HOUR + minutes * ONE_MINUTE + seconds;
+  return (
+    parseInt(hours) * ONE_HOUR +
+    parseInt(minutes) * ONE_MINUTE +
+    parseInt(seconds)
+  );
 }
