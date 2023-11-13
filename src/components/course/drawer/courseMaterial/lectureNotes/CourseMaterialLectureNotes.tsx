@@ -29,12 +29,14 @@ const MarkdownPreview = dynamic(
 type Props = {
   lectureNotes: LectureNote;
   courseVideoId: number;
+  handleTimestampClick: (formattedTimestamp: string) => void;
 };
 const DEBOUNCE_TIME = ONE_SECOND_IN_MS / 2;
 
 export default function CourseMaterialLectureNotes({
   lectureNotes,
-  courseVideoId
+  courseVideoId,
+  handleTimestampClick
 }: Props) {
   const sessionStorageContentKey = `${SessionStorageKeys.LECTURE_NOTES}-${courseVideoId}`;
   const sessionStorageIsEditModeKey = `${SessionStorageKeys.LECTURE_NOTES_IS_EDIT_MODE}-${courseVideoId}`;
@@ -72,14 +74,20 @@ export default function CourseMaterialLectureNotes({
     }
   );
 
+  const copyTextExcludingButtons = useCallback(() => {
+    const buttonRegex = /<button[^>]*class="timestamp"[^>]*>.*?<\/button>/g;
+
+    navigator.clipboard.writeText(content.replace(buttonRegex, ''));
+  }, [content]);
+
   const copyButtonClickHandler = useCallback(() => {
     setIsCopied(() => true);
-    navigator.clipboard.writeText(content);
+    copyTextExcludingButtons();
 
     setTimeout(() => {
       setIsCopied(() => false);
     }, 2000);
-  }, [content]);
+  }, [copyTextExcludingButtons]);
 
   const toggleButtonClickHandler = useCallback(() => {
     if (isEditMode) {
@@ -108,6 +116,33 @@ export default function CourseMaterialLectureNotes({
     sessionStorageContentKey,
     sessionStorageIsEditModeKey
   ]);
+
+  useEffect(() => {
+    const listeners: { [key: string]: () => void } = {};
+
+    setTimeout(() => {
+      const timestampButtons = document.querySelectorAll('button.timestamp');
+      timestampButtons.forEach((timestampButton) => {
+        const clickHandler = () => {
+          handleTimestampClick(timestampButton.innerHTML);
+        };
+
+        listeners[timestampButton.innerHTML] = clickHandler;
+
+        timestampButton.addEventListener('click', clickHandler);
+      });
+    }, 500);
+
+    return () => {
+      const timestampButtons = document.querySelectorAll('button.timestamp');
+      timestampButtons.forEach((timestampButton) => {
+        const clickHandler = listeners[timestampButton.id];
+        if (clickHandler) {
+          timestampButton.removeEventListener('click', clickHandler);
+        }
+      });
+    };
+  });
 
   useLayoutEffect(() => {
     setContent(

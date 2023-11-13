@@ -1,5 +1,6 @@
 export const ONE_SECOND_IN_MS = 1000;
 //login
+export const ONE_MINUTE = 60;
 export const ONE_HOUR = 60 * 60;
 export const ONE_DAY = 24 * ONE_HOUR;
 export const SESSION_AGE = ONE_DAY * 3 - ONE_HOUR;

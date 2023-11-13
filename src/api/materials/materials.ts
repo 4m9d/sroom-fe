@@ -10,7 +10,6 @@ export async function fetchCourseMaterials(course_video_id: number) {
     headers
   }).then(async (res) => {
     if (res.ok) {
-      console.log('강의자료 api 호출! ', course_video_id)
       return (await res.json()) as Promise<CourseMaterials>;
     } else {
       return fetchErrorHandling(res, ErrorMessage.COURSE_MATERIALS);

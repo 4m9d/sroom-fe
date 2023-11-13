@@ -42,6 +42,10 @@
         {
           "valueFrom": "arn:aws:ssm:ap-northeast-2:224066583965:parameter/sroom/fe/NEXTAUTH_SECRET",
           "name": "NEXTAUTH_SECRET"
+        },
+        {
+          "valueFrom": "arn:aws:ssm:ap-northeast-2:224066583965:parameter/sroom/fe/NEXT_PUBLIC_SENTRY_DSN",
+          "name": "NEXT_PUBLIC_SENTRY_DSN"
         }
       ],
       "dockerSecurityOptions": null,
