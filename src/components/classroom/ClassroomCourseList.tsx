@@ -4,14 +4,14 @@ import { motion } from 'framer-motion';
 import ClassroomCourseCard from './ClassroomCourseCard';
 import CourseReviewModal from './review/CourseReviewModal';
 import CourseDeleteModal from './delete/CourseDeleteModal';
+import MaterialExportModal from './pdf/MaterialExportModal';
 
 type Props = {
   courses: Course[];
 };
 
 export default function ClassroomCourseList({ courses }: Props) {
-  const [reviewCourseId, setReviewCourseId] = useState<number | null>(null);
-  const [deleteCourseId, setDeleteCourseId] = useState<number | null>(null);
+  const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
 
   return (
     <>
@@ -20,8 +20,7 @@ export default function ClassroomCourseList({ courses }: Props) {
           <motion.li layout key={course.course_id}>
             <ClassroomCourseCard
               course={course}
-              setReviewCourseId={setReviewCourseId}
-              setDeleteCourseId={setDeleteCourseId}
+              setSelectedCourseId={setSelectedCourseId}
             />
           </motion.li>
         ))}
@@ -37,12 +36,19 @@ export default function ClassroomCourseList({ courses }: Props) {
           </div>
         </div>
       )}
-      <CourseReviewModal courseId={reviewCourseId} />
+      <CourseReviewModal courseId={selectedCourseId} />
       <CourseDeleteModal
-        courseId={deleteCourseId}
+        courseId={selectedCourseId}
         courseTitle={
-          courses.find((course) => course.course_id === deleteCourseId)
+          courses.find((course) => course.course_id === selectedCourseId)
             ?.course_title
+        }
+      />
+      <MaterialExportModal
+        courseId={selectedCourseId}
+        courseTitle={
+          courses.find((course) => course.course_id === selectedCourseId)
+            ?.course_title ?? null
         }
       />
     </>

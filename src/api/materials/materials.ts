@@ -38,7 +38,7 @@ export async function updateCourseLectureNotes(
 
 export async function updateCourseQuizGrade(
   course_video_id: number,
-  params: updateQuizGradeParams[]
+  params: UpdateQuizGradeParams[]
 ) {
   const headers = await getAuthorizedHeaders();
   const body = JSON.stringify(params);

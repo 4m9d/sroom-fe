@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^3.1.14",
     "@sentry/nextjs": "^7.77.0",
     "@svgr/webpack": "^8.1.0",
     "@tanstack/react-query": "^4.29.19",
@@ -20,6 +21,7 @@
     "async-mutex": "^0.4.0",
     "dayjs": "^1.11.9",
     "easymde": "^2.18.0",
+    "encoding": "^0.1.13",
     "env-cmd": "^10.1.0",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
@@ -27,6 +29,7 @@
     "next": "13.4.7",
     "next-auth": "^4.22.1",
     "node-cache": "^5.1.2",
+    "node-fetch": "^3.3.2",
     "notion-client": "^6.16.0",
     "postcss": "8.4.24",
     "react": "18.2.0",

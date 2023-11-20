@@ -75,7 +75,7 @@ export default function CourseMaterialQuizzes({
         submitted_answer: selectedAnswer.submitted_answer,
         is_correct: selectedAnswer.is_correct
       };
-    }) as updateQuizGradeParams[];
+    }) as UpdateQuizGradeParams[];
     const result = await updateCourseQuizGrade(courseVideoId, gradeResult);
     return result;
   }
