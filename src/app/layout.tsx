@@ -2,16 +2,14 @@ import QueryProvider from '../providers/QueryProvider';
 import NavBar from '../components/gnb/NavBar';
 import AuthSessionProvider from '../providers/AuthSessionProvider';
 import './globals.css';
-import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
+import localFont from 'next/font/local';
 import ResolutionCheck from '../components/ui/ResolutionCheck';
 import Footer from '../components/fnb/Footer';
 import ChannelTalk from '../components/tools/ChannelTalk/ChannelTalk';
 import ChannelTalkManager from '../components/tools/ChannelTalk/ChannelTalkManager';
 import GoogleAnalytics from '../components/tools/GoogleAnalytics/GoogleAnalytics';
 import NaverAnalytics from '../components/tools/NaverAnalytics/NaverAnalytics';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   metadataBase: new URL('https://sroom.kr'),
@@ -38,13 +36,18 @@ type Props = {
   modal: React.ReactNode;
 };
 
+const Pretendard = localFont({
+  src: './Pretendard.woff2',
+  display: 'swap'
+})
+
 export default function RootLayout({ children, modal }: Props) {
   return (
-    <html lang='ko'>
+    <html lang='ko' className={Pretendard.className}>
       <GoogleAnalytics />
       <NaverAnalytics />
       <ChannelTalk />
-      <body className={inter.className}>
+      <body>
         <AuthSessionProvider>
           <QueryProvider>
             <NavBar
