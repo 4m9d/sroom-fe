@@ -288,14 +288,13 @@ export default function MaterialPDFDocument({ materials }: Props) {
                 </View>
               );
             case 'code':
+              const lines = token.text.split('\n');
               return (
                 <Text key={index} style={styles.code}>
-                  {token.text.split('\n').map((line, lineIndex) => (
+                  {lines.map((line: string, lineIndex: number) => (
                     <Text key={lineIndex}>
                       {line}
-                      {lineIndex < token.text.split('\n').length - 1
-                        ? '\n '
-                        : ''}
+                      {lineIndex < lines.length - 1 ? '\n ' : ''}
                     </Text>
                   ))}
                 </Text>
@@ -336,55 +335,58 @@ export default function MaterialPDFDocument({ materials }: Props) {
         <Image src={'/logo/logo.png'} style={styles.logo} />
         <Text style={styles.title}>{materials.course_title}</Text>
         {materials.materials.map((material) => {
-          if (material.usable === false)
-            return (
-              <View style={styles.unavailable}>
-                <Text style={styles.h3}>
-                  {'🚫 정책상 강의 자료를 생성할 수 없어요!'}
-                </Text>
-                <Text style={styles.h4}>
-                  {'🚫 정책상 강의 자료를 생성할 수 없어요!'}
-                </Text>
-              </View>
-            );
-          else
-            return (
-              <View key={material.index}>
-                <View style={styles.subtitle}>
-                  <View style={styles.video_index_container}>
-                    <Text style={styles.video_index}>{material.index}</Text>
-                  </View>
-                  <Text style={styles.video_title}>{material.video_title}</Text>
+          return (
+            <View key={material.index}>
+              <View style={styles.subtitle}>
+                <View style={styles.video_index_container}>
+                  <Text style={styles.video_index}>{material.index}</Text>
                 </View>
-                <Text style={styles.channel}>{material.channel}</Text>
-                <Text style={styles.section_heading}>{'📝  강의 노트'}</Text>
-                {renderMarkdown(
-                  material.summary_brief.content.replace(TimestampRegex, '')
-                )}
-                <Text style={styles.section_heading}>{'🤔  퀴즈'}</Text>
-                {material.quizzes.map((quiz) => {
-                  return (
-                    <View key={quiz.index}>
-                      <Text
-                        style={styles.quiz_question}
-                      >{`Q.${quiz.index} ${quiz.question}`}</Text>
-                      {quiz.options.map((option, index) => {
-                        return (
-                          <View
-                            style={[styles.li, styles.quiz_option]}
-                            key={index}
-                          >
-                            <Text style={styles.number}>{`${index + 1}.`}</Text>
-                            <Text style={styles.paragraph}>{option}</Text>
-                          </View>
-                        );
-                      })}
-                    </View>
-                  );
-                })}
-                <View style={{ marginBottom: 20 }} />
+                <Text style={styles.video_title}>{material.video_title}</Text>
               </View>
-            );
+              {material.usable ? (
+                <View>
+                  <Text style={styles.channel}>{material.channel}</Text>
+                  <Text style={styles.section_heading}>{'📝  강의 노트'}</Text>
+                  {renderMarkdown(
+                    material.summary_brief.content.replace(TimestampRegex, '')
+                  )}
+                  <Text style={styles.section_heading}>{'🤔  퀴즈'}</Text>
+                  {material.quizzes.map((quiz) => {
+                    return (
+                      <View key={quiz.index}>
+                        <Text
+                          style={styles.quiz_question}
+                        >{`Q.${quiz.index} ${quiz.question}`}</Text>
+                        {quiz.options.map((option, index) => {
+                          return (
+                            <View
+                              style={[styles.li, styles.quiz_option]}
+                              key={index}
+                            >
+                              <Text style={styles.number}>{`${
+                                index + 1
+                              }.`}</Text>
+                              <Text style={styles.paragraph}>{option}</Text>
+                            </View>
+                          );
+                        })}
+                      </View>
+                    );
+                  })}
+                  <View style={{ marginBottom: 20 }} />
+                </View>
+              ) : (
+                <View style={styles.unavailable}>
+                  <Text style={[styles.h3, { paddingBottom: 10 }]}>
+                    {'🚫 정책상 강의 자료를 생성할 수 없어요!'}
+                  </Text>
+                  <Text style={styles.h5}>
+                    {'다른 강의에서 스룸의 AI 자동 생성 자료를 확인해 보세요'}
+                  </Text>
+                </View>
+              )}
+            </View>
+          );
         })}
         <Text
           style={styles.pageNumber}
