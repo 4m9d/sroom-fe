@@ -20,6 +20,7 @@ import ClipboardSVG from '@/public/icon/Clipboard';
 import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import FeedbackMessage from '@/src/components/ui/feedback/FeedbackMessage';
+import EasyMDE from 'easymde';
 
 const MarkdownPreview = dynamic(
   () => import('@uiw/react-markdown-preview').then((mod) => mod.default),
@@ -54,10 +55,11 @@ export default function CourseMaterialLectureNotes({
     setContent(() => value);
   }, []);
 
-  const editorOptions = useMemo(() => {
+  const editorOptions: EasyMDE.Options = useMemo(() => {
     return {
       spellChecker: false,
-      autoDownloadFontAwesome: true
+      autoDownloadFontAwesome: true,
+      uploadImage: false
     };
   }, []);
 
@@ -156,9 +158,9 @@ export default function CourseMaterialLectureNotes({
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className={`min-w-full max-w-full my-10 flex flex-col justify-center items-center gap-10 overflow-x-scroll`}
+        className={`min-w-full max-w-full my-10 flex flex-col justify-center items-center gap-10`}
       >
-        <div>
+        <div className='w-full mx-2'>
           {isEditMode ? (
             <SimpleMdeReact
               options={editorOptions}
@@ -167,10 +169,11 @@ export default function CourseMaterialLectureNotes({
               onChange={onContentChange}
             />
           ) : (
-            <div className='w-full h-full p-5 border rounded-md border-sroom-gray-500'>
+            <div className='h-full max-w-full min-w-full p-5 border rounded-md border-sroom-gray-500'>
               <MarkdownPreview
                 source={content}
                 wrapperElement={{ 'data-color-mode': 'light' }}
+                className='max-w-full min-w-full markdown-preview'
               />
             </div>
           )}

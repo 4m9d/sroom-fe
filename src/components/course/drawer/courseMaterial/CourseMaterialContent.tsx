@@ -7,7 +7,6 @@ import { useQuery } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { fetchCourseMaterials } from '@/src/api/materials/materials';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
-import LoadingSpinnerSVG from '@/public/icon/LoadingSpinner';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import CourseMaterialQuizzes from './quizzes/CourseMaterialQuizzes';
 import ForbiddenSVG from '@/public/icon/Forbidden';
