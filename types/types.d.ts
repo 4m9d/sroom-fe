@@ -430,11 +430,16 @@ interface WorkbookMaterials {
   quizzes: (Pick<Quiz, 'type' | 'question' | 'options'> & { index: number })[];
 }
 
-interface WorkbookAnswers {
-  video_index: number;
+interface WorkbookVideoAnswers {
   quiz_index: number;
   answer: string;
   answer_str: string;
+}
+
+interface WorkbookAnswers {
+  video_index: number;
+  video_title: string;
+  video_answers: WorkbookVideoAnswers[];
 }
 
 interface CourseMaterialWorkbook {
