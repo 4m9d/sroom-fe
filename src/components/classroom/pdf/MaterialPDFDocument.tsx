@@ -51,6 +51,16 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     marginTop: 30
   },
+  unavailable: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 150,
+    marginVertical: 50,
+    backgroundColor: '#F7F7F7',
+    borderRadius: 3
+  },
   video_index_container: {
     flexShrink: 0,
     display: 'flex',
@@ -88,9 +98,9 @@ const styles = StyleSheet.create({
     fontWeight: 'medium'
   },
   paragraph: {
-    textAlign: 'justify',
+    textAlign: 'left',
     fontWeight: 'medium',
-    lineHeight: 1.2,
+    lineHeight: 1.2
   },
   pageNumber: {
     position: 'absolute',
@@ -157,7 +167,7 @@ const styles = StyleSheet.create({
     lineHeight: 1.6,
     fontWeight: 'normal',
     backgroundColor: '#f5f5f5',
-    padding: 10,
+    padding: '25',
     borderRadius: 3,
     marginVertical: 5
   },
@@ -326,43 +336,55 @@ export default function MaterialPDFDocument({ materials }: Props) {
         <Image src={'/logo/logo.png'} style={styles.logo} />
         <Text style={styles.title}>{materials.course_title}</Text>
         {materials.materials.map((material) => {
-          return (
-            <View key={material.index}>
-              <View style={styles.subtitle}>
-                <View style={styles.video_index_container}>
-                  <Text style={styles.video_index}>{material.index}</Text>
-                </View>
-                <Text style={styles.video_title}>{material.video_title}</Text>
+          if (material.usable === false)
+            return (
+              <View style={styles.unavailable}>
+                <Text style={styles.h3}>
+                  {'🚫 정책상 강의 자료를 생성할 수 없어요!'}
+                </Text>
+                <Text style={styles.h4}>
+                  {'🚫 정책상 강의 자료를 생성할 수 없어요!'}
+                </Text>
               </View>
-              <Text style={styles.channel}>{material.channel}</Text>
-              <Text style={styles.section_heading}>{'📝  강의 노트'}</Text>
-              {renderMarkdown(
-                material.summary_brief.content.replace(TimestampRegex, '')
-              )}
-              <Text style={styles.section_heading}>{'🤔  퀴즈'}</Text>
-              {material.quizzes.map((quiz) => {
-                return (
-                  <View key={quiz.index}>
-                    <Text
-                      style={styles.quiz_question}
-                    >{`Q.${quiz.index} ${quiz.question}`}</Text>
-                    {quiz.options.map((option, index) => {
-                      return (
-                        <View
-                          style={[styles.li, styles.quiz_option]}
-                          key={index}
-                        >
-                          <Text style={styles.number}>{`${index + 1}.`}</Text>
-                          <Text style={styles.paragraph}>{option}</Text>
-                        </View>
-                      );
-                    })}
+            );
+          else
+            return (
+              <View key={material.index}>
+                <View style={styles.subtitle}>
+                  <View style={styles.video_index_container}>
+                    <Text style={styles.video_index}>{material.index}</Text>
                   </View>
-                );
-              })}
-              <View style={{ marginBottom: 20 }} />
-            </View>
-          );
+                  <Text style={styles.video_title}>{material.video_title}</Text>
+                </View>
+                <Text style={styles.channel}>{material.channel}</Text>
+                <Text style={styles.section_heading}>{'📝  강의 노트'}</Text>
+                {renderMarkdown(
+                  material.summary_brief.content.replace(TimestampRegex, '')
+                )}
+                <Text style={styles.section_heading}>{'🤔  퀴즈'}</Text>
+                {material.quizzes.map((quiz) => {
+                  return (
+                    <View key={quiz.index}>
+                      <Text
+                        style={styles.quiz_question}
+                      >{`Q.${quiz.index} ${quiz.question}`}</Text>
+                      {quiz.options.map((option, index) => {
+                        return (
+                          <View
+                            style={[styles.li, styles.quiz_option]}
+                            key={index}
+                          >
+                            <Text style={styles.number}>{`${index + 1}.`}</Text>
+                            <Text style={styles.paragraph}>{option}</Text>
+                          </View>
+                        );
+                      })}
+                    </View>
+                  );
+                })}
+                <View style={{ marginBottom: 20 }} />
+              </View>
+            );
         })}
         <Text
           style={styles.pageNumber}
