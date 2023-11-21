@@ -34,7 +34,7 @@ export default function MaterialPDFRenderer({ courseId, courseTitle }: Props) {
     }
   );
   return (
-    <div className='flex flex-col items-center justify-center w-full h-full'>
+    <div className='flex flex-col items-center justify-center w-full h-full gap-10'>
       {status === 'loading' ? (
         <LoadingSpinner className='text-sroom-brand' />
       ) : (
