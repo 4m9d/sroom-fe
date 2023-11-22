@@ -16,19 +16,19 @@ export default function CourseMaterialTopNav({
   return (
     <TabNav className='flex justify-center h-20 border-b tab-bordered -top-14 bg-sroom-white text-sroom-black-400 border-b-sroom-gray-500'>
       <li
-        id='lecture-notes'
+        id='summary'
         className={`flex items-center justify-center flex-1 cursor-pointer ${
-          activeTab === 'lecture-notes'
+          activeTab === 'summary'
             ? 'border-b-sroom-black-400 border-b-2'
             : 'border-none'
         }`}
       >
         <button
           type='button'
-          id='lecture-notes'
+          id='summary'
           onClick={onTabClickHandler}
           className={`tab tab-bordered text-lg transition-colors p-1 border-none w-full ${
-            activeTab === 'lecture-notes'
+            activeTab === 'summary'
               ? 'tab-active font-bold'
               : 'text-sroom-black-100 font-medium'
           }`}
@@ -37,19 +37,19 @@ export default function CourseMaterialTopNav({
         </button>
       </li>
       <li
-        id='quizzes'
+        id='quiz'
         className={`flex items-center justify-center flex-1 cursor-pointer ${
-          activeTab === 'quizzes'
+          activeTab === 'quiz'
             ? 'border-b-sroom-black-400 border-b-2'
             : 'border-none'
         }`}
       >
         <button
           type='button'
-          id='quizzes'
+          id='quiz'
           onClick={onTabClickHandler}
           className={`tab tab-bordered text-lg transition-colors p-1 border-none w-full ${
-            activeTab === 'quizzes'
+            activeTab === 'quiz'
               ? 'tab-active font-bold'
               : 'text-sroom-black-100 font-medium'
           }`}

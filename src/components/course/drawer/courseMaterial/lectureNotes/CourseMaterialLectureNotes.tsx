@@ -21,6 +21,7 @@ import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import FeedbackMessage from '@/src/components/ui/feedback/FeedbackMessage';
 import EasyMDE from 'easymde';
+import CourseMaterialFeedback from '../CourseMaterialFeedback';
 
 const MarkdownPreview = dynamic(
   () => import('@uiw/react-markdown-preview').then((mod) => mod.default),
@@ -158,7 +159,7 @@ export default function CourseMaterialLectureNotes({
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className={`min-w-full max-w-full my-10 flex flex-col justify-center items-center gap-10`}
+        className={`min-w-full max-w-full my-10 flex flex-col justify-center items-center gap-10 text-sroom-black-400`}
       >
         <div className='w-full mx-2'>
           {isEditMode ? (
@@ -177,12 +178,20 @@ export default function CourseMaterialLectureNotes({
               />
             </div>
           )}
-          <div className='flex justify-end w-full mt-2'>
+          <div className='flex flex-col items-end justify-between w-full gap-1 mt-2'>
             <span className='text-sm font-normal text-sroom-black-200'>
               {`${getRelativeTime(lectureNotes.modified_at)}${
                 lectureNotes.is_modified ? ' (수정됨)' : ''
               }`}
             </span>
+            {lectureNotes.feedback_info.available === true &&
+              lectureNotes.feedback_info.has_feedback === false && (
+                <CourseMaterialFeedback
+                  courseVideoId={courseVideoId}
+                  materialId={lectureNotes.id}
+                  materialType='summary'
+                />
+              )}
           </div>
         </div>
         <div className='w-full'>

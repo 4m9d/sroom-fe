@@ -378,7 +378,14 @@ interface CourseTakingInfo {
 
 /////////////////////////////course-material/////////////////////////////
 
-type CourseMaterialType = 'lecture-notes' | 'quizzes';
+type CourseMaterialType = 'summary' | 'quiz';
+
+interface MaterialFeedback {
+  type: CourseMaterialType;
+  available: boolean;
+  has_feedback: boolean;
+  satisfactory: boolean;
+}
 
 interface Quiz {
   id: number;
@@ -391,6 +398,7 @@ interface Quiz {
   is_submitted: boolean;
   is_correct: boolean;
   is_scrapped: boolean;
+  feedback_info: MaterialFeedback;
 }
 
 interface SelectedQuizAnswer {
@@ -403,9 +411,11 @@ interface SelectedQuizAnswer {
 }
 
 interface LectureNote {
+  id: number;
   content: string;
   modified_at: string;
   is_modified: boolean;
+  feedback_info: MaterialFeedback;
 }
 
 interface CourseMaterials {
@@ -448,6 +458,10 @@ interface CourseMaterialWorkbook {
   status: 0 | 1;
   materials: WorkbookMaterials[];
   answers: WorkbookAnswers[];
+}
+
+interface SubmitFeedbackParams {
+  is_satisfactory: boolean;
 }
 
 /////////////////////////////////////////////////////////////////////////

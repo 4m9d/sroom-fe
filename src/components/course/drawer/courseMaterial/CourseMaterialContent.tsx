@@ -32,8 +32,7 @@ export default function CourseMaterialContent({
   drawerHandler,
   handleTimestampClick
 }: Props) {
-  const [activeTab, setActiveTab] =
-    useState<CourseMaterialType>('lecture-notes');
+  const [activeTab, setActiveTab] = useState<CourseMaterialType>('summary');
   const { data, status } = useQuery(
     [QueryKeys.COURSE_MATERIAL, courseVideoId.toString()],
     () => fetchCourseMaterials(courseVideoId),
@@ -67,14 +66,14 @@ export default function CourseMaterialContent({
             )}
             {data && data.status === STATUS.SUCCESS && (
               <div>
-                {activeTab === 'lecture-notes' && (
+                {activeTab === 'summary' && (
                   <CourseMaterialLectureNotes
                     lectureNotes={data.summary_brief}
                     courseVideoId={courseVideoId}
                     handleTimestampClick={handleTimestampClick}
                   />
                 )}
-                {activeTab === 'quizzes' && (
+                {activeTab === 'quiz' && (
                   <CourseMaterialQuizzes
                     quizzes={data.quizzes}
                     courseVideoId={courseVideoId}
