@@ -11,6 +11,7 @@ import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useLayoutEffect, useState } from 'react';
+import CourseMaterialFeedback from '../CourseMaterialFeedback';
 
 type Props = { quizzes: Quiz[]; courseVideoId: number };
 const DEBOUNCE_TIME = ONE_SECOND_IN_MS / 2;
@@ -75,7 +76,7 @@ export default function CourseMaterialQuizzes({
         submitted_answer: selectedAnswer.submitted_answer,
         is_correct: selectedAnswer.is_correct
       };
-    }) as updateQuizGradeParams[];
+    }) as UpdateQuizGradeParams[];
     const result = await updateCourseQuizGrade(courseVideoId, gradeResult);
     return result;
   }
@@ -134,6 +135,16 @@ export default function CourseMaterialQuizzes({
                 questionNumber={idx + 1}
                 courseVideoId={courseVideoId}
               />
+              {quiz.feedback_info.available === true &&
+                quiz.feedback_info.has_feedback === false && (
+                  <div className='p-2'>
+                    <CourseMaterialFeedback
+                      courseVideoId={courseVideoId}
+                      materialId={quiz.id}
+                      materialType='quiz'
+                    />
+                  </div>
+                )}
             </motion.section>
           );
         })}

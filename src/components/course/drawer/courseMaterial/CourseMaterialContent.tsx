@@ -7,11 +7,11 @@ import { useQuery } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { fetchCourseMaterials } from '@/src/api/materials/materials';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
-import LoadingSpinnerSVG from '@/public/icon/LoadingSpinner';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import CourseMaterialQuizzes from './quizzes/CourseMaterialQuizzes';
 import ForbiddenSVG from '@/public/icon/Forbidden';
 import LoadingSpinner from '@/src/components/ui/LoadingSpinner';
+import CourseMaterialLoading from './CourseMaterialLoading';
 
 type Props = {
   courseVideoId: number;
@@ -32,8 +32,7 @@ export default function CourseMaterialContent({
   drawerHandler,
   handleTimestampClick
 }: Props) {
-  const [activeTab, setActiveTab] =
-    useState<CourseMaterialType>('lecture-notes');
+  const [activeTab, setActiveTab] = useState<CourseMaterialType>('summary');
   const { data, status } = useQuery(
     [QueryKeys.COURSE_MATERIAL, courseVideoId.toString()],
     () => fetchCourseMaterials(courseVideoId),
@@ -63,30 +62,18 @@ export default function CourseMaterialContent({
         status === 'success' && (
           <>
             {data && data.status === STATUS.PENDING && (
-              <div className='flex flex-col items-center justify-center h-[calc(100%-5rem)] gap-7'>
-                <div className='flex items-center justify-center w-12 h-12 animate-spin'>
-                  <LoadingSpinnerSVG />
-                </div>
-                <div className='flex flex-col items-center justify-center'>
-                  <p className='mb-1 text-lg font-semibold text-sroom-black-300'>
-                    강의 자료를 생성 중이에요!
-                  </p>
-                  <p className='font-normal text-sroom-black-100'>
-                    조금만 기다려 주세요
-                  </p>
-                </div>
-              </div>
+              <CourseMaterialLoading />
             )}
             {data && data.status === STATUS.SUCCESS && (
               <div>
-                {activeTab === 'lecture-notes' && (
+                {activeTab === 'summary' && (
                   <CourseMaterialLectureNotes
                     lectureNotes={data.summary_brief}
                     courseVideoId={courseVideoId}
                     handleTimestampClick={handleTimestampClick}
                   />
                 )}
-                {activeTab === 'quizzes' && (
+                {activeTab === 'quiz' && (
                   <CourseMaterialQuizzes
                     quizzes={data.quizzes}
                     courseVideoId={courseVideoId}

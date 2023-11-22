@@ -5,6 +5,7 @@ export const ModalIDs = {
   LECTURE_REVIEW: 'lecture-review-modal',
   SCHEDULING: 'scheduling-modal',
   COURSE_DELETE: 'course-delete-modal',
+  MATERIAL_EXPORT: 'material-export-modal',
 } as const;
 
 type ModalIDs = (typeof ModalIDs)[keyof typeof ModalIDs];

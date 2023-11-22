@@ -200,17 +200,7 @@ interface Lecture {
   is_enrolled: boolean;
 }
 
-type PersonalizedLecture = {
-  [key in
-    | 'lecture_title'
-    | 'description'
-    | 'channel'
-    | 'lecture_code'
-    | 'rating'
-    | 'review_count'
-    | 'thumbnail'
-    | 'is_playlist']: Lecture[key];
-};
+type PersonalizedLecture = Omit<Lecture, 'is_enrolled'>;
 
 interface SearchResultsLecture extends Lecture {
   published_at: string;
@@ -249,9 +239,10 @@ interface LectureReview {
 
 type LectureReviewList = LectureReview[];
 
-type EnrolledCourse = {
-  [key in 'course_id' | 'course_title' | 'total_video_count']: Course[key];
-};
+type EnrolledCourse = Pick<
+  Course,
+  'course_id' | 'course_title' | 'total_video_count'
+>;
 
 interface LectureDetail extends Lecture {
   published_at: string;
@@ -342,20 +333,12 @@ interface Video {
   video_duration: number;
 }
 
-type LastViewVideo = {
-  [key in
-    | 'course_video_id'
-    | 'video_id'
-    | 'video_title'
-    | 'video_code'
-    | 'channel'
-    | 'last_view_duration'
-    | 'is_completed']: Video[key];
-};
+type LastViewVideo = Omit<Video, 'video_index' | 'video_duration'>;
 
-type CurrentPlayingVideo = {
-  [key in 'video_id' | 'video_code' | 'last_view_duration']: Video[key];
-};
+type CurrentPlayingVideo = Pick<
+  Video,
+  'video_id' | 'video_code' | 'last_view_duration'
+>;
 
 interface Section {
   section: number;
@@ -395,7 +378,14 @@ interface CourseTakingInfo {
 
 /////////////////////////////course-material/////////////////////////////
 
-type CourseMaterialType = 'lecture-notes' | 'quizzes';
+type CourseMaterialType = 'summary' | 'quiz';
+
+interface MaterialFeedback {
+  type: CourseMaterialType;
+  available: boolean;
+  has_feedback: boolean;
+  satisfactory: boolean;
+}
 
 interface Quiz {
   id: number;
@@ -408,6 +398,7 @@ interface Quiz {
   is_submitted: boolean;
   is_correct: boolean;
   is_scrapped: boolean;
+  feedback_info: MaterialFeedback;
 }
 
 interface SelectedQuizAnswer {
@@ -420,9 +411,11 @@ interface SelectedQuizAnswer {
 }
 
 interface LectureNote {
+  id: number;
   content: string;
   modified_at: string;
   is_modified: boolean;
+  feedback_info: MaterialFeedback;
 }
 
 interface CourseMaterials {
@@ -432,10 +425,43 @@ interface CourseMaterials {
   summary_brief: LectureNote;
 }
 
-interface updateQuizGradeParams {
+interface UpdateQuizGradeParams {
   id: number;
   submitted_answer: string;
   is_correct: boolean;
+}
+
+interface WorkbookMaterials {
+  index: number;
+  video_title: string;
+  channel: string;
+  usable: boolean;
+  summary_brief: LectureNote;
+  quizzes: (Pick<Quiz, 'type' | 'question' | 'options'> & { index: number })[];
+}
+
+interface WorkbookVideoAnswers {
+  quiz_index: number;
+  answer: string;
+  answer_str: string;
+}
+
+interface WorkbookAnswers {
+  video_index: number;
+  video_title: string;
+  video_answers: WorkbookVideoAnswers[];
+}
+
+interface CourseMaterialWorkbook {
+  course_title: string;
+  total_video_count: number;
+  status: 0 | 1;
+  materials: WorkbookMaterials[];
+  answers: WorkbookAnswers[];
+}
+
+interface SubmitFeedbackParams {
+  is_satisfactory: boolean;
 }
 
 /////////////////////////////////////////////////////////////////////////

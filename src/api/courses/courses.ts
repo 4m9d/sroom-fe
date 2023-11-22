@@ -84,3 +84,17 @@ export async function deleteCourse(course_id: number) {
     }
   });
 }
+
+export async function fetchCourseMaterialWorkbook(course_id: number) {
+  const headers = await getAuthorizedHeaders();
+  return await fetch(getQueryURL(`${Endpoints.COURSES}/materials/${course_id}`), {
+    method: 'GET',
+    headers
+  }).then(async (res) => {
+    if (res.ok) {
+      return (await res.json()) as Promise<CourseMaterialWorkbook>;
+    } else {
+      return fetchErrorHandling(res, ErrorMessage.COURSE_MATERIALS);
+    }
+  });
+}

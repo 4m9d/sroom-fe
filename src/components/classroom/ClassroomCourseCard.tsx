@@ -7,20 +7,17 @@ import LectureSVG from '@/public/icon/Lecture';
 import ProgressBar from '../ui/progress/ProgressBar';
 import Button from '../ui/button/Button';
 import { useRouter } from 'next/navigation';
-import ArrowRightSVG from '@/public/icon/ArrowRight';
 import setUndevelopedAlertToast from '@/src/util/toast/setUndevelopedAlertToast';
 import { showModalHandler } from '@/src/util/modal/modalHandler';
 
 type Props = {
   course: Course;
-  setReviewCourseId: React.Dispatch<React.SetStateAction<number | null>>;
-  setDeleteCourseId: React.Dispatch<React.SetStateAction<number | null>>;
+  setSelectedCourseId: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
 export default function ClassroomCourseCard({
   course,
-  setReviewCourseId,
-  setDeleteCourseId
+  setSelectedCourseId
 }: Props) {
   const router = useRouter();
 
@@ -33,7 +30,7 @@ export default function ClassroomCourseCard({
     >
       <Button
         onClick={() => {
-          setDeleteCourseId(() => course.course_id);
+          setSelectedCourseId(() => course.course_id);
           showModalHandler('COURSE_DELETE');
         }}
         hoverEffect={true}
@@ -74,29 +71,33 @@ export default function ClassroomCourseCard({
             </p>
           </div>
         </div>
-        <div className='flex items-center justify-around gap-1'>
+        <div className='flex items-center justify-evenly'>
           <Button
             onClick={() => setUndevelopedAlertToast('scrap')}
             hoverEffect={true}
-            className='!h-8 text-xs !px-[5px]'
+            className='!h-8 text-xs max-w-[9rem]'
           >
             <p>오답 노트</p>
-            <span className='w-3 ml-1 stroke-sroom-black-400'>
-              <ArrowRightSVG />
-            </span>
           </Button>
           <Button
             onClick={() => {
-              setReviewCourseId(() => course.course_id);
+              setSelectedCourseId(() => course.course_id);
+              showModalHandler('MATERIAL_EXPORT');
+            }}
+            hoverEffect={true}
+            className='!h-8 text-xs max-w-[9rem]'
+          >
+            <p>내보내기</p>
+          </Button>
+          <Button
+            onClick={() => {
+              setSelectedCourseId(() => course.course_id);
               showModalHandler('LECTURE_REVIEW');
             }}
             hoverEffect={true}
-            className='!h-8 text-xs !px-[5px]'
+            className='!h-8 text-xs max-w-[9rem]'
           >
-            <p>후기 / 평점</p>
-            <span className='w-3 ml-1 stroke-sroom-black-400'>
-              <ArrowRightSVG />
-            </span>
+            <p>후기･평점</p>
           </Button>
         </div>
       </div>

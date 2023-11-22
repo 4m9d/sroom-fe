@@ -2,6 +2,7 @@ import { fetchErrorHandling } from '@/src/util/http/fetchErrorHandling';
 import { Endpoints } from '../Endpoints';
 import { ErrorMessage } from '../ErrorMessage';
 import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
+import getQueryURL from '@/src/util/http/getQueryURL';
 
 export async function fetchCourseMaterials(course_video_id: number) {
   const headers = await getAuthorizedHeaders();
@@ -38,7 +39,7 @@ export async function updateCourseLectureNotes(
 
 export async function updateCourseQuizGrade(
   course_video_id: number,
-  params: updateQuizGradeParams[]
+  params: UpdateQuizGradeParams[]
 ) {
   const headers = await getAuthorizedHeaders();
   const body = JSON.stringify(params);
@@ -51,6 +52,29 @@ export async function updateCourseQuizGrade(
       return (await res.json()) as Promise<Response>;
     } else {
       return fetchErrorHandling(res, ErrorMessage.QUIZZES);
+    }
+  });
+}
+
+export async function submitCourseMaterialFeedback(
+  type: CourseMaterialType,
+  material_id: number,
+  params: SubmitFeedbackParams
+) {
+  const headers = await getAuthorizedHeaders();
+  const body = JSON.stringify(params);
+  return await fetch(
+    getQueryURL(`${Endpoints.MATERIALS}/${material_id}/feedback`, { type }),
+    {
+      method: 'POST',
+      headers,
+      body
+    }
+  ).then(async (res) => {
+    if (res.ok) {
+      return (await res.json()) as Promise<Response>;
+    } else {
+      return fetchErrorHandling(res, ErrorMessage.MATERIAL_FEEDBACK);
     }
   });
 }

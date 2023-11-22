@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 type Props = {
   message: string;
-  type: 'success' | 'error';
+  type: 'success' | 'error' | 'normal';
 };
 
 export default function FeedbackMessage({ message, type }: Props) {
@@ -18,6 +18,8 @@ export default function FeedbackMessage({ message, type }: Props) {
             ? 'text-sroom-green'
             : type === 'error'
             ? 'text-sroom-red'
+            : type === 'normal'
+            ? 'text-sroom-black-200'
             : ''
         }`}
       >

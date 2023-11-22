@@ -20,6 +20,7 @@ export const ErrorMessage = {
   REVIEW_LIST: '후기 정보를 불러오지 못했어요',
   REVIEW_UPDATE: '후기를 등록하지 못했어요',
   TIMESTAMP: '타임스탬프 형식이 잘못되었어요',
+  MATERIAL_FEEDBACK: '피드백을 등록하지 못했어요',
 } as const;
 
 export const API_FETCH_ERROR = 'API_FETCH_ERROR'

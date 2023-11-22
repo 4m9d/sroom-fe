@@ -25,3 +25,11 @@
   bottom: 0.95rem;
   border-color: var(--primary-color) transparent transparent transparent;
 }
+
+.markdown-preview ol {
+  @apply list-decimal;
+}
+
+.markdown-preview ul {
+  @apply list-disc;
+}
