@@ -19,6 +19,7 @@
     "@types/react-dom": "18.2.6",
     "@uiw/react-markdown-preview": "^4.1.15",
     "async-mutex": "^0.4.0",
+    "comlink": "^4.4.1",
     "dayjs": "^1.11.9",
     "easymde": "^2.18.0",
     "encoding": "^0.1.13",

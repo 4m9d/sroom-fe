@@ -2,64 +2,11 @@ import { ModalIDs } from '@/src/constants/modal/modal';
 import Modal from '../../ui/Modal';
 import { closeModalHandler } from '@/src/util/modal/modalHandler';
 import MaterialPDFRenderer from './MaterialPDFRenderer';
-import { Font } from '@react-pdf/renderer';
 
 type Props = {
   courseId: number | null;
   courseTitle: string | null;
 };
-Font.register({
-  family: 'MonoplexKR',
-  fonts: [
-    {
-      src: '/fonts/MonoplexKR-Regular.ttf',
-      fontWeight: 'normal',
-      fontStyle: 'normal'
-    },
-    {
-      src: '/fonts/MonoplexKR-Italic.ttf',
-      fontWeight: 'normal',
-      fontStyle: 'italic'
-    },
-    {
-      src: '/fonts/MonoplexKR-Bold.ttf',
-      fontWeight: 'bold',
-      fontStyle: 'normal'
-    },
-    {
-      src: '/fonts/MonoplexKR-BoldItalic.ttf',
-      fontWeight: 'bold',
-      fontStyle: 'italic'
-    }
-  ]
-});
-
-Font.register({
-  family: 'Pretendard',
-  fonts: [
-    {
-      fontWeight: 'normal',
-      src: '/fonts/Pretendard-Regular.woff'
-    },
-    {
-      fontWeight: 'medium',
-      src: '/fonts/Pretendard-Medium.woff'
-    },
-    {
-      fontWeight: 'semibold',
-      src: '/fonts/Pretendard-SemiBold.woff'
-    },
-    {
-      fontWeight: 'bold',
-      src: '/fonts/Pretendard-Bold.woff'
-    }
-  ]
-});
-
-Font.registerEmojiSource({
-  format: 'png',
-  url: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/'
-});
 
 export default function MaterialExportModal({ courseId, courseTitle }: Props) {
   return (
