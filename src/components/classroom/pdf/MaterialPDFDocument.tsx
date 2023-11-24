@@ -1,17 +1,70 @@
-'use client';
 import {
   Document,
   Page,
   Text,
   StyleSheet,
   Image,
-  View
+  View,
+  Font
 } from '@react-pdf/renderer';
 import { Token, marked } from 'marked';
 
 type Props = { materials: CourseMaterialWorkbook };
 
 const TimestampRegex = /<button[^>]*class="timestamp"[^>]*>.*?<\/button>/g;
+
+Font.register({
+  family: 'MonoplexKR',
+  fonts: [
+    {
+      src: '/fonts/MonoplexKR-Regular.ttf',
+      fontWeight: 'normal',
+      fontStyle: 'normal'
+    },
+    {
+      src: '/fonts/MonoplexKR-Italic.ttf',
+      fontWeight: 'normal',
+      fontStyle: 'italic'
+    },
+    {
+      src: '/fonts/MonoplexKR-Bold.ttf',
+      fontWeight: 'bold',
+      fontStyle: 'normal'
+    },
+    {
+      src: '/fonts/MonoplexKR-BoldItalic.ttf',
+      fontWeight: 'bold',
+      fontStyle: 'italic'
+    }
+  ]
+});
+
+Font.register({
+  family: 'Pretendard',
+  fonts: [
+    {
+      fontWeight: 'normal',
+      src: '/fonts/Pretendard-Regular.woff'
+    },
+    {
+      fontWeight: 'medium',
+      src: '/fonts/Pretendard-Medium.woff'
+    },
+    {
+      fontWeight: 'semibold',
+      src: '/fonts/Pretendard-SemiBold.woff'
+    },
+    {
+      fontWeight: 'bold',
+      src: '/fonts/Pretendard-Bold.woff'
+    }
+  ]
+});
+
+Font.registerEmojiSource({
+  format: 'png',
+  url: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/'
+});
 
 const styles = StyleSheet.create({
   body: {
