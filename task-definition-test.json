@@ -33,7 +33,7 @@
       "secrets": [
         {
           "valueFrom": "arn:aws:ssm:ap-northeast-2:224066583965:parameter/sroom/fe/NEXT_PUBLIC_GOOGLE_CLIENT_ID",
-          "name": "NEXT_PUBLIC_GOOGLE_CLIENT_ID"
+          "name": "NEXT_PUBLIC_GOOGLE_CLIENT_IDs"
         },
         {
           "valueFrom": "arn:aws:ssm:ap-northeast-2:224066583965:parameter/sroom/fe/NEXT_PUBLIC_CHANNEL_TALK_PLUGIN_KEY",
