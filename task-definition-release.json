@@ -1,5 +1,5 @@
 {
-  "executionRoleArn": "arn:aws:iam::804073597504:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::804073597504:role/AWSECSTaskExecutionRole",
   "containerDefinitions": [
     {
       "dnsSearchDomains": null,
