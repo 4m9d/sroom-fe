@@ -49,5 +49,5 @@ jobs:
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
           service: fe-service
-          cluster: fe-cluster
+          cluster: fe-release-cluster
           wait-for-service-stability: true
