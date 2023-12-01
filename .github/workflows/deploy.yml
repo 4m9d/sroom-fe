@@ -1,5 +1,9 @@
 name: Deploy to Amazon ECS
 on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, reopened, synchronize]
   push:
     branches:
       - main
