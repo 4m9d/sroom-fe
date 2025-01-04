@@ -1,4 +1,4 @@
-export default function SearchSVG() {
+export function SearchSVG() {
   return (
     <svg
       width='26'

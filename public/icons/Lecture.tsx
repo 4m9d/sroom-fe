@@ -1,4 +1,4 @@
-export default function LectureSVG() {
+export function LectureSVG() {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'

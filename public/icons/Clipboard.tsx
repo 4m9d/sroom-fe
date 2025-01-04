@@ -1,4 +1,4 @@
-export default function ClipboardSVG() {
+export function ClipboardSVG() {
   return (
     <svg
       width='20'

@@ -1,4 +1,4 @@
-export default function CrownSVG() {
+export function CrownSVG() {
   return (
     <svg
       width='current'
