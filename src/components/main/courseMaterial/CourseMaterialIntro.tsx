@@ -1,3 +1,4 @@
+import { quizMain } from '@/public/images/images';
 import Image from 'next/image';
 
 export default function CourseMaterialIntro({}) {
@@ -12,7 +13,7 @@ export default function CourseMaterialIntro({}) {
         <div className='absolute bottom-0 right-0 w-[94%]'>
           <div className='pb-[96.2%] relative object-cover'>
             <Image
-              src={'/image/main/quiz.webp'}
+              src={quizMain.default.src}
               alt='퀴즈 강의노트'
               fill={true}
               quality={80}

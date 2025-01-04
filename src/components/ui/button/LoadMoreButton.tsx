@@ -1,4 +1,4 @@
-import ArrowRightSVG from '@/public/icon/ArrowRight';
+import { ArrowRightSVG } from '@/public/icons/icons';
 import Button from './Button';
 
 type Props = {

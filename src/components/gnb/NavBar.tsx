@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react';
 import { useMutation } from '@tanstack/react-query';
 import { updateUserProfile } from '@/src/api/members/members';
 import ProfileDropdown from './ProfileDropdown';
+import { textLogoEn, logoIcon } from '@/public/logoImages/logoImages';
 
 type Props = {
   logo: string;
@@ -62,7 +63,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
             {windowWidth < WIDTH_SM ? (
               <Image
                 className='w-10 h-10'
-                src={'/logo/logo.svg'}
+                src={logoIcon.default.src}
                 alt={logo}
                 width={40}
                 height={40}
@@ -70,7 +71,7 @@ export default function NavBar({ logo, profileDropdown }: Props) {
             ) : (
               <Image
                 className='w-28 lg:w-36'
-                src={'/logo/logo_en.svg'}
+                src={textLogoEn.default.src}
                 alt={logo}
                 width={150}
                 height={40}

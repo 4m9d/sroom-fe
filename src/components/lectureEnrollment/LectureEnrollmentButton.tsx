@@ -1,6 +1,6 @@
 'use client';
-import ArrowRightSVG from '@/public/icon/ArrowRight';
-import LectureSVG from '@/public/icon/Lecture';
+import { ArrowRightSVG } from '@/public/icons/icons';
+import { LectureSVG } from '@/public/icons/icons';
 import Button from '../ui/button/Button';
 import { showModalHandler } from '@/src/util/modal/modalHandler';
 import { useMutation, useQueryClient } from '@tanstack/react-query';

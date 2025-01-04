@@ -9,7 +9,7 @@ import { fetchCourseMaterials } from '@/src/api/materials/materials';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import CourseMaterialQuizzes from './quizzes/CourseMaterialQuizzes';
-import ForbiddenSVG from '@/public/icon/Forbidden';
+import { ForbiddenSVG } from '@/public/icons/icons';
 import LoadingSpinner from '@/src/components/ui/LoadingSpinner';
 import CourseMaterialLoading from './CourseMaterialLoading';
 

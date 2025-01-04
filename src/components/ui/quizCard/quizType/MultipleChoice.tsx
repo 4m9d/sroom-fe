@@ -1,4 +1,4 @@
-import MultipleChoiceSVG from '@/public/icon/MultipleChoice';
+import { MultipleChoiceSVG } from '@/public/icons/icons';
 
 export default function MultipleChoice({
   quiz,

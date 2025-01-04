@@ -8,6 +8,7 @@ import {
   Font
 } from '@react-pdf/renderer';
 import { Token, marked } from 'marked';
+import { textLogo } from '@/public/logoImages/logoImages';
 
 type Props = { materials: CourseMaterialWorkbook };
 
@@ -385,7 +386,7 @@ export default function MaterialPDFDocument({ materials }: Props) {
   return (
     <Document>
       <Page style={styles.body}>
-        <Image src={'/logo/logo.png'} style={styles.logo} />
+        <Image src={textLogo.default.src} style={styles.logo} />
         <Text style={styles.title}>{materials.course_title}</Text>
         {materials.materials.map((material) => {
           return (
@@ -450,7 +451,7 @@ export default function MaterialPDFDocument({ materials }: Props) {
         />
       </Page>
       <Page style={styles.body}>
-        <Image src={'/logo/logo.png'} style={styles.logo} />
+        <Image src={textLogo.default.src} style={styles.logo} />
         <Text style={{ ...styles.section_heading, marginTop: 0 }}>
           {'✅  해답'}
         </Text>

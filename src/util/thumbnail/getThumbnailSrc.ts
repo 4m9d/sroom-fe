@@ -1,6 +1,8 @@
+import { defaultThumbnail } from '@/public/images/images';
+
 export const getThumbnailSrc = (src: string) => {
   if (src.endsWith('no_thumbnail.jpg')) {
-    return '/image/thumbnail/default_thumbnail.webp';
+    return defaultThumbnail.default.src;
   }
   return src;
 };

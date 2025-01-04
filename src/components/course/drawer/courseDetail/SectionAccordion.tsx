@@ -1,5 +1,5 @@
 'use client';
-import PolygonSVG from '@/public/icon/Polygon';
+import { PolygonSVG } from '@/public/icons/icons';
 import VideoCompletionBadge from '@/src/components/ui/badge/VideoCompletionBadge';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import getCompactFormattedDuration from '@/src/util/time/getCompactFormattedTime';

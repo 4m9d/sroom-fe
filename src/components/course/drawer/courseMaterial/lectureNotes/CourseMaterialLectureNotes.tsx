@@ -1,5 +1,5 @@
 'use client';
-import PencilSVG from '@/public/icon/Pencil';
+import { PencilSVG } from '@/public/icons/icons';
 import Button from '@/src/components/ui/button/Button';
 import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
@@ -16,7 +16,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { updateCourseLectureNotes } from '@/src/api/materials/materials';
 import getRelativeTime from '@/src/util/time/getRelativeTime';
-import ClipboardSVG from '@/public/icon/Clipboard';
+import { ClipboardSVG } from '@/public/icons/icons';
 import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import FeedbackMessage from '@/src/components/ui/feedback/FeedbackMessage';

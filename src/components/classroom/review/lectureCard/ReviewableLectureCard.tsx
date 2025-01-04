@@ -1,11 +1,11 @@
-import ClockSVG from '@/public/icon/Clock';
+import { ClockSVG } from '@/public/icons/icons';
 import Button from '../../../ui/button/Button';
 import HorizontalSmallLectureCard from '../../../ui/lectureCard/HorizontalSmallLectureCard';
 import getFormattedTime from '@/src/util/time/getFormattedTime';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
-import LectureSVG from '@/public/icon/Lecture';
+import { LectureSVG } from '@/public/icons/icons';
 import ProgressBar from '../../../ui/progress/ProgressBar';
-import PencilSVG from '@/public/icon/Pencil';
+import { PencilSVG } from '@/public/icons/icons';
 
 type Props = {
   reviewableLecture: ReviewableLecture;
@@ -57,11 +57,13 @@ export default function ReviewableLectureCard({
                     <ClockSVG />
                   </span>
                   {getFormattedTime(
-                    convertSecondsToMinutes(reviewableLecture.view_duration), true
+                    convertSecondsToMinutes(reviewableLecture.view_duration),
+                    true
                   )}
                   <span>/</span>
                   {getFormattedTime(
-                    convertSecondsToMinutes(reviewableLecture.lecture_duration), true
+                    convertSecondsToMinutes(reviewableLecture.lecture_duration),
+                    true
                   )}
                   <span className='ml-1'>수강 완료</span>
                 </>

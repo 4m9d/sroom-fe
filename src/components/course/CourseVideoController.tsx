@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import Button from '../ui/button/Button';
-import ArrowRightSVG from '@/public/icon/ArrowRight';
+import { ArrowRightSVG } from '@/public/icons/icons';
 import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';

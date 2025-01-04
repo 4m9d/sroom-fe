@@ -1,5 +1,5 @@
 'use client';
-import Thumbs from '@/public/icon/Thumbs';
+import { Thumbs } from '@/public/icons/icons';
 import { submitCourseMaterialFeedback } from '@/src/api/materials/materials';
 import { QueryKeys } from '@/src/api/queryKeys';
 import Button from '@/src/components/ui/button/Button';

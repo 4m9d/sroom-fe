@@ -1,6 +1,6 @@
 'use client';
-import CorrectCheckSVG from '@/public/icon/CorrectCheck';
-import WrongCheckSVG from '@/public/icon/WrongCheck';
+import { CorrectCheckSVG } from '@/public/icons/icons';
+import { WrongCheckSVG } from '@/public/icons/icons';
 import { QuizType } from '@/src/constants/courseTaking/courseTaking';
 import { AnimatePresence, motion } from 'framer-motion';
 

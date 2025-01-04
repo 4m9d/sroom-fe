@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { textLogoEn } from '@/public/logoImages/logoImages';
 
 export default function Footer({}) {
   const currentRoute = usePathname();
@@ -40,16 +41,14 @@ export default function Footer({}) {
         </ul>
         <div className='flex flex-col gap-3'>
           <Image
-            src={'/logo/logo_en.svg'}
+            src={textLogoEn.default.src}
             alt='스룸 로고'
             className='grayscale'
             width={100}
             height={30}
           />
           <address className='flex flex-col gap-1 text-xs text-sroom-black-100'>
-            <div>
-              4M9D
-            </div>
+            <div>4M9D</div>
             <div>
               서울특별시 강남구 테헤란로 311 아남타워빌딩 7층 (우편번호 : 06151)
             </div>

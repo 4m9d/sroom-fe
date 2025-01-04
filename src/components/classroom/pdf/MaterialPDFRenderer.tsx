@@ -1,5 +1,5 @@
 'use client';
-import DownloadSVG from '@/public/icon/Download';
+import { DownloadSVG } from '@/public/icons/icons';
 import Button from '../../ui/button/Button';
 import { useQuery } from '@tanstack/react-query';
 import { QueryKeys } from '@/src/api/queryKeys';
