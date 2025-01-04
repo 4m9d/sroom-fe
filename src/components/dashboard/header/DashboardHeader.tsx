@@ -6,6 +6,11 @@ import ServiceGuideModal from './ServiceGuideModal';
 import { ExtendedRecordMap } from 'notion-types';
 import { useState } from 'react';
 import { SERVICE_GUIDE } from '@/src/constants/serviceGuides/serviceGuides';
+import {
+  search,
+  calendarDashboard,
+  quizDashboard
+} from '@/public/images/images';
 
 type Props = {
   isExistingUser: boolean;
@@ -50,7 +55,7 @@ export default function DashboardHeader({
                 <div className='pb-[38.88%] relative object-cover'>
                   <Image
                     className='transition-all lg:opacity-0 group-hover:opacity-100 group-hover:-translate-y-2'
-                    src={'/image/dashboard/search.webp'}
+                    src={search.default.src}
                     alt='검색창'
                     fill={true}
                     quality={100}
@@ -67,7 +72,7 @@ export default function DashboardHeader({
                 <div className='pb-[56.62%] relative object-cover'>
                   <Image
                     className='transition-all lg:opacity-0 group-hover:opacity-100 group-hover:-translate-y-2'
-                    src={'/image/dashboard/calendar.webp'}
+                    src={calendarDashboard.default.src}
                     alt='달력'
                     fill={true}
                     quality={100}
@@ -84,7 +89,7 @@ export default function DashboardHeader({
                 <div className='pb-[46.30%] relative object-cover'>
                   <Image
                     className='transition-all lg:opacity-0 group-hover:opacity-100 group-hover:-translate-y-2'
-                    src={'/image/dashboard/quiz.webp'}
+                    src={quizDashboard.default.src}
                     alt='퀴즈'
                     fill={true}
                     quality={100}

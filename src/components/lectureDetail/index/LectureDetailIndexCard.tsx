@@ -1,5 +1,5 @@
 'use client';
-import CrownSVG from '@/public/icon/Crown';
+import { CrownSVG } from '@/public/icons/icons';
 import getCompactFormattedTime from '@/src/util/time/getCompactFormattedTime';
 import Image from 'next/image';
 import React from 'react';

@@ -1,4 +1,4 @@
-import SearchSVG from '@/public/icon/Search';
+import { SearchSVG } from '@/public/icons/icons';
 import SearchInput from '../../gnb/SearchInput';
 import SectionHeading from '../../ui/SectionHeading';
 import Button from '../../ui/button/Button';

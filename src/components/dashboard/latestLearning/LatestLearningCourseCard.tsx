@@ -4,9 +4,9 @@ import Button from '../../ui/button/Button';
 import getFormattedTime from '@/src/util/time/getFormattedTime';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import Link from 'next/link';
-import ClockSVG from '@/public/icon/Clock';
-import LectureSVG from '@/public/icon/Lecture';
-import ArrowRightSVG from '@/public/icon/ArrowRight';
+import { ClockSVG } from '@/public/icons/icons';
+import { LectureSVG } from '@/public/icons/icons';
+import { ArrowRightSVG } from '@/public/icons/icons';
 
 type Props = {
   course: Course;

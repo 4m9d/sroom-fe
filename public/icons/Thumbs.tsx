@@ -1,4 +1,4 @@
-export default function Thumbs({ direction }: { direction: 'up' | 'down' }) {
+export function Thumbs({ direction }: { direction: 'up' | 'down' }) {
   if (direction === 'up') {
     return (
       <svg

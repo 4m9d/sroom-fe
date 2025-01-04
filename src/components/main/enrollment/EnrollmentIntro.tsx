@@ -1,3 +1,4 @@
+import { enrollment } from '@/public/images/images';
 import Image from 'next/image';
 
 export default function EnrollmentIntro({}) {
@@ -11,7 +12,7 @@ export default function EnrollmentIntro({}) {
       <div className='absolute bottom-0 right-0 w-[82%]'>
         <div className='pb-[91.08%] relative object-cover'>
           <Image
-            src={'/image/main/enrollment.webp'}
+            src={enrollment.default.src}
             alt='강의 등록'
             fill={true}
             quality={80}

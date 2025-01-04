@@ -1,4 +1,4 @@
-export default function ForbiddenSVG() {
+export function ForbiddenSVG() {
   return (
     <svg
       width='118'

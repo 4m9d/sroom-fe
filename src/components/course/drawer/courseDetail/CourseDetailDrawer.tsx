@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import SectionList from './SectionList';
 import CourseDetailHeader from './CourseDetailHeader';
 import DrawerMenuButtons from './DrawerMenuButtons';
-import ArrowRightSVG from '@/public/icon/ArrowRight';
+import { ArrowRightSVG } from '@/public/icons/icons';
 
 type Props = {
   courseDetail: CourseDetail;

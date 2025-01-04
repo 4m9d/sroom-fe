@@ -1,4 +1,4 @@
-export default function MultipleChoiceSVG({
+export function MultipleChoiceSVG({
   selected,
   isAnswer
 }: {

@@ -10,6 +10,7 @@ import ChannelTalk from '../components/tools/ChannelTalk/ChannelTalk';
 import ChannelTalkManager from '../components/tools/ChannelTalk/ChannelTalkManager';
 import GoogleAnalytics from '../components/tools/GoogleAnalytics/GoogleAnalytics';
 import NaverAnalytics from '../components/tools/NaverAnalytics/NaverAnalytics';
+import { opengraph } from '@/public/images/images';
 
 export const metadata = {
   metadataBase: new URL('https://sroom.kr'),
@@ -23,7 +24,7 @@ export const metadata = {
     description: '나만을 위한 유튜브 강의 관리 플랫폼 스룸',
     type: 'website',
     images: {
-      url: '/image/opengraph/opengraph-image.jpg',
+      url: opengraph.default.src,
       width: 1200,
       height: 630,
       alt: '나만을 위한 유튜브 강의 관리 플랫폼, 스룸'
@@ -39,7 +40,7 @@ type Props = {
 const Pretendard = localFont({
   src: './Pretendard.woff2',
   display: 'swap'
-})
+});
 
 export default function RootLayout({ children, modal }: Props) {
   return (

@@ -1,4 +1,4 @@
-import LoadingSpinnerSVG from '@/public/icon/LoadingSpinner';
+import { LoadingSpinnerSVG } from '@/public/icons/icons';
 
 type Props = {
   title?: string;

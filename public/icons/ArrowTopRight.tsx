@@ -1,4 +1,4 @@
-export default function ArrowTopRightSVG() {
+export function ArrowTopRightSVG() {
   return (
     <svg
       width='15'

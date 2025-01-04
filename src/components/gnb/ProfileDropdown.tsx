@@ -1,7 +1,7 @@
 'use client';
-import ArrowTopRightSVG from '@/public/icon/ArrowTopRight';
-import PencilSVG from '@/public/icon/Pencil';
-import SaveSVG from '@/public/icon/Save';
+import { ArrowTopRightSVG } from '@/public/icons/icons';
+import { PencilSVG } from '@/public/icons/icons';
+import { SaveSVG } from '@/public/icons/icons';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef } from 'react';

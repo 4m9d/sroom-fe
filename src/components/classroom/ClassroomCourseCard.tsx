@@ -1,9 +1,9 @@
 'use client';
-import ClockSVG from '@/public/icon/Clock';
+import { ClockSVG } from '@/public/icons/icons';
 import HorizontalSmallLectureCard from '../ui/lectureCard/HorizontalSmallLectureCard';
 import getFormattedTime from '@/src/util/time/getFormattedTime';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
-import LectureSVG from '@/public/icon/Lecture';
+import { LectureSVG } from '@/public/icons/icons';
 import ProgressBar from '../ui/progress/ProgressBar';
 import Button from '../ui/button/Button';
 import { useRouter } from 'next/navigation';

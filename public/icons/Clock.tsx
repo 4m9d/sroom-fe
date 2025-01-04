@@ -1,4 +1,4 @@
-export default function ClockSVG() {
+export function ClockSVG() {
   return (
     <svg
       width='current'

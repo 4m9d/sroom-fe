@@ -1,4 +1,4 @@
-export default function DownloadSVG() {
+export function DownloadSVG() {
   return (
     <svg
       width='current'

@@ -1,4 +1,4 @@
-export default function SaveSVG() {
+export function SaveSVG() {
   return (
     <svg
       width='20'
