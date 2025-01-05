@@ -1,10 +1,10 @@
 'use client';
-import { CrownSVG } from '@/public/icons/icons';
-import getCompactFormattedTime from '@/src/util/time/getCompactFormattedTime';
 import Image from 'next/image';
 import React from 'react';
-import ThumbnailBadge from '../../ui/badge/ThumbnailBadge';
+import { CrownSVG } from '@/public/icons/icons';
 import { BadgeType } from '@/src/constants/badge/badge';
+import getCompactFormattedTime from '@/src/util/time/getCompactFormattedTime';
+import ThumbnailBadge from '../../ui/badge/ThumbnailBadge';
 
 type Props = {
   lectureIndex: LectureIndex;

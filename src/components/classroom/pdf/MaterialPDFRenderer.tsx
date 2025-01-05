@@ -1,14 +1,14 @@
 'use client';
-import { DownloadSVG } from '@/public/icons/icons';
-import Button from '../../ui/button/Button';
 import { useQuery } from '@tanstack/react-query';
-import { QueryKeys } from '@/src/api/queryKeys';
-import { fetchCourseMaterialWorkbook } from '@/src/api/courses/courses';
-import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
-import CourseMaterialLoading from '../../course/drawer/courseMaterial/CourseMaterialLoading';
-import { useEffect, useState } from 'react';
 import { wrap } from 'comlink';
+import { useEffect, useState } from 'react';
+import { DownloadSVG } from '@/public/icons/icons';
+import { fetchCourseMaterialWorkbook } from '@/src/api/courses/courses';
+import { QueryKeys } from '@/src/api/queryKeys';
+import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import { GeneratePDF } from '@/src/util/pdf/pdfWorker';
+import CourseMaterialLoading from '../../course/drawer/courseMaterial/CourseMaterialLoading';
+import Button from '../../ui/button/Button';
 
 type Props = {
   courseId: string;
@@ -55,7 +55,7 @@ export default function MaterialPDFRenderer({ courseId, courseTitle }: Props) {
         }
       };
     }
-  }, [data]);
+  }, [data, url]);
 
   return (
     <div className='flex flex-col items-center justify-center w-full h-full gap-10'>

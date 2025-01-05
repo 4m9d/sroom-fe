@@ -1,7 +1,7 @@
 import { Session, getServerSession } from 'next-auth';
 import { getSession } from 'next-auth/react';
-import getHeaders from './getHeaders';
 import { authOptions } from '../../app/api/auth/[...nextauth]/route';
+import getHeaders from './getHeaders';
 
 export async function getAuthorizedHeaders() {
   let session: Session | null = await getSession();

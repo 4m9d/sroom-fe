@@ -1,17 +1,17 @@
 'use client';
-import { useState } from 'react';
-import CourseMaterialTopNav from './CourseMaterialTopNav';
-import CloseButton from '@/src/components/ui/button/CloseButton';
-import CourseMaterialLectureNotes from './lectureNotes/CourseMaterialLectureNotes';
 import { useQuery } from '@tanstack/react-query';
-import { QueryKeys } from '@/src/api/queryKeys';
+import { useState } from 'react';
+import { ForbiddenSVG } from '@/public/icons/icons';
 import { fetchCourseMaterials } from '@/src/api/materials/materials';
+import { QueryKeys } from '@/src/api/queryKeys';
+import LoadingSpinner from '@/src/components/ui/LoadingSpinner';
+import CloseButton from '@/src/components/ui/button/CloseButton';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
-import CourseMaterialQuizzes from './quizzes/CourseMaterialQuizzes';
-import { ForbiddenSVG } from '@/public/icons/icons';
-import LoadingSpinner from '@/src/components/ui/LoadingSpinner';
 import CourseMaterialLoading from './CourseMaterialLoading';
+import CourseMaterialTopNav from './CourseMaterialTopNav';
+import CourseMaterialLectureNotes from './lectureNotes/CourseMaterialLectureNotes';
+import CourseMaterialQuizzes from './quizzes/CourseMaterialQuizzes';
 
 type Props = {
   courseVideoId: number;

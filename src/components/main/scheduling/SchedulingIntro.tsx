@@ -1,5 +1,5 @@
-import { calendarMain, scheduling } from '@/public/images/images';
 import Image from 'next/image';
+import { calendarMain, scheduling } from '@/public/images/images';
 
 export default function SchedulingIntro({}) {
   return (

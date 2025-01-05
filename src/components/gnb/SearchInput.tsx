@@ -1,7 +1,7 @@
 'use client';
-import getQueryURL from '@/src/util/http/getQueryURL';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
+import getQueryURL from '@/src/util/http/getQueryURL';
 
 type Props = {
   className?: string;

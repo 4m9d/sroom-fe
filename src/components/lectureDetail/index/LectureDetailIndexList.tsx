@@ -1,15 +1,15 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
-import LectureDetailIndexCard from './LectureDetailIndexCard';
-import { QueryKeys } from '@/src/api/queryKeys';
-import { fetchLectureDetailIndex } from '@/src/api/lectures/search';
-import { ErrorMessage } from '@/src/api/ErrorMessage';
-import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
-import LoadMoreButton from '../../ui/button/LoadMoreButton';
-import setErrorToast from '@/src/util/toast/setErrorToast';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import LectureIndexNotice from './LectureIndexNotice';
+import { ErrorMessage } from '@/src/api/ErrorMessage';
+import { fetchLectureDetailIndex } from '@/src/api/lectures/search';
+import { QueryKeys } from '@/src/api/queryKeys';
+import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
+import setErrorToast from '@/src/util/toast/setErrorToast';
+import LoadMoreButton from '../../ui/button/LoadMoreButton';
+import LectureDetailIndexCard from './LectureDetailIndexCard';
 import LectureDetailIndexSkeleton from './LectureDetailIndexSkeleton';
+import LectureIndexNotice from './LectureIndexNotice';
 
 export default async function LectureDetailIndexList({
   lectureCode,

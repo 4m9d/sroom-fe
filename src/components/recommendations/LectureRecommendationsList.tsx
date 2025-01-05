@@ -1,10 +1,10 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
-import { QueryKeys } from '@/src/api/queryKeys';
 import { fetchLectureRecommendations } from '@/src/api/lectures/search';
+import { QueryKeys } from '@/src/api/queryKeys';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
-import LectureRecommendationsSection from './LectureRecommendationsSection';
 import { RecommendationSectionHeading } from '@/src/constants/recommendation/recommendation';
+import LectureRecommendationsSection from './LectureRecommendationsSection';
 
 export default function LectureRecommendationsList() {
   const { data } = useQuery(

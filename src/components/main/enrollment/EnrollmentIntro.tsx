@@ -1,5 +1,5 @@
-import { enrollment } from '@/public/images/images';
 import Image from 'next/image';
+import { enrollment } from '@/public/images/images';
 
 export default function EnrollmentIntro({}) {
   return (

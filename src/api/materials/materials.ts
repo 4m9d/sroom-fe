@@ -1,8 +1,8 @@
 import { fetchErrorHandling } from '@/src/util/http/fetchErrorHandling';
-import { Endpoints } from '../Endpoints';
-import { ErrorMessage } from '../ErrorMessage';
 import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
 import getQueryURL from '@/src/util/http/getQueryURL';
+import { Endpoints } from '../Endpoints';
+import { ErrorMessage } from '../ErrorMessage';
 
 export async function fetchCourseMaterials(course_video_id: number) {
   const headers = await getAuthorizedHeaders();

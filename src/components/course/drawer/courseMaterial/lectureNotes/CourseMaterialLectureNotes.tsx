@@ -1,6 +1,6 @@
 'use client';
-import { PencilSVG } from '@/public/icons/icons';
-import Button from '@/src/components/ui/button/Button';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import EasyMDE from 'easymde';
 import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import {
@@ -11,16 +11,16 @@ import {
   useState
 } from 'react';
 import { SimpleMdeReact } from 'react-simplemde-editor';
-import 'easymde/dist/easymde.min.css';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { QueryKeys } from '@/src/api/queryKeys';
-import { updateCourseLectureNotes } from '@/src/api/materials/materials';
-import getRelativeTime from '@/src/util/time/getRelativeTime';
+import { PencilSVG } from '@/public/icons/icons';
 import { ClipboardSVG } from '@/public/icons/icons';
+import { updateCourseLectureNotes } from '@/src/api/materials/materials';
+import { QueryKeys } from '@/src/api/queryKeys';
+import Button from '@/src/components/ui/button/Button';
+import 'easymde/dist/easymde.min.css';
+import FeedbackMessage from '@/src/components/ui/feedback/FeedbackMessage';
 import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
-import FeedbackMessage from '@/src/components/ui/feedback/FeedbackMessage';
-import EasyMDE from 'easymde';
+import getRelativeTime from '@/src/util/time/getRelativeTime';
 import CourseMaterialFeedback from '../CourseMaterialFeedback';
 
 const MarkdownPreview = dynamic(

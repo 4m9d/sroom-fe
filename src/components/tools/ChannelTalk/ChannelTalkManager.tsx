@@ -1,6 +1,6 @@
 'use client';
-import { bootChannelTalk } from '@/src/util/channelTalk/channelTalk';
 import { useEffect } from 'react';
+import { bootChannelTalk } from '@/src/util/channelTalk/channelTalk';
 
 type Props = {
   children: React.ReactNode;

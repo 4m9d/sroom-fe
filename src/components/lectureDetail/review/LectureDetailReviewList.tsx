@@ -1,13 +1,13 @@
 'use client';
-import { fetchLectureDetailReview } from '@/src/api/lectures/search';
-import { ErrorMessage } from '@/src/api/ErrorMessage';
-import LoadMoreButton from '../../ui/button/LoadMoreButton';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { ErrorMessage } from '@/src/api/ErrorMessage';
+import { fetchLectureDetailReview } from '@/src/api/lectures/search';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { STALE_TIME, CACHE_TIME } from '@/src/constants/query/query';
 import { REVIEW_LIMIT } from '@/src/constants/skeleton/skeleton';
-import LectureDetailReviewCard from './LectureDetailReviewCard';
 import setErrorToast from '@/src/util/toast/setErrorToast';
+import LoadMoreButton from '../../ui/button/LoadMoreButton';
+import LectureDetailReviewCard from './LectureDetailReviewCard';
 
 export default function LectureDetailReviewList({
   lectureCode,

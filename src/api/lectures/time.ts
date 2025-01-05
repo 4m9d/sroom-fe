@@ -1,8 +1,8 @@
+import { fetchErrorHandling } from '@/src/util/http/fetchErrorHandling';
 import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
+import getQueryURL from '@/src/util/http/getQueryURL';
 import { Endpoints } from '../Endpoints';
 import { ErrorMessage } from '../ErrorMessage';
-import getQueryURL from '@/src/util/http/getQueryURL';
-import { fetchErrorHandling } from '@/src/util/http/fetchErrorHandling';
 
 export async function updateViewDuration(
   params: CourseTakingParams,

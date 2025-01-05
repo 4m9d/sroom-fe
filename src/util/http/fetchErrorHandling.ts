@@ -1,10 +1,10 @@
+import { signOut } from 'next-auth/react';
 import {
   API_FETCH_ERROR,
   ErrorMessage,
   SESSION_ERROR
 } from '@/src/api/ErrorMessage';
 import { UNAUTHORIZED } from '@/src/constants/query/query';
-import { signOut } from 'next-auth/react';
 import setErrorToast from '../toast/setErrorToast';
 
 export async function fetchErrorHandling(res: Response, errorMessage: string) {

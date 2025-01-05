@@ -1,11 +1,11 @@
 import { ClockSVG } from '@/public/icons/icons';
+import { LectureSVG } from '@/public/icons/icons';
+import { PencilSVG } from '@/public/icons/icons';
+import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
+import getFormattedTime from '@/src/util/time/getFormattedTime';
 import Button from '../../../ui/button/Button';
 import HorizontalSmallLectureCard from '../../../ui/lectureCard/HorizontalSmallLectureCard';
-import getFormattedTime from '@/src/util/time/getFormattedTime';
-import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
-import { LectureSVG } from '@/public/icons/icons';
 import ProgressBar from '../../../ui/progress/ProgressBar';
-import { PencilSVG } from '@/public/icons/icons';
 
 type Props = {
   reviewableLecture: ReviewableLecture;

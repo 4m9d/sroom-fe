@@ -1,6 +1,6 @@
+import React from 'react';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import getFormattedTime from '@/src/util/time/getFormattedTime';
-import React from 'react';
 
 type Props = {
   duration: number;

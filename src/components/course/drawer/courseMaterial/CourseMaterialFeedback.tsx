@@ -1,12 +1,12 @@
 'use client';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 import { Thumbs } from '@/public/icons/icons';
 import { submitCourseMaterialFeedback } from '@/src/api/materials/materials';
 import { QueryKeys } from '@/src/api/queryKeys';
 import Button from '@/src/components/ui/button/Button';
 import FeedbackMessage from '@/src/components/ui/feedback/FeedbackMessage';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
 
 type Props = {
   courseVideoId: number;

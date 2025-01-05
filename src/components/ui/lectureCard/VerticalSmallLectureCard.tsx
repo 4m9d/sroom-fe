@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import ThumbnailBadge from '../badge/ThumbnailBadge';
-import { getThumbnailSrc } from '@/src/util/thumbnail/getThumbnailSrc';
 import { BadgeType } from '@/src/constants/badge/badge';
+import { getThumbnailSrc } from '@/src/util/thumbnail/getThumbnailSrc';
+import ThumbnailBadge from '../badge/ThumbnailBadge';
 
 type Props = {
   src: string;

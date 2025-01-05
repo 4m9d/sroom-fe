@@ -1,14 +1,14 @@
 'use client';
-import { ClockSVG } from '@/public/icons/icons';
-import HorizontalSmallLectureCard from '../ui/lectureCard/HorizontalSmallLectureCard';
-import getFormattedTime from '@/src/util/time/getFormattedTime';
-import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
-import { LectureSVG } from '@/public/icons/icons';
-import ProgressBar from '../ui/progress/ProgressBar';
-import Button from '../ui/button/Button';
 import { useRouter } from 'next/navigation';
-import setUndevelopedAlertToast from '@/src/util/toast/setUndevelopedAlertToast';
+import { ClockSVG } from '@/public/icons/icons';
+import { LectureSVG } from '@/public/icons/icons';
 import { showModalHandler } from '@/src/util/modal/modalHandler';
+import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
+import getFormattedTime from '@/src/util/time/getFormattedTime';
+import setUndevelopedAlertToast from '@/src/util/toast/setUndevelopedAlertToast';
+import Button from '../ui/button/Button';
+import HorizontalSmallLectureCard from '../ui/lectureCard/HorizontalSmallLectureCard';
+import ProgressBar from '../ui/progress/ProgressBar';
 
 type Props = {
   course: Course;

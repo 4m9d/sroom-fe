@@ -1,8 +1,8 @@
 'use client';
+import { AnimatePresence, motion } from 'framer-motion';
 import { CorrectCheckSVG } from '@/public/icons/icons';
 import { WrongCheckSVG } from '@/public/icons/icons';
 import { QuizType } from '@/src/constants/courseTaking/courseTaking';
-import { AnimatePresence, motion } from 'framer-motion';
 
 export default function QuizHeader({
   quiz,

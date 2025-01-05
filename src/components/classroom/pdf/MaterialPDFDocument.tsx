@@ -3,7 +3,7 @@ import {
   Page,
   Text,
   StyleSheet,
-  Image,
+  Image as PDFImage,
   View,
   Font
 } from '@react-pdf/renderer';
@@ -386,7 +386,7 @@ export default function MaterialPDFDocument({ materials }: Props) {
   return (
     <Document>
       <Page style={styles.body}>
-        <Image src={textLogo.default.src} style={styles.logo} />
+        <PDFImage src={textLogo.default.src} style={styles.logo} />
         <Text style={styles.title}>{materials.course_title}</Text>
         {materials.materials.map((material) => {
           return (
@@ -451,7 +451,7 @@ export default function MaterialPDFDocument({ materials }: Props) {
         />
       </Page>
       <Page style={styles.body}>
-        <Image src={textLogo.default.src} style={styles.logo} />
+        <PDFImage src={textLogo.default.src} style={styles.logo} />
         <Text style={{ ...styles.section_heading, marginTop: 0 }}>
           {'✅  해답'}
         </Text>

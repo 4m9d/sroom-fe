@@ -1,9 +1,9 @@
+import { fetchErrorHandling } from '@/src/util/http/fetchErrorHandling';
+import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
 import getQueryURL from '@/src/util/http/getQueryURL';
 import { Endpoints } from '../Endpoints';
 import { ErrorMessage } from '../ErrorMessage';
-import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
 import { QueryKeys } from '../queryKeys';
-import { fetchErrorHandling } from '@/src/util/http/fetchErrorHandling';
 
 export async function enrollLectureInNewCourse(
   params: EnrollLectureInNewCourseParams

@@ -1,22 +1,22 @@
 'use client';
 import { usePathname, useRouter } from 'next/navigation';
-import Modal from '../ui/Modal';
-import LectureDetailTabNav from './LectureDetailTabNav';
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
-import LectureDetailIndexList from './index/LectureDetailIndexList';
-import LectureDetailReviewList from './review/LectureDetailReviewList';
-import LectureDetailCard from './LectureDetailCard';
-import LectureDetailIndexSkeleton from './index/LectureDetailIndexSkeleton';
-import { INDEX_LIMIT, REVIEW_LIMIT } from '@/src/constants/skeleton/skeleton';
-import LectureDetailHeading from './LectureDetailHeading';
-import LectureDetailReviewSkeleton from './review/LectureDetailReviewSkeleton';
-import OneStar from '../ui/rating/OneStar';
 import { ModalIDs } from '@/src/constants/modal/modal';
-import LectureEnrollmentModal from '../lectureEnrollment/LectureEnrollmentModal';
+import { INDEX_LIMIT, REVIEW_LIMIT } from '@/src/constants/skeleton/skeleton';
 import { closeModalHandler } from '@/src/util/modal/modalHandler';
+import LectureEnrollmentModal from '../lectureEnrollment/LectureEnrollmentModal';
 import SchedulingModal from '../lectureEnrollment/SchedulingModal';
+import Modal from '../ui/Modal';
+import OneStar from '../ui/rating/OneStar';
+import LectureDetailCard from './LectureDetailCard';
+import LectureDetailHeading from './LectureDetailHeading';
+import LectureDetailTabNav from './LectureDetailTabNav';
 import LectureDetailIndexCard from './index/LectureDetailIndexCard';
+import LectureDetailIndexList from './index/LectureDetailIndexList';
+import LectureDetailIndexSkeleton from './index/LectureDetailIndexSkeleton';
 import LectureIndexNotice from './index/LectureIndexNotice';
+import LectureDetailReviewList from './review/LectureDetailReviewList';
+import LectureDetailReviewSkeleton from './review/LectureDetailReviewSkeleton';
 
 type Props = {
   lectureDetail: LectureDetail;

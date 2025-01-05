@@ -1,10 +1,10 @@
 'use client';
+import { AnimatePresence, motion } from 'framer-motion';
 import getCompactFormattedDate from '@/src/util/day/getCompactFormattedDate';
-import HorizontalBigLectureCard from '../ui/lectureCard/HorizontalBigLectureCard';
-import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
 import getCompactFormattedNumber from '@/src/util/number/getCompactFormattedNumber';
 import LectureEnrollmentButton from '../lectureEnrollment/LectureEnrollmentButton';
-import { AnimatePresence, motion } from 'framer-motion';
+import HorizontalBigLectureCard from '../ui/lectureCard/HorizontalBigLectureCard';
+import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
 
 type Props = {
   lectureDetail: LectureDetail;

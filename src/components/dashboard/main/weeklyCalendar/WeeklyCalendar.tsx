@@ -1,4 +1,6 @@
 'use client';
+import { useCallback, useLayoutEffect, useState } from 'react';
+import { getCurrentWeekDay } from '@/src/util/day/getCurrentDate';
 import {
   getCurrentWeekRange,
   getNextWeekRange,
@@ -6,10 +8,8 @@ import {
   getFullWeekDate,
   getMonth
 } from '@/src/util/day/getWeekRange';
-import { getCurrentWeekDay } from '@/src/util/day/getCurrentDate';
-import getFormattedTime from '@/src/util/time/getFormattedTime';
-import { useCallback, useLayoutEffect, useState } from 'react';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
+import getFormattedTime from '@/src/util/time/getFormattedTime';
 import CalendarForOneWeek from './CalendarForOneWeek';
 import LearningHistoryItem from './LearningHistoryItem';
 import { weekdayKey } from '.';

@@ -1,15 +1,15 @@
 'use client';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 import { useState } from 'react';
+import { ErrorMessage } from '@/src/api/ErrorMessage';
 import { fetchLecturesByKeyword } from '@/src/api/lectures/search';
 import { QueryKeys } from '@/src/api/queryKeys';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import SearchLectureCard from './SearchLectureCard';
-import LoadMoreButton from '../ui/button/LoadMoreButton';
-import setErrorToast from '@/src/util/toast/setErrorToast';
-import { ErrorMessage } from '@/src/api/ErrorMessage';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
+import setErrorToast from '@/src/util/toast/setErrorToast';
 import Button from '../ui/button/Button';
-import Link from 'next/link';
+import LoadMoreButton from '../ui/button/LoadMoreButton';
+import SearchLectureCard from './SearchLectureCard';
 
 export default async function SearchResultsList({
   requestParam,

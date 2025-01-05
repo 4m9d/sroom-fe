@@ -1,8 +1,8 @@
 'use client';
-import TabNav from '../ui/TabNav';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import useIntersectionObserver from '@/src/hooks/useIntersectionObserver';
-import Link from 'next/link';
+import TabNav from '../ui/TabNav';
 
 type Props = {
   is_playlist: boolean;

@@ -1,9 +1,9 @@
 'use client';
-import { useRef } from 'react';
-import useAuth from '@/src/hooks/useAuth';
 import Script from 'next/script';
-import useWindowSize from '@/src/hooks/useWindowSize';
+import { useRef } from 'react';
 import { BROWSER_MIN_WIDTH } from '@/src/constants/window/window';
+import useAuth from '@/src/hooks/useAuth';
+import useWindowSize from '@/src/hooks/useWindowSize';
 import LoadingSpinner from '../ui/LoadingSpinner';
 
 type Props = {

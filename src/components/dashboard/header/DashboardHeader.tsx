@@ -1,16 +1,16 @@
 'use client';
 import Image from 'next/image';
-import GuideBox from './GuideBox';
-import { showModalHandler } from '@/src/util/modal/modalHandler';
-import ServiceGuideModal from './ServiceGuideModal';
 import { ExtendedRecordMap } from 'notion-types';
 import { useState } from 'react';
-import { SERVICE_GUIDE } from '@/src/constants/serviceGuides/serviceGuides';
 import {
   search,
   calendarDashboard,
   quizDashboard
 } from '@/public/images/images';
+import { SERVICE_GUIDE } from '@/src/constants/serviceGuides/serviceGuides';
+import { showModalHandler } from '@/src/util/modal/modalHandler';
+import GuideBox from './GuideBox';
+import ServiceGuideModal from './ServiceGuideModal';
 
 type Props = {
   isExistingUser: boolean;

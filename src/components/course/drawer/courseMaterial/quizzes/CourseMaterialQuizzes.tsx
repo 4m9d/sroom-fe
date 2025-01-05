@@ -1,4 +1,7 @@
 'use client';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { updateCourseQuizGrade } from '@/src/api/materials/materials';
 import { QueryKeys } from '@/src/api/queryKeys';
 import Button from '@/src/components/ui/button/Button';
@@ -8,9 +11,6 @@ import {
   SessionStorageKeys
 } from '@/src/constants/courseTaking/courseTaking';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useLayoutEffect, useState } from 'react';
 import CourseMaterialFeedback from '../CourseMaterialFeedback';
 
 type Props = { quizzes: Quiz[]; courseVideoId: number };

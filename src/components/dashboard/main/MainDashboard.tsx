@@ -1,9 +1,9 @@
 import SectionHeading from '../../ui/SectionHeading';
 import CompletionRate from './completionRate/CompletionRate';
 import CorrectnessRate from './correctnessRate/CorrectnessRate';
-import WrongQuizReviewSlider from './wrongQuizReview/WrongQuizReviewSlider';
 import TotalLearningTime from './totalLearningTime/TotalLearningTime';
 import WeeklyCalendar from './weeklyCalendar/WeeklyCalendar';
+import WrongQuizReviewSlider from './wrongQuizReview/WrongQuizReviewSlider';
 
 type Props = {
   dashboardInfo: DashboardInfo;

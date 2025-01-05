@@ -1,20 +1,20 @@
 'use client';
+import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { YouTubePlayer } from 'react-youtube';
+import { ErrorMessage } from '@/src/api/ErrorMessage';
+import { QueryKeys } from '@/src/api/queryKeys';
+import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
+import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
+import { showModalHandler } from '@/src/util/modal/modalHandler';
+import convertCompactFormattedTimeToSeconds from '@/src/util/time/convertCompactFormattedTimeToSeconds';
+import setErrorToast from '@/src/util/toast/setErrorToast';
+import CourseReviewModal from '../classroom/review/CourseReviewModal';
 import CourseHeader from './CourseHeader';
+import CourseVideoController from './CourseVideoController';
 import YoutubePlayer from './YoutubePlayer';
 import CourseDetailDrawer from './drawer/courseDetail/CourseDetailDrawer';
 import CourseMaterialDrawer from './drawer/courseMaterial/CourseMaterialDrawer';
-import CourseVideoController from './CourseVideoController';
-import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
-import CourseReviewModal from '../classroom/review/CourseReviewModal';
-import { showModalHandler } from '@/src/util/modal/modalHandler';
-import { useQueryClient } from '@tanstack/react-query';
-import { QueryKeys } from '@/src/api/queryKeys';
-import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
-import convertCompactFormattedTimeToSeconds from '@/src/util/time/convertCompactFormattedTimeToSeconds';
-import { YouTubePlayer } from 'react-youtube';
-import setErrorToast from '@/src/util/toast/setErrorToast';
-import { ErrorMessage } from '@/src/api/ErrorMessage';
 
 type Props = {
   courseDetail: CourseDetail;

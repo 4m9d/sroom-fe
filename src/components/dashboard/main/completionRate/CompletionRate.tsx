@@ -1,7 +1,7 @@
 'use client';
 import { COMPLETION_RATE_BREAKPOINT_LG, COMPLETION_RATE_BREAKPOINT_SM } from '@/src/constants/window/window';
-import RadialProgress from '../../../ui/progress/RadialProgress';
 import useWindowSize from '@/src/hooks/useWindowSize';
+import RadialProgress from '../../../ui/progress/RadialProgress';
 
 type Props = {
   value: number;

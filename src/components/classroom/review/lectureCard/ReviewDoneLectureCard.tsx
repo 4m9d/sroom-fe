@@ -1,6 +1,6 @@
+import FiveStars from '@/src/components/ui/rating/FiveStars';
 import getCompactDateFormat from '@/src/util/day/getCompactFormattedDate';
 import ReviewableLectureCard from './ReviewableLectureCard';
-import FiveStars from '@/src/components/ui/rating/FiveStars';
 
 type Props = { reviewableLecture: ReviewableLecture };
 

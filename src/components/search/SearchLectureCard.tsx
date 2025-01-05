@@ -1,8 +1,8 @@
 'use client';
+import getCompactFormattedNumber from '@/src/util/number/getCompactFormattedNumber';
 import getRelativeTime from '@/src/util/time/getRelativeTime';
 import HorizontalSmallLectureCard from '../ui/lectureCard/HorizontalSmallLectureCard';
 import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
-import getCompactFormattedNumber from '@/src/util/number/getCompactFormattedNumber';
 
 export default async function SearchLectureCard({
   lecture

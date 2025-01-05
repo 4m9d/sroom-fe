@@ -1,14 +1,14 @@
 'use client';
-import Link from 'next/link';
-import SearchInput from './SearchInput';
-import Image from 'next/image';
-import useWindowSize from '@/src/hooks/useWindowSize';
-import { useCallback, useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
 import { useMutation } from '@tanstack/react-query';
-import { updateUserProfile } from '@/src/api/members/members';
-import ProfileDropdown from './ProfileDropdown';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+import { useCallback, useEffect, useState } from 'react';
 import { textLogoEn, logoIcon } from '@/public/logoImages/logoImages';
+import { updateUserProfile } from '@/src/api/members/members';
+import useWindowSize from '@/src/hooks/useWindowSize';
+import ProfileDropdown from './ProfileDropdown';
+import SearchInput from './SearchInput';
 
 type Props = {
   logo: string;

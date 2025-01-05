@@ -1,11 +1,11 @@
 'use client';
+import Link from 'next/link';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { PolygonSVG } from '@/public/icons/icons';
 import VideoCompletionBadge from '@/src/components/ui/badge/VideoCompletionBadge';
 import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
 import getCompactFormattedDuration from '@/src/util/time/getCompactFormattedTime';
 import getFormattedTime from '@/src/util/time/getFormattedTime';
-import Link from 'next/link';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 type Props = {
   section: Section;
