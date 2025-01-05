@@ -1,12 +1,12 @@
 'use client';
-import { ModalIDs } from '@/src/constants/modal/modal';
-import Modal from '../../ui/Modal';
-import { closeModalHandler } from '@/src/util/modal/modalHandler';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { QueryKeys } from '@/src/api/queryKeys';
-import LoadingSpinner from '../../ui/LoadingSpinner';
-import Button from '../../ui/button/Button';
 import { deleteCourse } from '@/src/api/courses/courses';
+import { QueryKeys } from '@/src/api/queryKeys';
+import { ModalIDs } from '@/src/constants/modal/modal';
+import { closeModalHandler } from '@/src/util/modal/modalHandler';
+import LoadingSpinner from '../../ui/LoadingSpinner';
+import Modal from '../../ui/Modal';
+import Button from '../../ui/button/Button';
 
 type Props = {
   courseId: number | null;

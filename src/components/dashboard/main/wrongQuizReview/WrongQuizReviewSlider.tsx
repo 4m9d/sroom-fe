@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import SwiperNavigationButton from '@/src/components/ui/button/SwiperNavigationButton';
 import WrongQuizReviewCard from './WrongQuizReviewCard';

@@ -1,5 +1,5 @@
-import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
 import VerticalSmallLectureCard from '../ui/lectureCard/VerticalSmallLectureCard';
+import StarRatingWithReviewCount from '../ui/rating/StarRatingWithReviewCount';
 
 type Props = {
   lecture: PersonalizedLecture;

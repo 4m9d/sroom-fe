@@ -1,19 +1,19 @@
 'use client';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 import SwiperCore from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/mousewheel';
-import SectionHeading from '../ui/SectionHeading';
-import LectureRecommendationsCard from './LectureRecommendationsCard';
-import useWindowSize from '@/src/hooks/useWindowSize';
-import SwiperNavigationButton from '../ui/button/SwiperNavigationButton';
-import { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { RecommendationSectionHeading } from '@/src/constants/recommendation/recommendation';
 import {
   RECOMMENDATION_BREAKPOINT_LG,
   RECOMMENDATION_BREAKPOINT_SM
 } from '@/src/constants/window/window';
-import { RecommendationSectionHeading } from '@/src/constants/recommendation/recommendation';
+import useWindowSize from '@/src/hooks/useWindowSize';
+import SectionHeading from '../ui/SectionHeading';
+import SwiperNavigationButton from '../ui/button/SwiperNavigationButton';
+import LectureRecommendationsCard from './LectureRecommendationsCard';
 
 type Props = {
   recommendations: PersonalizedLecture[];

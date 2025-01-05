@@ -1,4 +1,6 @@
 'use client';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { fetchCourseDetail } from '@/src/api/courses/courses';
 import { QueryKeys } from '@/src/api/queryKeys';
 import CourseTaking from '@/src/components/course/CourseTaking';
@@ -8,8 +10,6 @@ import {
   showChannelTalkButton
 } from '@/src/util/channelTalk/channelTalk';
 import getPageTitle from '@/src/util/metadata/getPageTitle';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
 
 export default function CourseTakingPage({
   params,

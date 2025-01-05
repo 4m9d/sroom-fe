@@ -1,8 +1,8 @@
 'use client';
-import SectionHeading from '../../ui/SectionHeading';
-import LatestLearningLectureCard from './LatestLearningCourseCard';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import SectionHeading from '../../ui/SectionHeading';
+import LatestLearningLectureCard from './LatestLearningCourseCard';
 
 type Props = {
   latestLearningCourses: Course[];

@@ -1,10 +1,10 @@
 'use client';
-import { ArrowTopRightSVG } from '@/public/icons/icons';
-import { PencilSVG } from '@/public/icons/icons';
-import { SaveSVG } from '@/public/icons/icons';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef } from 'react';
+import { ArrowTopRightSVG } from '@/public/icons/icons';
+import { PencilSVG } from '@/public/icons/icons';
+import { SaveSVG } from '@/public/icons/icons';
 import FeedbackMessage from '../ui/feedback/FeedbackMessage';
 
 type Props = {

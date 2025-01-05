@@ -1,12 +1,12 @@
 'use client';
-import TrueOrFalse from './quizType/TrueOrFalse';
-import ShortAnswer from './quizType/ShortAnswer';
-import MultipleChoice from './quizType/MultipleChoice';
-import QuizHeader from './QuizHeader';
-import Button from '../button/Button';
 import { QuizType } from '@/src/constants/courseTaking/courseTaking';
 import { TEXT_MAX_LENGTH } from '@/src/constants/text/text';
 import setUndevelopedAlertToast from '@/src/util/toast/setUndevelopedAlertToast';
+import Button from '../button/Button';
+import QuizHeader from './QuizHeader';
+import MultipleChoice from './quizType/MultipleChoice';
+import ShortAnswer from './quizType/ShortAnswer';
+import TrueOrFalse from './quizType/TrueOrFalse';
 
 type Props = {
   setSelectedAnswerList: React.Dispatch<

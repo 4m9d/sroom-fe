@@ -1,5 +1,4 @@
 'use client';
-import useWindowSize from '@/src/hooks/useWindowSize';
 import {
   AnimatePresence,
   PanInfo,
@@ -8,8 +7,9 @@ import {
   useMotionValue
 } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
-import CourseMaterialContent from './CourseMaterialContent';
 import { COURSE_MATERIAL_BREAKPOINT } from '@/src/constants/window/window';
+import useWindowSize from '@/src/hooks/useWindowSize';
+import CourseMaterialContent from './CourseMaterialContent';
 
 type Props = {
   courseVideoId: number;

@@ -1,7 +1,7 @@
 'use client';
-import Button from '@/src/components/ui/button/Button';
-import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { signOut } from 'next-auth/react';
+import Button from '@/src/components/ui/button/Button';
 
 export default function Signout({}) {
   const router = useRouter();

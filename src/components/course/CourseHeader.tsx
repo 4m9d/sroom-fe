@@ -1,7 +1,7 @@
 'use client';
 import { AnimatePresence, motion } from 'framer-motion';
-import Button from '../ui/button/Button';
 import VideoCompletionBadge from '../ui/badge/VideoCompletionBadge';
+import Button from '../ui/button/Button';
 
 type Props = {
   title: string;

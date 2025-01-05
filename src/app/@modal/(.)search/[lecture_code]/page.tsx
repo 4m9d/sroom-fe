@@ -1,9 +1,9 @@
 'use client';
+import { useQuery } from '@tanstack/react-query';
 import { fetchLectureDetail } from '@/src/api/lectures/search';
 import { QueryKeys } from '@/src/api/queryKeys';
 import LectureDetailModal from '@/src/components/lectureDetail/LectureDetailModal';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
-import { useQuery } from '@tanstack/react-query';
 
 export default function LectureDetailModalIntercepter({
   params: { lecture_code }

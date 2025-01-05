@@ -1,18 +1,18 @@
 'use client';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+import { ErrorMessage } from '@/src/api/ErrorMessage';
+import { enrollLectureInNewCourse } from '@/src/api/courses/courses';
+import { QueryKeys } from '@/src/api/queryKeys';
+import { ModalIDs } from '@/src/constants/modal/modal';
+import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import { showModalHandler } from '@/src/util/modal/modalHandler';
+import setErrorToast from '@/src/util/toast/setErrorToast';
+import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
+import LoadingSpinner from '../ui/LoadingSpinner';
 import Modal from '../ui/Modal';
 import Button from '../ui/button/Button';
-import { ModalIDs } from '@/src/constants/modal/modal';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { enrollLectureInNewCourse } from '@/src/api/courses/courses';
-import setErrorToast from '@/src/util/toast/setErrorToast';
-import { ErrorMessage } from '@/src/api/ErrorMessage';
-import LoadingSpinner from '../ui/LoadingSpinner';
-import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
-import { useRouter } from 'next/navigation';
-import { QueryKeys } from '@/src/api/queryKeys';
-import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
-import toast from 'react-hot-toast';
 
 type Props = {
   lectureDetail: LectureDetail;

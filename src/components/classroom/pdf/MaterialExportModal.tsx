@@ -1,6 +1,6 @@
 import { ModalIDs } from '@/src/constants/modal/modal';
-import Modal from '../../ui/Modal';
 import { closeModalHandler } from '@/src/util/modal/modalHandler';
+import Modal from '../../ui/Modal';
 import MaterialPDFRenderer from './MaterialPDFRenderer';
 
 type Props = {

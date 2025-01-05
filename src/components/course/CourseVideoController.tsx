@@ -1,12 +1,12 @@
 'use client';
-import { useRouter } from 'next/navigation';
-import Button from '../ui/button/Button';
-import { ArrowRightSVG } from '@/public/icons/icons';
-import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { QueryKeys } from '@/src/api/queryKeys';
+import { useRouter } from 'next/navigation';
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
+import { ArrowRightSVG } from '@/public/icons/icons';
 import { updateViewDuration } from '@/src/api/lectures/time';
+import { QueryKeys } from '@/src/api/queryKeys';
 import setVideoCompleteToast from '@/src/util/toast/setVideoCompleteToast';
+import Button from '../ui/button/Button';
 
 type Props = {
   course_id: number;

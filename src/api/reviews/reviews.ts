@@ -1,7 +1,7 @@
+import { fetchErrorHandling } from '@/src/util/http/fetchErrorHandling';
 import { getAuthorizedHeaders } from '@/src/util/http/getAuthorizedHeaders';
 import { Endpoints } from '../Endpoints';
 import { ErrorMessage } from '../ErrorMessage';
-import { fetchErrorHandling } from '@/src/util/http/fetchErrorHandling';
 
 export async function fetchReviewListByCourse(courseId: number) {
   const headers = await getAuthorizedHeaders();

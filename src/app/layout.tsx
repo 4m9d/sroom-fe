@@ -1,16 +1,16 @@
-import QueryProvider from '../providers/QueryProvider';
-import NavBar from '../components/gnb/NavBar';
-import AuthSessionProvider from '../providers/AuthSessionProvider';
 import './globals.css';
-import { Toaster } from 'react-hot-toast';
 import localFont from 'next/font/local';
-import ResolutionCheck from '../components/ui/ResolutionCheck';
+import { Toaster } from 'react-hot-toast';
+import { opengraph } from '@/public/images/images';
 import Footer from '../components/fnb/Footer';
+import NavBar from '../components/gnb/NavBar';
 import ChannelTalk from '../components/tools/ChannelTalk/ChannelTalk';
 import ChannelTalkManager from '../components/tools/ChannelTalk/ChannelTalkManager';
 import GoogleAnalytics from '../components/tools/GoogleAnalytics/GoogleAnalytics';
 import NaverAnalytics from '../components/tools/NaverAnalytics/NaverAnalytics';
-import { opengraph } from '@/public/images/images';
+import ResolutionCheck from '../components/ui/ResolutionCheck';
+import AuthSessionProvider from '../providers/AuthSessionProvider';
+import QueryProvider from '../providers/QueryProvider';
 
 export const metadata = {
   metadataBase: new URL('https://sroom.kr'),

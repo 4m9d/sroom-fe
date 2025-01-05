@@ -1,21 +1,21 @@
 'use client';
-import { ModalIDs } from '@/src/constants/modal/modal';
-import Modal from '../../ui/Modal';
-import { useLayoutEffect, useState } from 'react';
-import { closeModalHandler } from '@/src/util/modal/modalHandler';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useLayoutEffect, useState } from 'react';
 import { QueryKeys } from '@/src/api/queryKeys';
 import {
   fetchReviewListByCourse,
   updateLectureReview
 } from '@/src/api/reviews/reviews';
+import { ModalIDs } from '@/src/constants/modal/modal';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
-import LoadingSpinner from '../../ui/LoadingSpinner';
-import ReviewableLectureList from './lectureCard/ReviewableLectureList';
-import ReviewableLectureCard from './lectureCard/ReviewableLectureCard';
 import { TEXT_MAX_LENGTH } from '@/src/constants/text/text';
+import { closeModalHandler } from '@/src/util/modal/modalHandler';
+import LoadingSpinner from '../../ui/LoadingSpinner';
+import Modal from '../../ui/Modal';
 import Button from '../../ui/button/Button';
 import FiveStars from '../../ui/rating/FiveStars';
+import ReviewableLectureCard from './lectureCard/ReviewableLectureCard';
+import ReviewableLectureList from './lectureCard/ReviewableLectureList';
 
 type Props = {
   courseId: number | null;

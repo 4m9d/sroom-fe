@@ -1,5 +1,5 @@
-import TabNav from '@/src/components/ui/TabNav';
 import { MouseEvent } from 'react';
+import TabNav from '@/src/components/ui/TabNav';
 
 type Props = {
   activeTab: CourseMaterialType;

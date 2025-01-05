@@ -1,14 +1,14 @@
 'use client';
-import { updateViewDuration } from '@/src/api/lectures/time';
-import { QueryKeys } from '@/src/api/queryKeys';
-import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
-import { ONE_MINUTE_IN_MS, ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { memo, useCallback, useEffect, useRef } from 'react';
 import YouTube, { YouTubeEvent } from 'react-youtube';
 import PlayerStates from 'youtube-player/dist/constants/PlayerStates';
 import { Options, YouTubePlayer } from 'youtube-player/dist/types';
+import { updateViewDuration } from '@/src/api/lectures/time';
+import { QueryKeys } from '@/src/api/queryKeys';
+import { SessionStorageKeys } from '@/src/constants/courseTaking/courseTaking';
+import { ONE_MINUTE_IN_MS, ONE_SECOND_IN_MS } from '@/src/constants/time/time';
 
 type Props = {
   width: number | string;

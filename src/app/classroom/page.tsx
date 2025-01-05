@@ -1,4 +1,5 @@
 'use client';
+import { useQuery } from '@tanstack/react-query';
 import { fetchClassroom } from '@/src/api/courses/courses';
 import { QueryKeys } from '@/src/api/queryKeys';
 import ClassroomCourseList from '@/src/components/classroom/ClassroomCourseList';
@@ -7,7 +8,6 @@ import ClassroomHeader from '@/src/components/classroom/ClassroomHeader';
 import SectionHeading from '@/src/components/ui/SectionHeading';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
 import { CLASSROOM_LIMIT } from '@/src/constants/skeleton/skeleton';
-import { useQuery } from '@tanstack/react-query';
 
 export default function Classroom({}) {
   const { data, status } = useQuery([QueryKeys.CLASSROOM], fetchClassroom, {

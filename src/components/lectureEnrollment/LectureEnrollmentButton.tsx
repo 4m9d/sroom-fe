@@ -1,21 +1,21 @@
 'use client';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 import { ArrowRightSVG } from '@/public/icons/icons';
 import { LectureSVG } from '@/public/icons/icons';
-import Button from '../ui/button/Button';
-import { showModalHandler } from '@/src/util/modal/modalHandler';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { ErrorMessage } from '@/src/api/ErrorMessage';
 import {
   enrollLectureInExistingCourse,
   enrollLectureInNewCourse
 } from '@/src/api/courses/courses';
-import { ErrorMessage } from '@/src/api/ErrorMessage';
-import setErrorToast from '@/src/util/toast/setErrorToast';
-import LoadingSpinner from '../ui/LoadingSpinner';
-import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
-import { useRouter } from 'next/navigation';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { ONE_SECOND_IN_MS } from '@/src/constants/time/time';
-import toast from 'react-hot-toast';
+import { showModalHandler } from '@/src/util/modal/modalHandler';
+import setErrorToast from '@/src/util/toast/setErrorToast';
+import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
+import LoadingSpinner from '../ui/LoadingSpinner';
+import Button from '../ui/button/Button';
 
 type Props = {
   is_playlist: boolean;

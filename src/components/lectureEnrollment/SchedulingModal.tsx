@@ -1,29 +1,29 @@
 'use client';
-import Modal from '../ui/Modal';
-import Button from '../ui/button/Button';
-import SchedulingSlider from '../scheduling/SchedulingSlider';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ModalIDs } from '@/src/constants/modal/modal';
+import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
-import getFormattedTime from '@/src/util/time/getFormattedTime';
-import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
+import toast from 'react-hot-toast';
+import { ErrorMessage } from '@/src/api/ErrorMessage';
+import { enrollLectureInNewCourse } from '@/src/api/courses/courses';
+import { QueryKeys } from '@/src/api/queryKeys';
+import { ModalIDs } from '@/src/constants/modal/modal';
 import {
   FOUR_HOURS_IN_MINUTES,
   ONE_SECOND_IN_MS,
   THIRTY_MINUTES
 } from '@/src/constants/time/time';
+import getCompactDateFormat from '@/src/util/day/getCompactFormattedDate';
 import getCurrentDate from '@/src/util/day/getCurrentDate';
 import convertMinutesToSeconds from '@/src/util/time/convertMinutesToSeconds';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { enrollLectureInNewCourse } from '@/src/api/courses/courses';
+import convertSecondsToMinutes from '@/src/util/time/convertSecondsToMinutes';
+import getFormattedTime from '@/src/util/time/getFormattedTime';
 import setErrorToast from '@/src/util/toast/setErrorToast';
-import { ErrorMessage } from '@/src/api/ErrorMessage';
-import LoadingSpinner from '../ui/LoadingSpinner';
-import getCompactDateFormat from '@/src/util/day/getCompactFormattedDate';
 import setLectureEnrollToast from '@/src/util/toast/setLectureEnrollToast';
-import { useRouter } from 'next/navigation';
-import { QueryKeys } from '@/src/api/queryKeys';
-import toast from 'react-hot-toast';
+import SchedulingSlider from '../scheduling/SchedulingSlider';
+import LoadingSpinner from '../ui/LoadingSpinner';
+import Modal from '../ui/Modal';
+import Button from '../ui/button/Button';
 
 type Props = {
   lectureDetail: LectureDetail;

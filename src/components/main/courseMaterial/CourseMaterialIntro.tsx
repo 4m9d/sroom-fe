@@ -1,5 +1,5 @@
-import { quizMain } from '@/public/images/images';
 import Image from 'next/image';
+import { quizMain } from '@/public/images/images';
 
 export default function CourseMaterialIntro({}) {
   return (

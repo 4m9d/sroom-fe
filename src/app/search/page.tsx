@@ -1,4 +1,6 @@
 'use client';
+import { useQueryClient } from '@tanstack/react-query';
+import { Suspense, useLayoutEffect, useRef } from 'react';
 import { QueryKeys } from '@/src/api/queryKeys';
 import LectureRecommendationsSection from '@/src/components/recommendations/LectureRecommendationsSection';
 import SearchResultsHeading from '@/src/components/search/SearchResultsHeading';
@@ -6,8 +8,6 @@ import SearchResultsList from '@/src/components/search/SearchResultsList';
 import SearchResultsSkeleton from '@/src/components/search/SearchResultsSkeleton';
 import { RecommendationSectionHeading } from '@/src/constants/recommendation/recommendation';
 import getPageTitle from '@/src/util/metadata/getPageTitle';
-import { useQueryClient } from '@tanstack/react-query';
-import { Suspense, useLayoutEffect, useRef } from 'react';
 
 type Props = {
   searchParams: SearchLectureParams;

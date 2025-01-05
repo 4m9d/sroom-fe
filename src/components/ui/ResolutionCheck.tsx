@@ -1,7 +1,7 @@
 'use client';
+import { usePathname } from 'next/navigation';
 import { BROWSER_MIN_WIDTH } from '@/src/constants/window/window';
 import useWindowSize from '@/src/hooks/useWindowSize';
-import { usePathname } from 'next/navigation';
 
 type Props = { children: React.ReactNode };
 

@@ -1,9 +1,9 @@
 'use client';
+import { useQuery } from '@tanstack/react-query';
+import dynamic from 'next/dynamic';
 import { fetchLectureDetail } from '@/src/api/lectures/search';
 import { QueryKeys } from '@/src/api/queryKeys';
 import { CACHE_TIME, STALE_TIME } from '@/src/constants/query/query';
-import { useQuery } from '@tanstack/react-query';
-import dynamic from 'next/dynamic';
 
 const DynamicLectureDetailModal = dynamic(
   () => import('@/src/components/lectureDetail/LectureDetailModal'),

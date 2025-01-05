@@ -1,10 +1,10 @@
 'use client';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
-import SectionList from './SectionList';
+import { ArrowRightSVG } from '@/public/icons/icons';
 import CourseDetailHeader from './CourseDetailHeader';
 import DrawerMenuButtons from './DrawerMenuButtons';
-import { ArrowRightSVG } from '@/public/icons/icons';
+import SectionList from './SectionList';
 
 type Props = {
   courseDetail: CourseDetail;
