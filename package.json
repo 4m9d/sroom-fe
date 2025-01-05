@@ -7,7 +7,8 @@
     "dev:local": "env-cmd -f .env.local-server next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "eslint --fix ."
   },
   "dependencies": {
     "@react-pdf/renderer": "^3.1.14",
@@ -15,8 +16,8 @@
     "@svgr/webpack": "^8.1.0",
     "@tanstack/react-query": "^4.29.19",
     "@types/node": "20.3.1",
-    "@types/react": "18.2.13",
     "@types/react-dom": "18.2.6",
+    "@types/react": "18.2.13",
     "@uiw/react-markdown-preview": "^4.1.15",
     "async-mutex": "^0.4.0",
     "comlink": "^4.4.1",
@@ -24,24 +25,24 @@
     "easymde": "^2.18.0",
     "encoding": "^0.1.13",
     "env-cmd": "^10.1.0",
-    "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
+    "eslint": "8.43.0",
     "framer-motion": "^10.12.18",
     "html-react-parser": "^5.0.6",
     "marked": "^10.0.0",
-    "next": "13.4.7",
     "next-auth": "^4.22.1",
+    "next": "13.4.7",
     "node-cache": "^5.1.2",
     "node-fetch": "^3.3.2",
     "notion-client": "^6.16.0",
     "postcss": "8.4.24",
-    "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-loading-skeleton": "^3.3.1",
     "react-notion-x": "^6.16.0",
     "react-simplemde-editor": "^5.2.0",
     "react-youtube": "^10.1.0",
+    "react": "18.2.0",
     "sharp": "^0.32.6",
     "swiper": "^10.0.4",
     "tailwind-scrollbar-hide": "^1.1.7",
@@ -51,6 +52,7 @@
   "devDependencies": {
     "@types/youtube-player": "^5.5.7",
     "autoprefixer": "^10.4.14",
-    "daisyui": "^3.7.4"
+    "daisyui": "^3.7.4",
+    "eslint-plugin-import": "^2.31.0"
   }
 }

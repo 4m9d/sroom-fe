@@ -1,3 +1,46 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "plugins": ["import"],
+  "rules": {
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "type",
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "unknown"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "react*",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "@hooks/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@pages/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@components/*",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ]
+  }
 }
